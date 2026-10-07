@@ -157,26 +157,26 @@ a{color:inherit;text-decoration:none}
 
 /* ============ HERO ============ */
 .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:clip}
-.hero-bg{position:absolute;inset:-6% 0 0;will-change:transform}
-.hero-bg img{width:100%;height:100%;object-fit:cover;filter:saturate(.82) contrast(1.06) brightness(.72)}
-.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(15deg,var(--bg) 6%,rgba(11,13,18,.55) 42%,rgba(11,13,18,.25) 70%),linear-gradient(0deg,rgba(11,13,18,.35),transparent 40%)}
+.hero-bg{position:absolute;inset:-8% -4% 0;will-change:transform;transform-origin:center center}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:saturate(.82) contrast(1.06) brightness(.72);transform:scale(1.06);will-change:transform}
+.hero.go .hero-bg img{animation:heroKen 22s ease-in-out alternate infinite}
+@keyframes heroKen{from{transform:scale(1.06)}to{transform:scale(1.14)}}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(15deg,var(--bg) 6%,rgba(11,13,18,.55) 42%,rgba(11,13,18,.25) 70%),linear-gradient(0deg,rgba(11,13,18,.35),transparent 40%);pointer-events:none}
 .hero-in{position:relative;z-index:3;width:100%;padding-bottom:clamp(120px,16vh,170px);padding-top:160px}
-.hero .eyebrow,.hero h1 .line span,.hero .hero-sub,.hero .hero-cta,.hero .hero-meta{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.hero .eyebrow,.hero .hero-sub,.hero .hero-cta,.hero .hero-meta{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 .hero.go .eyebrow{opacity:1;transform:none;transition-delay:.15s}
-.line{display:block;overflow:hidden}
-.line span{display:block}
+.line{display:block}
 .hero h1{margin:20px 0 22px}
-.hero.go h1 .line span{opacity:1;transform:none}
-.hero.go h1 .line:nth-child(1) span{transition-delay:.28s}
-.hero.go h1 .line:nth-child(2) span{transition-delay:.4s}
+.hero h1 .line{min-height:.94em}
+.hero h1 [data-i18n]{display:inline;white-space:pre-wrap}
 .hero-sub{max-width:560px;color:var(--ink-dim);font-size:clamp(16px,1.6vw,19px)}
-.hero.go .hero-sub{opacity:1;transform:none;transition-delay:.55s}
+.hero.typed .hero-sub{opacity:1;transform:none;transition-delay:.06s}
 .hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
-.hero.go .hero-cta{opacity:1;transform:none;transition-delay:.68s}
+.hero.typed .hero-cta{opacity:1;transform:none;transition-delay:.16s}
 .hero-meta{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:36px;color:var(--mut);font-size:13.5px;font-weight:600}
 .hero-meta span{display:inline-flex;align-items:center;gap:8px}
 .hero-meta .ic{width:15px;color:var(--gold)}
-.hero.go .hero-meta{opacity:1;transform:none;transition-delay:.8s}
+.hero.typed .hero-meta{opacity:1;transform:none;transition-delay:.26s}
 .scroll-ind{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--mut);font-size:10.5px;font-weight:800;letter-spacing:.4em;text-transform:uppercase;transition:opacity .4s}
 .scroll-ind i{width:1px;height:46px;background:var(--line2);position:relative;overflow:hidden;display:block}
 .scroll-ind i::after{content:"";position:absolute;left:0;top:-100%;width:100%;height:50%;background:var(--gold);animation:sline 1.9s var(--ease) infinite}
@@ -508,7 +508,8 @@ main,.nav-in,footer{transition:opacity .25s}
 
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
-  .rv,.hero .eyebrow,.hero h1 .line span{opacity:1!important;transform:none!important}
+  .rv,.hero .eyebrow,.hero .hero-sub,.hero .hero-cta,.hero .hero-meta{opacity:1!important;transform:none!important}
+  .hero.go .hero-bg img{animation:none!important}
 }
 </style>
 </head>
@@ -641,9 +642,9 @@ main,.nav-in,footer{transition:opacity .25s}
     </div>
     <div class="wrap hero-in">
       <span class="eyebrow" data-i18n="hero.eyebrow">ZOB Döner · Passau</span>
-      <h1 class="h-display">
-        <span class="line"><span data-i18n="hero.t1">Dein Döner.</span></span>
-        <span class="line"><span data-i18n="hero.t2">Dein Moment.</span></span>
+      <h1 class="h-display" id="heroTitle">
+        <span class="line"><span data-i18n="hero.t1"></span></span>
+        <span class="line"><span data-i18n="hero.t2"></span></span>
       </h1>
       <p class="hero-sub" data-i18n="hero.sub">Frisch. Herzhaft. Mitten in Passau — Döner, Box, Pizza &amp; Pide, handgemacht und heiß auf den Teller.</p>
       <div class="hero-cta">
@@ -1515,9 +1516,12 @@ function onScroll(){
     const y=window.scrollY;
     $('#nav').classList.toggle('scrolled',y>34);
     const si=$('#scrollInd');if(si)si.style.opacity=y>140?0:1;
-    if(!reduceMotion){
+      if(!reduceMotion){
       const hb=$('#heroBg');
-      if(hb&&CUR==='home')hb.style.transform=`translateY(${y*.22}px)`;
+      if(hb&&CUR==='home'){
+        const p=Math.min(y/Math.max(innerHeight,1),1);
+        hb.style.transform=`translate3d(0,${(y*.32).toFixed(1)}px,0) scale(${(1+p*.07).toFixed(4)})`;
+      }
       plxEls().forEach(el=>{
         const box=el.closest('.phero-bg,.fresh-img,.band');
         if(!box)return;
@@ -1553,15 +1557,53 @@ function closeLangs(){$$('[data-langbox]').forEach(b=>{b.classList.remove('open'
 });
 document.addEventListener('click',closeLangs);
  $$('[data-lang]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();setLang(b.dataset.lang)}));
+let heroTypeTimer=null;
+function clearHeroType(){if(heroTypeTimer){clearTimeout(heroTypeTimer);heroTypeTimer=null}}
+function typeHeroHeadline(){
+  clearHeroType();
+  const hero=$('#hero');
+  const lines=$$('#hero h1 [data-i18n]');
+  if(!hero||!lines.length)return;
+  const texts=lines.map(el=>t(el.dataset.i18n));
+  const title=$('#heroTitle');
+  if(title)title.setAttribute('aria-label',texts.join(' '));
+  hero.classList.remove('typed');
+  if(reduceMotion){
+    lines.forEach((el,i)=>{el.textContent=texts[i]});
+    hero.classList.add('typed');
+    return;
+  }
+  lines.forEach(el=>{el.textContent=''});
+  if(!hero.classList.contains('go'))return;
+  let li=0,ci=0;
+  const speed=52,linePause=340;
+  const step=()=>{
+    if(li>=texts.length){hero.classList.add('typed');heroTypeTimer=null;return}
+    const full=texts[li];
+    if(ci<=full.length){
+      lines[li].textContent=full.slice(0,ci);
+      ci++;
+      heroTypeTimer=setTimeout(step,speed);
+    }else{
+      li++;ci=0;
+      heroTypeTimer=setTimeout(step,linePause);
+    }
+  };
+  heroTypeTimer=setTimeout(step,260);
+}
 function applyLang(){
   document.documentElement.lang=LANG;
   document.documentElement.dataset.lang=LANG;
-  $$('[data-i18n]').forEach(el=>{el.textContent=t(el.dataset.i18n)});
+  $$('[data-i18n]').forEach(el=>{
+    if(el.closest('#hero h1'))return;
+    el.textContent=t(el.dataset.i18n);
+  });
   $$('[data-i18n-html]').forEach(el=>{el.innerHTML=t(el.dataset.i18nHtml)});
   $$('[data-lang-cur]').forEach(el=>el.textContent=LANG.toUpperCase());
   $$('[data-lang]').forEach(b=>{const sel=b.dataset.lang===LANG;b.classList.toggle('sel',sel);b.setAttribute('aria-pressed',sel)});
   $('#ordNote').placeholder=t('c.notePh');
   $('#cartBtn').setAttribute('aria-label',`${t('c.title')} (${cartCount()})`);
+  typeHeroHeadline();
 }
 function setLang(l){
   if(l===LANG)return;
@@ -1609,17 +1651,23 @@ renderCart();
 observeReveals();
 onScroll();
 
+function revealHero(){
+  const hero=$('#hero');
+  if(!hero||hero.classList.contains('go'))return;
+  hero.classList.add('go');
+  typeHeroHeadline();
+}
 window.addEventListener('load',()=>{
   setTimeout(()=>{
     $('#loader').classList.add('done');
     document.body.classList.remove('lock');
-    $('#hero').classList.add('go');
+    revealHero();
     setTimeout(()=>$('#loader').remove(),1000);
     refreshInds();
   },1450);
 });
 setTimeout(()=>{ // fallback if load already fired
-  if(document.body.contains($('#loader'))&&performance.now()>4000&&!$('#loader').classList.contains('done')){ $('#loader').classList.add('done');document.body.classList.remove('lock');$('#hero').classList.add('go');}
+  if(document.body.contains($('#loader'))&&performance.now()>4000&&!$('#loader').classList.contains('done')){ $('#loader').classList.add('done');document.body.classList.remove('lock');revealHero();}
 },4200);
 </script>
 </body>
