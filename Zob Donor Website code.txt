@@ -1,0 +1,1626 @@
+﻿<!DOCTYPE html>
+<html lang="de" data-lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZOB Döner — Passau</title>
+<meta name="description" content="ZOB Döner Passau — frischer Döner, Boxen, Pizza & Pide. Dr.-Hans-Kapfinger-Straße 10, 94032 Passau.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS / RESET ============ */
+:root{
+  --bg:#0b0d12; --bg2:#0e1117; --panel:#141823; --panel2:#181d2a;
+  --ink:#f3eee2; --ink-dim:#cdc7b9; --mut:#93907f;
+  --gold:#f2b53a; --gold2:#d99a26; --orange:#e8732e; --red:#e5484d;
+  --line:rgba(243,238,226,.09); --line2:rgba(243,238,226,.18);
+  --r:22px; --nav-h:78px;
+  --ease:cubic-bezier(.22,.75,.25,1);
+  --sh:0 24px 60px rgba(0,0,0,.45);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:auto}
+html,body{overflow-x:clip}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:"Archivo",sans-serif; font-size:16px; line-height:1.6;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+body.lock{overflow:hidden}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--gold);color:#171307}
+::-webkit-scrollbar{width:10px}::-webkit-scrollbar-thumb{background:#242a38;border-radius:8px}::-webkit-scrollbar-track{background:#0b0d12}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+.skip{position:fixed;top:-60px;left:16px;z-index:400;background:var(--gold);color:#171307;padding:10px 18px;border-radius:999px;font-weight:700;transition:top .3s}
+.skip:focus{top:14px}
+.wrap{max-width:1260px;margin:0 auto;padding:0 28px}
+.sec{padding:clamp(84px,10vw,150px) 0;position:relative}
+.ic{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.ic-f{fill:currentColor;stroke:none}
+
+/* ============ AMBIENT / GRAIN ============ */
+.grain{position:fixed;inset:-100px;z-index:200;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");animation:grain 9s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-40px,30px)}50%{transform:translate(30px,-45px)}75%{transform:translate(-25px,-20px)}100%{transform:translate(0,0)}}
+.glow{position:fixed;width:60vw;height:60vw;border-radius:50%;pointer-events:none;z-index:0;filter:blur(10px)}
+.glow.a{top:-25vw;left:-18vw;background:radial-gradient(closest-side,rgba(242,181,58,.055),transparent 70%);animation:drift 34s ease-in-out infinite alternate}
+.glow.b{bottom:-30vw;right:-20vw;background:radial-gradient(closest-side,rgba(58,84,148,.08),transparent 70%);animation:drift 42s ease-in-out infinite alternate-reverse}
+@keyframes drift{to{transform:translate(6vw,4vw) scale(1.12)}}
+
+/* ============ TYPE SYSTEM ============ */
+.eyebrow{display:inline-flex;align-items:center;gap:12px;font-size:12px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--gold)}
+.h-display{font-weight:900;font-stretch:114%;text-transform:uppercase;letter-spacing:-.015em;line-height:.94;font-size:clamp(46px,7.4vw,106px)}
+.h2{font-weight:900;font-stretch:112%;text-transform:uppercase;letter-spacing:-.01em;line-height:.98;font-size:clamp(34px,4.6vw,64px)}
+.lead{font-size:clamp(17px,1.5vw,20px);color:var(--ink-dim);line-height:1.75}
+.mut{color:var(--mut)}
+.num{font-variant-numeric:tabular-nums}
+
+/* ============ BUTTONS ============ */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:16px 30px;border-radius:999px;font-weight:800;font-size:15px;letter-spacing:.02em;border:1px solid transparent;transition:transform .35s var(--ease),background .35s,border-color .35s,color .35s,box-shadow .35s;white-space:nowrap}
+.btn .ic{transition:transform .35s var(--ease)}
+.btn-solid{background:var(--gold);color:#181206}
+.btn-solid:hover{background:#ffc657;transform:translateY(-2px);box-shadow:0 14px 34px rgba(242,181,58,.22)}
+.btn-solid:hover .ic{transform:translateX(4px)}
+.btn-solid:active{transform:translateY(0) scale(.98)}
+.btn-ghost{border-color:rgba(243,238,226,.24);color:var(--ink);background:rgba(243,238,226,.02)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);background:rgba(242,181,58,.07);transform:translateY(-2px)}
+.btn-ghost:hover .ic{transform:translateX(4px)}
+.btn-sm{padding:12px 20px;font-size:13.5px}
+.btn-w100{width:100%}
+
+/* ============ LOADER ============ */
+.loader{position:fixed;inset:0;z-index:300;background:#090b0f;display:grid;place-items:center;clip-path:inset(0 0 0 0);transition:clip-path .85s var(--ease)}
+.loader.done{clip-path:inset(0 0 100% 0)}
+.loader .l-in{display:flex;flex-direction:column;align-items:center;gap:26px;transition:transform .7s var(--ease),opacity .6s}
+.loader.done .l-in{transform:translateY(-36px);opacity:0}
+.l-badge{width:150px;height:150px}
+.l-circ{stroke-dasharray:100;stroke-dashoffset:100;animation:draw 1.1s .1s var(--ease) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.l-bus{opacity:0;animation:lfade .5s .5s forwards}
+.l-t1,.l-t2{opacity:0;transform:translateY(10px);animation:lup .6s var(--ease) forwards}
+.l-t1{animation-delay:.55s}.l-t2{animation-delay:.7s}
+@keyframes lfade{to{opacity:1}}
+@keyframes lup{to{opacity:1;transform:translateY(0)}}
+.l-bar{width:230px;height:2px;background:rgba(243,238,226,.12);border-radius:2px;overflow:hidden}
+.l-bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--gold2),var(--gold));transform:scaleX(0);transform-origin:left;animation:load 1.15s .25s var(--ease) forwards}
+@keyframes load{to{transform:scaleX(1)}}
+.l-sub{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--mut)}
+
+/* ============ PAGE VEIL (transitions) ============ */
+.veil{position:fixed;inset:0;z-index:180;background:#090b0f;display:grid;place-items:center;transform:translateY(101%);pointer-events:none}
+.veil svg{width:84px;height:84px;opacity:.9}
+.veil.cover{transform:translateY(0);transition:transform .5s var(--ease)}
+.veil.exit{transform:translateY(-101%);transition:transform .55s var(--ease)}
+
+/* ============ NAV ============ */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .4s,border-color .4s,backdrop-filter .4s}
+.nav-in{max-width:1360px;margin:0 auto;padding:0 28px;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;gap:20px;transition:height .4s var(--ease)}
+.nav.scrolled{background:rgba(10,12,17,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav.scrolled .nav-in{height:64px}
+.brand{display:flex;align-items:center;gap:13px;flex:none}
+.brand .badge{width:46px;height:46px;transition:width .4s var(--ease),height .4s var(--ease)}
+.nav.scrolled .brand .badge{width:38px;height:38px}
+.brand-word{display:flex;flex-direction:column;line-height:1.05}
+.brand-word b{font-weight:900;font-stretch:114%;letter-spacing:.04em;font-size:19px}
+.brand-word span{font-size:9.5px;font-weight:800;letter-spacing:.42em;color:var(--gold);text-transform:uppercase}
+.nav-links{display:flex;align-items:center}
+.nav-links a{position:relative;font-weight:700;font-size:14.5px;color:var(--ink-dim);padding:9px 3px;margin:0 15px;transition:color .3s}
+.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:right;transition:transform .4s var(--ease)}
+.nav-links a:hover,.nav-links a.active{color:var(--ink)}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);transform-origin:left}
+.nav-right{display:flex;align-items:center;gap:12px}
+.icon-btn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line2);display:grid;place-items:center;color:var(--ink);transition:border-color .3s,color .3s,background .3s;position:relative}
+.icon-btn:hover{border-color:var(--gold);color:var(--gold)}
+.cart-n{position:absolute;top:-5px;right:-5px;min-width:20px;height:20px;padding:0 5px;border-radius:999px;background:var(--gold);color:#181206;font-size:11px;font-weight:900;display:grid;place-items:center;transform:scale(0);transition:transform .3s var(--ease)}
+.cart-btn.has .cart-n{transform:scale(1)}
+.lang{position:relative}
+.lang-btn{display:flex;align-items:center;gap:7px;height:44px;padding:0 15px;border-radius:999px;border:1px solid var(--line2);font-weight:800;font-size:13px;letter-spacing:.06em;color:var(--ink);transition:border-color .3s,color .3s}
+.lang-btn:hover{border-color:var(--gold);color:var(--gold)}
+.lang-btn .ic{width:13px;transition:transform .35s var(--ease)}
+.lang.open .lang-btn .ic{transform:rotate(180deg)}
+.lang-menu{position:absolute;top:calc(100% + 10px);right:0;min-width:150px;background:#12151d;border:1px solid var(--line2);border-radius:16px;padding:6px;box-shadow:var(--sh);opacity:0;visibility:hidden;transform:translateY(-8px) scale(.97);transform-origin:top right;transition:.3s var(--ease);z-index:5}
+.lang.open .lang-menu{opacity:1;visibility:visible;transform:none}
+.lang-menu button{display:flex;width:100%;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;border-radius:11px;font-weight:700;font-size:14px;color:var(--ink-dim);transition:.25s}
+.lang-menu button:hover{background:rgba(242,181,58,.09);color:var(--ink)}
+.lang-menu button.sel{color:var(--gold)}
+.lang-menu button.sel::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold)}
+.burger{display:none}
+.burger i{display:block;width:19px;height:2px;background:var(--ink);border-radius:2px;transition:.35s var(--ease)}
+.burger i+i{margin-top:5px}
+.burger.open i:first-child{transform:translateY(3.5px) rotate(45deg)}
+.burger.open i:last-child{transform:translateY(-3.5px) rotate(-45deg)}
+@media(max-width:1080px){.nav-links{display:none}}
+@media(max-width:640px){.nav .order-cta{display:none}.lang-btn{height:40px;padding:0 12px}}
+@media(max-width:460px){.lang{display:none}}
+
+/* ============ MOBILE MENU ============ */
+.mmenu{position:fixed;inset:0;z-index:95;background:rgba(9,11,15,.96);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);display:flex;flex-direction:column;justify-content:center;padding:110px 32px 44px;opacity:0;visibility:hidden;transition:.45s var(--ease)}
+.mmenu.open{opacity:1;visibility:visible}
+.mmenu nav{display:flex;flex-direction:column;gap:4px}
+.mmenu nav a{font-weight:900;font-stretch:114%;text-transform:uppercase;font-size:clamp(34px,9vw,52px);line-height:1.15;color:var(--ink);display:flex;align-items:baseline;gap:16px;opacity:0;transform:translateY(26px);transition:.55s var(--ease)}
+.mmenu nav a i{font-style:normal;font-size:12px;color:var(--gold);letter-spacing:.2em}
+.mmenu.open nav a{opacity:1;transform:none}
+.mmenu.open nav a:nth-child(1){transition-delay:.08s}.mmenu.open nav a:nth-child(2){transition-delay:.14s}.mmenu.open nav a:nth-child(3){transition-delay:.2s}.mmenu.open nav a:nth-child(4){transition-delay:.26s}
+.mmenu nav a:hover,.mmenu nav a.active{color:var(--gold)}
+.m-foot{margin-top:auto;display:flex;flex-direction:column;gap:22px;opacity:0;transform:translateY(20px);transition:.55s .3s var(--ease)}
+.mmenu.open .m-foot{opacity:1;transform:none}
+.m-lang{display:flex;align-items:center;gap:10px}
+.m-lang .lab{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--mut);margin-right:6px}
+.m-lang button{padding:9px 18px;border-radius:999px;border:1px solid var(--line2);font-weight:800;font-size:13px;color:var(--ink-dim)}
+.m-lang button.sel{background:var(--gold);border-color:var(--gold);color:#181206}
+.m-meta{display:flex;flex-direction:column;gap:6px;color:var(--mut);font-size:14px}
+.m-meta a{color:var(--ink-dim)}
+.m-meta a:hover{color:var(--gold)}
+
+/* ============ HERO ============ */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:clip}
+.hero-bg{position:absolute;inset:-6% 0 0;will-change:transform}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:saturate(.82) contrast(1.06) brightness(.72)}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(15deg,var(--bg) 6%,rgba(11,13,18,.55) 42%,rgba(11,13,18,.25) 70%),linear-gradient(0deg,rgba(11,13,18,.35),transparent 40%)}
+.hero-in{position:relative;z-index:3;width:100%;padding-bottom:clamp(120px,16vh,170px);padding-top:160px}
+.hero .eyebrow,.hero h1 .line span,.hero .hero-sub,.hero .hero-cta,.hero .hero-meta{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.hero.go .eyebrow{opacity:1;transform:none;transition-delay:.15s}
+.line{display:block;overflow:hidden}
+.line span{display:block}
+.hero h1{margin:20px 0 22px}
+.hero.go h1 .line span{opacity:1;transform:none}
+.hero.go h1 .line:nth-child(1) span{transition-delay:.28s}
+.hero.go h1 .line:nth-child(2) span{transition-delay:.4s}
+.hero-sub{max-width:560px;color:var(--ink-dim);font-size:clamp(16px,1.6vw,19px)}
+.hero.go .hero-sub{opacity:1;transform:none;transition-delay:.55s}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+.hero.go .hero-cta{opacity:1;transform:none;transition-delay:.68s}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:36px;color:var(--mut);font-size:13.5px;font-weight:600}
+.hero-meta span{display:inline-flex;align-items:center;gap:8px}
+.hero-meta .ic{width:15px;color:var(--gold)}
+.hero.go .hero-meta{opacity:1;transform:none;transition-delay:.8s}
+.scroll-ind{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--mut);font-size:10.5px;font-weight:800;letter-spacing:.4em;text-transform:uppercase;transition:opacity .4s}
+.scroll-ind i{width:1px;height:46px;background:var(--line2);position:relative;overflow:hidden;display:block}
+.scroll-ind i::after{content:"";position:absolute;left:0;top:-100%;width:100%;height:50%;background:var(--gold);animation:sline 1.9s var(--ease) infinite}
+@keyframes sline{60%{top:100%}100%{top:100%}}
+.stamp{position:absolute;right:clamp(20px,7vw,110px);bottom:-74px;z-index:6;width:148px;height:148px;border-radius:50%;background:rgba(14,17,23,.88);backdrop-filter:blur(10px);border:1px solid var(--line2);display:grid;place-items:center;box-shadow:var(--sh)}
+.stamp .ring{position:absolute;inset:0;animation:spin 18s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.stamp .bus{width:34px;color:var(--gold)}
+.stamp text{font-size:10.5px;font-weight:800;letter-spacing:2.6px;fill:var(--ink-dim)}
+@media(max-width:760px){.stamp{display:none}}
+
+/* ============ MARQUEE ============ */
+.marq{overflow:clip;border-block:1px solid var(--line);padding:20px 0;background:rgba(243,238,226,.015)}
+.marq-track{display:flex;width:max-content;animation:marq 30s linear infinite}
+.marq:hover .marq-track{animation-play-state:paused}
+.marq-group{display:flex;align-items:center;flex:none}
+.marq-group span{font-weight:900;font-stretch:114%;text-transform:uppercase;font-size:clamp(30px,4vw,48px);line-height:1;padding:0 26px;color:var(--ink)}
+.marq-group span.o{color:transparent;-webkit-text-stroke:1px rgba(243,238,226,.4)}
+.marq-group em{color:var(--gold);font-style:normal;font-size:18px}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* ============ INTRO ============ */
+.intro-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(40px,6vw,110px);align-items:end}
+.intro-grid .h2{margin-top:22px}
+.intro-grid p+p{margin-top:18px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.chip{display:inline-flex;align-items:center;gap:9px;padding:10px 18px;border:1px solid var(--line2);border-radius:999px;font-size:13px;font-weight:700;color:var(--ink-dim)}
+.chip .ic{width:14px;color:var(--gold)}
+@media(max-width:900px){.intro-grid{grid-template-columns:1fr}}
+
+/* ============ SECTION HEAD ============ */
+.sec-head{margin-bottom:clamp(38px,5vw,64px)}
+.sec-head .h2{margin-top:20px}
+.sec-head p{margin-top:16px;max-width:560px}
+.sec-head.row{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;flex-wrap:wrap}
+.link-arrow{display:inline-flex;align-items:center;gap:9px;font-weight:800;font-size:14.5px;color:var(--gold);letter-spacing:.02em}
+.link-arrow .ic{transition:transform .35s var(--ease)}
+.link-arrow:hover .ic{transform:translateX(5px)}
+
+/* ============ FAVORITES ============ */
+.alt{background:linear-gradient(180deg,rgba(243,238,226,.022),transparent 30%);border-block:1px solid var(--line)}
+.f-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.f-card{background:linear-gradient(180deg,var(--panel),rgba(20,24,35,.5));border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:transform .45s var(--ease),border-color .45s,box-shadow .45s;display:flex;flex-direction:column}
+.f-card:hover{transform:translateY(-7px);border-color:rgba(242,181,58,.4);box-shadow:0 26px 50px rgba(0,0,0,.45)}
+.f-img{position:relative;aspect-ratio:16/11;overflow:clip}
+.f-img img{width:100%;height:100%;object-fit:cover;filter:saturate(.8) contrast(1.05) brightness(.86);transition:transform .8s var(--ease)}
+.f-card:hover .f-img img{transform:scale(1.07)}
+.f-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(242,181,58,.08),rgba(11,13,18,.35) 75%)}
+.f-tag{position:absolute;top:14px;left:14px;z-index:2;background:var(--gold);color:#181206;font-size:10.5px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;padding:7px 13px;border-radius:999px}
+.f-body{padding:22px 22px 24px;display:flex;flex-direction:column;gap:12px;flex:1}
+.f-top{display:flex;align-items:baseline;justify-content:space-between;gap:14px}
+.f-top h4{font-size:18px;font-weight:800;letter-spacing:-.01em}
+.f-price{color:var(--gold);font-weight:900;font-size:17px;white-space:nowrap}
+.f-body>p{font-size:13.5px;color:var(--mut);line-height:1.55;flex:1}
+.f-body .btn{align-self:flex-start;margin-top:4px}
+@media(max-width:1000px){.f-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.f-grid{grid-template-columns:1fr}}
+
+/* ============ CATEGORY STRIP ============ */
+.strip{position:relative;display:flex;gap:10px;padding:12px;border:1px solid var(--line2);border-radius:999px;background:rgba(20,24,35,.5);width:max-content;max-width:100%;margin:0 auto;overflow-x:auto;scrollbar-width:none}
+.strip::-webkit-scrollbar{display:none}
+.strip .ind{position:absolute;top:12px;bottom:12px;left:12px;width:0;border-radius:999px;background:var(--gold);transition:left .5s var(--ease),width .5s var(--ease)}
+.strip button{position:relative;z-index:1;display:inline-flex;align-items:center;gap:11px;padding:15px 30px;border-radius:999px;font-weight:800;font-stretch:108%;text-transform:uppercase;font-size:15.5px;letter-spacing:.03em;color:var(--ink-dim);transition:color .35s;white-space:nowrap}
+.strip button i{font-style:normal;font-size:10.5px;letter-spacing:.1em;opacity:.6}
+.strip button .ic{width:15px;transition:transform .35s var(--ease)}
+.strip button:hover{color:var(--ink)}
+.strip button.active{color:#181206}
+.strip button.active:hover .ic{transform:translateX(4px)}
+.strip-note{text-align:center;margin-top:22px;color:var(--mut);font-size:13.5px}
+
+/* ============ FRESH SPLIT ============ */
+.fresh{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,100px);align-items:center}
+.fresh-img{position:relative;border-radius:28px;overflow:clip;aspect-ratio:4/5;border:1px solid var(--line)}
+.fresh-img img{width:100%;height:114%;object-fit:cover;filter:saturate(.8) contrast(1.05) brightness(.85);will-change:transform}
+.fresh-img::after{content:"";position:absolute;inset:0;background:linear-gradient(200deg,rgba(242,181,58,.1),rgba(11,13,18,.4) 70%)}
+.fresh-copy .h2{margin:20px 0 24px}
+.fresh-copy p{max-width:480px}
+.fresh-copy .btn{margin-top:34px}
+@media(max-width:900px){.fresh{grid-template-columns:1fr}.fresh-img{aspect-ratio:16/11}}
+
+/* ============ WHY ============ */
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.why-card{padding:30px 26px;border:1px solid var(--line);border-radius:var(--r);background:linear-gradient(180deg,var(--panel),rgba(20,24,35,.4));transition:transform .45s var(--ease),border-color .45s}
+.why-card:hover{transform:translateY(-6px);border-color:rgba(242,181,58,.35)}
+.why-ico{width:52px;height:52px;border-radius:16px;border:1px solid rgba(242,181,58,.35);display:grid;place-items:center;color:var(--gold);margin-bottom:20px}
+.why-ico .ic{width:22px;height:22px}
+.why-card h4{font-weight:900;font-stretch:110%;text-transform:uppercase;font-size:16.5px;letter-spacing:.02em;margin-bottom:10px}
+.why-card p{font-size:13.5px;color:var(--mut);line-height:1.6}
+@media(max-width:1020px){.why-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.why-grid{grid-template-columns:1fr}}
+
+/* ============ LOCATION / MAP ============ */
+.loc{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,5vw,80px);align-items:center}
+.loc .h2{margin:20px 0 20px}
+.loc-info{display:flex;flex-direction:column;gap:14px;margin:26px 0 34px}
+.loc-info span{display:flex;align-items:flex-start;gap:13px;color:var(--ink-dim);font-weight:600}
+.loc-info .ic{color:var(--gold);margin-top:3px}
+.loc-btns{display:flex;flex-wrap:wrap;gap:13px}
+.mapbox{position:relative;height:min(440px,60vh);border-radius:26px;overflow:clip;border:1px solid var(--line2);background:#10141d}
+.mapbox iframe{width:100%;height:100%;border:0;filter:grayscale(1) invert(.92) contrast(.86) hue-rotate(185deg) saturate(.35) brightness(.92)}
+.map-chip{position:absolute;top:16px;left:16px;display:flex;align-items:center;gap:10px;background:rgba(11,13,18,.85);backdrop-filter:blur(10px);border:1px solid var(--line2);padding:11px 17px;border-radius:999px;font-size:13px;font-weight:700;z-index:2}
+.map-chip .ic{color:var(--gold);width:15px}
+.map-btn{position:absolute;right:16px;bottom:16px;z-index:2}
+@media(max-width:900px){.loc{grid-template-columns:1fr}}
+
+/* ============ SOCIAL ============ */
+.soc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+.soc-card{display:flex;align-items:center;gap:18px;padding:26px;border:1px solid var(--line);border-radius:var(--r);background:linear-gradient(180deg,var(--panel),rgba(20,24,35,.4));transition:transform .45s var(--ease),border-color .45s;text-align:left;width:100%}
+.soc-card:hover{transform:translateY(-5px);border-color:rgba(242,181,58,.35)}
+.soc-ico{width:50px;height:50px;border-radius:14px;background:rgba(242,181,58,.1);display:grid;place-items:center;color:var(--gold);flex:none}
+.soc-ico .ic{width:22px;height:22px}
+.soc-card b{display:block;font-size:16.5px}
+.soc-card small{color:var(--mut);font-size:12.5px}
+@media(max-width:760px){.soc-grid{grid-template-columns:1fr}}
+
+/* ============ PAGE HERO (subpages) ============ */
+.phero{position:relative;min-height:56svh;display:flex;align-items:flex-end;overflow:clip;padding:170px 0 74px}
+.phero-bg{position:absolute;inset:0}
+.phero-bg img{width:100%;height:112%;object-fit:cover;filter:saturate(.8) contrast(1.05) brightness(.6);will-change:transform}
+.phero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(10deg,var(--bg) 8%,rgba(11,13,18,.5) 55%,rgba(11,13,18,.3))}
+.phero-in{position:relative;z-index:2}
+.phero h1{margin-top:20px}
+.phero p{margin-top:16px;max-width:520px;color:var(--ink-dim)}
+
+/* ============ MENU PAGE ============ */
+.catbar-wrap{position:sticky;top:86px;z-index:60;padding:6px 28px;margin:-10px 0 8px}
+.catbar{position:relative;display:flex;gap:6px;padding:9px;background:rgba(12,14,20,.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--line2);border-radius:999px;width:max-content;max-width:100%;margin:0 auto;overflow-x:auto;scrollbar-width:none}
+.catbar::-webkit-scrollbar{display:none}
+.catbar .ind{position:absolute;top:9px;bottom:9px;left:9px;border-radius:999px;background:var(--gold);transition:left .45s var(--ease),width .45s var(--ease)}
+.cat-pill{position:relative;z-index:1;padding:11px 24px;border-radius:999px;font-weight:800;font-size:14px;letter-spacing:.03em;color:var(--ink-dim);white-space:nowrap;transition:color .3s}
+.cat-pill:hover{color:var(--ink)}
+.cat-pill.active{color:#181206}
+.menu-note{margin:34px 0 10px;color:var(--mut);font-size:13px;text-align:center}
+.cat-sec{padding-top:clamp(48px,6vw,80px);scroll-margin-top:150px}
+.cat-head{display:flex;align-items:baseline;gap:18px;margin-bottom:30px;flex-wrap:wrap}
+.cat-num{font-weight:900;font-size:14px;color:var(--gold);letter-spacing:.2em}
+.cat-head h3{font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:clamp(30px,3.6vw,46px);letter-spacing:-.01em;line-height:1}
+.cat-count{color:var(--mut);font-size:13px;font-weight:700}
+.cat-extra{margin-left:auto;font-size:12.5px;font-weight:700;color:var(--gold);border:1px solid rgba(242,181,58,.35);padding:8px 16px;border-radius:999px}
+.m-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.m-item{display:flex;gap:18px;padding:16px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(180deg,var(--panel),rgba(20,24,35,.45));transition:transform .4s var(--ease),border-color .4s}
+.m-item:hover{transform:translateY(-3px);border-color:rgba(242,181,58,.32)}
+.m-thumb{flex:none;width:108px;height:108px;border-radius:15px;overflow:clip;position:relative}
+.m-thumb img{width:100%;height:100%;object-fit:cover;filter:saturate(.82) contrast(1.05) brightness(.88);transition:transform .7s var(--ease)}
+.m-item:hover .m-thumb img{transform:scale(1.09)}
+.m-body{flex:1;min-width:0;display:flex;flex-direction:column}
+.m-top{display:flex;align-items:baseline;gap:10px}
+.m-namebtn{font-weight:800;font-size:16.5px;letter-spacing:-.01em;text-align:left;transition:color .3s}
+.m-namebtn:hover{color:var(--gold)}
+.m-dots{flex:1;border-bottom:1px dotted rgba(243,238,226,.22);transform:translateY(-4px)}
+.m-price{color:var(--gold);font-weight:900;font-size:15.5px;white-space:nowrap}
+.m-desc{font-size:13px;color:var(--mut);line-height:1.5;margin-top:5px}
+.m-sizes{font-size:11.5px;color:var(--mut);margin-top:6px;opacity:.85;letter-spacing:.02em}
+.m-foot{margin-top:auto;padding-top:10px;display:flex;justify-content:flex-end}
+.add-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 17px;border-radius:999px;border:1px solid rgba(242,181,58,.45);color:var(--gold);font-weight:800;font-size:12.5px;letter-spacing:.03em;transition:.3s}
+.add-btn .ic{width:13px}
+.add-btn:hover{background:var(--gold);color:#181206;transform:translateY(-1px)}
+.add-btn.ok{background:var(--gold);color:#181206;border-color:var(--gold)}
+.pizza-meta{display:grid;gap:12px;margin:6px 0 30px}
+.pizza-meta>div{border:1px dashed rgba(243,238,226,.2);border-radius:16px;padding:18px 22px;font-size:13.5px;color:var(--ink-dim);background:rgba(243,238,226,.02)}
+.pizza-meta b{color:var(--gold);text-transform:uppercase;letter-spacing:.12em;font-size:11.5px;display:block;margin-bottom:6px}
+.menu-cta{margin-top:clamp(60px,8vw,100px)}
+@media(max-width:940px){.m-grid{grid-template-columns:1fr}}
+@media(max-width:640px){.catbar-wrap{top:74px;padding:6px 16px}.cat-sec{scroll-margin-top:130px}.m-item{gap:14px}.m-thumb{width:86px;height:86px}}
+
+/* ============ CTA BANNER ============ */
+.cta-banner{position:relative;border:1px solid var(--line2);border-radius:30px;padding:clamp(44px,6vw,76px);text-align:center;overflow:clip;background:radial-gradient(120% 160% at 50% -20%,rgba(242,181,58,.14),transparent 55%),linear-gradient(180deg,var(--panel2),var(--panel))}
+.cta-banner .h2{margin-bottom:16px}
+.cta-banner p{max-width:480px;margin:0 auto 34px;color:var(--ink-dim)}
+.cta-banner .hero-cta{justify-content:center;margin-top:0}
+
+/* ============ ABOUT ============ */
+.about-lead{font-size:clamp(24px,3vw,38px);font-weight:800;font-stretch:108%;line-height:1.25;letter-spacing:-.01em;max-width:900px}
+.about-cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,70px);margin-top:44px}
+.about-cols p{color:var(--ink-dim)}
+@media(max-width:800px){.about-cols{grid-template-columns:1fr}}
+.v-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:54px}
+@media(max-width:760px){.v-grid{grid-template-columns:1fr}}
+.band{position:relative;min-height:62svh;display:grid;place-items:center;overflow:clip;text-align:center}
+.band img{position:absolute;inset:0;width:100%;height:118%;object-fit:cover;filter:saturate(.75) contrast(1.08) brightness(.5);will-change:transform}
+.band::after{content:"";position:absolute;inset:0;background:radial-gradient(90% 90% at 50% 50%,rgba(11,13,18,.35),rgba(11,13,18,.75))}
+.band h3{position:relative;z-index:2;font-weight:900;font-stretch:114%;text-transform:uppercase;font-size:clamp(38px,7vw,96px);line-height:.95;letter-spacing:-.01em;padding:0 20px}
+.band h3 b{color:var(--gold)}
+
+/* ============ CONTACT ============ */
+.ct-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(30px,4vw,60px);align-items:start}
+.ct-cards{display:flex;flex-direction:column;gap:14px}
+.ct-card{padding:26px;border:1px solid var(--line);border-radius:var(--r);background:linear-gradient(180deg,var(--panel),rgba(20,24,35,.4));transition:border-color .4s,transform .4s var(--ease)}
+.ct-card:hover{border-color:rgba(242,181,58,.3);transform:translateY(-3px)}
+.ct-card .lab{display:flex;align-items:center;gap:9px;font-size:11px;font-weight:900;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.ct-card .big{font-weight:800;font-size:17px;line-height:1.5}
+.ct-card .big a:hover{color:var(--gold)}
+.ct-card p{font-size:13.5px;color:var(--mut);margin:6px 0 14px}
+.ct-form{padding:clamp(28px,4vw,44px);border:1px solid var(--line2);border-radius:28px;background:linear-gradient(180deg,var(--panel2),var(--panel))}
+.ct-form h3{font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:clamp(26px,3vw,36px);margin-bottom:8px}
+.ct-form>p{color:var(--mut);font-size:14px;margin-bottom:28px}
+.f-grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fld{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.fld span{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim)}
+.fld input,.fld textarea{background:rgba(243,238,226,.04);border:1px solid var(--line2);border-radius:14px;padding:15px 17px;color:var(--ink);font:inherit;font-size:15px;transition:border-color .3s,box-shadow .3s,background .3s;width:100%}
+.fld textarea{min-height:120px;resize:vertical}
+.fld input:focus,.fld textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(242,181,58,.13);background:rgba(243,238,226,.06)}
+.fld.err input,.fld.err textarea{border-color:var(--red);box-shadow:0 0 0 4px rgba(229,72,77,.12)}
+.f-err{font-size:12.5px;color:var(--red);display:none;font-weight:600}
+.fld.err .f-err{display:block}
+.f-note{font-size:12.5px;color:var(--mut);margin:18px 0 0;line-height:1.6}
+.f-ok{display:none;border:1px solid rgba(242,181,58,.4);background:rgba(242,181,58,.07);border-radius:18px;padding:26px;margin-top:8px}
+.f-ok.show{display:block}
+.f-ok b{display:block;font-size:18px;margin-bottom:8px}
+.f-ok p{font-size:14px;color:var(--ink-dim);margin-bottom:18px}
+@media(max-width:900px){.ct-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.f-grid2{grid-template-columns:1fr}}
+
+/* ============ CART DRAWER ============ */
+.scrim{position:fixed;inset:0;z-index:140;background:rgba(6,8,11,.62);backdrop-filter:blur(5px);opacity:0;visibility:hidden;transition:.4s}
+.scrim.show{opacity:1;visibility:visible}
+.drawer{position:fixed;top:0;right:0;bottom:0;z-index:150;width:min(440px,100vw);background:#0d1017;border-left:1px solid var(--line2);display:flex;flex-direction:column;transform:translateX(103%);transition:transform .55s var(--ease)}
+.drawer.open{transform:none}
+.dr-head{display:flex;align-items:center;justify-content:space-between;padding:22px 26px;border-bottom:1px solid var(--line)}
+.dr-head h3{font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:21px;display:flex;align-items:center;gap:12px}
+.dr-head h3 em{font-style:normal;background:var(--gold);color:#181206;font-size:12px;font-weight:900;min-width:24px;height:24px;padding:0 7px;border-radius:999px;display:grid;place-items:center}
+.dr-body{flex:1;overflow-y:auto;padding:20px 26px;display:flex;flex-direction:column;gap:16px}
+.dr-empty{margin:auto;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;padding:40px 10px}
+.dr-empty .bus-big{width:60px;color:var(--gold);opacity:.85;margin-bottom:8px}
+.dr-empty b{font-size:18px}
+.dr-empty p{color:var(--mut);font-size:14px;margin-bottom:16px}
+.c-row{display:grid;grid-template-columns:62px 1fr auto;gap:14px;align-items:center;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.c-row img{width:62px;height:62px;border-radius:13px;object-fit:cover;filter:saturate(.85) brightness(.9)}
+.c-name{font-weight:800;font-size:14.5px;line-height:1.35}
+.c-name small{display:block;color:var(--mut);font-weight:600;font-size:12px}
+.qty{display:inline-flex;align-items:center;gap:2px;border:1px solid var(--line2);border-radius:999px;margin-top:9px;width:max-content}
+.qty button{width:29px;height:29px;display:grid;place-items:center;color:var(--ink-dim);border-radius:50%;transition:.25s}
+.qty button:hover{color:var(--gold);background:rgba(242,181,58,.1)}
+.qty button .ic{width:12px}
+.qty b{min-width:26px;text-align:center;font-size:13.5px}
+.c-right{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.c-price{color:var(--gold);font-weight:900;font-size:14.5px;white-space:nowrap}
+.c-rm{color:var(--mut);transition:color .25s;display:grid;place-items:center}
+.c-rm:hover{color:var(--red)}
+.c-rm .ic{width:15px}
+.dr-foot{border-top:1px solid var(--line);padding:20px 26px 24px;display:flex;flex-direction:column;gap:12px;background:#0b0e14}
+.sum{display:flex;justify-content:space-between;font-size:14px;color:var(--mut);font-weight:600}
+.sum b{color:var(--ink);font-size:15px}
+.sum.total{font-size:16px;color:var(--ink);font-weight:800;border-top:1px solid var(--line);padding-top:12px;margin-top:2px}
+.sum.total b{color:var(--gold);font-size:20px}
+.dr-foot .fld{margin-bottom:2px}
+.dr-foot input,.dr-foot textarea{padding:12px 15px;font-size:14px;border-radius:12px}
+.dr-foot textarea{min-height:64px}
+@media(max-width:520px){.drawer{width:100vw}}
+
+/* ============ PRODUCT MODAL ============ */
+.modal{position:fixed;inset:0;z-index:160;display:grid;place-items:center;padding:20px;visibility:hidden}
+.modal.open{visibility:visible}
+.modal-back{position:absolute;inset:0;background:rgba(6,8,11,.7);backdrop-filter:blur(6px);opacity:0;transition:.4s}
+.modal.open .modal-back{opacity:1}
+.modal-card{position:relative;width:min(470px,100%);max-height:92svh;overflow-y:auto;background:#0e1119;border:1px solid var(--line2);border-radius:26px;transform:translateY(34px) scale(.97);opacity:0;transition:.45s var(--ease)}
+.modal.open .modal-card{transform:none;opacity:1}
+.pm-img{position:relative;height:230px;overflow:clip}
+.pm-img img{width:100%;height:100%;object-fit:cover;filter:saturate(.85) contrast(1.05) brightness(.85)}
+.pm-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(14,17,25,.9))}
+.pm-x{position:absolute;top:14px;right:14px;z-index:3;background:rgba(11,13,18,.7);backdrop-filter:blur(8px);border-color:var(--line2)}
+.pm-body{padding:24px 26px 26px}
+.pm-body h3{font-size:23px;font-weight:900;letter-spacing:-.01em;padding-right:40px}
+.pm-cat{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:900;margin-bottom:8px;display:block}
+.pm-desc{color:var(--mut);font-size:14px;margin-top:8px;line-height:1.6}
+.pm-sizes{margin-top:20px;display:grid;gap:8px}
+.pm-sizes .lab,.pm-qty-lab{font-size:11px;font-weight:900;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:2px}
+.size-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.size-row button{border:1px solid var(--line2);border-radius:14px;padding:11px 8px;text-align:center;transition:.3s}
+.size-row button small{display:block;color:var(--mut);font-size:11.5px;font-weight:600;margin-top:2px}
+.size-row button.sel{border-color:var(--gold);background:rgba(242,181,58,.1)}
+.size-row button.sel b{color:var(--gold)}
+.pm-qty{display:flex;align-items:center;gap:16px;margin-top:18px}
+.pm-qty .qty{margin:0}
+.pm-qty .qty button{width:38px;height:38px}
+.pm-qty .qty b{min-width:34px;font-size:15px}
+.pm-add{margin-top:22px}
+.pm-add .tot{margin-left:auto;font-weight:900}
+
+/* ============ TOASTS ============ */
+.toasts{position:fixed;bottom:26px;left:26px;z-index:210;display:flex;flex-direction:column;gap:10px;pointer-events:none}
+.toast{display:flex;align-items:center;gap:11px;background:#141824;border:1px solid var(--line2);border-left:3px solid var(--gold);padding:14px 20px;border-radius:15px;font-weight:700;font-size:14px;box-shadow:var(--sh);transform:translateY(16px);opacity:0;transition:.4s var(--ease);max-width:min(360px,calc(100vw - 40px))}
+.toast .ic{color:var(--gold);width:17px}
+.toast.show{transform:none;opacity:1}
+@media(max-width:760px){.toasts{left:16px;right:16px;bottom:92px}.toast{width:100%}}
+
+/* ============ MOBILE CART BAR ============ */
+.mcart{position:fixed;left:16px;right:16px;bottom:16px;z-index:90;display:none;align-items:center;justify-content:space-between;gap:12px;background:var(--gold);color:#181206;border-radius:999px;padding:15px 22px;font-weight:900;font-size:15px;box-shadow:0 18px 40px rgba(0,0,0,.5);transform:translateY(130%);transition:transform .5s var(--ease)}
+.mcart.show{transform:none}
+.mcart .l{display:flex;align-items:center;gap:10px}
+.mcart small{font-weight:800;font-size:12px;opacity:.75}
+@media(max-width:760px){.mcart{display:flex}}
+
+/* ============ FOOTER ============ */
+footer{background:#080a0e;border-top:1px solid var(--line);padding-top:clamp(70px,8vw,110px);position:relative}
+.ft-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:44px}
+.ft-brand p{color:var(--mut);font-size:14.5px;margin:18px 0 24px;max-width:280px}
+.ft h5{font-size:11px;font-weight:900;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.ft ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.ft ul a,.ft ul button{color:var(--ink-dim);font-size:14.5px;font-weight:600;transition:color .3s;text-align:left}
+.ft ul a:hover,.ft ul button:hover{color:var(--gold)}
+.ft-addr{color:var(--ink-dim);font-size:14.5px;line-height:1.8;font-style:normal}
+.ft-addr a{display:inline-block}
+.ft-addr a:hover{color:var(--gold)}
+.ft-soc{display:flex;gap:10px;margin-top:6px}
+.ft-soc .icon-btn{width:42px;height:42px}
+.ft-mark-wrap{overflow:clip;margin-top:clamp(40px,6vw,70px)}
+.ft-mark{font-weight:900;font-stretch:116%;text-transform:uppercase;font-size:clamp(84px,16.5vw,250px);line-height:.82;text-align:center;color:transparent;-webkit-text-stroke:1px rgba(243,238,226,.08);letter-spacing:.02em;user-select:none;white-space:nowrap;transform:translateY(8%)}
+.ft-bottom{border-top:1px solid var(--line);padding:22px 0;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.ft-bottom p{color:var(--mut);font-size:13px}
+.ft-legal{display:flex;gap:20px}
+.ft-legal button{color:var(--mut);font-size:13px;font-weight:600;transition:color .3s}
+.ft-legal button:hover{color:var(--gold)}
+@media(max-width:960px){.ft-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.ft-grid{grid-template-columns:1fr}}
+
+/* ============ LEGAL MODAL ============ */
+.legal-card{width:min(460px,100%)}
+.legal-card .pm-body p{font-size:14px}
+
+/* ============ REVEAL / I18N FADE ============ */
+.rv{opacity:0;transform:translateY(30px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+html.i18n main,html.i18n .nav-in,html.i18n footer{opacity:.15;transition:opacity .18s}
+main,.nav-in,footer{transition:opacity .25s}
+.page{display:none}
+.page.active{display:block;animation:pagein .55s var(--ease)}
+@keyframes pagein{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .rv,.hero .eyebrow,.hero h1 .line span{opacity:1!important;transform:none!important}
+}
+</style>
+</head>
+<body class="lock">
+<a class="skip" href="#main" data-i18n="a.skip">Zum Inhalt springen</a>
+
+<!-- SVG ICON + LOGO DEFS -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="zobBadge" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="56" fill="rgba(242,181,58,.05)" stroke="var(--gold)" stroke-width="2.6"/>
+      <circle cx="60" cy="60" r="49" fill="none" stroke="rgba(243,238,226,.28)" stroke-width="1" stroke-dasharray="1.5 5.5"/>
+      <g stroke="var(--gold)" stroke-width="2.4" fill="none" stroke-linecap="round">
+        <rect x="41" y="25" width="38" height="19" rx="5.5"/>
+        <path d="M41 35h38"/>
+        <path d="M48.5 25v10M60 25v10M71.5 25v10"/>
+        <circle cx="50" cy="47.5" r="3.3"/><circle cx="70" cy="47.5" r="3.3"/>
+      </g>
+      <text x="60" y="80.5" text-anchor="middle" font-family="Archivo,sans-serif" font-size="27" font-weight="900" letter-spacing="1.5" fill="var(--ink)">ZOB</text>
+      <text x="60" y="97.5" text-anchor="middle" font-family="Archivo,sans-serif" font-size="11" font-weight="800" letter-spacing="4.2" fill="var(--gold)">DÖNER</text>
+    </symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 8h12l-1.2 12.1a2 2 0 0 1-2 1.9H9.2a2 2 0 0 1-2-1.9L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-arr" viewBox="0 0 24 24"><path d="M4 12h15m0 0-6-6m6 6-6 6"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2Z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 3s-6.5 5.6-6.5 10.2a6.5 6.5 0 0 0 13 0C18.5 8.6 12 3 12 3Z"/><path d="M12 11.5c-1.6 1.9-2.3 2.9-2.3 4.2a2.3 2.3 0 0 0 4.6 0c0-1.3-.7-2.3-2.3-4.2Z"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 4 13C4 8 9 4 20 4c0 11-4 16-9 16Z"/><path d="M11 20c0-5 2-8.5 6-11.5"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M4 12.5 9 17.5 20 6.5"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m3 0-1 13a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L6 7"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.6 2.7 4 6 4 9.5s-1.4 6.8-4 9.5c-2.6-2.7-4-6-4-9.5s1.4-6.8 4-9.5Z"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.2 6.8h.01"/></symbol>
+    <symbol id="i-fb" viewBox="0 0 24 24"><path d="M14.5 8.5H17V5h-2.5A4.5 4.5 0 0 0 10 9.5V12H7.5v3.5H10V22h3.5v-6.5H16l.5-3.5h-3v-2a1.5 1.5 0 0 1 1-1.5Z"/></symbol>
+    <symbol id="i-tt" viewBox="0 0 24 24"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07Z"/></symbol>
+    <symbol id="i-bus" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="14" rx="3"/><path d="M4 10h16M8 3v7M13 3v7M7 17v2M17 17v2"/><circle cx="8" cy="19.5" r="1.4"/><circle cx="16" cy="19.5" r="1.4"/></symbol>
+  </defs>
+</svg>
+
+<!-- LOADER -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="l-in">
+    <svg class="l-badge" viewBox="0 0 120 120" aria-hidden="true">
+      <circle class="l-circ" cx="60" cy="60" r="56" fill="rgba(242,181,58,.05)" stroke="var(--gold)" stroke-width="2.6" pathLength="100"/>
+      <circle cx="60" cy="60" r="49" fill="none" stroke="rgba(243,238,226,.28)" stroke-width="1" stroke-dasharray="1.5 5.5"/>
+      <g class="l-bus" stroke="var(--gold)" stroke-width="2.4" fill="none" stroke-linecap="round">
+        <rect x="41" y="25" width="38" height="19" rx="5.5"/><path d="M41 35h38"/><path d="M48.5 25v10M60 25v10M71.5 25v10"/>
+        <circle cx="50" cy="47.5" r="3.3"/><circle cx="70" cy="47.5" r="3.3"/>
+      </g>
+      <text class="l-t1" x="60" y="80.5" text-anchor="middle" font-family="Archivo,sans-serif" font-size="27" font-weight="900" letter-spacing="1.5" fill="var(--ink)">ZOB</text>
+      <text class="l-t2" x="60" y="97.5" text-anchor="middle" font-family="Archivo,sans-serif" font-size="11" font-weight="800" letter-spacing="4.2" fill="var(--gold)">DÖNER</text>
+    </svg>
+    <div class="l-bar"><i></i></div>
+    <div class="l-sub" data-i18n="l.sub">Passau · Frisches Street Food</div>
+  </div>
+</div>
+
+<div class="veil" id="veil" aria-hidden="true"><svg viewBox="0 0 120 120"><use href="#zobBadge"/></svg></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="glow a" aria-hidden="true"></div><div class="glow b" aria-hidden="true"></div>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="#/" data-nav="home" aria-label="ZOB Döner — Startseite">
+      <svg class="badge" viewBox="0 0 120 120" aria-hidden="true"><use href="#zobBadge"/></svg>
+      <span class="brand-word"><b>ZOB</b><span data-i18n="brand.sub">Döner · Passau</span></span>
+    </a>
+    <nav class="nav-links" aria-label="Hauptnavigation">
+      <a href="#/" data-nav="home" data-i18n="nav.home">Home</a>
+      <a href="#/menu" data-nav="menu" data-i18n="nav.menu">Menü</a>
+      <a href="#/about" data-nav="about" data-i18n="nav.about">Über uns</a>
+      <a href="#/contact" data-nav="contact" data-i18n="nav.contact">Kontakt</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang" data-langbox>
+        <button class="lang-btn" aria-haspopup="true" aria-expanded="false">
+          <svg class="ic" aria-hidden="true"><use href="#i-globe"/></svg>
+          <span data-lang-cur>DE</span>
+          <svg class="ic" aria-hidden="true"><use href="#i-chev"/></svg>
+        </button>
+        <div class="lang-menu">
+          <button data-lang="de">Deutsch</button>
+          <button data-lang="en">English</button>
+        </div>
+      </div>
+      <button class="icon-btn cart-btn" id="cartBtn" aria-label="Warenkorb öffnen">
+        <svg class="ic" aria-hidden="true"><use href="#i-bag"/></svg>
+        <span class="cart-n num" id="cartN" aria-hidden="true">0</span>
+      </button>
+      <button class="btn btn-solid btn-sm order-cta" data-nav="menu"><span data-i18n="nav.order">Jetzt bestellen</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></button>
+      <button class="icon-btn burger" id="burger" aria-label="Menü öffnen" aria-expanded="false"><i></i><i></i></button>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mmenu" id="mmenu" aria-hidden="true">
+  <nav aria-label="Mobile Navigation">
+    <a href="#/" data-nav="home"><i>01</i><span data-i18n="nav.home">Home</span></a>
+    <a href="#/menu" data-nav="menu"><i>02</i><span data-i18n="nav.menu">Menü</span></a>
+    <a href="#/about" data-nav="about"><i>03</i><span data-i18n="nav.about">Über uns</span></a>
+    <a href="#/contact" data-nav="contact"><i>04</i><span data-i18n="nav.contact">Kontakt</span></a>
+  </nav>
+  <div class="m-foot">
+    <div class="m-lang" role="group" aria-label="Sprache / Language">
+      <span class="lab" data-i18n="m.lang">Sprache</span>
+      <button data-lang="de">DE</button>
+      <button data-lang="en">EN</button>
+    </div>
+    <button class="btn btn-solid" data-nav="menu"><span data-i18n="nav.order">Jetzt bestellen</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></button>
+    <div class="m-meta">
+      <span>Dr.-Hans-Kapfinger-Straße 10 · 94032 Passau</span>
+      <a href="tel:+4915906361242">+49 1590 6361242</a>
+    </div>
+  </div>
+</div>
+
+<main id="main">
+<!-- ==================== HOME ==================== -->
+<section class="page" data-page="home" id="page-home">
+  <div class="hero" id="hero">
+    <div class="hero-bg" id="heroBg">
+      <img src="https://picsum.photos/seed/zob-hero/1920/1200.jpg" alt="Frisch zubereiteter Döner bei ZOB Döner Passau" fetchpriority="high">
+    </div>
+    <div class="wrap hero-in">
+      <span class="eyebrow" data-i18n="hero.eyebrow">ZOB Döner · Passau</span>
+      <h1 class="h-display">
+        <span class="line"><span data-i18n="hero.t1">Dein Döner.</span></span>
+        <span class="line"><span data-i18n="hero.t2">Dein Moment.</span></span>
+      </h1>
+      <p class="hero-sub" data-i18n="hero.sub">Frisch. Herzhaft. Mitten in Passau — Döner, Box, Pizza &amp; Pide, handgemacht und heiß auf den Teller.</p>
+      <div class="hero-cta">
+        <button class="btn btn-solid" data-nav="menu"><span data-i18n="hero.cta1">Jetzt bestellen</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></button>
+        <button class="btn btn-ghost" data-nav="menu"><span data-i18n="hero.cta2">Speisekarte ansehen</span></button>
+      </div>
+      <div class="hero-meta">
+        <span><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>Dr.-Hans-Kapfinger-Straße 10 · Passau</span>
+        <span><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg><a href="tel:+4915906361242">+49 1590 6361242</a></span>
+      </div>
+    </div>
+    <div class="scroll-ind" id="scrollInd"><span data-i18n="hero.scroll">Scroll</span><i></i></div>
+    <div class="stamp" aria-hidden="true">
+      <svg class="ring" viewBox="0 0 100 100">
+        <defs><path id="circ" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs>
+        <text><textPath href="#circ">FRISCH · HEISS · ECHT ZOB ·</textPath></text>
+      </svg>
+      <svg class="bus ic" aria-hidden="true"><use href="#i-bus"/></svg>
+    </div>
+  </div>
+
+  <div class="marq" aria-hidden="true">
+    <div class="marq-track">
+      <div class="marq-group">
+        <span>Döner</span><em>●</em><span class="o">Box</span><em>●</em><span>Pizza</span><em>●</em><span class="o">Pide</span><em>●</em><span>Passau</span><em>●</em><span class="o">Frisch</span><em>●</em><span>Heiß</span><em>●</em><span class="o">Echt ZOB</span><em>●</em>
+      </div>
+      <div class="marq-group" aria-hidden="true">
+        <span>Döner</span><em>●</em><span class="o">Box</span><em>●</em><span>Pizza</span><em>●</em><span class="o">Pide</span><em>●</em><span>Passau</span><em>●</em><span class="o">Frisch</span><em>●</em><span>Heiß</span><em>●</em><span class="o">Echt ZOB</span><em>●</em>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="wrap intro-grid">
+      <div>
+        <span class="eyebrow rv" data-i18n="intro.eyebrow">Willkommen bei ZOB</span>
+        <h2 class="h2 rv" style="--d:.08s" data-i18n-html="intro.h">Mehr als nur Döner.</h2>
+      </div>
+      <div class="rv" style="--d:.15s">
+        <p class="lead" data-i18n="intro.p1">ZOB Döner bringt frisches Street Food mitten in Passau auf den Teller: knuspriges Brot, frisch geschnittener Salat und Fleisch direkt vom Spieß — dazu Pizza, goldbraune Pide und Boxen, die richtig satt machen.</p>
+        <p class="lead mut" data-i18n="intro.p2">Ob schneller Snack zwischen zwei Terminen oder das große Essen für alle zusammen — bei uns gibt es handgemachte Küche zu fairen Preisen. Ehrlich zubereitet, ohne Schnickschnack.</p>
+        <div class="chips">
+          <span class="chip"><svg class="ic" aria-hidden="true"><use href="#i-leaf"/></svg><span data-i18n="intro.c1">Frisch zubereitet</span></span>
+          <span class="chip"><svg class="ic" aria-hidden="true"><use href="#i-flame"/></svg><span data-i18n="intro.c2">Kräftig im Geschmack</span></span>
+          <span class="chip"><svg class="ic" aria-hidden="true"><use href="#i-bolt"/></svg><span data-i18n="intro.c3">Faire Preise</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec alt">
+    <div class="wrap">
+      <div class="sec-head row">
+        <div>
+          <span class="eyebrow rv" data-i18n="fav.eyebrow">Signaturen</span>
+          <h2 class="h2 rv" style="--d:.08s" data-i18n="fav.h">Unsere Favoriten</h2>
+          <p class="rv" style="--d:.14s" data-i18n="fav.sub">Die Klassiker, die immer wieder bestellt werden — direkt aus unserer Theke.</p>
+        </div>
+        <button class="link-arrow rv" style="--d:.2s" data-nav="menu"><span data-i18n="fav.all">Zur ganzen Speisekarte</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></button>
+      </div>
+      <div class="f-grid" id="favGrid"></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="wrap">
+      <div class="sec-head" style="text-align:center">
+        <span class="eyebrow rv" style="justify-content:center" data-i18n="cat.eyebrow">Kategorien</span>
+        <h2 class="h2 rv" style="--d:.08s" data-i18n="cat.h">Was darf's sein?</h2>
+        <p class="rv" style="--d:.14s;margin-inline:auto" data-i18n="cat.sub">Vier Kategorien, ein Versprechen: frisch, heiß und ehrlich.</p>
+      </div>
+      <div class="strip rv" id="strip" style="--d:.2s">
+        <span class="ind" aria-hidden="true"></span>
+        <button data-cat-go="doner" class="active"><i>01</i><span data-i18n="cat.doner">Döner</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></button>
+        <button data-cat-go="box"><i>02</i><span data-i18n="cat.box">Box</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></button>
+        <button data-cat-go="pizza"><i>03</i><span data-i18n="cat.pizza">Pizza</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></button>
+        <button data-cat-go="pide"><i>04</i><span data-i18n="cat.pide">Pide</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></button>
+      </div>
+      <p class="strip-note rv" style="--d:.26s" data-i18n="cat.note">Tipp: Alle Gerichte gibt es auch per WhatsApp zur Abholung.</p>
+    </div>
+  </div>
+
+  <div class="sec alt">
+    <div class="wrap fresh">
+      <div class="fresh-img rv-img rv"><img data-plx src="https://picsum.photos/seed/zob-fresh/1100/1300.jpg" alt="Frische Zutaten bei ZOB Döner" loading="lazy"></div>
+      <div class="fresh-copy">
+        <span class="eyebrow rv" data-i18n="fresh.eyebrow">Frische</span>
+        <h2 class="h2 rv" style="--d:.08s" data-i18n="fresh.h">Frisch auf den Teller.</h2>
+        <p class="lead mut rv" style="--d:.14s" data-i18n="fresh.p">Salat frisch geschnitten, Soßen selbst angemacht, Brot außen knusprig und innen fluffig. Jede Bestellung wird erst zubereitet, wenn sie bei uns eingeht — heiß, frisch und mit Liebe zum Detail.</p>
+        <button class="btn btn-ghost rv" style="--d:.2s" data-nav="about"><span data-i18n="fresh.cta">Mehr über uns</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow rv" data-i18n="why.eyebrow">Warum ZOB</span>
+        <h2 class="h2 rv" style="--d:.08s" data-i18n="why.h">Warum ZOB Döner?</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card rv"><div class="why-ico"><svg class="ic" aria-hidden="true"><use href="#i-leaf"/></svg></div><h4 data-i18n="why.c1t">Frisch zubereitet</h4><p data-i18n="why.c1d">Frische Zutaten und jedes Gericht, das erst zubereitet wird, wenn du es bestellst.</p></div>
+        <div class="why-card rv" style="--d:.08s"><div class="why-ico"><svg class="ic" aria-hidden="true"><use href="#i-flame"/></svg></div><h4 data-i18n="why.c2t">Voller Geschmack</h4><p data-i18n="why.c2d">Kräftige Soßen, gegrillte Aromen und Portionen, die wirklich satt machen.</p></div>
+        <div class="why-card rv" style="--d:.16s"><div class="why-ico"><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg></div><h4 data-i18n="why.c3t">Mitten in Passau</h4><p data-i18n="why.c3d">Direkt am ZOB gelegen — praktisch, schnell erreichbar, mitten in der Stadt.</p></div>
+        <div class="why-card rv" style="--d:.24s"><div class="why-ico"><svg class="ic" aria-hidden="true"><use href="#i-bolt"/></svg></div><h4 data-i18n="why.c4t">Schnell &amp; einfach</h4><p data-i18n="why.c4d">Unkompliziert per WhatsApp bestellen und bequem bei uns abholen.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec alt">
+    <div class="wrap loc">
+      <div>
+        <span class="eyebrow rv" data-i18n="loc.eyebrow">Finde uns</span>
+        <h2 class="h2 rv" style="--d:.08s" data-i18n="loc.h">Dein ZOB. Mitten in Passau.</h2>
+        <div class="loc-info rv" style="--d:.14s">
+          <span><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>Dr.-Hans-Kapfinger-Straße 10<br>94032 Passau, Germany</span>
+          <span><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg><a href="tel:+4915906361242">+49 1590 6361242</a></span>
+        </div>
+        <div class="loc-btns rv" style="--d:.2s">
+          <a class="btn btn-solid" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Dr.-Hans-Kapfinger-Stra%C3%9Fe%2010%2C%2094032%20Passau%2C%20Germany"><span data-i18n="loc.route">Route planen</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></a>
+          <a class="btn btn-ghost" href="tel:+4915906361242"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg><span data-i18n="loc.call">Jetzt anrufen</span></a>
+        </div>
+      </div>
+      <div class="mapbox rv" style="--d:.15s">
+        <div class="map-chip"><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>ZOB Döner · Passau</div>
+        <iframe title="Karte: ZOB Döner, Dr.-Hans-Kapfinger-Straße 10, 94032 Passau" loading="lazy" src="https://www.google.com/maps?q=Dr.-Hans-Kapfinger-Stra%C3%9Fe+10,+94032+Passau,+Germany&z=16&output=embed"></iframe>
+        <a class="btn btn-solid btn-sm map-btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Dr.-Hans-Kapfinger-Stra%C3%9Fe%2010%2C%2094032%20Passau%2C%20Germany"><span data-i18n="loc.open">In Google Maps öffnen</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="wrap">
+      <div class="sec-head" style="text-align:center">
+        <span class="eyebrow rv" style="justify-content:center" data-i18n="soc.eyebrow">Community</span>
+        <h2 class="h2 rv" style="--d:.08s" data-i18n="soc.h">Folge uns.</h2>
+        <p class="rv" style="--d:.14s;margin-inline:auto" data-i18n="soc.p">Instagram, Facebook und TikTok sind bald für dich da — mit Einblicken aus der Küche, Neuigkeiten und Angeboten.</p>
+      </div>
+      <div class="soc-grid">
+        <button class="soc-card rv" data-social="Instagram"><span class="soc-ico"><svg class="ic" aria-hidden="true"><use href="#i-ig"/></svg></span><span><b>Instagram</b><small data-i18n="soc.soon">folgt in Kürze</small></span></button>
+        <button class="soc-card rv" style="--d:.08s" data-social="Facebook"><span class="soc-ico"><svg class="ic ic-f" aria-hidden="true"><use href="#i-fb"/></svg></span><span><b>Facebook</b><small data-i18n="soc.soon">folgt in Kürze</small></span></button>
+        <button class="soc-card rv" style="--d:.16s" data-social="TikTok"><span class="soc-ico"><svg class="ic ic-f" aria-hidden="true"><use href="#i-tt"/></svg></span><span><b>TikTok</b><small data-i18n="soc.soon">folgt in Kürze</small></span></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="cta-banner rv">
+        <h2 class="h2" data-i18n="cta.h">Appetit bekommen?</h2>
+        <p data-i18n="cta.p">Stell deine Bestellung zusammen und schick sie uns direkt per WhatsApp — wir bereiten alles frisch für dich vor.</p>
+        <div class="hero-cta">
+          <button class="btn btn-solid" data-nav="menu"><span data-i18n="cta.menu">Zur Speisekarte</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></button>
+          <button class="btn btn-ghost" data-wa-generic><svg class="ic ic-f" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="c.wa">Über WhatsApp bestellen</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== MENU ==================== -->
+<section class="page" data-page="menu" id="page-menu">
+  <div class="phero">
+    <div class="phero-bg"><img data-plx src="https://picsum.photos/seed/zob-menu/1920/1100.jpg" alt="Döner und Spezialitäten bei ZOB Döner Passau" loading="lazy"></div>
+    <div class="wrap phero-in">
+      <span class="eyebrow" data-i18n="menu.eyebrow">Speisekarte</span>
+      <h1 class="h-display" data-i18n="menu.h">Die Karte.</h1>
+      <p data-i18n="menu.sub">Döner, Boxen, Pizza &amp; Pide — alles frisch zubereitet. Bestell bequem per WhatsApp und hol dir dein Essen ab.</p>
+    </div>
+  </div>
+  <div class="wrap" style="padding-top:26px">
+    <div class="catbar-wrap"><div class="catbar" id="catbar"><span class="ind" aria-hidden="true"></span></div></div>
+    <p class="menu-note" data-i18n="menu.note">Alle Preise in Euro, inkl. MwSt. Allergene &amp; Zusatzstoffe auf Anfrage.</p>
+    <div id="menuRoot"></div>
+    <div class="cta-banner menu-cta rv">
+      <h2 class="h2" data-i18n="cta.h">Appetit bekommen?</h2>
+      <p data-i18n="cta.p">Stell deine Bestellung zusammen und schick sie uns direkt per WhatsApp — wir bereiten alles frisch für dich vor.</p>
+      <div class="hero-cta">
+        <button class="btn btn-solid" data-wa-generic><svg class="ic ic-f" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="c.wa">Über WhatsApp bestellen</span></button>
+        <a class="btn btn-ghost" href="tel:+4915906361242"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg><span data-i18n="loc.call">Jetzt anrufen</span></a>
+      </div>
+    </div>
+  </div>
+  <div style="height:90px"></div>
+</section>
+
+<!-- ==================== ABOUT ==================== -->
+<section class="page" data-page="about" id="page-about">
+  <div class="phero">
+    <div class="phero-bg"><img data-plx src="https://picsum.photos/seed/zob-about/1920/1100.jpg" alt="Bei ZOB Döner in Passau" loading="lazy"></div>
+    <div class="wrap phero-in">
+      <span class="eyebrow" data-i18n="ab.eyebrow">Über uns</span>
+      <h1 class="h-display" data-i18n="ab.h">Über ZOB Döner.</h1>
+      <p data-i18n="ab.sub">Ehrliches Street Food aus Passau.</p>
+    </div>
+  </div>
+  <div class="sec">
+    <div class="wrap">
+      <span class="eyebrow rv" data-i18n="ab.s1">Unsere Geschichte — zum Selbstschreiben</span>
+      <p class="about-lead rv" style="--d:.08s;margin-top:24px" data-i18n="ab.lead">ZOB Döner steht für ehrliches Street Food, frische Zutaten und kräftigen Geschmack — mitten in Passau.</p>
+      <div class="about-cols">
+        <p class="lead rv" style="--d:.12s" data-i18n="ab.p1">Wir machen das, was wir selbst gern essen: Döner vom frisch belegten Spieß, knusprige Pizza, goldbraune Pide und Boxen, die satt machen. Kein Schnickschnack — dafür Handwerk, gute Zutaten und Rezepte, die einfach funktionieren.</p>
+        <p class="lead mut rv" style="--d:.18s" data-i18n="ab.p2">Ob schneller Snack zwischendurch oder das große Essen für die ganze Runde: Bei uns bekommst du klassische Street-Food-Favoriten, frisch zubereitet und mit Herz gemacht.</p>
+      </div>
+    </div>
+  </div>
+  <div class="band">
+    <img data-plx src="https://picsum.photos/seed/zob-band/1920/900.jpg" alt="Dönerspieß bei ZOB Döner Passau" loading="lazy">
+    <h3 class="rv" data-i18n-html="ab.band">Frisch. Heiß. <b>Echt ZOB.</b></h3>
+  </div>
+  <div class="sec">
+    <div class="wrap">
+      <div class="sec-head"><span class="eyebrow rv" data-i18n="ab.s2">Woran wir glauben</span><h2 class="h2 rv" style="--d:.08s" data-i18n="ab.vh">Unsere Werte</h2></div>
+      <div class="v-grid">
+        <div class="why-card rv"><div class="why-ico"><svg class="ic" aria-hidden="true"><use href="#i-flame"/></svg></div><h4 data-i18n="ab.v1t">Unsere Philosophie</h4><p data-i18n="ab.v1d">Gutes Essen braucht keine Tricks. Wir halten uns an die Basics: frische Zutaten, saubere Zubereitung und Portionen, die stimmen.</p></div>
+        <div class="why-card rv" style="--d:.08s"><div class="why-ico"><svg class="ic" aria-hidden="true"><use href="#i-leaf"/></svg></div><h4 data-i18n="ab.v2t">Frische Zutaten</h4><p data-i18n="ab.v2d">Salat, Gemüse und Soßen werden frisch vorbereitet — jeden Tag, aufs Neue.</p></div>
+        <div class="why-card rv" style="--d:.16s"><div class="why-ico"><svg class="ic" aria-hidden="true"><use href="#i-bus"/></svg></div><h4 data-i18n="ab.v3t">Unsere Küche</h4><p data-i18n="ab.v3d">Vom Döner bis zur Pizza: Alles wird zubereitet, wenn du bestellst. Nicht früher — und nicht später.</p></div>
+        <div class="why-card rv" style="--d:.24s"><div class="why-ico"><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg></div><h4 data-i18n="ab.v4t">Mitten in Passau</h4><p data-i18n="ab.v4d">Direkt am ZOB in der Dr.-Hans-Kapfinger-Straße — leicht zu erreichen, egal woher du kommst.</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="cta-banner rv">
+        <h2 class="h2" data-i18n="ab.ctaH">Hungry?</h2>
+        <p data-i18n="ab.ctaP">Schau dir die Karte an und bestell dir dein Lieblingsgericht.</p>
+        <div class="hero-cta">
+          <button class="btn btn-solid" data-nav="menu"><span data-i18n="cta.menu">Zur Speisekarte</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></button>
+          <button class="btn btn-ghost" data-nav="contact"><span data-i18n="ab.ctaContact">Kontakt aufnehmen</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== CONTACT ==================== -->
+<section class="page" data-page="contact" id="page-contact">
+  <div class="phero">
+    <div class="phero-bg"><img data-plx src="https://picsum.photos/seed/zob-contact/1920/1100.jpg" alt="ZOB Döner Passau" loading="lazy"></div>
+    <div class="wrap phero-in">
+      <span class="eyebrow" data-i18n="ct.eyebrow">Kontakt</span>
+      <h1 class="h-display" data-i18n="ct.h">Komm vorbei.</h1>
+      <p data-i18n="ct.sub">Wir freuen uns auf dich — direkt am ZOB in Passau.</p>
+    </div>
+  </div>
+  <div class="sec">
+    <div class="wrap ct-grid">
+      <div class="ct-cards">
+        <div class="ct-card rv">
+          <div class="lab"><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg><span data-i18n="ct.addrT">Adresse</span></div>
+          <div class="big">ZOB Döner<br>Dr.-Hans-Kapfinger-Straße 10<br>94032 Passau, Germany</div>
+        </div>
+        <div class="ct-card rv" style="--d:.08s">
+          <div class="lab"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg><span data-i18n="ct.phoneT">Telefon</span></div>
+          <div class="big"><a href="tel:+4915906361242">+49 1590 6361242</a></div>
+          <p data-i18n="ct.phoneD">Bei Fragen oder Bestellungen — wir sind für dich da.</p>
+          <a class="btn btn-ghost btn-sm" href="tel:+4915906361242"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg><span data-i18n="loc.call">Jetzt anrufen</span></a>
+        </div>
+        <div class="ct-card rv" style="--d:.16s">
+          <div class="lab"><svg class="ic ic-f" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="ct.waT">WhatsApp</span></div>
+          <p data-i18n="ct.waD">Bestellung oder Frage? Schick uns direkt eine Nachricht.</p>
+          <button class="btn btn-solid btn-sm" data-wa-generic><svg class="ic ic-f" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="ct.waOpen">WhatsApp öffnen</span></button>
+        </div>
+      </div>
+      <div>
+        <div class="mapbox rv" style="height:min(420px,52vh);margin-bottom:34px">
+          <div class="map-chip"><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>ZOB Döner · Passau</div>
+          <iframe title="Karte: ZOB Döner, Dr.-Hans-Kapfinger-Straße 10, 94032 Passau" loading="lazy" src="https://www.google.com/maps?q=Dr.-Hans-Kapfinger-Stra%C3%9Fe+10,+94032+Passau,+Germany&z=16&output=embed"></iframe>
+          <a class="btn btn-solid btn-sm map-btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Dr.-Hans-Kapfinger-Stra%C3%9Fe%2010%2C%2094032%20Passau%2C%20Germany"><span data-i18n="loc.open">In Google Maps öffnen</span></a>
+        </div>
+        <form class="ct-form rv" id="cform" novalidate>
+          <h3 data-i18n="ct.formH">Schreib uns.</h3>
+          <p data-i18n="ct.formP">Fragen, Feedback oder eine größere Bestellung? Hinterlass uns eine Nachricht.</p>
+          <div class="f-grid2">
+            <label class="fld"><span data-i18n="f.name">Name *</span><input type="text" id="fName" autocomplete="name"><em class="f-err" id="eName"></em></label>
+            <label class="fld"><span data-i18n="f.email">E-Mail *</span><input type="email" id="fEmail" autocomplete="email"><em class="f-err" id="eEmail"></em></label>
+          </div>
+          <label class="fld"><span data-i18n="f.phone">Telefon (optional)</span><input type="tel" id="fPhone" autocomplete="tel"></label>
+          <label class="fld"><span data-i18n="f.msg">Nachricht *</span><textarea id="fMsg"></textarea><em class="f-err" id="eMsg"></em></label>
+          <button class="btn btn-solid btn-w100" type="submit"><span data-i18n="f.send">Nachricht senden</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></button>
+          <p class="f-note" data-i18n="f.note">Hinweis: Der Versand wird erst mit angebundenem E-Mail-Service aktiv. Bis dahin erreichst du uns am schnellsten per Telefon oder WhatsApp.</p>
+          <div class="f-ok" id="formOk">
+            <b id="okTitle">Danke!</b>
+            <p data-i18n="f.ok2">Deine Nachricht ist bereit — der E-Mail-Versand ist auf dieser Seite noch nicht angebunden. Ruf uns am besten kurz an oder schick uns deine Nachricht per WhatsApp.</p>
+            <div class="loc-btns">
+              <a class="btn btn-solid btn-sm" href="tel:+4915906361242"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg><span data-i18n="loc.call">Jetzt anrufen</span></a>
+              <button type="button" class="btn btn-ghost btn-sm" data-wa-generic><svg class="ic ic-f" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="ct.waOpen">WhatsApp öffnen</span></button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div style="height:60px"></div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="ft-grid">
+      <div class="ft ft-brand">
+        <a class="brand" href="#/" data-nav="home" aria-label="ZOB Döner">
+          <svg class="badge" style="width:56px;height:56px" viewBox="0 0 120 120" aria-hidden="true"><use href="#zobBadge"/></svg>
+          <span class="brand-word"><b style="font-size:22px">ZOB</b><span data-i18n="brand.sub">Döner · Passau</span></span>
+        </a>
+        <p data-i18n="fo.tag">Frischer Geschmack. Mitten in Passau.</p>
+        <div class="ft-soc">
+          <button class="icon-btn" data-social="Instagram" aria-label="Instagram (folgt in Kürze)"><svg class="ic" aria-hidden="true"><use href="#i-ig"/></svg></button>
+          <button class="icon-btn" data-social="Facebook" aria-label="Facebook (folgt in Kürze)"><svg class="ic ic-f" aria-hidden="true"><use href="#i-fb"/></svg></button>
+          <button class="icon-btn" data-social="TikTok" aria-label="TikTok (folgt in Kürze)"><svg class="ic ic-f" aria-hidden="true"><use href="#i-tt"/></svg></button>
+        </div>
+      </div>
+      <div class="ft">
+        <h5 data-i18n="fo.nav">Navigation</h5>
+        <ul>
+          <li><a href="#/" data-nav="home" data-i18n="nav.home">Home</a></li>
+          <li><a href="#/menu" data-nav="menu" data-i18n="nav.menu">Menü</a></li>
+          <li><a href="#/about" data-nav="about" data-i18n="nav.about">Über uns</a></li>
+          <li><a href="#/contact" data-nav="contact" data-i18n="nav.contact">Kontakt</a></li>
+        </ul>
+      </div>
+      <div class="ft">
+        <h5 data-i18n="fo.contact">Kontakt</h5>
+        <address class="ft-addr">
+          Dr.-Hans-Kapfinger-Straße 10<br>94032 Passau, Germany<br>
+          <a href="tel:+4915906361242">+49 1590 6361242</a>
+        </address>
+      </div>
+      <div class="ft">
+        <h5 data-i18n="fo.hours">Bestellung</h5>
+        <ul>
+          <li><button data-wa-generic><span data-i18n="c.wa">Über WhatsApp bestellen</span></button></li>
+          <li><a href="tel:+4915906361242" data-i18n="loc.call">Jetzt anrufen</a></li>
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Dr.-Hans-Kapfinger-Stra%C3%9Fe%2010%2C%2094032%20Passau%2C%20Germany" data-i18n="loc.route">Route planen</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-mark-wrap"><div class="ft-mark" aria-hidden="true">ZOB Döner</div></div>
+    <div class="ft-bottom">
+      <p>© 2026 ZOB Döner · <span data-i18n="fo.rights">Alle Rechte vorbehalten.</span></p>
+      <div class="ft-legal">
+        <button data-legal="imp" data-i18n="l.imp">Impressum</button>
+        <button data-legal="priv" data-i18n="l.priv">Datenschutz</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- CART DRAWER -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Warenkorb">
+  <div class="dr-head">
+    <h3><span data-i18n="c.title">Warenkorb</span><em class="num" id="drCount">0</em></h3>
+    <button class="icon-btn" id="drClose" aria-label="Warenkorb schließen"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button>
+  </div>
+  <div class="dr-body" id="drBody"></div>
+  <div class="dr-foot" id="drFoot">
+    <div class="sum"><span data-i18n="c.sub">Zwischensumme</span><b class="num" id="drSub">0,00 €</b></div>
+    <div class="sum total"><span data-i18n="c.total">Gesamt</span><b class="num" id="drTotal">0,00 €</b></div>
+    <label class="fld"><span data-i18n="c.name">Dein Name *</span><input type="text" id="ordName" autocomplete="name"></label>
+    <label class="fld"><span data-i18n="c.note">Notiz (optional)</span><textarea id="ordNote" placeholder=""></textarea></label>
+    <button class="btn btn-solid btn-w100" id="waBtn"><svg class="ic ic-f" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="c.wa">Über WhatsApp bestellen</span></button>
+    <button class="btn btn-ghost btn-w100" id="drContinue"><span data-i18n="c.cont">Weiter einkaufen</span></button>
+  </div>
+</aside>
+
+<!-- PRODUCT MODAL -->
+<div class="modal" id="pmodal" role="dialog" aria-modal="true" aria-label="Produktdetails">
+  <div class="modal-back" data-close-modal></div>
+  <div class="modal-card">
+    <div class="pm-img">
+      <img id="pmImg" src="" alt="">
+      <button class="icon-btn pm-x" data-close-modal aria-label="Schließen"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="pm-body">
+      <span class="pm-cat" id="pmCat"></span>
+      <h3 id="pmName"></h3>
+      <p class="pm-desc" id="pmDesc"></p>
+      <div class="pm-sizes" id="pmSizes" hidden>
+        <span class="lab" data-i18n="m.size">Größe</span>
+        <div class="size-row" id="sizeRow"></div>
+      </div>
+      <div class="pm-qty">
+        <span class="pm-qty-lab" data-i18n="m.qty">Menge</span>
+        <div class="qty">
+          <button id="pmMinus" aria-label="Weniger"><svg class="ic" aria-hidden="true"><use href="#i-minus"/></svg></button>
+          <b class="num" id="pmQty">1</b>
+          <button id="pmPlus" aria-label="Mehr"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></button>
+        </div>
+      </div>
+      <button class="btn btn-solid btn-w100 pm-add" id="pmAdd"><svg class="ic" aria-hidden="true"><use href="#i-bag"/></svg><span data-i18n="m.add">In den Warenkorb</span><span class="tot num" id="pmTot"></span></button>
+    </div>
+  </div>
+</div>
+
+<!-- LEGAL MODAL -->
+<div class="modal" id="legalModal" role="dialog" aria-modal="true">
+  <div class="modal-back" data-close-modal></div>
+  <div class="modal-card legal-card">
+    <div class="pm-body">
+      <h3 id="lTitle" style="padding-right:0"></h3>
+      <p class="pm-desc" data-i18n="l.ph">Platzhalter — Die rechtlichen Angaben des Betreibers werden an dieser Stelle ergänzt.</p>
+      <button class="btn btn-ghost btn-sm" data-close-modal style="margin-top:20px"><span data-i18n="m.close">Schließen</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+<button class="mcart" id="mcart" aria-label="Warenkorb öffnen">
+  <span class="l"><svg class="ic" aria-hidden="true"><use href="#i-bag"/></svg><span data-i18n="c.title">Warenkorb</span></span>
+  <span class="num" id="mcartTot">0,00 €</span>
+</button>
+
+<script>
+/* ============================================================
+   ZOB DÖNER — single-file app
+   ============================================================ */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const WA_NUM='4915906361242', TEL='+4915906361242';
+const SIZES=['27 cm','36 cm','40 cm'];
+const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- MENU (transcribed from the original ZOB Döner menu) ---------- */
+const CATS=[
+ {id:'doner',num:'01',de:'Döner',en:'Döner',items:[
+  {id:'d1',n:'Döner Kebab*',d:'Hähnchenbrustfleisch*, Salat, Krautsalat',p:6.5},
+  {id:'d2',n:'ZOB Döner*',d:'Hähnchenbrustfleisch*, Salat, Hirtenkäse, Krautsalat',p:7.5,tag:1},
+  {id:'d3',n:'Fleisch Kebab*',d:'Salat, Krautsalat',p:6.5},
+  {id:'d4',n:'Vegetarischer Döner*',d:'Salat, Krautsalat',p:6.5},
+  {id:'d5',n:'Sujuk Kebab*',d:'Salat, Krautsalat',p:6.5},
+  {id:'d6',n:'Halloumi Kebab*',d:'Salat, Hirtenkäse, scharf',p:6.5},
+  {id:'d7',n:'Döner Dürüm*',d:'Hähnchenbrustfleisch*, Salat, Krautsalat',p:7.5},
+  {id:'d8',n:'Fleischkäse Dürüm*',d:'Salat, Hirtenkäse',p:7.5},
+  {id:'d9',n:'Halloumi Dürüm*',d:'Salat, Krautsalat',p:7.5},
+  {id:'d10',n:'Vegetarischer Dürüm*',d:'Salat, Krautsalat',p:7.5},
+  {id:'d11',n:'Sucuk Dürüm*',d:'Sucuk, Salat, Krautsalat, scharf',p:7.5},
+ ]},
+ {id:'box',num:'02',de:'Box',en:'Boxes',items:[
+  {id:'b12',n:'Halloumi-Box*',d:'Hähnchenbrustfleisch*, Halloumi*, Salat, Krautsalat',p:7.5},
+  {id:'b13',n:'Falafel-Box*',d:'Hähnchenbrustfleisch*, Falafel*, Salat, Krautsalat',p:7.5},
+  {id:'b14',n:'Zwiebel-Box*',d:'Hähnchenbrustfleisch*, Salat, Zwiebeln',p:7.5},
+  {id:'b15',n:'Pommes-Box*',d:'Hähnchenbrustfleisch*, Salat, Pommes frites',p:7.5},
+  {id:'b16',n:'Fleisch-Box*',d:'Hähnchenbrustfleisch*, Salat',p:9},
+ ]},
+ {id:'pizza',num:'03',de:'Pizza',en:'Pizza',items:[
+  {id:'p17',n:'Pizzastück',d:'Tomatensoße, Käse*',p:4},
+  {id:'p18',n:'Pizzabrot*',d:'Tomatensoße, Käse*',p:4.5},
+  {id:'p19',n:'Funghi*',d:'Champignons, Käse*',p:[5.5,10,22]},
+  {id:'p20',n:'Salami und Putenfleisch*',d:'Salami*, Käse*',p:[9,15,22]},
+  {id:'p21',n:'Margherita',d:'Tomatensoße, Käse*',p:[9,14,19]},
+  {id:'p22',n:'Miffedli*',d:'Tomaten, Paprika, Zwiebeln, Käseknacker, scharf',p:[9,15,22]},
+  {id:'p23',n:'Capricciosa*',d:'Schinken*, Pilze, Tomaten',p:[9,15,21]},
+  {id:'p24',n:'Giorgia*',d:'Zwiebeln, Salami*',p:[9.5,15,22]},
+  {id:'p25',n:'Calzone*',d:'Salami*, Putenfleisch*, Champignons',p:[9,15,22]},
+  {id:'p26',n:'Calzone Döner*',d:'Hähnchenbrustfleisch*, Champignons, Zwiebeln',p:[9.5,15,22]},
+  {id:'p27',n:'Döner Pizza*',d:'Hähnchenbrustfleisch*, Paprika*, Zwiebeln',p:[9.5,17,23]},
+  {id:'p28',n:'Diavolo*',d:'Peperoni*, Tomatensoße*, Paprika, scharf',p:[9.5,15,22]},
+  {id:'p29',n:'Quatro Formaggi*',d:'Käse*',p:[9,16,23]},
+  {id:'p30',n:'Vegetarisch*',d:'Champignons, Paprika, Zwiebeln, Mais',p:[9,15,22]},
+  {id:'p31',n:'Salami*',d:'Salami*, Käse*',p:[9.5,15,22]},
+  {id:'p32',n:'Sucuk*',d:'Knoblauchwurst',p:[10,15,22]},
+  {id:'p33',n:'Regina*',d:'Pizzasoße*, Putenfleisch*, Champignons',p:[9.5,15,22]},
+  {id:'p34',n:'Tonno*',d:'Thunfisch*, Zwiebeln',p:[10,16,23]},
+  {id:'p35',n:'Azra*',d:'Salami*, Putenfleisch*, Paprika*',p:[10,16,23]},
+  {id:'p36',n:'Capricciosa*',d:'Salami*, Putenfleisch*, Paprika*',p:[10,16,23]},
+ ]},
+ {id:'pide',num:'04',de:'Pide',en:'Pide',items:[
+  {id:'pi37',n:'Sucuk Pide*',d:'Rindfleisch*, Sucuk*, Käse*, Röstpaprika',p:8},
+  {id:'pi38',n:'Ispanak Pide*',d:'Spinat*, Käse*, Röstpaprika',p:7.5},
+  {id:'pi39',n:'Vegetarische Pide*',d:'Balkankäse, Paprika*, Zwiebeln, Tomaten',p:8},
+  {id:'pi40',n:'Döner Pide*',d:'Hähnchenbrustfleisch*',p:8.5},
+ ]},
+];
+const FAVS=['d2','d1','p27','b12','pi37','p26'];
+const ALL={}; CATS.forEach(c=>c.items.forEach(i=>ALL[i.id]={...i,cat:c}));
+
+/* ---------- EN ingredient translation (descriptions only, names stay DE) ---------- */
+const ENMAP=[['Hähnchenbrustfleisch','chicken breast'],['Tomatensoße','tomato sauce'],['Pizzasoße','pizza sauce'],['Rindfleisch','beef'],['Knoblauchwurst','garlic sausage'],['Röstpaprika','roasted peppers'],['Balkankäse','Balkan cheese'],['Hirtenkäse','feta cheese'],['Putenfleisch','turkey'],['Champignons','mushrooms'],['Käseknacker','cheese sausage'],['Pommes frites','fries'],['Thunfisch','tuna'],['Krautsalat','coleslaw'],['Zwiebeln','onions'],['Tomaten','tomatoes'],['Peperoni','hot peppers'],['Paprika','peppers'],['Salami','salami'],['Schinken','ham'],['Spinat','spinach'],['Sucuk','sucuk'],['Halloumi','halloumi'],['Falafel','falafel'],['Käse','cheese'],['Salat','salad'],['Pilze','mushrooms'],['Mais','corn'],['scharf','spicy']].sort((a,b)=>b[0].length-a[0].length);
+function trEn(s){let o=s;ENMAP.forEach(([de,en])=>{o=o.replace(new RegExp(de.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi'),en)});return o.charAt(0).toUpperCase()+o.slice(1)}
+
+/* ---------- I18N ---------- */
+const I18N={
+ de:{'a.skip':'Zum Inhalt springen','l.sub':'Passau · Frisches Street Food','brand.sub':'Döner · Passau','nav.home':'Home','nav.menu':'Menü','nav.about':'Über uns','nav.contact':'Kontakt','nav.order':'Jetzt bestellen','m.lang':'Sprache',
+ 'hero.eyebrow':'ZOB Döner · Passau','hero.t1':'Dein Döner.','hero.t2':'Dein Moment.','hero.sub':'Frisch. Herzhaft. Mitten in Passau — Döner, Box, Pizza & Pide, handgemacht und heiß auf den Teller.','hero.cta1':'Jetzt bestellen','hero.cta2':'Speisekarte ansehen','hero.scroll':'Scroll',
+ 'intro.eyebrow':'Willkommen bei ZOB','intro.h':'Mehr als nur Döner.','intro.p1':'ZOB Döner bringt frisches Street Food mitten in Passau auf den Teller: knuspriges Brot, frisch geschnittener Salat und Fleisch direkt vom Spieß — dazu Pizza, goldbraune Pide und Boxen, die richtig satt machen.','intro.p2':'Ob schneller Snack zwischen zwei Terminen oder das große Essen für alle zusammen — bei uns gibt es handgemachte Küche zu fairen Preisen. Ehrlich zubereitet, ohne Schnickschnack.','intro.c1':'Frisch zubereitet','intro.c2':'Kräftig im Geschmack','intro.c3':'Faire Preise',
+ 'fav.eyebrow':'Signaturen','fav.h':'Unsere Favoriten','fav.sub':'Die Klassiker, die immer wieder bestellt werden — direkt aus unserer Theke.','fav.all':'Zur ganzen Speisekarte','fav.tag':'Signatur','fav.add':'In den Warenkorb',
+ 'cat.eyebrow':'Kategorien','cat.h':'Was darf\u2019s sein?','cat.sub':'Vier Kategorien, ein Versprechen: frisch, heiß und ehrlich.','cat.note':'Tipp: Alle Gerichte gibt es auch per WhatsApp zur Abholung.','cat.doner':'Döner','cat.box':'Box','cat.pizza':'Pizza','cat.pide':'Pide',
+ 'fresh.eyebrow':'Frische','fresh.h':'Frisch auf den Teller.','fresh.p':'Salat frisch geschnitten, Soßen selbst angemacht, Brot außen knusprig und innen fluffig. Jede Bestellung wird erst zubereitet, wenn sie bei uns eingeht — heiß, frisch und mit Liebe zum Detail.','fresh.cta':'Mehr über uns',
+ 'why.eyebrow':'Warum ZOB','why.h':'Warum ZOB Döner?','why.c1t':'Frisch zubereitet','why.c1d':'Frische Zutaten und jedes Gericht, das erst zubereitet wird, wenn du es bestellst.','why.c2t':'Voller Geschmack','why.c2d':'Kräftige Soßen, gegrillte Aromen und Portionen, die wirklich satt machen.','why.c3t':'Mitten in Passau','why.c3d':'Direkt am ZOB gelegen — praktisch, schnell erreichbar, mitten in der Stadt.','why.c4t':'Schnell & einfach','why.c4d':'Unkompliziert per WhatsApp bestellen und bequem bei uns abholen.',
+ 'loc.eyebrow':'Finde uns','loc.h':'Dein ZOB. Mitten in Passau.','loc.route':'Route planen','loc.call':'Jetzt anrufen','loc.open':'In Google Maps öffnen',
+ 'soc.eyebrow':'Community','soc.h':'Folge uns.','soc.p':'Instagram, Facebook und TikTok sind bald für dich da — mit Einblicken aus der Küche, Neuigkeiten und Angeboten.','soc.soon':'folgt in Kürze',
+ 'cta.h':'Appetit bekommen?','cta.p':'Stell deine Bestellung zusammen und schick sie uns direkt per WhatsApp — wir bereiten alles frisch für dich vor.','cta.menu':'Zur Speisekarte',
+ 'menu.eyebrow':'Speisekarte','menu.h':'Die Karte.','menu.sub':'Döner, Boxen, Pizza & Pide — alles frisch zubereitet. Bestell bequem per WhatsApp und hol dir dein Essen ab.','menu.note':'Alle Preise in Euro, inkl. MwSt. Allergene & Zusatzstoffe auf Anfrage.','menu.add':'Hinzufügen','menu.details':'Details ansehen','menu.from':'ab','menu.items':'Gerichte','menu.sizes':'Unsere Pizzen gibt es in drei Größen: Ø 27 cm · Ø 36 cm · Ø 40 cm.','menu.extrasT':'Extras — Pizza','menu.extras':'Pro Extra: 1,00 € / 1,50 € / 2,00 € — Tomatensoße, Käse, Paprika, Zwiebeln, Salami, Putenfleisch, Sucuk, Champignons, Thunfisch, Schinken. Extra Wunschsoße 1,00 € · Extra Käse 1,50 €.','menu.dextra':'Extra Käse + 1,50 €',
+ 'ab.eyebrow':'Über uns','ab.h':'Über ZOB Döner.','ab.sub':'Ehrliches Street Food aus Passau.','ab.s1':'Unsere Haltung','ab.lead':'ZOB Döner steht für ehrliches Street Food, frische Zutaten und kräftigen Geschmack — mitten in Passau.','ab.p1':'Wir machen das, was wir selbst gern essen: Döner vom frisch belegten Spieß, knusprige Pizza, goldbraune Pide und Boxen, die satt machen. Kein Schnickschnack — dafür Handwerk, gute Zutaten und Rezepte, die einfach funktionieren.','ab.p2':'Ob schneller Snack zwischendurch oder das große Essen für die ganze Runde: Bei uns bekommst du klassische Street-Food-Favoriten, frisch zubereitet und mit Herz gemacht.','ab.band':'Frisch. Heiß. <b>Echt ZOB.</b>','ab.s2':'Woran wir glauben','ab.vh':'Unsere Werte','ab.v1t':'Unsere Philosophie','ab.v1d':'Gutes Essen braucht keine Tricks. Wir halten uns an die Basics: frische Zutaten, saubere Zubereitung und Portionen, die stimmen.','ab.v2t':'Frische Zutaten','ab.v2d':'Salat, Gemüse und Soßen werden frisch vorbereitet — jeden Tag, aufs Neue.','ab.v3t':'Unsere Küche','ab.v3d':'Vom Döner bis zur Pizza: Alles wird zubereitet, wenn du bestellst. Nicht früher — und nicht später.','ab.v4t':'Mitten in Passau','ab.v4d':'Direkt am ZOB in der Dr.-Hans-Kapfinger-Straße — leicht zu erreichen, egal woher du kommst.','ab.ctaH':'Hungry?','ab.ctaP':'Schau dir die Karte an und bestell dir dein Lieblingsgericht.','ab.ctaContact':'Kontakt aufnehmen',
+ 'ct.eyebrow':'Kontakt','ct.h':'Komm vorbei.','ct.sub':'Wir freuen uns auf dich — direkt am ZOB in Passau.','ct.addrT':'Adresse','ct.phoneT':'Telefon','ct.phoneD':'Bei Fragen oder Bestellungen — wir sind für dich da.','ct.waT':'WhatsApp','ct.waD':'Bestellung oder Frage? Schick uns direkt eine Nachricht.','ct.waOpen':'WhatsApp öffnen','ct.formH':'Schreib uns.','ct.formP':'Fragen, Feedback oder eine größere Bestellung? Hinterlass uns eine Nachricht.',
+ 'f.name':'Name *','f.email':'E-Mail *','f.phone':'Telefon (optional)','f.msg':'Nachricht *','f.send':'Nachricht senden','f.errName':'Bitte gib deinen Namen an.','f.errEmail':'Bitte gib eine gültige E-Mail-Adresse an.','f.errMsg':'Bitte schreib uns eine kurze Nachricht (min. 10 Zeichen).','f.note':'Hinweis: Der Versand wird erst mit angebundenem E-Mail-Service aktiv. Bis dahin erreichst du uns am schnellsten per Telefon oder WhatsApp.','f.ok1':'Danke, {name}!','f.ok2':'Deine Nachricht ist bereit — der E-Mail-Versand ist auf dieser Seite noch nicht angebunden. Ruf uns am besten kurz an oder schick uns deine Nachricht per WhatsApp.',
+ 'c.title':'Warenkorb','c.empty':'Dein Warenkorb ist leer.','c.emptyP':'Zeit für einen Döner — schau in die Karte.','c.go':'Speisekarte öffnen','c.sub':'Zwischensumme','c.total':'Gesamt','c.name':'Dein Name *','c.note':'Notiz (optional)','c.notePh':'z. B. ohne Zwiebeln, extra scharf …','c.wa':'Über WhatsApp bestellen','c.cont':'Weiter einkaufen','c.rm':'Artikel entfernen',
+ 'm.size':'Größe','m.qty':'Menge','m.add':'In den Warenkorb','m.close':'Schließen',
+ 't.added':'Zum Warenkorb hinzugefügt','t.soon':'{n} folgt in Kürze.','t.errName':'Bitte gib deinen Namen an.',
+ 'wa.hello':'Hallo ZOB Döner,','wa.intro':'ich möchte gerne folgende Bestellung aufgeben:','wa.total':'Gesamt','wa.name':'Name','wa.note':'Notiz','wa.thanks':'Vielen Dank!','wa.generic':'Hallo ZOB Döner!',
+ 'fo.tag':'Frischer Geschmack. Mitten in Passau.','fo.nav':'Navigation','fo.contact':'Kontakt','fo.hours':'Bestellung','fo.rights':'Alle Rechte vorbehalten.','l.imp':'Impressum','l.priv':'Datenschutz','l.ph':'Platzhalter — Die rechtlichen Angaben des Betreibers werden an dieser Stelle ergänzt.'},
+ en:{'a.skip':'Skip to content','l.sub':'Passau · Fresh Street Food','brand.sub':'Döner · Passau','nav.home':'Home','nav.menu':'Menu','nav.about':'About us','nav.contact':'Contact','nav.order':'Order now','m.lang':'Language',
+ 'hero.eyebrow':'ZOB Döner · Passau','hero.t1':'Your döner.','hero.t2':'Your moment.','hero.sub':'Fresh. Hearty. Right in the heart of Passau — döner, boxes, pizza & pide, handmade and served hot.','hero.cta1':'Order now','hero.cta2':'View the menu','hero.scroll':'Scroll',
+ 'intro.eyebrow':'Welcome to ZOB','intro.h':'More than just döner.','intro.p1':'ZOB Döner brings fresh street food to the heart of Passau: crispy bread, freshly cut salad and meat straight from the spit — plus pizza, golden-brown pide and boxes that really fill you up.','intro.p2':'Whether it\u2019s a quick snack between appointments or a big meal to share — we serve handmade food at fair prices. Honestly prepared, no gimmicks.','intro.c1':'Freshly prepared','intro.c2':'Bursting with flavour','intro.c3':'Fair prices',
+ 'fav.eyebrow':'Signatures','fav.h':'Our favourites','fav.sub':'The classics our guests keep coming back for — straight from our counter.','fav.all':'View the full menu','fav.tag':'Signature','fav.add':'Add to cart',
+ 'cat.eyebrow':'Categories','cat.h':'What will it be?','cat.sub':'Four categories, one promise: fresh, hot and honest.','cat.note':'Tip: every dish is also available via WhatsApp for pickup.','cat.doner':'Döner','cat.box':'Boxes','cat.pizza':'Pizza','cat.pide':'Pide',
+ 'fresh.eyebrow':'Freshness','fresh.h':'Fresh on your plate.','fresh.p':'Salad freshly cut, sauces made in-house, bread crispy on the outside and fluffy inside. Every order is prepared the moment it comes in — hot, fresh and with care in every detail.','fresh.cta':'More about us',
+ 'why.eyebrow':'Why ZOB','why.h':'Why ZOB Döner?','why.c1t':'Freshly prepared','why.c1d':'Fresh ingredients and every dish prepared the moment you order it.','why.c2t':'Full of flavour','why.c2d':'Bold sauces, grilled flavours and portions that truly satisfy.','why.c3t':'Right in Passau','why.c3d':'Located right at the ZOB — convenient, easy to reach, in the middle of town.','why.c4t':'Fast & easy','why.c4d':'Order easily via WhatsApp and collect your food at your convenience.',
+ 'loc.eyebrow':'Find us','loc.h':'Your ZOB. Right in Passau.','loc.route':'Plan a route','loc.call':'Call now','loc.open':'Open in Google Maps',
+ 'soc.eyebrow':'Community','soc.h':'Follow us.','soc.p':'Instagram, Facebook and TikTok are coming soon — with kitchen insights, news and offers.','soc.soon':'coming soon',
+ 'cta.h':'Feeling hungry?','cta.p':'Put your order together and send it to us directly via WhatsApp — we\u2019ll prepare everything fresh for you.','cta.menu':'Go to the menu',
+ 'menu.eyebrow':'Menu','menu.h':'The menu.','menu.sub':'Döner, boxes, pizza & pide — all freshly prepared. Order easily via WhatsApp and pick up your food.','menu.note':'All prices in euros, incl. VAT. Allergen information available on request.','menu.add':'Add','menu.details':'View details','menu.from':'from','menu.items':'items','menu.sizes':'Our pizzas come in three sizes: Ø 27 cm · Ø 36 cm · Ø 40 cm.','menu.extrasT':'Extras — Pizza','menu.extras':'Per extra: €1.00 / €1.50 / €2.00 — tomato sauce, cheese, peppers, onions, salami, turkey, sucuk, mushrooms, tuna, ham. Extra sauce of choice €1.00 · Extra cheese €1.50.','menu.dextra':'Extra cheese + €1.50',
+ 'ab.eyebrow':'About us','ab.h':'About ZOB Döner.','ab.sub':'Honest street food from Passau.','ab.s1':'Where we stand','ab.lead':'ZOB Döner stands for honest street food, fresh ingredients and bold flavour — right in the heart of Passau.','ab.p1':'We make the food we love to eat ourselves: döner from a freshly stocked spit, crispy pizza, golden-brown pide and boxes that fill you up. No gimmicks — just craftsmanship, good ingredients and recipes that simply work.','ab.p2':'Whether it\u2019s a quick snack in between or a big meal for the whole group: with us you get classic street-food favourites, freshly prepared and made with heart.','ab.band':'Fresh. Hot. <b>100% ZOB.</b>','ab.s2':'What we believe in','ab.vh':'Our values','ab.v1t':'Our philosophy','ab.v1d':'Good food doesn\u2019t need tricks. We stick to the basics: fresh ingredients, clean preparation and portions that deliver.','ab.v2t':'Fresh ingredients','ab.v2d':'Salad, vegetables and sauces are prepared fresh — every single day.','ab.v3t':'Our food','ab.v3d':'From döner to pizza: everything is prepared when you order. Not before — and not after.','ab.v4t':'In the heart of Passau','ab.v4d':'Right at the ZOB on Dr.-Hans-Kapfinger-Straße — easy to reach, wherever you\u2019re coming from.','ab.ctaH':'Hungry?','ab.ctaP':'Take a look at the menu and order your favourite dish.','ab.ctaContact':'Get in touch',
+ 'ct.eyebrow':'Contact','ct.h':'Come on over.','ct.sub':'We look forward to seeing you — right at the ZOB in Passau.','ct.addrT':'Address','ct.phoneT':'Phone','ct.phoneD':'For questions or orders — we\u2019re here for you.','ct.waT':'WhatsApp','ct.waD':'Order or question? Send us a message directly.','ct.waOpen':'Open WhatsApp','ct.formH':'Write to us.','ct.formP':'Questions, feedback or a larger order? Leave us a message.',
+ 'f.name':'Name *','f.email':'Email *','f.phone':'Phone (optional)','f.msg':'Message *','f.send':'Send message','f.errName':'Please enter your name.','f.errEmail':'Please enter a valid email address.','f.errMsg':'Please write us a short message (min. 10 characters).','f.note':'Note: Sending will be activated once an email service is connected. Until then, the fastest way to reach us is by phone or WhatsApp.','f.ok1':'Thanks, {name}!','f.ok2':'Your message is ready — email sending isn\u2019t connected on this page yet. The quickest way is to call us or send your message via WhatsApp.',
+ 'c.title':'Cart','c.empty':'Your cart is empty.','c.emptyP':'Time for a döner — check out the menu.','c.go':'Open the menu','c.sub':'Subtotal','c.total':'Total','c.name':'Your name *','c.note':'Note (optional)','c.notePh':'e.g. no onions, extra spicy …','c.wa':'Order via WhatsApp','c.cont':'Continue shopping','c.rm':'Remove item',
+ 'm.size':'Size','m.qty':'Quantity','m.add':'Add to cart','m.close':'Close',
+ 't.added':'Added to your cart','t.soon':'{n} is coming soon.','t.errName':'Please enter your name.',
+ 'wa.hello':'Hello ZOB Döner,','wa.intro':'I\u2019d like to place the following order:','wa.total':'Total','wa.name':'Name','wa.note':'Note','wa.thanks':'Thank you!','wa.generic':'Hello ZOB Döner!',
+ 'fo.tag':'Fresh flavour. Right in Passau.','fo.nav':'Navigation','fo.contact':'Contact','fo.hours':'Ordering','fo.rights':'All rights reserved.','l.imp':'Imprint','l.priv':'Privacy','l.ph':'Placeholder — Legal information provided by the owner will be added here.'}
+};
+const TITLES={de:{home:'ZOB Döner — Passau',menu:'Speisekarte · ZOB Döner',about:'Über uns · ZOB Döner',contact:'Kontakt · ZOB Döner'},en:{home:'ZOB Döner — Passau',menu:'Menu · ZOB Döner',about:'About us · ZOB Döner',contact:'Contact · ZOB Döner'}};
+
+let LANG='de';
+try{LANG=localStorage.getItem('zob_lang')||'de'}catch(e){}
+if(!I18N[LANG])LANG='de';
+const t=k=>I18N[LANG][k]??k;
+const L=()=>LANG;
+function fmt(n){return LANG==='de'?n.toFixed(2).replace('.',',')+' €':'€'+n.toFixed(2)}
+const desc=x=>LANG==='en'?trEn(x):x;
+
+/* ---------- CART ---------- */
+let cart=[];
+try{cart=JSON.parse(localStorage.getItem('zob_cart_v1')||'[]')}catch(e){cart=[]}
+const saveCart=()=>{try{localStorage.setItem('zob_cart_v1',JSON.stringify(cart))}catch(e){}};
+const unit=(it,s)=>Array.isArray(it.p)?it.p[s]:it.p;
+const cartTotal=()=>cart.reduce((a,l)=>a+unit(ALL[l.id],l.s)*l.q,0);
+const cartCount=()=>cart.reduce((a,l)=>a+l.q,0);
+
+/* ---------- TOASTS ---------- */
+function toast(msg,icon='check'){
+  const el=document.createElement('div');el.className='toast';
+  el.innerHTML=`<svg class="ic" aria-hidden="true"><use href="#i-${icon}"/></svg><span></span>`;
+  el.querySelector('span').textContent=msg;
+  $('#toasts').appendChild(el);
+  requestAnimationFrame(()=>el.classList.add('show'));
+  setTimeout(()=>{el.classList.remove('show');setTimeout(()=>el.remove(),450)},2800);
+}
+
+/* ---------- FLY TO CART ---------- */
+function flyToCart(imgEl){
+  const target=$('#cartBtn');if(!imgEl||!target||reduceMotion){popBadge();return}
+  const r=imgEl.getBoundingClientRect(),tr=target.getBoundingClientRect();
+  if(!r.width){popBadge();return}
+  const c=imgEl.cloneNode();
+  Object.assign(c.style,{position:'fixed',left:r.left+'px',top:r.top+'px',width:r.width+'px',height:r.height+'px',borderRadius:'14px',objectFit:'cover',zIndex:250,pointerEvents:'none',filter:'saturate(.85)'});
+  document.body.appendChild(c);
+  c.animate([{transform:'translate(0,0) scale(1)',opacity:1},{transform:`translate(${tr.left+tr.width/2-(r.left+r.width/2)}px,${tr.top+tr.height/2-(r.top+r.height/2)}px) scale(.12)`,opacity:.35}],{duration:680,easing:'cubic-bezier(.3,.7,.3,1)'}).onfinish=()=>{c.remove();popBadge()};
+}
+function popBadge(){
+  const n=$('#cartN');
+  n.animate([{transform:'scale(1)'},{transform:'scale(1.45)'},{transform:'scale(1)'}],{duration:380,easing:'cubic-bezier(.3,.7,.3,1)'});
+}
+
+/* ---------- RENDER: MENU & FAVORITES ---------- */
+function priceLabel(it){return Array.isArray(it.p)?t('menu.from')+' '+fmt(it.p[0]):fmt(it.p)}
+function favCard(it){
+  const multi=Array.isArray(it.p);
+  return `<article class="f-card rv">
+    <div class="f-img"><img loading="lazy" src="https://picsum.photos/seed/${it.id}-f/900/700.jpg" alt="${it.n} — ZOB Döner Passau">${it.tag?`<span class="f-tag">${t('fav.tag')}</span>`:''}</div>
+    <div class="f-body">
+      <div class="f-top"><h4>${it.n}</h4><span class="f-price num">${priceLabel(it)}</span></div>
+      <p>${desc(it.d)}</p>
+      <button class="btn btn-solid btn-sm" ${multi?`data-open="${it.id}"`:`data-add="${it.id}"`}><svg class="ic" aria-hidden="true"><use href="#i-bag"/></svg><span>${t('fav.add')}</span></button>
+    </div></article>`;
+}
+function itemCard(it){
+  const multi=Array.isArray(it.p);
+  const sizes=multi?`<div class="m-sizes num">${SIZES.map((s,i)=>`${s} ${fmt(it.p[i])}`).join(' · ')}</div>`:'';
+  return `<article class="m-item rv">
+    <button class="m-thumb" data-open="${it.id}" aria-label="${it.n} — ${t('menu.details')}">
+      <img loading="lazy" src="https://picsum.photos/seed/${it.id}/480/480.jpg" alt="${it.n} — ZOB Döner Passau">
+    </button>
+    <div class="m-body">
+      <div class="m-top"><h4 class="m-name"><button class="m-namebtn" data-open="${it.id}">${it.n}</button></h4><span class="m-dots" aria-hidden="true"></span><span class="m-price num">${priceLabel(it)}</span></div>
+      <p class="m-desc">${desc(it.d)}</p>
+      ${sizes}
+      <div class="m-foot"><button class="add-btn" ${multi?`data-open="${it.id}"`:`data-add="${it.id}"`}><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg><span>${t('menu.add')}</span></button></div>
+    </div></article>`;
+}
+function renderMenuPage(){
+  const root=$('#menuRoot');
+  root.innerHTML=CATS.map(c=>{
+    const extra=c.id==='doner'?`<span class="cat-extra">${t('menu.dextra')}</span>`:'';
+    const meta=c.id==='pizza'?`<div class="pizza-meta"><div><b>${t('menu.sizes').split(':')[0]}</b>${t('menu.sizes').split(': ').slice(1).join(': ')}</div><div><b>${t('menu.extrasT')}</b>${t('menu.extras')}</div></div>`:'';
+    return `<div class="cat-sec" id="cat-${c.id}">
+      <header class="cat-head rv"><span class="cat-num">${c.num}</span><h3>${LANG==='en'?c.en:c.de}</h3><span class="cat-count num">${c.items.length} ${t('menu.items')}</span>${extra}</header>
+      ${meta}
+      <div class="m-grid">${c.items.map(itemCard).join('')}</div>
+    </div>`;
+  }).join('');
+  // sticky pills
+  const bar=$('#catbar');
+  bar.querySelectorAll('.cat-pill').forEach(b=>b.remove());
+  CATS.forEach((c,i)=>{
+    const b=document.createElement('button');
+    b.className='cat-pill'+(i===0?' active':'');
+    b.dataset.scrollCat=c.id;b.textContent=LANG==='en'?c.en:c.de;
+    bar.appendChild(b);
+  });
+  refreshInds();
+}
+function renderFavs(){
+  $('#favGrid').innerHTML=FAVS.map((id,i)=>favCard(ALL[id]).replace('class="f-card rv"',`class="f-card rv" style="--d:${i*.07}s"`)).join('');
+  observeReveals();
+}
+
+/* ---------- CART UI ---------- */
+function renderCart(){
+  const body=$('#drBody'),foot=$('#drFoot');
+  $('#drCount').textContent=cartCount();
+  if(!cart.length){
+    foot.style.display='none';
+    body.innerHTML=`<div class="dr-empty">
+      <svg class="bus-big ic" aria-hidden="true"><use href="#i-bus"/></svg>
+      <b>${t('c.empty')}</b><p>${t('c.emptyP')}</p>
+      <button class="btn btn-solid btn-sm" data-nav="menu"><span>${t('c.go')}</span></button></div>`;
+  }else{
+    foot.style.display='flex';
+    body.innerHTML=cart.map(l=>{
+      const it=ALL[l.id];
+      const nm=it.n+(l.s!=null?` <small>${SIZES[l.s]}</small>`:'');
+      const line=unit(it,l.s)*l.q;
+      return `<div class="c-row">
+        <img src="https://picsum.photos/seed/${it.id}/200/200.jpg" alt="">
+        <div><div class="c-name">${nm}</div>
+          <div class="qty">
+            <button data-dec="${l.id}|${l.s}" aria-label="−"><svg class="ic" aria-hidden="true"><use href="#i-minus"/></svg></button>
+            <b class="num">${l.q}</b>
+            <button data-inc="${l.id}|${l.s}" aria-label="+"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></button>
+          </div></div>
+        <div class="c-right"><span class="c-price num">${fmt(line)}</span>
+          <button class="c-rm" data-rm="${l.id}|${l.s}" aria-label="${t('c.rm')}"><svg class="ic" aria-hidden="true"><use href="#i-trash"/></svg></button></div>
+      </div>`;
+    }).join('');
+    $('#drSub').textContent=fmt(cartTotal());
+    $('#drTotal').textContent=fmt(cartTotal());
+  }
+  updateBadges();
+}
+function updateBadges(){
+  const n=cartCount(),b=$('#cartBtn'),m=$('#mcart');
+  $('#cartN').textContent=n;
+  b.classList.toggle('has',n>0);
+  b.setAttribute('aria-label',`${t('c.title')} (${n})`);
+  if(n>0){m.classList.add('show');$('#mcartTot').textContent=fmt(cartTotal())}
+  else m.classList.remove('show');
+}
+function addToCart(id,s=null,q=1,imgEl){
+  const key=id+'|'+s;
+  const ex=cart.find(l=>l.id===id&&l.s===s);
+  if(ex)ex.q+=q;else cart.push({id,s,q});
+  saveCart();renderCart();
+  if(imgEl)flyToCart(imgEl);else popBadge();
+  toast(t('t.added'));
+}
+
+/* ---------- CART DRAWER ---------- */
+function openDrawer(){renderCart();$('#drawer').classList.add('open');$('#scrim').classList.add('show');document.body.classList.add('lock');$('#mcart').classList.remove('show');$('#drClose').focus()}
+function closeDrawer(){$('#drawer').classList.remove('open');$('#scrim').classList.remove('show');document.body.classList.remove('lock');$('#cartBtn').focus()}
+ $('#cartBtn').addEventListener('click',openDrawer);
+ $('#mcart').addEventListener('click',openDrawer);
+ $('#drClose').addEventListener('click',closeDrawer);
+ $('#drContinue').addEventListener('click',closeDrawer);
+ $('#scrim').addEventListener('click',closeDrawer);
+ $('#ordNote').placeholder=t('c.notePh');
+ $('#ordName').addEventListener('input',e=>e.target.classList.remove('err'));
+
+/* ---------- WHATSAPP ORDER ---------- */
+function buildOrderMsg(){
+  const de=LANG==='de';
+  const lines=[t('wa.hello'),t('wa.intro'),''];
+  cart.forEach(l=>{
+    const it=ALL[l.id];
+    const nm=it.n+(l.s!=null?` (${SIZES[l.s]})`:'');
+    lines.push(`${l.q}x ${nm} — ${fmt(unit(it,l.s)*l.q)}`);
+  });
+  lines.push('',`${t('wa.total')}: ${fmt(cartTotal())}`,'');
+  lines.push(`${t('wa.name')}: ${$('#ordName').value.trim()}`);
+  lines.push(`${t('wa.note')}: ${$('#ordNote').value.trim()||'–'}`);
+  lines.push('',t('wa.thanks'));
+  return lines.join('\n');
+}
+ $('#waBtn').addEventListener('click',()=>{
+  const name=$('#ordName').value.trim();
+  if(!name){$('#ordName').classList.add('err');$('#ordName').focus();toast(t('t.errName'),'x');return}
+  window.open(`https://wa.me/${WA_NUM}?text=${encodeURIComponent(buildOrderMsg())}`,'_blank','noopener');
+});
+ $$('[data-wa-generic]').forEach(b=>b.addEventListener('click',()=>{
+  window.open(`https://wa.me/${WA_NUM}?text=${encodeURIComponent(t('wa.generic'))}`,'_blank','noopener');
+}));
+
+/* ---------- PRODUCT MODAL ---------- */
+let pm={id:null,s:0,q:1};
+function openModal(id){
+  const it=ALL[id];if(!it)return;
+  pm={id,s:0,q:1};
+  $('#pmImg').src=`https://picsum.photos/seed/${id}/900/700.jpg`;
+  $('#pmImg').alt=it.n+' — ZOB Döner Passau';
+  const cat=ALL[id].cat;
+  $('#pmCat').textContent=LANG==='en'?cat.en:cat.de;
+  $('#pmName').textContent=it.n;
+  $('#pmDesc').textContent=desc(it.d);
+  const multi=Array.isArray(it.p);
+  $('#pmSizes').hidden=!multi;
+  if(multi){
+    $('#sizeRow').innerHTML=SIZES.map((s,i)=>`<button data-size="${i}" class="${i===0?'sel':''}"><b class="num">${s}</b><small class="num">${fmt(it.p[i])}</small></button>`).join('');
+  }
+  updatePm();
+  $('#pmodal').classList.add('open');document.body.classList.add('lock');
+  $('#pmMinus').focus();
+}
+function updatePm(){
+  const it=ALL[pm.id];if(!it)return;
+  $('#pmQty').textContent=pm.q;
+  $('#pmTot').textContent=fmt(unit(it,pm.s)*pm.q);
+}
+function closeModal(id){
+  $$('.modal.open').forEach(m=>m.classList.remove('open'));
+  document.body.classList.remove('lock');
+}
+ $('#pmMinus').addEventListener('click',()=>{pm.q=Math.max(1,pm.q-1);updatePm()});
+ $('#pmPlus').addEventListener('click',()=>{pm.q=Math.min(20,pm.q+1);updatePm()});
+ $('#pmAdd').addEventListener('click',e=>{
+  const it=ALL[pm.id];
+  const multi=Array.isArray(it.p);
+  addToCart(pm.id,multi?pm.s:null,pm.q,$('#pmImg'));
+  closeModal();
+});
+
+/* ---------- GLOBAL CLICK DELEGATION ---------- */
+document.addEventListener('click',e=>{
+  const open=e.target.closest('[data-open]');
+  if(open){openModal(open.dataset.open);return}
+  const add=e.target.closest('[data-add]');
+  if(add){
+    const card=add.closest('.m-item,.f-card');
+    const img=card?card.querySelector('img'):null;
+    addToCart(add.dataset.add,null,1,img);
+    if(add.classList.contains('add-btn')){
+      add.classList.add('ok');
+      const span=add.querySelector('span');const old=span.textContent;
+      span.textContent='✓';setTimeout(()=>{add.classList.remove('ok');span.textContent=old},1400);
+    }
+    return;
+  }
+  const sz=e.target.closest('[data-size]');
+  if(sz){pm.s=+sz.dataset.size;$$('#sizeRow button').forEach(b=>b.classList.toggle('sel',b===sz));updatePm();return}
+  const inc=e.target.closest('[data-inc]');
+  if(inc){const[id,s]=inc.dataset.inc.split('|');const l=cart.find(x=>x.id===id&&String(x.s)===s);if(l){l.q=Math.min(20,l.q+1);saveCart();renderCart()}return}
+  const dec=e.target.closest('[data-dec]');
+  if(dec){const[id,s]=dec.dataset.dec.split('|');const l=cart.find(x=>x.id===id&&String(x.s)===s);if(l){l.q--;if(l.q<1)cart=cart.filter(x=>x!==l);saveCart();renderCart()}return}
+  const rm=e.target.closest('[data-rm]');
+  if(rm){const[id,s]=rm.dataset.rm.split('|');cart=cart.filter(x=>!(x.id===id&&String(x.s)===s));saveCart();renderCart();return}
+  const catGo=e.target.closest('[data-cat-go]');
+  if(catGo){go('menu',{cat:catGo.dataset.catGo});return}
+  const nav=e.target.closest('[data-nav]');
+  if(nav){e.preventDefault();go(nav.dataset.nav);closeMobileMenu();return}
+  const soc=e.target.closest('[data-social]');
+  if(soc){toast(t('t.soon').replace('{n}',soc.dataset.social));return}
+  const leg=e.target.closest('[data-legal]');
+  if(leg){$('#lTitle').textContent=t(leg.dataset.legal==='imp'?'l.imp':'l.priv');$('#legalModal').classList.add('open');document.body.classList.add('lock');return}
+  const cls=e.target.closest('[data-close-modal]');
+  if(cls){closeModal();return}
+  const sc=e.target.closest('[data-scroll-cat]');
+  if(sc){scrollCat(sc.dataset.scrollCat);return}
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeDrawer();closeMobileMenu();closeLangs()}});
+
+/* ---------- ROUTER ---------- */
+let CUR='home',animating=false;
+const PAGES=['home','menu','about','contact'];
+function parseHash(){const h=location.hash.replace(/^#\/?/,'');return PAGES.includes(h)?h:'home'}
+function swap(page){
+  CUR=page;
+  $$('.page').forEach(p=>p.classList.toggle('active',p.dataset.page===page));
+  $$('[data-nav]').forEach(a=>a.classList.toggle('active',a.dataset.nav===page));
+  document.title=TITLES[LANG][page];
+  window.scrollTo(0,0);
+  refreshInds();
+}
+function go(page,opts={},push=true){
+  if(animating||page===CUR){if(opts.cat)setTimeout(()=>scrollCat(opts.cat),300);return}
+  animating=true;
+  const veil=$('#veil');
+  veil.classList.add('cover');
+  setTimeout(()=>{
+    swap(page);
+    if(push)history.pushState({p:page},'','#/'+(page==='home'?'':page));
+    requestAnimationFrame(()=>{
+      veil.classList.remove('cover');veil.classList.add('exit');
+      setTimeout(()=>{veil.classList.remove('exit');animating=false;if(opts.cat)scrollCat(opts.cat)},580);
+    });
+  },540);
+}
+window.addEventListener('popstate',()=>{const p=parseHash();if(p!==CUR&&!animating)swap(p)});
+function scrollCat(id){
+  const el=document.getElementById('cat-'+id);if(!el)return;
+  el.scrollIntoView({behavior:reduceMotion?'auto':'smooth',block:'start'});
+  $$('#catbar .cat-pill').forEach(b=>b.classList.toggle('active',b.dataset.scrollCat===id));
+  setInd($('#catbar'),$('#catbar .cat-pill.active'));
+}
+
+/* ---------- SLIDING INDICATORS ---------- */
+function setInd(box,btn){
+  const ind=box.querySelector('.ind');if(!ind)return;
+  if(!btn||!btn.offsetWidth)return;
+  ind.style.left=btn.offsetLeft+'px';
+  ind.style.width=btn.offsetWidth+'px';
+}
+function refreshInds(){
+  setInd($('#catbar'),$('#catbar .cat-pill.active'));
+  setInd($('#strip'),$('#strip button.active'));
+}
+window.addEventListener('resize',refreshInds);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(refreshInds);
+
+/* home strip -> navigate */
+ $('#strip').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  $$('#strip button').forEach(x=>x.classList.toggle('active',x===b));
+  setInd($('#strip'),b);
+});
+
+/* sticky bar clicks are handled via delegation (data-scroll-cat) */
+ $('#catbar').addEventListener('click',e=>{
+  const b=e.target.closest('.cat-pill');if(!b)return;
+  $$('#catbar .cat-pill').forEach(x=>x.classList.toggle('active',x===b));
+  setInd($('#catbar'),b);
+  scrollCat(b.dataset.scrollCat);
+});
+
+/* ---------- SCROLLSPY (menu categories) ---------- */
+const spy=new IntersectionObserver(es=>{
+  es.forEach(en=>{
+    if(en.isIntersecting){
+      const id=en.target.id.replace('cat-','');
+      $$('#catbar .cat-pill').forEach(b=>b.classList.toggle('active',b.dataset.scrollCat===id));
+      setInd($('#catbar'),$('#catbar .cat-pill.active'));
+    }
+  });
+},{rootMargin:'-40% 0px -55% 0px'});
+function watchCats(){$$('.cat-sec').forEach(s=>spy.observe(s))}
+
+/* ---------- REVEAL ON SCROLL ---------- */
+const io=new IntersectionObserver(es=>{
+  es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}});
+},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+function observeReveals(){$$('.rv:not(.in),.rv-img:not(.in)').forEach(el=>io.observe(el))}
+
+/* ---------- PARALLAX ---------- */
+const plxEls=()=>$$('[data-plx]');
+let ticking=false;
+function onScroll(){
+  if(ticking)return;ticking=true;
+  requestAnimationFrame(()=>{
+    ticking=false;
+    const y=window.scrollY;
+    $('#nav').classList.toggle('scrolled',y>34);
+    const si=$('#scrollInd');if(si)si.style.opacity=y>140?0:1;
+    if(!reduceMotion){
+      const hb=$('#heroBg');
+      if(hb&&CUR==='home')hb.style.transform=`translateY(${y*.22}px)`;
+      plxEls().forEach(el=>{
+        const box=el.closest('.phero-bg,.fresh-img,.band');
+        if(!box)return;
+        const r=box.getBoundingClientRect();
+        if(r.bottom<0||r.top>innerHeight)return;
+        const p=(r.top+r.height/2-innerHeight/2)/innerHeight;
+        el.style.transform=`translateY(${(p*-7).toFixed(2)}%)`;
+      });
+    }
+  });
+}
+addEventListener('scroll',onScroll,{passive:true});
+
+/* ---------- MOBILE MENU ---------- */
+const burger=$('#burger'),mmenu=$('#mmenu');
+function closeMobileMenu(){mmenu.classList.remove('open');burger.classList.remove('open');burger.setAttribute('aria-expanded','false');burger.setAttribute('aria-label',t('nav.menu')+' öffnen');if(!$('#drawer').classList.contains('open')&&!$$('.modal.open').length)document.body.classList.remove('lock')}
+burger.addEventListener('click',()=>{
+  const open=!mmenu.classList.contains('open');
+  mmenu.classList.toggle('open',open);burger.classList.toggle('open',open);
+  burger.setAttribute('aria-expanded',open);
+  document.body.classList.toggle('lock',open||$('#drawer').classList.contains('open'));
+});
+
+/* ---------- LANGUAGE SWITCHER ---------- */
+function closeLangs(){$$('[data-langbox]').forEach(b=>{b.classList.remove('open');b.querySelector('.lang-btn').setAttribute('aria-expanded','false')})}
+ $$('[data-langbox]').forEach(box=>{
+  box.querySelector('.lang-btn').addEventListener('click',e=>{
+    e.stopPropagation();
+    const open=!box.classList.contains('open');closeLangs();
+    box.classList.toggle('open',open);
+    box.querySelector('.lang-btn').setAttribute('aria-expanded',open);
+  });
+});
+document.addEventListener('click',closeLangs);
+ $$('[data-lang]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();setLang(b.dataset.lang)}));
+function applyLang(){
+  document.documentElement.lang=LANG;
+  document.documentElement.dataset.lang=LANG;
+  $$('[data-i18n]').forEach(el=>{el.textContent=t(el.dataset.i18n)});
+  $$('[data-i18n-html]').forEach(el=>{el.innerHTML=t(el.dataset.i18nHtml)});
+  $$('[data-lang-cur]').forEach(el=>el.textContent=LANG.toUpperCase());
+  $$('[data-lang]').forEach(b=>{const sel=b.dataset.lang===LANG;b.classList.toggle('sel',sel);b.setAttribute('aria-pressed',sel)});
+  $('#ordNote').placeholder=t('c.notePh');
+  $('#cartBtn').setAttribute('aria-label',`${t('c.title')} (${cartCount()})`);
+}
+function setLang(l){
+  if(l===LANG)return;
+  LANG=l;
+  try{localStorage.setItem('zob_lang',l)}catch(e){}
+  document.documentElement.classList.add('i18n');
+  setTimeout(()=>{
+    applyLang();
+    renderFavs();renderMenuPage();watchCats();renderCart();
+    document.title=TITLES[LANG][CUR];
+    closeModal();closeLangs();closeMobileMenu();
+    requestAnimationFrame(()=>document.documentElement.classList.remove('i18n'));
+    refreshInds();
+  },190);
+}
+
+/* ---------- CONTACT FORM ---------- */
+function setErr(input,errEl,msg){
+  const fld=input.closest('.fld');
+  fld.classList.toggle('err',!!msg);
+  if(msg)errEl.textContent=msg;
+}
+['fName','fEmail','fMsg'].forEach(id=>$('#'+id).addEventListener('input',e=>setErr(e.target,e.target.closest('.fld').querySelector('.f-err'),'')));
+ $('#cform').addEventListener('submit',e=>{
+  e.preventDefault();
+  const name=$('#fName').value.trim(),email=$('#fEmail').value.trim(),msg=$('#fMsg').value.trim();
+  let ok=true;
+  if(name.length<2){setErr($('#fName'),$('#eName'),t('f.errName'));ok=false}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){setErr($('#fEmail'),$('#eEmail'),t('f.errEmail'));ok=false}
+  if(msg.length<10){setErr($('#fMsg'),$('#eMsg'),t('f.errMsg'));ok=false}
+  if(!ok)return;
+  $('#okTitle').textContent=t('f.ok1').replace('{name}',name.split(' ')[0]);
+  $('#formOk').classList.add('show');
+  $$('#cform .fld, #cform .f-grid2, #cform > .btn, #cform > .f-note').forEach(el=>el.style.display='none');
+  toast(t('f.send')+' ✓');
+});
+
+/* ---------- INIT ---------- */
+swap(parseHash());
+applyLang();
+renderFavs();
+renderMenuPage();
+watchCats();
+renderCart();
+observeReveals();
+onScroll();
+
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    $('#loader').classList.add('done');
+    document.body.classList.remove('lock');
+    $('#hero').classList.add('go');
+    setTimeout(()=>$('#loader').remove(),1000);
+    refreshInds();
+  },1450);
+});
+setTimeout(()=>{ // fallback if load already fired
+  if(document.body.contains($('#loader'))&&performance.now()>4000&&!$('#loader').classList.contains('done')){ $('#loader').classList.add('done');document.body.classList.remove('lock');$('#hero').classList.add('go');}
+},4200);
+</script>
+</body>
+</html>
