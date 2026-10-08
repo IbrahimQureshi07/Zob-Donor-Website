@@ -226,6 +226,25 @@ a{color:inherit;text-decoration:none}
 
 /* ============ FAVORITES ============ */
 .alt{background:linear-gradient(180deg,rgba(243,238,226,.022),transparent 30%);border-block:1px solid var(--line)}
+.fav-sec{position:relative;overflow:clip}
+.fav-decor{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.fav-sec>.wrap{position:relative;z-index:1}
+.fav-float{position:absolute;opacity:.2;filter:invert(1) brightness(1.2);user-select:none;will-change:transform;object-fit:contain}
+.fav-float.top{top:32px;right:0;width:343px;height:335px;animation:favBob 5.2s ease-in-out infinite}
+.fav-float.bot{bottom:24px;left:0;width:246px;height:412px;object-position:left center;animation:favBob 6.4s ease-in-out infinite reverse}
+@keyframes favBob{
+  0%,100%{transform:translate3d(0,0,0)}
+  50%{transform:translate3d(0,-14px,0)}
+}
+@media(max-width:900px){
+  .fav-float.top{width:min(280px,42vw);height:auto;aspect-ratio:343/335}
+  .fav-float.bot{width:min(200px,36vw);height:auto;aspect-ratio:123/206}
+}
+@media(max-width:700px){
+  .fav-float{opacity:.15}
+  .fav-float.top{top:20px;right:0;width:min(200px,52vw)}
+  .fav-float.bot{bottom:16px;left:0;width:min(160px,48vw)}
+}
 .f-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .f-card{background:linear-gradient(180deg,var(--panel),rgba(20,24,35,.5));border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:transform .45s var(--ease),border-color .45s,box-shadow .45s;display:flex;flex-direction:column}
 .f-card:hover{transform:translateY(-7px);border-color:rgba(242,181,58,.4);box-shadow:0 26px 50px rgba(0,0,0,.45)}
@@ -517,7 +536,7 @@ main,.nav-in,footer{transition:opacity .25s}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
   .rv,.hero .eyebrow,.hero .hero-sub,.hero .hero-cta,.hero .hero-meta{opacity:1!important;transform:none!important}
-  .hero.go .hero-bg img{animation:none!important}
+  .hero.go .hero-bg img,.fav-float{animation:none!important}
 }
 </style>
 </head>
@@ -706,7 +725,11 @@ main,.nav-in,footer{transition:opacity .25s}
     </div>
   </div>
 
-  <div class="sec alt">
+  <div class="sec alt fav-sec">
+    <div class="fav-decor" aria-hidden="true">
+      <img class="fav-float top" src="Images/bg-2.png" alt="">
+      <img class="fav-float bot" src="Images/bg-1.png" alt="">
+    </div>
     <div class="wrap">
       <div class="sec-head row">
         <div>
@@ -714,7 +737,7 @@ main,.nav-in,footer{transition:opacity .25s}
           <h2 class="h2 rv" style="--d:.08s" data-i18n="fav.h">Unsere Favoriten</h2>
           <p class="rv" style="--d:.14s" data-i18n="fav.sub">Die Klassiker, die immer wieder bestellt werden — direkt aus unserer Theke.</p>
         </div>
-        <button class="link-arrow rv" style="--d:.2s" data-nav="menu"><span data-i18n="fav.all">Zur ganzen Speisekarte</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></button>
+        <a class="link-arrow rv" style="--d:.2s" href="#/menu" data-nav="menu"><span data-i18n="fav.all">Zur ganzen Speisekarte</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></a>
       </div>
       <div class="f-grid" id="favGrid"></div>
     </div>
