@@ -199,13 +199,21 @@ a{color:inherit;text-decoration:none}
 @keyframes marq{to{transform:translateX(-50%)}}
 
 /* ============ INTRO ============ */
-.intro-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(40px,6vw,110px);align-items:end}
-.intro-grid .h2{margin-top:22px}
-.intro-grid p+p{margin-top:18px}
+.intro-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(36px,5vw,80px);align-items:stretch}
+.intro-media{position:relative;border-radius:var(--r);overflow:clip;border:1px solid var(--line);align-self:stretch;min-height:280px;height:100%}
+.intro-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.88) contrast(1.04) brightness(.92)}
+.intro-media::after{content:"";position:absolute;inset:0;background:linear-gradient(200deg,transparent 45%,rgba(11,13,18,.4));pointer-events:none;z-index:1}
+.intro-copy{display:flex;flex-direction:column;justify-content:center;min-width:0}
+.intro-copy .h2{margin:20px 0 26px}
+.intro-copy p+p{margin-top:18px}
 .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
 .chip{display:inline-flex;align-items:center;gap:9px;padding:10px 18px;border:1px solid var(--line2);border-radius:999px;font-size:13px;font-weight:700;color:var(--ink-dim)}
 .chip .ic{width:14px;color:var(--gold)}
-@media(max-width:900px){.intro-grid{grid-template-columns:1fr}}
+@media(max-width:900px){
+  .intro-grid{grid-template-columns:1fr;gap:28px}
+  .intro-media{min-height:0;aspect-ratio:16/11}
+  .intro-copy{justify-content:flex-start}
+}
 
 /* ============ SECTION HEAD ============ */
 .sec-head{margin-bottom:clamp(38px,5vw,64px)}
@@ -648,8 +656,8 @@ main,.nav-in,footer{transition:opacity .25s}
       </h1>
       <p class="hero-sub" data-i18n="hero.sub">Frisch. Herzhaft. Mitten in Passau — Döner, Box, Pizza &amp; Pide, handgemacht und heiß auf den Teller.</p>
       <div class="hero-cta">
-        <button class="btn btn-solid" data-nav="menu"><span data-i18n="hero.cta1">Jetzt bestellen</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></button>
-        <button class="btn btn-ghost" data-nav="menu"><span data-i18n="hero.cta2">Speisekarte ansehen</span></button>
+        <a class="btn btn-solid" href="#/menu" data-nav="menu"><span data-i18n="hero.cta1">Jetzt bestellen</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></a>
+        <a class="btn btn-ghost" href="#/menu" data-nav="menu"><span data-i18n="hero.cta2">Speisekarte ansehen</span></a>
       </div>
       <div class="hero-meta">
         <span><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>Dr.-Hans-Kapfinger-Straße 10 · Passau</span>
@@ -679,17 +687,20 @@ main,.nav-in,footer{transition:opacity .25s}
 
   <div class="sec">
     <div class="wrap intro-grid">
-      <div>
+      <div class="intro-media rv-img rv">
+        <img src="Images/about.webp" alt="ZOB Döner Stand in Passau" loading="lazy">
+      </div>
+      <div class="intro-copy">
         <span class="eyebrow rv" data-i18n="intro.eyebrow">Willkommen bei ZOB</span>
         <h2 class="h2 rv" style="--d:.08s" data-i18n-html="intro.h">Mehr als nur Döner.</h2>
-      </div>
-      <div class="rv" style="--d:.15s">
-        <p class="lead" data-i18n="intro.p1">ZOB Döner bringt frisches Street Food mitten in Passau auf den Teller: knuspriges Brot, frisch geschnittener Salat und Fleisch direkt vom Spieß — dazu Pizza, goldbraune Pide und Boxen, die richtig satt machen.</p>
-        <p class="lead mut" data-i18n="intro.p2">Ob schneller Snack zwischen zwei Terminen oder das große Essen für alle zusammen — bei uns gibt es handgemachte Küche zu fairen Preisen. Ehrlich zubereitet, ohne Schnickschnack.</p>
-        <div class="chips">
-          <span class="chip"><svg class="ic" aria-hidden="true"><use href="#i-leaf"/></svg><span data-i18n="intro.c1">Frisch zubereitet</span></span>
-          <span class="chip"><svg class="ic" aria-hidden="true"><use href="#i-flame"/></svg><span data-i18n="intro.c2">Kräftig im Geschmack</span></span>
-          <span class="chip"><svg class="ic" aria-hidden="true"><use href="#i-bolt"/></svg><span data-i18n="intro.c3">Faire Preise</span></span>
+        <div class="rv" style="--d:.16s">
+          <p class="lead" data-i18n="intro.p1">ZOB Döner bringt frisches Street Food mitten in Passau auf den Teller: knuspriges Brot, frisch geschnittener Salat und Fleisch direkt vom Spieß — dazu Pizza, goldbraune Pide und Boxen, die richtig satt machen.</p>
+          <p class="lead mut" data-i18n="intro.p2">Ob schneller Snack zwischen zwei Terminen oder das große Essen für alle zusammen — bei uns gibt es handgemachte Küche zu fairen Preisen. Ehrlich zubereitet, ohne Schnickschnack.</p>
+          <div class="chips">
+            <span class="chip"><svg class="ic" aria-hidden="true"><use href="#i-leaf"/></svg><span data-i18n="intro.c1">Frisch zubereitet</span></span>
+            <span class="chip"><svg class="ic" aria-hidden="true"><use href="#i-flame"/></svg><span data-i18n="intro.c2">Kräftig im Geschmack</span></span>
+            <span class="chip"><svg class="ic" aria-hidden="true"><use href="#i-bolt"/></svg><span data-i18n="intro.c3">Faire Preise</span></span>
+          </div>
         </div>
       </div>
     </div>
