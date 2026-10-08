@@ -245,13 +245,13 @@ a{color:inherit;text-decoration:none}
   .fav-float.top{top:20px;right:0;width:min(200px,52vw)}
   .fav-float.bot{bottom:16px;left:0;width:min(160px,48vw)}
 }
-.f-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.f-card{background:linear-gradient(180deg,var(--panel),rgba(20,24,35,.5));border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:transform .45s var(--ease),border-color .45s,box-shadow .45s;display:flex;flex-direction:column}
+.f-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
+.f-card{background:linear-gradient(180deg,var(--panel),rgba(20,24,35,.5));border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:transform .45s var(--ease),border-color .45s,box-shadow .45s;display:flex;flex-direction:column;height:100%;min-height:0}
 .f-card:hover{transform:translateY(-7px);border-color:rgba(242,181,58,.4);box-shadow:0 26px 50px rgba(0,0,0,.45)}
-.f-img{position:relative;aspect-ratio:16/11;overflow:clip}
-.f-img img{width:100%;height:100%;object-fit:cover;filter:saturate(.8) contrast(1.05) brightness(.86);transition:transform .8s var(--ease)}
-.f-card:hover .f-img img{transform:scale(1.07)}
-.f-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(242,181,58,.08),rgba(11,13,18,.35) 75%)}
+.f-img{position:relative;aspect-ratio:16/11;width:100%;overflow:hidden;flex:none;background:#12151d}
+.f-img img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center;filter:saturate(.96) contrast(1.03) brightness(.95);transition:transform .8s var(--ease)}
+.f-card:hover .f-img img{transform:scale(1.06)}
+.f-img::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(242,181,58,.06),rgba(11,13,18,.28) 78%);pointer-events:none}
 .f-tag{position:absolute;top:14px;left:14px;z-index:2;background:var(--gold);color:#181206;font-size:10.5px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;padding:7px 13px;border-radius:999px}
 .f-body{padding:22px 22px 24px;display:flex;flex-direction:column;gap:12px;flex:1}
 .f-top{display:flex;align-items:baseline;justify-content:space-between;gap:14px}
@@ -1105,8 +1105,8 @@ const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
 /* ---------- MENU (transcribed from the original ZOB Döner menu) ---------- */
 const CATS=[
  {id:'doner',num:'01',de:'Döner',en:'Döner',items:[
-  {id:'d1',n:'Döner Kebab*',d:'Hähnchenbrustfleisch*, Salat, Krautsalat',p:6.5},
-  {id:'d2',n:'ZOB Döner*',d:'Hähnchenbrustfleisch*, Salat, Hirtenkäse, Krautsalat',p:7.5,tag:1},
+  {id:'d1',n:'Döner Kebab',d:'Hähnchenbrustfleisch*, Salat, Krautsalat',p:6.5,img:'Images/doner-kebab.jpg'},
+  {id:'d2',n:'ZOB Döner',d:'Hähnchenbrustfleisch*, Salat, Hirtenkäse, Krautsalat',p:7.5,tag:1,img:'Images/zob-doner.jpg'},
   {id:'d3',n:'Fleisch Kebab*',d:'Salat, Krautsalat',p:6.5},
   {id:'d4',n:'Vegetarischer Döner*',d:'Salat, Krautsalat',p:6.5},
   {id:'d5',n:'Sujuk Kebab*',d:'Salat, Krautsalat',p:6.5},
@@ -1118,7 +1118,7 @@ const CATS=[
   {id:'d11',n:'Sucuk Dürüm*',d:'Sucuk, Salat, Krautsalat, scharf',p:7.5},
  ]},
  {id:'box',num:'02',de:'Box',en:'Boxes',items:[
-  {id:'b12',n:'Halloumi-Box*',d:'Hähnchenbrustfleisch*, Halloumi*, Salat, Krautsalat',p:7.5},
+  {id:'b12',n:'Halloumi-Box',d:'Hähnchenbrustfleisch*, Halloumi*, Salat, Krautsalat',p:7.5,img:'Images/Halloumi-Box.jpg'},
   {id:'b13',n:'Falafel-Box*',d:'Hähnchenbrustfleisch*, Falafel*, Salat, Krautsalat',p:7.5},
   {id:'b14',n:'Zwiebel-Box*',d:'Hähnchenbrustfleisch*, Salat, Zwiebeln',p:7.5},
   {id:'b15',n:'Pommes-Box*',d:'Hähnchenbrustfleisch*, Salat, Pommes frites',p:7.5},
@@ -1134,8 +1134,8 @@ const CATS=[
   {id:'p23',n:'Capricciosa*',d:'Schinken*, Pilze, Tomaten',p:[9,15,21]},
   {id:'p24',n:'Giorgia*',d:'Zwiebeln, Salami*',p:[9.5,15,22]},
   {id:'p25',n:'Calzone*',d:'Salami*, Putenfleisch*, Champignons',p:[9,15,22]},
-  {id:'p26',n:'Calzone Döner*',d:'Hähnchenbrustfleisch*, Champignons, Zwiebeln',p:[9.5,15,22]},
-  {id:'p27',n:'Döner Pizza*',d:'Hähnchenbrustfleisch*, Paprika*, Zwiebeln',p:[9.5,17,23]},
+  {id:'p26',n:'Calzone Döner',d:'Hähnchenbrustfleisch*, Champignons, Zwiebeln',p:[9.5,15,22],img:'Images/Calzone-Döner.jpg'},
+  {id:'p27',n:'Döner Pizza',d:'Hähnchenbrustfleisch*, Paprika*, Zwiebeln',p:[9.5,17,23],img:'Images/doner-pizza.jpg'},
   {id:'p28',n:'Diavolo*',d:'Peperoni*, Tomatensoße*, Paprika, scharf',p:[9.5,15,22]},
   {id:'p29',n:'Quatro Formaggi*',d:'Käse*',p:[9,16,23]},
   {id:'p30',n:'Vegetarisch*',d:'Champignons, Paprika, Zwiebeln, Mais',p:[9,15,22]},
@@ -1147,7 +1147,7 @@ const CATS=[
   {id:'p36',n:'Capricciosa*',d:'Salami*, Putenfleisch*, Paprika*',p:[10,16,23]},
  ]},
  {id:'pide',num:'04',de:'Pide',en:'Pide',items:[
-  {id:'pi37',n:'Sucuk Pide*',d:'Rindfleisch*, Sucuk*, Käse*, Röstpaprika',p:8},
+  {id:'pi37',n:'Sucuk Pide',d:'Rindfleisch*, Sucuk*, Käse*, Röstpaprika',p:8,img:'Images/Sucuk-Pide.jpg'},
   {id:'pi38',n:'Ispanak Pide*',d:'Spinat*, Käse*, Röstpaprika',p:7.5},
   {id:'pi39',n:'Vegetarische Pide*',d:'Balkankäse, Paprika*, Zwiebeln, Tomaten',p:8},
   {id:'pi40',n:'Döner Pide*',d:'Hähnchenbrustfleisch*',p:8.5},
@@ -1246,10 +1246,11 @@ function popBadge(){
 
 /* ---------- RENDER: MENU & FAVORITES ---------- */
 function priceLabel(it){return Array.isArray(it.p)?t('menu.from')+' '+fmt(it.p[0]):fmt(it.p)}
+function imgSrc(it,w=900,h=700){return it.img||`https://picsum.photos/seed/${it.id}/`+w+`/`+h+`.jpg`}
 function favCard(it){
   const multi=Array.isArray(it.p);
   return `<article class="f-card rv">
-    <div class="f-img"><img loading="lazy" src="https://picsum.photos/seed/${it.id}-f/900/700.jpg" alt="${it.n} — ZOB Döner Passau">${it.tag?`<span class="f-tag">${t('fav.tag')}</span>`:''}</div>
+    <div class="f-img"><img loading="lazy" src="${imgSrc(it,900,700)}" alt="${it.n} — ZOB Döner Passau">${it.tag?`<span class="f-tag">${t('fav.tag')}</span>`:''}</div>
     <div class="f-body">
       <div class="f-top"><h4>${it.n}</h4><span class="f-price num">${priceLabel(it)}</span></div>
       <p>${desc(it.d)}</p>
@@ -1261,7 +1262,7 @@ function itemCard(it){
   const sizes=multi?`<div class="m-sizes num">${SIZES.map((s,i)=>`${s} ${fmt(it.p[i])}`).join(' · ')}</div>`:'';
   return `<article class="m-item rv">
     <button class="m-thumb" data-open="${it.id}" aria-label="${it.n} — ${t('menu.details')}">
-      <img loading="lazy" src="https://picsum.photos/seed/${it.id}/480/480.jpg" alt="${it.n} — ZOB Döner Passau">
+      <img loading="lazy" src="${imgSrc(it,480,480)}" alt="${it.n} — ZOB Döner Passau">
     </button>
     <div class="m-body">
       <div class="m-top"><h4 class="m-name"><button class="m-namebtn" data-open="${it.id}">${it.n}</button></h4><span class="m-dots" aria-hidden="true"></span><span class="m-price num">${priceLabel(it)}</span></div>
@@ -1314,7 +1315,7 @@ function renderCart(){
       const nm=it.n+(l.s!=null?` <small>${SIZES[l.s]}</small>`:'');
       const line=unit(it,l.s)*l.q;
       return `<div class="c-row">
-        <img src="https://picsum.photos/seed/${it.id}/200/200.jpg" alt="">
+        <img src="${imgSrc(it,200,200)}" alt="">
         <div><div class="c-name">${nm}</div>
           <div class="qty">
             <button data-dec="${l.id}|${l.s}" aria-label="−"><svg class="ic" aria-hidden="true"><use href="#i-minus"/></svg></button>
@@ -1387,7 +1388,7 @@ let pm={id:null,s:0,q:1};
 function openModal(id){
   const it=ALL[id];if(!it)return;
   pm={id,s:0,q:1};
-  $('#pmImg').src=`https://picsum.photos/seed/${id}/900/700.jpg`;
+  $('#pmImg').src=imgSrc(it,900,700);
   $('#pmImg').alt=it.n+' — ZOB Döner Passau';
   const cat=ALL[id].cat;
   $('#pmCat').textContent=LANG==='en'?cat.en:cat.de;
