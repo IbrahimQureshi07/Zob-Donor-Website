@@ -452,6 +452,9 @@ a{color:inherit;text-decoration:none}
 .dr-foot .fld{margin-bottom:2px}
 .dr-foot input,.dr-foot textarea{padding:12px 15px;font-size:14px;border-radius:12px}
 .dr-foot textarea{min-height:64px}
+.dr-clear{align-self:center;margin-top:4px;font-size:13px;font-weight:700;color:var(--mut);text-decoration:underline;text-underline-offset:3px;transition:color .25s}
+.dr-clear:hover{color:var(--gold)}
+.dr-foot .btn.btn-solid{margin-top:4px}
 @media(max-width:520px){.drawer{width:100vw}}
 
 /* ============ PRODUCT MODAL ============ */
@@ -1039,9 +1042,10 @@ main,.nav-in,footer{transition:opacity .25s}
   <div class="dr-foot" id="drFoot">
     <div class="sum"><span data-i18n="c.sub">Zwischensumme</span><b class="num" id="drSub">0,00 €</b></div>
     <div class="sum total"><span data-i18n="c.total">Gesamt</span><b class="num" id="drTotal">0,00 €</b></div>
-    <label class="fld"><span data-i18n="c.name">Dein Name *</span><input type="text" id="ordName" autocomplete="name"></label>
+    <label class="fld" id="fldName"><span data-i18n="c.name">Dein Name *</span><input type="text" id="ordName" autocomplete="name" required></label>
+    <label class="fld" id="fldAddr"><span data-i18n="c.addr">Adresse *</span><input type="text" id="ordAddr" autocomplete="street-address" required></label>
     <label class="fld"><span data-i18n="c.note">Notiz (optional)</span><textarea id="ordNote" placeholder=""></textarea></label>
-    <button class="btn btn-solid btn-w100" id="waBtn"><svg class="ic ic-f" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="c.wa">Über WhatsApp bestellen</span></button>
+    <button class="btn btn-solid btn-w100" id="waBtn"><svg class="ic ic-f" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="c.wa">Bestellung per WhatsApp senden</span></button>
     <button class="btn btn-ghost btn-w100" id="drContinue"><span data-i18n="c.cont">Weiter einkaufen</span></button>
   </div>
 </aside>
@@ -1176,10 +1180,10 @@ const I18N={
  'ab.eyebrow':'Über uns','ab.h':'Über ZOB Döner.','ab.sub':'Ehrliches Street Food aus Passau.','ab.s1':'Unsere Haltung','ab.lead':'ZOB Döner steht für ehrliches Street Food, frische Zutaten und kräftigen Geschmack — mitten in Passau.','ab.p1':'Wir machen das, was wir selbst gern essen: Döner vom frisch belegten Spieß, knusprige Pizza, goldbraune Pide und Boxen, die satt machen. Kein Schnickschnack — dafür Handwerk, gute Zutaten und Rezepte, die einfach funktionieren.','ab.p2':'Ob schneller Snack zwischendurch oder das große Essen für die ganze Runde: Bei uns bekommst du klassische Street-Food-Favoriten, frisch zubereitet und mit Herz gemacht.','ab.band':'Frisch. Heiß. <b>Echt ZOB.</b>','ab.s2':'Woran wir glauben','ab.vh':'Unsere Werte','ab.v1t':'Unsere Philosophie','ab.v1d':'Gutes Essen braucht keine Tricks. Wir halten uns an die Basics: frische Zutaten, saubere Zubereitung und Portionen, die stimmen.','ab.v2t':'Frische Zutaten','ab.v2d':'Salat, Gemüse und Soßen werden frisch vorbereitet — jeden Tag, aufs Neue.','ab.v3t':'Unsere Küche','ab.v3d':'Vom Döner bis zur Pizza: Alles wird zubereitet, wenn du bestellst. Nicht früher — und nicht später.','ab.v4t':'Mitten in Passau','ab.v4d':'Direkt am ZOB in der Dr.-Hans-Kapfinger-Straße — leicht zu erreichen, egal woher du kommst.','ab.ctaH':'Hungry?','ab.ctaP':'Schau dir die Karte an und bestell dir dein Lieblingsgericht.','ab.ctaContact':'Kontakt aufnehmen',
  'ct.eyebrow':'Kontakt','ct.h':'Komm vorbei.','ct.sub':'Wir freuen uns auf dich — direkt am ZOB in Passau.','ct.addrT':'Adresse','ct.phoneT':'Telefon','ct.phoneD':'Bei Fragen oder Bestellungen — wir sind für dich da.','ct.waT':'WhatsApp','ct.waD':'Bestellung oder Frage? Schick uns direkt eine Nachricht.','ct.waOpen':'WhatsApp öffnen','ct.formH':'Schreib uns.','ct.formP':'Fragen, Feedback oder eine größere Bestellung? Hinterlass uns eine Nachricht.',
  'f.name':'Name *','f.email':'E-Mail *','f.phone':'Telefon (optional)','f.msg':'Nachricht *','f.send':'Nachricht senden','f.errName':'Bitte gib deinen Namen an.','f.errEmail':'Bitte gib eine gültige E-Mail-Adresse an.','f.errMsg':'Bitte schreib uns eine kurze Nachricht (min. 10 Zeichen).','f.note':'Hinweis: Der Versand wird erst mit angebundenem E-Mail-Service aktiv. Bis dahin erreichst du uns am schnellsten per Telefon oder WhatsApp.','f.ok1':'Danke, {name}!','f.ok2':'Deine Nachricht ist bereit — der E-Mail-Versand ist auf dieser Seite noch nicht angebunden. Ruf uns am besten kurz an oder schick uns deine Nachricht per WhatsApp.',
- 'c.title':'Warenkorb','c.empty':'Dein Warenkorb ist leer.','c.emptyP':'Zeit für einen Döner — schau in die Karte.','c.go':'Speisekarte öffnen','c.sub':'Zwischensumme','c.total':'Gesamt','c.name':'Dein Name *','c.note':'Notiz (optional)','c.notePh':'z. B. ohne Zwiebeln, extra scharf …','c.wa':'Über WhatsApp bestellen','c.cont':'Weiter einkaufen','c.rm':'Artikel entfernen',
+ 'c.title':'Warenkorb','c.empty':'Dein Warenkorb ist leer.','c.emptyP':'Zeit für einen Döner — schau in die Karte.','c.go':'Speisekarte öffnen','c.sub':'Zwischensumme','c.total':'Gesamt','c.name':'Dein Name *','c.addr':'Adresse *','c.note':'Notiz (optional)','c.notePh':'z. B. ohne Zwiebeln, extra scharf …','c.wa':'Bestellung per WhatsApp senden','c.cont':'Weiter einkaufen','c.rm':'Artikel entfernen','c.clear':'Alles löschen',
  'm.size':'Größe','m.qty':'Menge','m.add':'In den Warenkorb','m.close':'Schließen',
- 't.added':'Zum Warenkorb hinzugefügt','t.soon':'{n} folgt in Kürze.','t.errName':'Bitte gib deinen Namen an.',
- 'wa.hello':'Hallo ZOB Döner,','wa.intro':'ich möchte gerne folgende Bestellung aufgeben:','wa.total':'Gesamt','wa.name':'Name','wa.note':'Notiz','wa.thanks':'Vielen Dank!','wa.generic':'Hallo ZOB Döner!',
+ 't.added':'Zum Warenkorb hinzugefügt','t.soon':'{n} folgt in Kürze.','t.errName':'Bitte gib deinen Namen an.','t.errAddr':'Bitte gib deine Adresse an.','t.cleared':'Warenkorb geleert',
+ 'wa.hello':'Hallo ZOB Döner,','wa.intro':'ich möchte gerne folgende Bestellung aufgeben:','wa.total':'Gesamt','wa.name':'Name','wa.addr':'Adresse','wa.note':'Notiz','wa.thanks':'Vielen Dank!','wa.generic':'Hallo ZOB Döner!',
  'fo.tag':'Frischer Geschmack. Mitten in Passau.','fo.nav':'Navigation','fo.contact':'Kontakt','fo.hours':'Bestellung','fo.rights':'Alle Rechte vorbehalten.','l.imp':'Impressum','l.priv':'Datenschutz','l.ph':'Platzhalter — Die rechtlichen Angaben des Betreibers werden an dieser Stelle ergänzt.'},
  en:{'a.skip':'Skip to content','l.sub':'Passau · Fresh Street Food','brand.sub':'Döner · Passau','nav.home':'Home','nav.menu':'Menu','nav.about':'About us','nav.contact':'Contact','nav.order':'Order now','m.lang':'Language',
  'hero.eyebrow':'ZOB Döner · Passau','hero.t1':'Your döner.','hero.t2':'Your moment.','hero.sub':'Fresh. Hearty. Right in the heart of Passau — döner, boxes, pizza & pide, handmade and served hot.','hero.cta1':'Order now','hero.cta2':'View the menu','hero.scroll':'Scroll',
@@ -1195,10 +1199,10 @@ const I18N={
  'ab.eyebrow':'About us','ab.h':'About ZOB Döner.','ab.sub':'Honest street food from Passau.','ab.s1':'Where we stand','ab.lead':'ZOB Döner stands for honest street food, fresh ingredients and bold flavour — right in the heart of Passau.','ab.p1':'We make the food we love to eat ourselves: döner from a freshly stocked spit, crispy pizza, golden-brown pide and boxes that fill you up. No gimmicks — just craftsmanship, good ingredients and recipes that simply work.','ab.p2':'Whether it\u2019s a quick snack in between or a big meal for the whole group: with us you get classic street-food favourites, freshly prepared and made with heart.','ab.band':'Fresh. Hot. <b>100% ZOB.</b>','ab.s2':'What we believe in','ab.vh':'Our values','ab.v1t':'Our philosophy','ab.v1d':'Good food doesn\u2019t need tricks. We stick to the basics: fresh ingredients, clean preparation and portions that deliver.','ab.v2t':'Fresh ingredients','ab.v2d':'Salad, vegetables and sauces are prepared fresh — every single day.','ab.v3t':'Our food','ab.v3d':'From döner to pizza: everything is prepared when you order. Not before — and not after.','ab.v4t':'In the heart of Passau','ab.v4d':'Right at the ZOB on Dr.-Hans-Kapfinger-Straße — easy to reach, wherever you\u2019re coming from.','ab.ctaH':'Hungry?','ab.ctaP':'Take a look at the menu and order your favourite dish.','ab.ctaContact':'Get in touch',
  'ct.eyebrow':'Contact','ct.h':'Come on over.','ct.sub':'We look forward to seeing you — right at the ZOB in Passau.','ct.addrT':'Address','ct.phoneT':'Phone','ct.phoneD':'For questions or orders — we\u2019re here for you.','ct.waT':'WhatsApp','ct.waD':'Order or question? Send us a message directly.','ct.waOpen':'Open WhatsApp','ct.formH':'Write to us.','ct.formP':'Questions, feedback or a larger order? Leave us a message.',
  'f.name':'Name *','f.email':'Email *','f.phone':'Phone (optional)','f.msg':'Message *','f.send':'Send message','f.errName':'Please enter your name.','f.errEmail':'Please enter a valid email address.','f.errMsg':'Please write us a short message (min. 10 characters).','f.note':'Note: Sending will be activated once an email service is connected. Until then, the fastest way to reach us is by phone or WhatsApp.','f.ok1':'Thanks, {name}!','f.ok2':'Your message is ready — email sending isn\u2019t connected on this page yet. The quickest way is to call us or send your message via WhatsApp.',
- 'c.title':'Cart','c.empty':'Your cart is empty.','c.emptyP':'Time for a döner — check out the menu.','c.go':'Open the menu','c.sub':'Subtotal','c.total':'Total','c.name':'Your name *','c.note':'Note (optional)','c.notePh':'e.g. no onions, extra spicy …','c.wa':'Order via WhatsApp','c.cont':'Continue shopping','c.rm':'Remove item',
+ 'c.title':'Cart','c.empty':'Your cart is empty.','c.emptyP':'Time for a döner — check out the menu.','c.go':'Open the menu','c.sub':'Subtotal','c.total':'Total','c.name':'Your name *','c.addr':'Address *','c.note':'Note (optional)','c.notePh':'e.g. no onions, extra spicy …','c.wa':'Send order on WhatsApp','c.cont':'Continue shopping','c.rm':'Remove item','c.clear':'Clear all',
  'm.size':'Size','m.qty':'Quantity','m.add':'Add to cart','m.close':'Close',
- 't.added':'Added to your cart','t.soon':'{n} is coming soon.','t.errName':'Please enter your name.',
- 'wa.hello':'Hello ZOB Döner,','wa.intro':'I\u2019d like to place the following order:','wa.total':'Total','wa.name':'Name','wa.note':'Note','wa.thanks':'Thank you!','wa.generic':'Hello ZOB Döner!',
+ 't.added':'Added to your cart','t.soon':'{n} is coming soon.','t.errName':'Please enter your name.','t.errAddr':'Please enter your address.','t.cleared':'Cart cleared',
+ 'wa.hello':'Hello ZOB Döner,','wa.intro':'I would like to order from ZOB Döner:','wa.total':'Total','wa.name':'Name','wa.addr':'Address','wa.note':'Note','wa.thanks':'Thank you!','wa.generic':'Hello ZOB Döner!',
  'fo.tag':'Fresh flavour. Right in Passau.','fo.nav':'Navigation','fo.contact':'Contact','fo.hours':'Ordering','fo.rights':'All rights reserved.','l.imp':'Imprint','l.priv':'Privacy','l.ph':'Placeholder — Legal information provided by the owner will be added here.'}
 };
 const TITLES={de:{home:'ZOB Döner — Passau',menu:'Speisekarte · ZOB Döner',about:'Über uns · ZOB Döner',contact:'Kontakt · ZOB Döner'},en:{home:'ZOB Döner — Passau',menu:'Menu · ZOB Döner',about:'About us · ZOB Döner',contact:'Contact · ZOB Döner'}};
@@ -1214,10 +1218,13 @@ const desc=x=>LANG==='en'?trEn(x):x;
 /* ---------- CART ---------- */
 let cart=[];
 try{cart=JSON.parse(localStorage.getItem('zob_cart_v1')||'[]')}catch(e){cart=[]}
+cart=cart.filter(l=>l&&l.id&&ALL[l.id]).map(l=>({id:l.id,s:(l.s===null||l.s===undefined||l.s===''||l.s==='null')?null:Number(l.s),q:Math.max(1,Math.min(20,+l.q||1))}));
 const saveCart=()=>{try{localStorage.setItem('zob_cart_v1',JSON.stringify(cart))}catch(e){}};
-const unit=(it,s)=>Array.isArray(it.p)?it.p[s]:it.p;
-const cartTotal=()=>cart.reduce((a,l)=>a+unit(ALL[l.id],l.s)*l.q,0);
+const sizeKey=s=>(s===null||s===undefined||s===''||s==='null')?'':String(s);
+const unit=(it,s)=>Array.isArray(it.p)?it.p[s??0]:it.p;
+const cartTotal=()=>cart.reduce((a,l)=>{const it=ALL[l.id];return it?a+unit(it,l.s)*l.q:a},0);
 const cartCount=()=>cart.reduce((a,l)=>a+l.q,0);
+const findLine=(id,s)=>cart.find(l=>l.id===id&&sizeKey(l.s)===sizeKey(s));
 
 /* ---------- TOASTS ---------- */
 function toast(msg,icon='check'){
@@ -1311,21 +1318,22 @@ function renderCart(){
   }else{
     foot.style.display='flex';
     body.innerHTML=cart.map(l=>{
-      const it=ALL[l.id];
+      const it=ALL[l.id];if(!it)return '';
+      const sk=sizeKey(l.s);
       const nm=it.n+(l.s!=null?` <small>${SIZES[l.s]}</small>`:'');
       const line=unit(it,l.s)*l.q;
       return `<div class="c-row">
         <img src="${imgSrc(it,200,200)}" alt="">
         <div><div class="c-name">${nm}</div>
           <div class="qty">
-            <button data-dec="${l.id}|${l.s}" aria-label="−"><svg class="ic" aria-hidden="true"><use href="#i-minus"/></svg></button>
+            <button type="button" data-dec="${l.id}|${sk}" aria-label="−"><svg class="ic" aria-hidden="true"><use href="#i-minus"/></svg></button>
             <b class="num">${l.q}</b>
-            <button data-inc="${l.id}|${l.s}" aria-label="+"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></button>
+            <button type="button" data-inc="${l.id}|${sk}" aria-label="+"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></button>
           </div></div>
         <div class="c-right"><span class="c-price num">${fmt(line)}</span>
-          <button class="c-rm" data-rm="${l.id}|${l.s}" aria-label="${t('c.rm')}"><svg class="ic" aria-hidden="true"><use href="#i-trash"/></svg></button></div>
+          <button type="button" class="c-rm" data-rm="${l.id}|${sk}" aria-label="${t('c.rm')}"><svg class="ic" aria-hidden="true"><use href="#i-trash"/></svg></button></div>
       </div>`;
-    }).join('');
+    }).join('')+`<button type="button" class="dr-clear" data-clear-cart>${t('c.clear')}</button>`;
     $('#drSub').textContent=fmt(cartTotal());
     $('#drTotal').textContent=fmt(cartTotal());
   }
@@ -1340,12 +1348,18 @@ function updateBadges(){
   else m.classList.remove('show');
 }
 function addToCart(id,s=null,q=1,imgEl){
-  const key=id+'|'+s;
-  const ex=cart.find(l=>l.id===id&&l.s===s);
-  if(ex)ex.q+=q;else cart.push({id,s,q});
+  if(!ALL[id])return;
+  const size=Array.isArray(ALL[id].p)?(s??0):null;
+  const ex=findLine(id,size);
+  if(ex)ex.q=Math.min(20,ex.q+q);else cart.push({id,s:size,q});
   saveCart();renderCart();
   if(imgEl)flyToCart(imgEl);else popBadge();
   toast(t('t.added'));
+  // keep cart visible in header; open drawer so user sees the item
+  openDrawer();
+}
+function clearCart(){
+  cart=[];saveCart();renderCart();toast(t('t.cleared'));
 }
 
 /* ---------- CART DRAWER ---------- */
@@ -1357,26 +1371,34 @@ function closeDrawer(){$('#drawer').classList.remove('open');$('#scrim').classLi
  $('#drContinue').addEventListener('click',closeDrawer);
  $('#scrim').addEventListener('click',closeDrawer);
  $('#ordNote').placeholder=t('c.notePh');
- $('#ordName').addEventListener('input',e=>e.target.classList.remove('err'));
+['ordName','ordAddr'].forEach(id=>$('#'+id).addEventListener('input',e=>{
+  e.target.closest('.fld')?.classList.remove('err');
+}));
 
 /* ---------- WHATSAPP ORDER ---------- */
 function buildOrderMsg(){
-  const de=LANG==='de';
   const lines=[t('wa.hello'),t('wa.intro'),''];
   cart.forEach(l=>{
-    const it=ALL[l.id];
+    const it=ALL[l.id];if(!it)return;
     const nm=it.n+(l.s!=null?` (${SIZES[l.s]})`:'');
-    lines.push(`${l.q}x ${nm} — ${fmt(unit(it,l.s)*l.q)}`);
+    lines.push(`• ${l.q}× ${nm} — ${fmt(unit(it,l.s)*l.q)}`);
   });
   lines.push('',`${t('wa.total')}: ${fmt(cartTotal())}`,'');
   lines.push(`${t('wa.name')}: ${$('#ordName').value.trim()}`);
-  lines.push(`${t('wa.note')}: ${$('#ordNote').value.trim()||'–'}`);
+  lines.push(`${t('wa.addr')}: ${$('#ordAddr').value.trim()}`);
+  const note=$('#ordNote').value.trim();
+  if(note)lines.push(`${t('wa.note')}: ${note}`);
   lines.push('',t('wa.thanks'));
   return lines.join('\n');
 }
+function setFldErr(fldId,on){$('#'+fldId)?.classList.toggle('err',!!on)}
  $('#waBtn').addEventListener('click',()=>{
+  if(!cart.length){toast(t('c.empty'),'x');return}
   const name=$('#ordName').value.trim();
-  if(!name){$('#ordName').classList.add('err');$('#ordName').focus();toast(t('t.errName'),'x');return}
+  const addr=$('#ordAddr').value.trim();
+  setFldErr('fldName',!name);setFldErr('fldAddr',!addr);
+  if(!name){$('#ordName').focus();toast(t('t.errName'),'x');return}
+  if(!addr){$('#ordAddr').focus();toast(t('t.errAddr'),'x');return}
   window.open(`https://wa.me/${WA_NUM}?text=${encodeURIComponent(buildOrderMsg())}`,'_blank','noopener');
 });
  $$('[data-wa-generic]').forEach(b=>b.addEventListener('click',()=>{
@@ -1417,8 +1439,9 @@ function closeModal(id){
  $('#pmAdd').addEventListener('click',e=>{
   const it=ALL[pm.id];
   const multi=Array.isArray(it.p);
-  addToCart(pm.id,multi?pm.s:null,pm.q,$('#pmImg'));
+  const img=$('#pmImg');
   closeModal();
+  addToCart(pm.id,multi?pm.s:null,pm.q,img);
 });
 
 /* ---------- GLOBAL CLICK DELEGATION ---------- */
@@ -1427,9 +1450,11 @@ document.addEventListener('click',e=>{
   if(open){openModal(open.dataset.open);return}
   const add=e.target.closest('[data-add]');
   if(add){
+    e.preventDefault();
+    const id=add.dataset.add;
     const card=add.closest('.m-item,.f-card');
     const img=card?card.querySelector('img'):null;
-    addToCart(add.dataset.add,null,1,img);
+    addToCart(id,null,1,img);
     if(add.classList.contains('add-btn')){
       add.classList.add('ok');
       const span=add.querySelector('span');const old=span.textContent;
@@ -1439,12 +1464,14 @@ document.addEventListener('click',e=>{
   }
   const sz=e.target.closest('[data-size]');
   if(sz){pm.s=+sz.dataset.size;$$('#sizeRow button').forEach(b=>b.classList.toggle('sel',b===sz));updatePm();return}
+  const clear=e.target.closest('[data-clear-cart]');
+  if(clear){clearCart();return}
   const inc=e.target.closest('[data-inc]');
-  if(inc){const[id,s]=inc.dataset.inc.split('|');const l=cart.find(x=>x.id===id&&String(x.s)===s);if(l){l.q=Math.min(20,l.q+1);saveCart();renderCart()}return}
+  if(inc){const[id,sk]=inc.dataset.inc.split('|');const l=findLine(id,sk===''?null:sk);if(l){l.q=Math.min(20,l.q+1);saveCart();renderCart()}return}
   const dec=e.target.closest('[data-dec]');
-  if(dec){const[id,s]=dec.dataset.dec.split('|');const l=cart.find(x=>x.id===id&&String(x.s)===s);if(l){l.q--;if(l.q<1)cart=cart.filter(x=>x!==l);saveCart();renderCart()}return}
+  if(dec){const[id,sk]=dec.dataset.dec.split('|');const l=findLine(id,sk===''?null:sk);if(l){l.q--;if(l.q<1)cart=cart.filter(x=>x!==l);saveCart();renderCart()}return}
   const rm=e.target.closest('[data-rm]');
-  if(rm){const[id,s]=rm.dataset.rm.split('|');cart=cart.filter(x=>!(x.id===id&&String(x.s)===s));saveCart();renderCart();return}
+  if(rm){const[id,sk]=rm.dataset.rm.split('|');cart=cart.filter(x=>!(x.id===id&&sizeKey(x.s)===sizeKey(sk===''?null:sk)));saveCart();renderCart();return}
   const catGo=e.target.closest('[data-cat-go]');
   if(catGo){go('menu',{cat:catGo.dataset.catGo});return}
   const nav=e.target.closest('[data-nav]');
