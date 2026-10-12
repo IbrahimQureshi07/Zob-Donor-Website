@@ -60,7 +60,7 @@ a{color:inherit;text-decoration:none}
 
 /* ============ BUTTONS ============ */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:16px 30px;border-radius:999px;font-weight:800;font-size:15px;letter-spacing:.02em;border:1px solid transparent;transition:transform .35s var(--ease),background .35s,border-color .35s,color .35s,box-shadow .35s;white-space:nowrap}
-.btn svg,.btn .ic,.add-btn svg,.add-btn .ic,.icon-btn svg,.qty button svg,.c-rm svg{pointer-events:none}
+.btn svg,.btn .ic,.btn span,.add-btn svg,.add-btn .ic,.add-btn span,.icon-btn svg,.qty button svg,.c-rm svg{pointer-events:none}
 .btn .ic{transition:transform .35s var(--ease)}
 .btn-solid{background:var(--gold);color:#181206}
 .btn-solid:hover{background:#ffc657;transform:translateY(-2px);box-shadow:0 14px 34px rgba(242,181,58,.22)}
@@ -1269,14 +1269,20 @@ function popBadge(){
   }catch(err){}
 }
 function closestFrom(e,sel){
-  if(e.target&&e.target.closest){
-    const hit=e.target.closest(sel);if(hit)return hit;
-  }
-  const path=(e.composedPath&&e.composedPath())||[];
-  for(let i=0;i<path.length;i++){
-    const node=path[i];
-    if(node&&node.nodeType===1&&node.matches&&node.matches(sel))return node;
-  }
+  try{
+    let t=e&&e.target;
+    if(t&&t.nodeType===3)t=t.parentElement;
+    if(t&&typeof t.closest==='function'){
+      const hit=t.closest(sel);if(hit)return hit;
+    }
+    const path=(e&&typeof e.composedPath==='function'&&e.composedPath())||[];
+    for(let i=0;i<path.length;i++){
+      const node=path[i];
+      if(!node||node.nodeType!==1)continue;
+      if(typeof node.closest==='function'){const hit=node.closest(sel);if(hit)return hit}
+      if(node.matches&&node.matches(sel))return node;
+    }
+  }catch(err){}
   return null;
 }
 
@@ -1284,27 +1290,26 @@ function closestFrom(e,sel){
 function priceLabel(it){return Array.isArray(it.p)?t('menu.from')+' '+fmt(it.p[0]):fmt(it.p)}
 function imgSrc(it,w=900,h=700){return it.img||`https://picsum.photos/seed/${it.id}/`+w+`/`+h+`.jpg`}
 function favCard(it){
-  const multi=Array.isArray(it.p);
   return `<article class="f-card rv">
     <div class="f-img"><img loading="lazy" src="${imgSrc(it,900,700)}" alt="${it.n} — ZOB Döner Passau">${it.tag?`<span class="f-tag">${t('fav.tag')}</span>`:''}</div>
     <div class="f-body">
       <div class="f-top"><h4>${it.n}</h4><span class="f-price num">${priceLabel(it)}</span></div>
       <p>${desc(it.d)}</p>
-      <button class="btn btn-solid btn-sm" ${multi?`data-open="${it.id}"`:`data-add="${it.id}"`}><svg class="ic" aria-hidden="true"><use href="#i-bag"/></svg><span>${t('fav.add')}</span></button>
+      <button type="button" class="btn btn-solid btn-sm js-add" data-add="${it.id}" onclick="return window.zobAdd(this,event)"><svg class="ic" aria-hidden="true"><use href="#i-bag"/></svg><span>${t('fav.add')}</span></button>
     </div></article>`;
 }
 function itemCard(it){
   const multi=Array.isArray(it.p);
   const sizes=multi?`<div class="m-sizes num">${SIZES.map((s,i)=>`${s} ${fmt(it.p[i])}`).join(' · ')}</div>`:'';
   return `<article class="m-item rv">
-    <button class="m-thumb" data-open="${it.id}" aria-label="${it.n} — ${t('menu.details')}">
+    <button type="button" class="m-thumb" data-open="${it.id}" aria-label="${it.n} — ${t('menu.details')}">
       <img loading="lazy" src="${imgSrc(it,480,480)}" alt="${it.n} — ZOB Döner Passau">
     </button>
     <div class="m-body">
-      <div class="m-top"><h4 class="m-name"><button class="m-namebtn" data-open="${it.id}">${it.n}</button></h4><span class="m-dots" aria-hidden="true"></span><span class="m-price num">${priceLabel(it)}</span></div>
+      <div class="m-top"><h4 class="m-name"><button type="button" class="m-namebtn" data-open="${it.id}">${it.n}</button></h4><span class="m-dots" aria-hidden="true"></span><span class="m-price num">${priceLabel(it)}</span></div>
       <p class="m-desc">${desc(it.d)}</p>
       ${sizes}
-      <div class="m-foot"><button class="add-btn" ${multi?`data-open="${it.id}"`:`data-add="${it.id}"`}><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg><span>${t('menu.add')}</span></button></div>
+      <div class="m-foot"><button type="button" class="add-btn js-add" data-add="${it.id}" onclick="return window.zobAdd(this,event)"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg><span>${t('menu.add')}</span></button></div>
     </div></article>`;
 }
 function renderMenuPage(){
@@ -1328,10 +1333,12 @@ function renderMenuPage(){
     bar.appendChild(b);
   });
   refreshInds();
+  bindAddButtons();
 }
 function renderFavs(){
   $('#favGrid').innerHTML=FAVS.map((id,i)=>favCard(ALL[id]).replace('class="f-card rv"',`class="f-card rv" style="--d:${i*.07}s"`)).join('');
   observeReveals();
+  bindAddButtons();
 }
 
 /* ---------- CART UI ---------- */
@@ -1378,7 +1385,7 @@ function updateBadges(){
   }
 }
 function addToCart(id,s,q,imgEl){
-  id=String(id||'');
+  id=String(id||'').trim();
   if(!id||!ALL[id])return false;
   q=Math.max(1,Math.min(20,Number(q)||1));
   const size=Array.isArray(ALL[id].p)?(s==null||s===''?0:Number(s)):null;
@@ -1390,6 +1397,36 @@ function addToCart(id,s,q,imgEl){
   try{toast(t('t.added'))}catch(err){}
   try{openDrawer()}catch(err){}
   return true;
+}
+function handleAddClick(e,el){
+  try{
+    if(e){
+      if(e._zobHandled)return false;
+      e._zobHandled=true;
+      if(e.preventDefault)e.preventDefault();
+      if(e.stopPropagation)e.stopPropagation();
+    }
+    const btn=el||(e&&closestFrom(e,'[data-add]'));
+    if(!btn)return false;
+    const id=String(btn.getAttribute('data-add')||'').trim();
+    const card=btn.closest?btn.closest('.m-item,.f-card'):null;
+    const img=card?card.querySelector('img'):null;
+    const ok=addToCart(id,null,1,img);
+    if(ok&&btn.classList.contains('add-btn')){
+      btn.classList.add('ok');
+      const span=btn.querySelector('span');
+      if(span){const old=span.textContent;span.textContent='✓';setTimeout(()=>{btn.classList.remove('ok');span.textContent=old},1400)}
+    }
+    return false;
+  }catch(err){return false}
+}
+window.zobAdd=function(el,ev){return handleAddClick(ev,el)};
+function bindAddButtons(){
+  $$('[data-add]').forEach(btn=>{
+    if(btn.dataset.zobBound==='1')return;
+    btn.dataset.zobBound='1';
+    btn.addEventListener('click',function(ev){handleAddClick(ev,this)});
+  });
 }
 function clearCart(){
   cart=[];saveCart();renderCart();toast(t('t.cleared'));
@@ -1499,20 +1536,10 @@ function closeModal(id){
 /* ---------- GLOBAL CLICK DELEGATION ---------- */
 document.addEventListener('click',e=>{
   const add=closestFrom(e,'[data-add]');
-  if(add){
-    e.preventDefault();
-    e.stopPropagation();
-    const id=add.getAttribute('data-add');
-    const card=add.closest('.m-item,.f-card');
-    const img=card?card.querySelector('img'):null;
-    addToCart(id,null,1,img);
-    if(add.classList.contains('add-btn')){
-      add.classList.add('ok');
-      const span=add.querySelector('span');
-      if(span){const old=span.textContent;span.textContent='✓';setTimeout(()=>{add.classList.remove('ok');span.textContent=old},1400)}
-    }
-    return;
-  }
+  if(add)handleAddClick(e,add);
+},true);
+document.addEventListener('click',e=>{
+  if(closestFrom(e,'[data-add]'))return;
   const open=closestFrom(e,'[data-open]');
   if(open){openModal(open.getAttribute('data-open'));return}
   const sz=closestFrom(e,'[data-size]');
