@@ -421,13 +421,15 @@ a{color:inherit;text-decoration:none}
 /* ============ CART DRAWER ============ */
 .scrim{position:fixed;inset:0;z-index:140;background:rgba(6,8,11,.62);backdrop-filter:blur(5px);opacity:0;visibility:hidden;pointer-events:none;transition:.4s}
 .scrim.show{opacity:1;visibility:visible;pointer-events:auto}
-.drawer{position:fixed;top:0;right:0;bottom:0;z-index:150;width:min(440px,100vw);background:#0d1017;border-left:1px solid var(--line2);display:flex;flex-direction:column;transform:translateX(103%);pointer-events:none;transition:transform .55s var(--ease)}
+.drawer{position:fixed;top:0;right:0;bottom:0;z-index:150;width:min(440px,100vw);background:#0d1017;border-left:1px solid var(--line2);display:flex;flex-direction:column;overflow:hidden;transform:translateX(103%);pointer-events:none;transition:transform .55s var(--ease)}
 .drawer.open{transform:none;pointer-events:auto}
-.dr-head{display:flex;align-items:center;justify-content:space-between;padding:22px 26px;border-bottom:1px solid var(--line)}
+.dr-head{flex:none;display:flex;align-items:center;justify-content:space-between;padding:22px 26px;border-bottom:1px solid var(--line)}
 .dr-head h3{font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:21px;display:flex;align-items:center;gap:12px}
 .dr-head h3 em{font-style:normal;background:var(--gold);color:#181206;font-size:12px;font-weight:900;min-width:24px;height:24px;padding:0 7px;border-radius:999px;display:grid;place-items:center}
-.dr-body{flex:1;overflow-y:auto;padding:20px 26px;display:flex;flex-direction:column;gap:16px}
-.dr-empty{margin:auto;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;padding:40px 10px}
+.dr-scroll{flex:1;min-height:0;overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column}
+.dr-body{flex:none;padding:20px 26px 8px;display:flex;flex-direction:column;gap:16px}
+.dr-body.is-empty{flex:1;justify-content:center;min-height:100%;padding:20px 26px}
+.dr-empty{text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;padding:40px 10px}
 .dr-empty .bus-big{width:60px;color:var(--gold);opacity:.85;margin-bottom:8px}
 .dr-empty b{font-size:18px}
 .dr-empty p{color:var(--mut);font-size:14px;margin-bottom:16px}
@@ -436,24 +438,24 @@ a{color:inherit;text-decoration:none}
 .c-name{font-weight:800;font-size:14.5px;line-height:1.35}
 .c-name small{display:block;color:var(--mut);font-weight:600;font-size:12px}
 .qty{display:inline-flex;align-items:center;gap:2px;border:1px solid var(--line2);border-radius:999px;margin-top:9px;width:max-content}
-.qty button{width:29px;height:29px;display:grid;place-items:center;color:var(--ink-dim);border-radius:50%;transition:.25s}
+.qty button{width:34px;height:34px;display:grid;place-items:center;color:var(--ink-dim);border-radius:50%;transition:.25s}
 .qty button:hover{color:var(--gold);background:rgba(242,181,58,.1)}
 .qty button .ic{width:12px}
 .qty b{min-width:26px;text-align:center;font-size:13.5px}
 .c-right{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
 .c-price{color:var(--gold);font-weight:900;font-size:14.5px;white-space:nowrap}
-.c-rm{color:var(--mut);transition:color .25s;display:grid;place-items:center}
+.c-rm{width:36px;height:36px;color:var(--mut);transition:color .25s;display:grid;place-items:center}
 .c-rm:hover{color:var(--red)}
 .c-rm .ic{width:15px}
-.dr-foot{border-top:1px solid var(--line);padding:20px 26px 24px;display:flex;flex-direction:column;gap:12px;background:#0b0e14}
+.dr-foot{flex:none;border-top:1px solid var(--line);padding:18px 26px 28px;display:flex;flex-direction:column;gap:12px;background:#0b0e14}
 .sum{display:flex;justify-content:space-between;font-size:14px;color:var(--mut);font-weight:600}
 .sum b{color:var(--ink);font-size:15px}
 .sum.total{font-size:16px;color:var(--ink);font-weight:800;border-top:1px solid var(--line);padding-top:12px;margin-top:2px}
 .sum.total b{color:var(--gold);font-size:20px}
 .dr-foot .fld{margin-bottom:2px}
 .dr-foot input,.dr-foot textarea{padding:12px 15px;font-size:14px;border-radius:12px}
-.dr-foot textarea{min-height:64px}
-.dr-clear{align-self:center;margin-top:4px;font-size:13px;font-weight:700;color:var(--mut);text-decoration:underline;text-underline-offset:3px;transition:color .25s}
+.dr-foot textarea{min-height:56px}
+.dr-clear{align-self:center;margin:4px 0 8px;padding:8px 12px;font-size:13px;font-weight:700;color:var(--mut);text-decoration:underline;text-underline-offset:3px;transition:color .25s}
 .dr-clear:hover{color:var(--gold)}
 .dr-foot .btn.btn-solid{margin-top:4px}
 @media(max-width:520px){.drawer{width:100vw}}
@@ -1039,15 +1041,17 @@ main,.nav-in,footer{transition:opacity .25s}
     <h3><span data-i18n="c.title">Warenkorb</span><em class="num" id="drCount">0</em></h3>
     <button class="icon-btn" id="drClose" aria-label="Warenkorb schließen"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button>
   </div>
-  <div class="dr-body" id="drBody"></div>
-  <div class="dr-foot" id="drFoot">
-    <div class="sum"><span data-i18n="c.sub">Zwischensumme</span><b class="num" id="drSub">0,00 €</b></div>
-    <div class="sum total"><span data-i18n="c.total">Gesamt</span><b class="num" id="drTotal">0,00 €</b></div>
-    <label class="fld" id="fldName"><span data-i18n="c.name">Dein Name *</span><input type="text" id="ordName" autocomplete="name" required></label>
-    <label class="fld" id="fldAddr"><span data-i18n="c.addr">Adresse *</span><input type="text" id="ordAddr" autocomplete="street-address" required></label>
-    <label class="fld"><span data-i18n="c.note">Notiz (optional)</span><textarea id="ordNote" placeholder=""></textarea></label>
-    <button class="btn btn-solid btn-w100" id="waBtn"><svg class="ic ic-f" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="c.wa">Bestellung per WhatsApp senden</span></button>
-    <button class="btn btn-ghost btn-w100" id="drContinue"><span data-i18n="c.cont">Weiter einkaufen</span></button>
+  <div class="dr-scroll" id="drScroll">
+    <div class="dr-body" id="drBody"></div>
+    <div class="dr-foot" id="drFoot">
+      <div class="sum"><span data-i18n="c.sub">Zwischensumme</span><b class="num" id="drSub">0,00 €</b></div>
+      <div class="sum total"><span data-i18n="c.total">Gesamt</span><b class="num" id="drTotal">0,00 €</b></div>
+      <label class="fld" id="fldName"><span data-i18n="c.name">Dein Name *</span><input type="text" id="ordName" autocomplete="name" required></label>
+      <label class="fld" id="fldAddr"><span data-i18n="c.addr">Adresse *</span><input type="text" id="ordAddr" autocomplete="street-address" required></label>
+      <label class="fld"><span data-i18n="c.note">Notiz (optional)</span><textarea id="ordNote" placeholder=""></textarea></label>
+      <button class="btn btn-solid btn-w100" id="waBtn"><svg class="ic ic-f" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="c.wa">Bestellung per WhatsApp senden</span></button>
+      <button class="btn btn-ghost btn-w100" id="drContinue"><span data-i18n="c.cont">Weiter einkaufen</span></button>
+    </div>
   </div>
 </aside>
 
@@ -1346,32 +1350,39 @@ function renderCart(){
   const body=$('#drBody'),foot=$('#drFoot');
   $('#drCount').textContent=cartCount();
   if(!cart.length){
-    foot.style.display='none';
-    body.innerHTML=`<div class="dr-empty">
-      <svg class="bus-big ic" aria-hidden="true"><use href="#i-bus"/></svg>
-      <b>${t('c.empty')}</b><p>${t('c.emptyP')}</p>
-      <button class="btn btn-solid btn-sm" data-nav="menu"><span>${t('c.go')}</span></button></div>`;
+    if(foot)foot.style.display='none';
+    if(body){
+      body.classList.add('is-empty');
+      body.innerHTML=`<div class="dr-empty">
+        <svg class="bus-big ic" aria-hidden="true"><use href="#i-bus"/></svg>
+        <b>${t('c.empty')}</b><p>${t('c.emptyP')}</p>
+        <button class="btn btn-solid btn-sm" data-nav="menu"><span>${t('c.go')}</span></button></div>`;
+    }
   }else{
-    foot.style.display='flex';
-    body.innerHTML=cart.map(l=>{
-      const it=ALL[l.id];if(!it)return '';
-      const sk=sizeKey(l.s);
-      const nm=it.n+(l.s!=null?` <small>${SIZES[l.s]}</small>`:'');
-      const line=unit(it,l.s)*l.q;
-      return `<div class="c-row">
-        <img src="${imgSrc(it,200,200)}" alt="">
-        <div><div class="c-name">${nm}</div>
-          <div class="qty">
-            <button type="button" data-dec="${l.id}|${sk}" aria-label="−"><svg class="ic" aria-hidden="true"><use href="#i-minus"/></svg></button>
-            <b class="num">${l.q}</b>
-            <button type="button" data-inc="${l.id}|${sk}" aria-label="+"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></button>
-          </div></div>
-        <div class="c-right"><span class="c-price num">${fmt(line)}</span>
-          <button type="button" class="c-rm" data-rm="${l.id}|${sk}" aria-label="${t('c.rm')}"><svg class="ic" aria-hidden="true"><use href="#i-trash"/></svg></button></div>
-      </div>`;
-    }).join('')+`<button type="button" class="dr-clear" data-clear-cart>${t('c.clear')}</button>`;
-    $('#drSub').textContent=fmt(cartTotal());
-    $('#drTotal').textContent=fmt(cartTotal());
+    if(foot)foot.style.display='flex';
+    if(body){
+      body.classList.remove('is-empty');
+      body.innerHTML=cart.map(l=>{
+        const it=ALL[l.id];if(!it)return '';
+        const sk=sizeKey(l.s);
+        const nm=it.n+(l.s!=null?` <small>${SIZES[l.s]}</small>`:'');
+        const line=unit(it,l.s)*l.q;
+        return `<div class="c-row">
+          <img src="${imgSrc(it,200,200)}" alt="">
+          <div><div class="c-name">${nm}</div>
+            <div class="qty">
+              <button type="button" data-dec="${l.id}|${sk}" aria-label="−"><svg class="ic" aria-hidden="true"><use href="#i-minus"/></svg></button>
+              <b class="num">${l.q}</b>
+              <button type="button" data-inc="${l.id}|${sk}" aria-label="+"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></button>
+            </div></div>
+          <div class="c-right"><span class="c-price num">${fmt(line)}</span>
+            <button type="button" class="c-rm" data-rm="${l.id}|${sk}" aria-label="${t('c.rm')}"><svg class="ic" aria-hidden="true"><use href="#i-trash"/></svg></button></div>
+        </div>`;
+      }).join('')+`<button type="button" class="dr-clear" data-clear-cart>${t('c.clear')}</button>`;
+    }
+    const sub=$('#drSub'),tot=$('#drTotal');
+    if(sub)sub.textContent=fmt(cartTotal());
+    if(tot)tot.textContent=fmt(cartTotal());
   }
   updateBadges();
 }
@@ -1431,15 +1442,49 @@ function bindAddButtons(){
 function clearCart(){
   cart=[];saveCart();renderCart();toast(t('t.cleared'));
 }
+function parseCartKey(raw){
+  const parts=String(raw||'').split('|');
+  const id=String(parts[0]||'').trim();
+  const sk=parts.length>1?parts.slice(1).join('|'):'';
+  return {id,s:sk===''?null:sk};
+}
+function cartInc(raw){
+  const{id,s}=parseCartKey(raw);const l=findLine(id,s);if(!l)return;
+  l.q=Math.min(20,l.q+1);saveCart();renderCart();
+}
+function cartDec(raw){
+  const{id,s}=parseCartKey(raw);const l=findLine(id,s);if(!l)return;
+  l.q--;if(l.q<1)cart=cart.filter(x=>x!==l);saveCart();renderCart();
+}
+function cartRm(raw){
+  const{id,s}=parseCartKey(raw);
+  cart=cart.filter(x=>!(x.id===id&&sizeKey(x.s)===sizeKey(s)));
+  saveCart();renderCart();
+}
+function handleCartControls(e){
+  if(e&&e._zobCartHandled)return true;
+  const clear=closestFrom(e,'[data-clear-cart]');
+  const inc=closestFrom(e,'[data-inc]');
+  const dec=closestFrom(e,'[data-dec]');
+  const rm=closestFrom(e,'[data-rm]');
+  if(!(clear||inc||dec||rm))return false;
+  if(e){e._zobCartHandled=true;e.preventDefault();if(e.stopPropagation)e.stopPropagation()}
+  if(clear)clearCart();
+  else if(inc)cartInc(inc.getAttribute('data-inc'));
+  else if(dec)cartDec(dec.getAttribute('data-dec'));
+  else if(rm)cartRm(rm.getAttribute('data-rm'));
+  return true;
+}
 
 /* ---------- CART DRAWER ---------- */
 function openDrawer(){
   try{renderCart()}catch(err){}
-  const drawer=$('#drawer'),scrim=$('#scrim'),mcart=$('#mcart'),closeBtn=$('#drClose');
+  const drawer=$('#drawer'),scrim=$('#scrim'),mcart=$('#mcart'),closeBtn=$('#drClose'),scroll=$('#drScroll');
   if(drawer)drawer.classList.add('open');
   if(scrim)scrim.classList.add('show');
   document.body.classList.add('lock');
   if(mcart)mcart.classList.remove('show');
+  if(scroll)scroll.scrollTop=0;
   if(closeBtn)try{closeBtn.focus()}catch(err){}
 }
 function closeDrawer(){
@@ -1535,23 +1580,16 @@ function closeModal(id){
 
 /* ---------- GLOBAL CLICK DELEGATION ---------- */
 document.addEventListener('click',e=>{
+  if(handleCartControls(e))return;
   const add=closestFrom(e,'[data-add]');
-  if(add)handleAddClick(e,add);
+  if(add){handleAddClick(e,add);return}
 },true);
 document.addEventListener('click',e=>{
-  if(closestFrom(e,'[data-add]'))return;
+  if(e._zobCartHandled||closestFrom(e,'[data-add],[data-inc],[data-dec],[data-rm],[data-clear-cart]'))return;
   const open=closestFrom(e,'[data-open]');
   if(open){openModal(open.getAttribute('data-open'));return}
   const sz=closestFrom(e,'[data-size]');
   if(sz){pm.s=+sz.getAttribute('data-size');$$('#sizeRow button').forEach(b=>b.classList.toggle('sel',b===sz));updatePm();return}
-  const clear=closestFrom(e,'[data-clear-cart]');
-  if(clear){clearCart();return}
-  const inc=closestFrom(e,'[data-inc]');
-  if(inc){const[id,sk]=String(inc.getAttribute('data-inc')||'').split('|');const l=findLine(id,sk===''?null:sk);if(l){l.q=Math.min(20,l.q+1);saveCart();renderCart()}return}
-  const dec=closestFrom(e,'[data-dec]');
-  if(dec){const[id,sk]=String(dec.getAttribute('data-dec')||'').split('|');const l=findLine(id,sk===''?null:sk);if(l){l.q--;if(l.q<1)cart=cart.filter(x=>x!==l);saveCart();renderCart()}return}
-  const rm=closestFrom(e,'[data-rm]');
-  if(rm){const[id,sk]=String(rm.getAttribute('data-rm')||'').split('|');cart=cart.filter(x=>!(x.id===id&&sizeKey(x.s)===sizeKey(sk===''?null:sk)));saveCart();renderCart();return}
   const catGo=closestFrom(e,'[data-cat-go]');
   if(catGo){go('menu',{cat:catGo.getAttribute('data-cat-go')});return}
   const nav=closestFrom(e,'[data-nav]');
@@ -1698,7 +1736,7 @@ function closeLangs(){$$('[data-langbox]').forEach(b=>{b.classList.remove('open'
   });
 });
 document.addEventListener('click',closeLangs);
- $$('[data-lang]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();setLang(b.dataset.lang)}));
+$$('.lang-menu [data-lang], .m-lang [data-lang]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();setLang(b.dataset.lang)}));
 let heroTypeTimer=null;
 function clearHeroType(){if(heroTypeTimer){clearTimeout(heroTypeTimer);heroTypeTimer=null}}
 function typeHeroHeadline(){
