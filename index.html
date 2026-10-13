@@ -324,6 +324,7 @@ a{color:inherit;text-decoration:none}
 .phero-bg{position:absolute;inset:0}
 .phero-bg img{width:100%;height:112%;object-fit:cover;filter:saturate(.8) contrast(1.05) brightness(.6);will-change:transform}
 .phero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(10deg,var(--bg) 8%,rgba(11,13,18,.5) 55%,rgba(11,13,18,.3))}
+.phero--about .phero-bg img{object-fit:cover;object-position:center 40%;filter:saturate(.9) contrast(1.05) brightness(.72)}
 .phero-in{position:relative;z-index:2}
 .phero h1{margin-top:20px}
 .phero h1 .line{display:block;min-height:.94em}
@@ -875,8 +876,8 @@ main,.nav-in,footer{transition:opacity .25s}
 
 <!-- ==================== ABOUT ==================== -->
 <section class="page" data-page="about" id="page-about">
-  <div class="phero">
-    <div class="phero-bg"><img data-plx src="https://picsum.photos/seed/zob-about/1920/1100.jpg" alt="Bei ZOB Döner in Passau" loading="lazy"></div>
+  <div class="phero phero--about">
+    <div class="phero-bg"><img data-plx src="Images/about%20banner.png" alt="Bei ZOB Döner in Passau" loading="lazy"></div>
     <div class="wrap phero-in">
       <span class="eyebrow" data-i18n="ab.eyebrow">Über uns</span>
       <h1 class="h-display" id="aboutTitle"><span class="line"><span data-i18n="ab.h"></span></span></h1>
@@ -925,7 +926,7 @@ main,.nav-in,footer{transition:opacity .25s}
 <!-- ==================== CONTACT ==================== -->
 <section class="page" data-page="contact" id="page-contact">
   <div class="phero">
-    <div class="phero-bg"><img data-plx src="https://picsum.photos/seed/zob-contact/1920/1100.jpg" alt="ZOB Döner Passau" loading="lazy"></div>
+    <div class="phero-bg"><img data-plx src="Images/contact.jpg" alt="ZOB Döner Passau" loading="lazy"></div>
     <div class="wrap phero-in">
       <span class="eyebrow" data-i18n="ct.eyebrow">Kontakt</span>
       <h1 class="h-display" id="contactTitle"><span class="line"><span data-i18n="ct.h"></span></span></h1>
