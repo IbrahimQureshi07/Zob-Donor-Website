@@ -146,8 +146,8 @@ a{color:inherit;text-decoration:none}
 .mmenu.open nav a{opacity:1;transform:none}
 .mmenu.open nav a:nth-child(1){transition-delay:.08s}.mmenu.open nav a:nth-child(2){transition-delay:.14s}.mmenu.open nav a:nth-child(3){transition-delay:.2s}.mmenu.open nav a:nth-child(4){transition-delay:.26s}
 .mmenu nav a:hover,.mmenu nav a.active{color:var(--gold)}
-.m-foot{margin-top:auto;display:flex;flex-direction:column;gap:22px;opacity:0;transform:translateY(20px);transition:.55s .3s var(--ease)}
-.mmenu.open .m-foot{opacity:1;transform:none}
+.mmenu-foot{margin-top:auto;display:flex;flex-direction:column;gap:22px;opacity:0;transform:translateY(20px);transition:.55s .3s var(--ease)}
+.mmenu.open .mmenu-foot{opacity:1;transform:none}
 .m-lang{display:flex;align-items:center;gap:10px}
 .m-lang .lab{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--mut);margin-right:6px}
 .m-lang button{padding:9px 18px;border-radius:999px;border:1px solid var(--line2);font-weight:800;font-size:13px;color:var(--ink-dim)}
@@ -361,7 +361,7 @@ a{color:inherit;text-decoration:none}
 .m-price{color:var(--gold);font-weight:900;font-size:15.5px;white-space:nowrap}
 .m-desc{font-size:13px;color:var(--mut);line-height:1.5;margin-top:5px}
 .m-sizes{font-size:11.5px;color:var(--mut);margin-top:6px;opacity:.85;letter-spacing:.02em}
-.m-foot{margin-top:auto;padding-top:10px;display:flex;justify-content:flex-end}
+.m-item-foot{margin-top:auto;padding-top:10px;display:flex;justify-content:flex-end}
 .add-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 17px;border-radius:999px;border:1px solid rgba(242,181,58,.45);color:var(--gold);font-weight:800;font-size:12.5px;letter-spacing:.03em;transition:.3s}
 .add-btn .ic{width:13px}
 .add-btn:hover{background:var(--gold);color:#181206;transform:translateY(-1px)}
@@ -378,6 +378,8 @@ a{color:inherit;text-decoration:none}
 .cta-banner .h2{margin-bottom:16px}
 .cta-banner p{max-width:480px;margin:0 auto 34px;color:var(--ink-dim)}
 .cta-banner .hero-cta{justify-content:center;margin-top:0}
+.cta-sec{display:flex;align-items:center;min-height:calc(100svh - 96px);padding:clamp(60px,8vw,120px) 0}
+.cta-sec .wrap{width:100%}
 
 /* ============ ABOUT ============ */
 .about-lead{font-size:clamp(24px,3vw,38px);font-weight:800;font-stretch:108%;line-height:1.25;letter-spacing:-.01em;max-width:900px}
@@ -655,7 +657,7 @@ main,.nav-in,footer{transition:opacity .25s}
     <a href="#/about" data-nav="about"><i>03</i><span data-i18n="nav.about">Über uns</span></a>
     <a href="#/contact" data-nav="contact"><i>04</i><span data-i18n="nav.contact">Kontakt</span></a>
   </nav>
-  <div class="m-foot">
+  <div class="mmenu-foot">
     <div class="m-lang" role="group" aria-label="Sprache / Language">
       <span class="lab" data-i18n="m.lang">Sprache</span>
       <button data-lang="de">DE</button>
@@ -819,7 +821,7 @@ main,.nav-in,footer{transition:opacity .25s}
     </div>
   </div>
 
-  <div class="sec">
+  <div class="sec" hidden aria-hidden="true">
     <div class="wrap">
       <div class="sec-head" style="text-align:center">
         <span class="eyebrow rv" style="justify-content:center" data-i18n="soc.eyebrow">Community</span>
@@ -834,7 +836,7 @@ main,.nav-in,footer{transition:opacity .25s}
     </div>
   </div>
 
-  <div class="sec" style="padding-top:0">
+  <div class="sec cta-sec">
     <div class="wrap">
       <div class="cta-banner rv">
         <h2 class="h2" data-i18n="cta.h">Appetit bekommen?</h2>
@@ -1316,7 +1318,7 @@ function itemCard(it){
       <div class="m-top"><h4 class="m-name"><button type="button" class="m-namebtn" data-open="${it.id}">${it.n}</button></h4><span class="m-dots" aria-hidden="true"></span><span class="m-price num">${priceLabel(it)}</span></div>
       <p class="m-desc">${desc(it.d)}</p>
       ${sizes}
-      <div class="m-foot"><button type="button" class="add-btn js-add" data-add="${it.id}" onclick="return window.zobAdd(this,event)"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg><span>${t('menu.add')}</span></button></div>
+      <div class="m-item-foot"><button type="button" class="add-btn js-add" data-add="${it.id}" onclick="return window.zobAdd(this,event)"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg><span>${t('menu.add')}</span></button></div>
     </div></article>`;
 }
 function renderMenuPage(){
