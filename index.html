@@ -515,14 +515,15 @@ a{color:inherit;text-decoration:none}
 @media(max-width:800px){.about-cols{grid-template-columns:1fr}}
 .v-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:54px}
 @media(max-width:760px){.v-grid{grid-template-columns:1fr}}
-.band{--band-h:min(78svh,760px);position:relative;text-align:center}
-.band-bg{position:sticky;top:0;height:var(--band-h);z-index:0;overflow:hidden;background:#10141d}
-.band-bg img{width:100%;height:100%;max-width:none;object-fit:cover;object-position:center;display:block;filter:saturate(.88) contrast(1.06) brightness(.48)}
-.band-bg::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(90% 90% at 50% 50%,rgba(11,13,18,.32),rgba(11,13,18,.78))}
-.band-copy{position:relative;z-index:1;margin-top:calc(-1 * var(--band-h));min-height:calc(var(--band-h) + 42svh);display:grid;place-items:center;padding:clamp(48px,12vh,120px) 20px clamp(72px,16vh,140px)}
+.band{
+  position:relative;min-height:min(58svh,560px);display:grid;place-items:center;text-align:center;
+  background:#10141d url("Images/hot%20taste%20bg.jpg") center/cover no-repeat fixed;
+  isolation:isolate;
+}
+.band::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(90% 90% at 50% 50%,rgba(11,13,18,.32),rgba(11,13,18,.78))}
 .band h3{position:relative;z-index:2;font-weight:900;font-stretch:114%;text-transform:uppercase;font-size:clamp(38px,7vw,96px);line-height:.95;letter-spacing:-.01em;padding:0 20px;max-width:16ch}
 .band h3 b{color:var(--gold)}
-@media(prefers-reduced-motion:reduce){.band-copy{min-height:var(--band-h);padding:clamp(40px,8vh,80px) 20px}}
+@media(max-width:900px){.band{background-attachment:scroll}}
 
 /* ============ CONTACT ============ */
 .ct-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(30px,4vw,60px);align-items:start}
@@ -1101,12 +1102,7 @@ main,.nav-in,footer{transition:opacity .25s}
     </div>
   </div>
   <div class="band">
-    <div class="band-bg" aria-hidden="true">
-      <img src="Images/hot%20taste%20bg.jpg" alt="" loading="lazy" decoding="async">
-    </div>
-    <div class="band-copy">
-      <h3 class="rv" data-i18n-html="ab.band">Frisch. Heiß. <b>Echt ZOB.</b></h3>
-    </div>
+    <h3 class="rv" data-i18n-html="ab.band">Frisch. Heiß. <b>Echt ZOB.</b></h3>
   </div>
   <div class="sec">
     <div class="wrap">
