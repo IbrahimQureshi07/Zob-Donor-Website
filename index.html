@@ -551,14 +551,21 @@ a{color:inherit;text-decoration:none}
 @media(max-width:960px){.faq-grid{grid-template-columns:1fr}.faq-list{justify-content:flex-start}}
 
 /* ============ CONTACT ============ */
-.ct-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(30px,4vw,60px);align-items:start}
-.ct-cards{display:flex;flex-direction:column;gap:14px}
+.ct-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(30px,4vw,60px);align-items:stretch}
+.ct-cards{display:flex;flex-direction:column;gap:14px;height:100%}
+.ct-cards .ct-card{flex:1 1 0;min-height:0;display:flex;flex-direction:column;justify-content:center;padding:clamp(22px,2.4vw,28px) 26px}
+.ct-form--side{height:100%;display:flex;flex-direction:column}
+.ct-form--side .f-note{margin-top:auto}
+.ct-sec{padding-bottom:clamp(56px,7vw,88px)}
+.ct-map{margin-top:clamp(56px,7vw,88px)}
+.ct-map .mapbox{height:min(500px,58vh)}
 .ct-card{padding:26px;border:1px solid var(--line);border-radius:var(--r);background:linear-gradient(180deg,var(--panel),rgba(20,24,35,.4));transition:border-color .4s,transform .4s var(--ease)}
 .ct-card:hover{border-color:rgba(242,181,58,.3);transform:translateY(-3px)}
 .ct-card .lab{display:flex;align-items:center;gap:9px;font-size:11px;font-weight:900;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
 .ct-card .big{font-weight:800;font-size:17px;line-height:1.5}
 .ct-card .big a:hover{color:var(--gold)}
 .ct-card p{font-size:13.5px;color:var(--mut);margin:6px 0 14px}
+.ct-card .btn{align-self:flex-start;margin-top:auto}
 .ct-form{padding:clamp(28px,4vw,44px);border:1px solid var(--line2);border-radius:28px;background:linear-gradient(180deg,var(--panel2),var(--panel))}
 .ct-form h3{font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:clamp(26px,3vw,36px);margin-bottom:8px}
 .ct-form>p{color:var(--mut);font-size:14px;margin-bottom:28px}
@@ -1219,32 +1226,28 @@ main,.nav-in,footer{transition:opacity .25s}
       <p data-i18n="ct.sub">Wir freuen uns auf dich — direkt am ZOB in Passau.</p>
     </div>
   </div>
-  <div class="sec">
-    <div class="wrap ct-grid">
-      <div class="ct-cards">
-        <div class="ct-card rv">
-          <div class="lab"><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg><span data-i18n="ct.addrT">Adresse</span></div>
-          <div class="big">ZOB Döner<br>Dr.-Hans-Kapfinger-Straße 10<br>94032 Passau, Germany</div>
+  <div class="sec ct-sec">
+    <div class="wrap">
+      <div class="ct-grid">
+        <div class="ct-cards">
+          <div class="ct-card rv">
+            <div class="lab"><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg><span data-i18n="ct.addrT">Adresse</span></div>
+            <div class="big">ZOB Döner<br>Dr.-Hans-Kapfinger-Straße 10<br>94032 Passau, Germany</div>
+            <p data-i18n="ct.addrD">Direkt am ZOB — zentral, gut erreichbar, mit Präsenz vor Ort.</p>
+          </div>
+          <div class="ct-card rv" style="--d:.08s">
+            <div class="lab"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg><span data-i18n="ct.phoneT">Telefon</span></div>
+            <div class="big"><a href="tel:+4915906361242">+49 1590 6361242</a></div>
+            <p data-i18n="ct.phoneD">Bei Fragen oder Bestellungen — wir sind für dich da.</p>
+            <a class="btn btn-ghost btn-sm" href="tel:+4915906361242"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg><span data-i18n="loc.call">Jetzt anrufen</span></a>
+          </div>
+          <div class="ct-card rv" style="--d:.16s">
+            <div class="lab"><svg class="ic ic-f" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="ct.waT">WhatsApp</span></div>
+            <p data-i18n="ct.waD">Bestellung oder Frage? Schick uns direkt eine Nachricht — schnell, unkompliziert und ohne Wartezeit.</p>
+            <button class="btn btn-solid btn-sm" data-wa-generic><svg class="ic ic-f" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="ct.waOpen">WhatsApp öffnen</span></button>
+          </div>
         </div>
-        <div class="ct-card rv" style="--d:.08s">
-          <div class="lab"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg><span data-i18n="ct.phoneT">Telefon</span></div>
-          <div class="big"><a href="tel:+4915906361242">+49 1590 6361242</a></div>
-          <p data-i18n="ct.phoneD">Bei Fragen oder Bestellungen — wir sind für dich da.</p>
-          <a class="btn btn-ghost btn-sm" href="tel:+4915906361242"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg><span data-i18n="loc.call">Jetzt anrufen</span></a>
-        </div>
-        <div class="ct-card rv" style="--d:.16s">
-          <div class="lab"><svg class="ic ic-f" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="ct.waT">WhatsApp</span></div>
-          <p data-i18n="ct.waD">Bestellung oder Frage? Schick uns direkt eine Nachricht.</p>
-          <button class="btn btn-solid btn-sm" data-wa-generic><svg class="ic ic-f" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="ct.waOpen">WhatsApp öffnen</span></button>
-        </div>
-      </div>
-      <div>
-        <div class="mapbox rv" style="height:min(420px,52vh);margin-bottom:34px">
-          <div class="map-chip"><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>ZOB Döner · Passau</div>
-          <iframe title="Karte: ZOB Döner, Dr.-Hans-Kapfinger-Straße 10, 94032 Passau" loading="lazy" src="https://www.google.com/maps?q=Dr.-Hans-Kapfinger-Stra%C3%9Fe+10,+94032+Passau,+Germany&z=16&output=embed"></iframe>
-          <a class="btn btn-solid btn-sm map-btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Dr.-Hans-Kapfinger-Stra%C3%9Fe%2010%2C%2094032%20Passau%2C%20Germany"><span data-i18n="loc.open">In Google Maps öffnen</span></a>
-        </div>
-        <form class="ct-form rv" id="cform" novalidate>
+        <form class="ct-form ct-form--side rv" id="cform" style="--d:.1s" novalidate>
           <h3 data-i18n="ct.formH">Schreib uns.</h3>
           <p data-i18n="ct.formP">Fragen, Feedback oder eine größere Bestellung? Hinterlass uns eine Nachricht.</p>
           <div class="f-grid2">
@@ -1265,9 +1268,15 @@ main,.nav-in,footer{transition:opacity .25s}
           </div>
         </form>
       </div>
+      <div class="ct-map rv" style="--d:.16s">
+        <div class="mapbox">
+          <div class="map-chip"><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>ZOB Döner · Passau</div>
+          <iframe title="Karte: ZOB Döner, Dr.-Hans-Kapfinger-Straße 10, 94032 Passau" loading="lazy" src="https://www.google.com/maps?q=Dr.-Hans-Kapfinger-Stra%C3%9Fe+10,+94032+Passau,+Germany&z=16&output=embed"></iframe>
+          <a class="btn btn-solid btn-sm map-btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Dr.-Hans-Kapfinger-Stra%C3%9Fe%2010%2C%2094032%20Passau%2C%20Germany"><span data-i18n="loc.open">In Google Maps öffnen</span></a>
+        </div>
+      </div>
     </div>
   </div>
-  <div style="height:60px"></div>
 </section>
 </main>
 
@@ -1474,7 +1483,7 @@ const I18N={
  'menu.eyebrow':'Speisekarte','menu.h':'Die Karte.','menu.sub':'Döner, Boxen, Pizza & Pide — alles frisch zubereitet. Bestell bequem per WhatsApp und hol dir dein Essen ab.','menu.note':'Alle Preise in Euro, inkl. MwSt. Allergene & Zusatzstoffe auf Anfrage.','menu.add':'Hinzufügen','menu.details':'Details ansehen','menu.from':'ab','menu.items':'Gerichte','menu.sizes':'Unsere Pizzen gibt es in drei Größen: Ø 27 cm · Ø 36 cm · Ø 40 cm.','menu.extrasT':'Extras — Pizza','menu.extras':'Pro Extra: 1,00 € / 1,50 € / 2,00 € — Tomatensoße, Käse, Paprika, Zwiebeln, Salami, Putenfleisch, Sucuk, Champignons, Thunfisch, Schinken. Extra Wunschsoße 1,00 € · Extra Käse 1,50 €.','menu.dextra':'Extra Käse + 1,50 €',
  'ab.eyebrow':'Über uns','ab.h':'Über ZOB Döner.','ab.sub':'Ehrliches Street Food aus Passau.','ab.s1':'Unsere Haltung','ab.lead':'ZOB Döner steht für ehrliches Street Food, frische Zutaten und kräftigen Geschmack — mitten in Passau.','ab.p1':'Wir machen das, was wir selbst gern essen: Döner vom frisch belegten Spieß, knusprige Pizza, goldbraune Pide und Boxen, die satt machen. Kein Schnickschnack — dafür Handwerk, gute Zutaten und Rezepte, die einfach funktionieren.','ab.p2':'Ob schneller Snack zwischendurch oder das große Essen für die ganze Runde: Bei uns bekommst du klassische Street-Food-Favoriten, frisch zubereitet und mit Herz gemacht.','ab.band':'Frisch. Heiß. <b>Echt ZOB.</b>','ab.s2':'Woran wir glauben','ab.vh':'Unsere Werte','ab.v1t':'Unsere Philosophie','ab.v1d':'Gutes Essen braucht keine Tricks. Wir halten uns an die Basics: frische Zutaten, saubere Zubereitung und Portionen, die stimmen.','ab.v2t':'Frische Zutaten','ab.v2d':'Salat, Gemüse und Soßen werden frisch vorbereitet — jeden Tag, aufs Neue.','ab.v3t':'Unsere Küche','ab.v3d':'Vom Döner bis zur Pizza: Alles wird zubereitet, wenn du bestellst. Nicht früher — und nicht später.','ab.v4t':'Mitten in Passau','ab.v4d':'Direkt am ZOB in der Dr.-Hans-Kapfinger-Straße — leicht zu erreichen, egal woher du kommst.','ab.ctaH':'Hungry?','ab.ctaP':'Schau dir die Karte an und bestell dir dein Lieblingsgericht.','ab.ctaContact':'Kontakt aufnehmen',
  'faq.eyebrow':'FAQ','faq.h':'Häufige Fragen.','faq.sub':'Schnelle Antworten rund um Bestellung, Abholung und mehr.','faq.q1':'Wie kann ich bestellen?','faq.a1':'Am einfachsten per WhatsApp oder direkt vor Ort. Stell deine Bestellung im Menü zusammen und schick sie uns — wir bereiten alles frisch zu.','faq.q2':'Gibt es Lieferung?','faq.a2':'Aktuell holst du deine Bestellung bei uns am ZOB ab. So bleibt alles heiß und frisch.','faq.q3':'Wo findet ihr uns?','faq.a3':'Direkt am ZOB in der Dr.-Hans-Kapfinger-Straße 10, 94032 Passau — mittendrin und leicht zu finden.','faq.q4':'Welche Zahlungsmittel akzeptiert ihr?','faq.a4':'Bar und gängige Kartenzahlung vor Ort. Bei Fragen melde dich gern kurz bei uns.','faq.q5':'Habt ihr Allergie-Infos?','faq.a5':'Ja — Allergene und Zusatzstoffe nennen wir dir gerne auf Anfrage. Frag einfach beim Bestellen nach.','faq.formH':'Noch Fragen?','faq.formP':'Schreib uns — wir melden uns so schnell wie möglich.',
- 'ct.eyebrow':'Kontakt','ct.h':'Komm vorbei.','ct.sub':'Wir freuen uns auf dich — direkt am ZOB in Passau.','ct.addrT':'Adresse','ct.phoneT':'Telefon','ct.phoneD':'Bei Fragen oder Bestellungen — wir sind für dich da.','ct.waT':'WhatsApp','ct.waD':'Bestellung oder Frage? Schick uns direkt eine Nachricht.','ct.waOpen':'WhatsApp öffnen','ct.formH':'Schreib uns.','ct.formP':'Fragen, Feedback oder eine größere Bestellung? Hinterlass uns eine Nachricht.',
+ 'ct.eyebrow':'Kontakt','ct.h':'Komm vorbei.','ct.sub':'Wir freuen uns auf dich — direkt am ZOB in Passau.','ct.addrT':'Adresse','ct.addrD':'Direkt am ZOB — zentral, gut erreichbar, mit Präsenz vor Ort.','ct.phoneT':'Telefon','ct.phoneD':'Bei Fragen oder Bestellungen — wir sind für dich da.','ct.waT':'WhatsApp','ct.waD':'Bestellung oder Frage? Schick uns direkt eine Nachricht — schnell, unkompliziert und ohne Wartezeit.','ct.waOpen':'WhatsApp öffnen','ct.formH':'Schreib uns.','ct.formP':'Fragen, Feedback oder eine größere Bestellung? Hinterlass uns eine Nachricht.',
  'f.name':'Name *','f.email':'E-Mail *','f.phone':'Telefon (optional)','f.msg':'Nachricht *','f.send':'Nachricht senden','f.errName':'Bitte gib deinen Namen an.','f.errEmail':'Bitte gib eine gültige E-Mail-Adresse an.','f.errMsg':'Bitte schreib uns eine kurze Nachricht (min. 10 Zeichen).','f.note':'Hinweis: Der Versand wird erst mit angebundenem E-Mail-Service aktiv. Bis dahin erreichst du uns am schnellsten per Telefon oder WhatsApp.','f.ok1':'Danke, {name}!','f.ok2':'Deine Nachricht ist bereit — der E-Mail-Versand ist auf dieser Seite noch nicht angebunden. Ruf uns am besten kurz an oder schick uns deine Nachricht per WhatsApp.',
  'c.title':'Warenkorb','c.empty':'Dein Warenkorb ist leer.','c.emptyP':'Zeit für einen Döner — schau in die Karte.','c.go':'Speisekarte öffnen','c.sub':'Zwischensumme','c.total':'Gesamt','c.name':'Dein Name *','c.addr':'Adresse *','c.note':'Notiz (optional)','c.notePh':'z. B. ohne Zwiebeln, extra scharf …','c.wa':'Bestellung per WhatsApp senden','c.cont':'Weiter einkaufen','c.rm':'Artikel entfernen','c.clear':'Alles löschen',
  'm.size':'Größe','m.qty':'Menge','m.add':'In den Warenkorb','m.close':'Schließen',
@@ -1496,7 +1505,7 @@ const I18N={
  'menu.eyebrow':'Menu','menu.h':'The menu.','menu.sub':'Döner, boxes, pizza & pide — all freshly prepared. Order easily via WhatsApp and pick up your food.','menu.note':'All prices in euros, incl. VAT. Allergen information available on request.','menu.add':'Add','menu.details':'View details','menu.from':'from','menu.items':'items','menu.sizes':'Our pizzas come in three sizes: Ø 27 cm · Ø 36 cm · Ø 40 cm.','menu.extrasT':'Extras — Pizza','menu.extras':'Per extra: €1.00 / €1.50 / €2.00 — tomato sauce, cheese, peppers, onions, salami, turkey, sucuk, mushrooms, tuna, ham. Extra sauce of choice €1.00 · Extra cheese €1.50.','menu.dextra':'Extra cheese + €1.50',
  'ab.eyebrow':'About us','ab.h':'About ZOB Döner.','ab.sub':'Honest street food from Passau.','ab.s1':'Where we stand','ab.lead':'ZOB Döner stands for honest street food, fresh ingredients and bold flavour — right in the heart of Passau.','ab.p1':'We make the food we love to eat ourselves: döner from a freshly stocked spit, crispy pizza, golden-brown pide and boxes that fill you up. No gimmicks — just craftsmanship, good ingredients and recipes that simply work.','ab.p2':'Whether it\u2019s a quick snack in between or a big meal for the whole group: with us you get classic street-food favourites, freshly prepared and made with heart.','ab.band':'Fresh. Hot. <b>100% ZOB.</b>','ab.s2':'What we believe in','ab.vh':'Our values','ab.v1t':'Our philosophy','ab.v1d':'Good food doesn\u2019t need tricks. We stick to the basics: fresh ingredients, clean preparation and portions that deliver.','ab.v2t':'Fresh ingredients','ab.v2d':'Salad, vegetables and sauces are prepared fresh — every single day.','ab.v3t':'Our food','ab.v3d':'From döner to pizza: everything is prepared when you order. Not before — and not after.','ab.v4t':'In the heart of Passau','ab.v4d':'Right at the ZOB on Dr.-Hans-Kapfinger-Straße — easy to reach, wherever you\u2019re coming from.','ab.ctaH':'Hungry?','ab.ctaP':'Take a look at the menu and order your favourite dish.','ab.ctaContact':'Get in touch',
  'faq.eyebrow':'FAQ','faq.h':'Frequently asked questions.','faq.sub':'Quick answers about ordering, pickup and more.','faq.q1':'How can I order?','faq.a1':'Easiest via WhatsApp or right here in store. Build your order in the menu and send it to us — we prepare everything fresh.','faq.q2':'Do you deliver?','faq.a2':'Right now you pick up your order at our ZOB counter. That way everything stays hot and fresh.','faq.q3':'Where can we find you?','faq.a3':'Right at the ZOB on Dr.-Hans-Kapfinger-Straße 10, 94032 Passau — central and easy to find.','faq.q4':'Which payment methods do you accept?','faq.a4':'Cash and common card payments in store. Just ask us if you have any questions.','faq.q5':'Do you have allergen info?','faq.a5':'Yes — we are happy to tell you about allergens and additives on request. Just ask when you order.','faq.formH':'Still have questions?','faq.formP':'Write to us — we will get back to you as soon as we can.',
- 'ct.eyebrow':'Contact','ct.h':'Come on over.','ct.sub':'We look forward to seeing you — right at the ZOB in Passau.','ct.addrT':'Address','ct.phoneT':'Phone','ct.phoneD':'For questions or orders — we\u2019re here for you.','ct.waT':'WhatsApp','ct.waD':'Order or question? Send us a message directly.','ct.waOpen':'Open WhatsApp','ct.formH':'Write to us.','ct.formP':'Questions, feedback or a larger order? Leave us a message.',
+ 'ct.eyebrow':'Contact','ct.h':'Come on over.','ct.sub':'We look forward to seeing you — right at the ZOB in Passau.','ct.addrT':'Address','ct.addrD':'Right at the ZOB — central, easy to reach, with us on site.','ct.phoneT':'Phone','ct.phoneD':'For questions or orders — we\u2019re here for you.','ct.waT':'WhatsApp','ct.waD':'Order or question? Send us a message directly — fast, simple and with no waiting around.','ct.waOpen':'Open WhatsApp','ct.formH':'Write to us.','ct.formP':'Questions, feedback or a larger order? Leave us a message.',
  'f.name':'Name *','f.email':'Email *','f.phone':'Phone (optional)','f.msg':'Message *','f.send':'Send message','f.errName':'Please enter your name.','f.errEmail':'Please enter a valid email address.','f.errMsg':'Please write us a short message (min. 10 characters).','f.note':'Note: Sending will be activated once an email service is connected. Until then, the fastest way to reach us is by phone or WhatsApp.','f.ok1':'Thanks, {name}!','f.ok2':'Your message is ready — email sending isn\u2019t connected on this page yet. The quickest way is to call us or send your message via WhatsApp.',
  'c.title':'Cart','c.empty':'Your cart is empty.','c.emptyP':'Time for a döner — check out the menu.','c.go':'Open the menu','c.sub':'Subtotal','c.total':'Total','c.name':'Your name *','c.addr':'Address *','c.note':'Note (optional)','c.notePh':'e.g. no onions, extra spicy …','c.wa':'Send order on WhatsApp','c.cont':'Continue shopping','c.rm':'Remove item','c.clear':'Clear all',
  'm.size':'Size','m.qty':'Quantity','m.add':'Add to cart','m.close':'Close',
