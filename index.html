@@ -317,6 +317,35 @@ a{color:inherit;text-decoration:none}
   .car-viewport{scroll-behavior:auto}
 }
 
+/* ============ GALLERY STACK ============ */
+.gal-sec{padding-bottom:clamp(48px,7vw,90px);overflow:visible}
+.gal-sec .sec-head{margin-bottom:clamp(36px,5vw,56px)}
+.gal-stack{position:relative;display:flex;flex-direction:column;gap:0}
+.gal-card{
+  --gal-top:calc(var(--nav-h) + 22px);
+  position:sticky;top:var(--gal-top);z-index:var(--z,1);
+  height:min(70svh,640px);margin:0 0 clamp(24px,5vh,56px);
+  border-radius:28px;overflow:hidden;border:1px solid var(--line2);
+  background:#10141d;box-shadow:0 30px 70px rgba(0,0,0,.5);
+  transform-origin:50% 0%;will-change:transform;
+}
+.gal-card:last-child{margin-bottom:0}
+.gal-card img{width:100%;height:100%;max-width:none;object-fit:cover;object-position:center;display:block;filter:saturate(.97) contrast(1.04) brightness(.94)}
+.gal-card::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(11,13,18,.08) 0%,transparent 32%,rgba(11,13,18,.78) 100%)}
+.gal-cap{position:absolute;left:0;right:0;bottom:0;z-index:2;display:flex;align-items:flex-end;justify-content:space-between;gap:18px;padding:clamp(22px,3vw,34px);pointer-events:none}
+.gal-cap b{font-size:clamp(22px,3vw,34px);font-weight:900;font-stretch:112%;letter-spacing:.02em;text-transform:uppercase;line-height:1}
+.gal-cap span{font-size:12px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.gal-card.is-deep{border-color:rgba(242,181,58,.22)}
+@media(max-width:700px){
+  .gal-card{--gal-top:calc(var(--nav-h) + 12px);height:min(62svh,520px);border-radius:22px}
+  .gal-cap{padding:18px}
+  .gal-cap b{font-size:20px}
+}
+@media(prefers-reduced-motion:reduce){
+  .gal-card{position:relative;top:auto;height:auto;aspect-ratio:16/10;margin-bottom:16px;transform:none!important}
+  .gal-card:last-child{margin-bottom:0}
+}
+
 /* ============ FRESH SPLIT ============ */
 .fresh{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,100px);align-items:center}
 .fresh-img{position:relative;border-radius:28px;overflow:clip;aspect-ratio:4/5;border:1px solid var(--line)}
@@ -826,6 +855,38 @@ main,.nav-in,footer{transition:opacity .25s}
     </div>
   </div>
 
+  <div class="sec gal-sec">
+    <div class="wrap">
+      <div class="sec-head" style="text-align:center">
+        <span class="eyebrow rv" style="justify-content:center" data-i18n="gal.eyebrow">Galerie</span>
+        <h2 class="h2 rv" style="--d:.08s" data-i18n="gal.h">Einblicke.</h2>
+        <p class="rv" style="--d:.14s;margin-inline:auto" data-i18n="gal.sub">Küche, Theke und unsere Klassiker — frisch eingefangen bei ZOB Döner in Passau.</p>
+      </div>
+    </div>
+    <div class="wrap gal-stack" id="galStack" aria-label="ZOB Döner Galerie">
+      <figure class="gal-card" style="--z:1">
+        <img src="Images/gallery images/first.webp" alt="ZOB Döner Passau — Einblick 1" loading="lazy" decoding="async">
+        <figcaption class="gal-cap"><b class="num">01</b><span data-i18n="gal.t1">Einblicke</span></figcaption>
+      </figure>
+      <figure class="gal-card" style="--z:2">
+        <img src="Images/gallery images/second.webp" alt="ZOB Döner Passau — Einblick 2" loading="lazy" decoding="async">
+        <figcaption class="gal-cap"><b class="num">02</b><span data-i18n="gal.t2">Die Theke</span></figcaption>
+      </figure>
+      <figure class="gal-card" style="--z:3">
+        <img src="Images/gallery images/third.jpg" alt="ZOB Döner Passau — Einblick 3" loading="lazy" decoding="async">
+        <figcaption class="gal-cap"><b class="num">03</b><span data-i18n="gal.t3">Frisch zubereitet</span></figcaption>
+      </figure>
+      <figure class="gal-card" style="--z:4">
+        <img src="Images/gallery images/forth.jpg" alt="ZOB Döner Passau — Einblick 4" loading="lazy" decoding="async">
+        <figcaption class="gal-cap"><b class="num">04</b><span data-i18n="gal.t4">Unsere Klassiker</span></figcaption>
+      </figure>
+      <figure class="gal-card" style="--z:5">
+        <img src="Images/gallery images/fifth.webp" alt="ZOB Döner Passau — Einblick 5" loading="lazy" decoding="async">
+        <figcaption class="gal-cap"><b class="num">05</b><span data-i18n="gal.t5">Mitten in Passau</span></figcaption>
+      </figure>
+    </div>
+  </div>
+
   <div class="sec alt">
     <div class="wrap fresh">
       <div class="fresh-img rv-img rv"><img data-plx src="Images/salad.webp" alt="Frische Zutaten bei ZOB Döner" loading="lazy"></div>
@@ -1235,6 +1296,7 @@ const I18N={
  'intro.eyebrow':'Willkommen bei ZOB','intro.h':'Mehr als nur Döner.','intro.p1':'ZOB Döner bringt frisches Street Food mitten in Passau auf den Teller: knuspriges Brot, frisch geschnittener Salat und Fleisch direkt vom Spieß — dazu Pizza, goldbraune Pide und Boxen, die richtig satt machen.','intro.p2':'Ob schneller Snack zwischen zwei Terminen oder das große Essen für alle zusammen — bei uns gibt es handgemachte Küche zu fairen Preisen. Ehrlich zubereitet, ohne Schnickschnack.','intro.c1':'Frisch zubereitet','intro.c2':'Kräftig im Geschmack','intro.c3':'Faire Preise',
  'fav.eyebrow':'Signaturen','fav.h':'Unsere Favoriten','fav.sub':'Die Klassiker, die immer wieder bestellt werden — direkt aus unserer Theke.','fav.all':'Zur ganzen Speisekarte','fav.tag':'Signatur','fav.add':'In den Warenkorb',
  'cat.eyebrow':'Kategorien','cat.h':'Was darf\u2019s sein?','cat.sub':'Vier Kategorien, ein Versprechen: frisch, heiß und ehrlich.','cat.note':'Tipp: Alle Gerichte gibt es auch per WhatsApp zur Abholung.','cat.doner':'Döner','cat.box':'Box','cat.pizza':'Pizza','cat.pide':'Pide','cat.full':'Ganze Speisekarte öffnen','cat.prev':'Vorheriges Gericht','cat.next':'Nächstes Gericht',
+ 'gal.eyebrow':'Galerie','gal.h':'Einblicke.','gal.sub':'Küche, Theke und unsere Klassiker — frisch eingefangen bei ZOB Döner in Passau.','gal.t1':'Einblicke','gal.t2':'Die Theke','gal.t3':'Frisch zubereitet','gal.t4':'Unsere Klassiker','gal.t5':'Mitten in Passau',
  'fresh.eyebrow':'Frische','fresh.h':'Frisch auf den Teller.','fresh.p':'Salat frisch geschnitten, Soßen selbst angemacht, Brot außen knusprig und innen fluffig. Jede Bestellung wird erst zubereitet, wenn sie bei uns eingeht — heiß, frisch und mit Liebe zum Detail.','fresh.cta':'Mehr über uns',
  'why.eyebrow':'Warum ZOB','why.h':'Warum ZOB Döner?','why.c1t':'Frisch zubereitet','why.c1d':'Frische Zutaten und jedes Gericht, das erst zubereitet wird, wenn du es bestellst.','why.c2t':'Voller Geschmack','why.c2d':'Kräftige Soßen, gegrillte Aromen und Portionen, die wirklich satt machen.','why.c3t':'Mitten in Passau','why.c3d':'Direkt am ZOB gelegen — praktisch, schnell erreichbar, mitten in der Stadt.','why.c4t':'Schnell & einfach','why.c4d':'Unkompliziert per WhatsApp bestellen und bequem bei uns abholen.',
  'loc.eyebrow':'Finde uns','loc.h':'Dein ZOB. Mitten in Passau.','loc.route':'Route planen','loc.call':'Jetzt anrufen','loc.open':'In Google Maps öffnen',
@@ -1254,6 +1316,7 @@ const I18N={
  'intro.eyebrow':'Welcome to ZOB','intro.h':'More than just döner.','intro.p1':'ZOB Döner brings fresh street food to the heart of Passau: crispy bread, freshly cut salad and meat straight from the spit — plus pizza, golden-brown pide and boxes that really fill you up.','intro.p2':'Whether it\u2019s a quick snack between appointments or a big meal to share — we serve handmade food at fair prices. Honestly prepared, no gimmicks.','intro.c1':'Freshly prepared','intro.c2':'Bursting with flavour','intro.c3':'Fair prices',
  'fav.eyebrow':'Signatures','fav.h':'Our favourites','fav.sub':'The classics our guests keep coming back for — straight from our counter.','fav.all':'View the full menu','fav.tag':'Signature','fav.add':'Add to cart',
  'cat.eyebrow':'Categories','cat.h':'What will it be?','cat.sub':'Four categories, one promise: fresh, hot and honest.','cat.note':'Tip: every dish is also available via WhatsApp for pickup.','cat.doner':'Döner','cat.box':'Boxes','cat.pizza':'Pizza','cat.pide':'Pide','cat.full':'Open full menu','cat.prev':'Previous dish','cat.next':'Next dish',
+ 'gal.eyebrow':'Gallery','gal.h':'Inside ZOB.','gal.sub':'Kitchen, counter and our classics — captured fresh at ZOB Döner in Passau.','gal.t1':'Inside','gal.t2':'The counter','gal.t3':'Freshly made','gal.t4':'Our classics','gal.t5':'Right in Passau',
  'fresh.eyebrow':'Freshness','fresh.h':'Fresh on your plate.','fresh.p':'Salad freshly cut, sauces made in-house, bread crispy on the outside and fluffy inside. Every order is prepared the moment it comes in — hot, fresh and with care in every detail.','fresh.cta':'More about us',
  'why.eyebrow':'Why ZOB','why.h':'Why ZOB Döner?','why.c1t':'Freshly prepared','why.c1d':'Fresh ingredients and every dish prepared the moment you order it.','why.c2t':'Full of flavour','why.c2d':'Bold sauces, grilled flavours and portions that truly satisfy.','why.c3t':'Right in Passau','why.c3d':'Located right at the ZOB — convenient, easy to reach, in the middle of town.','why.c4t':'Fast & easy','why.c4d':'Order easily via WhatsApp and collect your food at your convenience.',
  'loc.eyebrow':'Find us','loc.h':'Your ZOB. Right in Passau.','loc.route':'Plan a route','loc.call':'Call now','loc.open':'Open in Google Maps',
@@ -1769,7 +1832,10 @@ function swap(page){
   window.scrollTo(0,0);
   refreshInds();
   typePageHeadline(page);
-  if(page==='home')startCar();else stopCar();
+  if(page==='home')startCar();else{
+    stopCar();
+    $$('#galStack .gal-card').forEach(c=>{c.style.transform='';c.style.filter='';c.classList.remove('is-deep')});
+  }
 }
 function go(page,opts={},push=true){
   if(animating||page===CUR){if(opts.cat)setTimeout(()=>scrollCat(opts.cat),300);return}
@@ -1844,6 +1910,23 @@ function observeReveals(){$$('.rv:not(.in),.rv-img:not(.in)').forEach(el=>io.obs
 /* ---------- PARALLAX ---------- */
 const plxEls=()=>$$('[data-plx]');
 let ticking=false;
+function updateGalStack(){
+  if(reduceMotion||CUR!=='home')return;
+  const cards=$$('#galStack .gal-card');
+  if(!cards.length)return;
+  const stickyTop=parseFloat(getComputedStyle(cards[0]).top)||96;
+  cards.forEach((card,i)=>{
+    const next=cards[i+1];
+    if(!next){card.style.transform='';card.classList.remove('is-deep');return}
+    const nr=next.getBoundingClientRect();
+    const progress=Math.min(1,Math.max(0,(stickyTop+28-nr.top)/(card.offsetHeight*.72||1)));
+    const scale=1-progress*.07;
+    const bright=1-progress*.18;
+    card.style.transform=`scale(${scale.toFixed(4)})`;
+    card.style.filter=`brightness(${bright.toFixed(3)})`;
+    card.classList.toggle('is-deep',progress>.35);
+  });
+}
 function onScroll(){
   if(ticking)return;ticking=true;
   requestAnimationFrame(()=>{
@@ -1865,6 +1948,7 @@ function onScroll(){
         const p=(r.top+r.height/2-innerHeight/2)/innerHeight;
         el.style.transform=`translateY(${(p*-7).toFixed(2)}%)`;
       });
+      updateGalStack();
     }
   });
 }
