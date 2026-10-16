@@ -509,16 +509,20 @@ a{color:inherit;text-decoration:none}
 
 /* ============ ABOUT ============ */
 .about-lead{font-size:clamp(24px,3vw,38px);font-weight:800;font-stretch:108%;line-height:1.25;letter-spacing:-.01em;max-width:900px}
+.about-lead.rev-words{gap:.12em .26em}
 .about-cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,70px);margin-top:44px}
 .about-cols p{color:var(--ink-dim)}
 @media(max-width:800px){.about-cols{grid-template-columns:1fr}}
 .v-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:54px}
 @media(max-width:760px){.v-grid{grid-template-columns:1fr}}
-.band{position:relative;min-height:62svh;display:grid;place-items:center;overflow:clip;text-align:center}
-.band img{position:absolute;inset:0;width:100%;height:118%;object-fit:cover;filter:saturate(.75) contrast(1.08) brightness(.5);will-change:transform}
-.band::after{content:"";position:absolute;inset:0;background:radial-gradient(90% 90% at 50% 50%,rgba(11,13,18,.35),rgba(11,13,18,.75))}
-.band h3{position:relative;z-index:2;font-weight:900;font-stretch:114%;text-transform:uppercase;font-size:clamp(38px,7vw,96px);line-height:.95;letter-spacing:-.01em;padding:0 20px}
+.band{--band-h:min(78svh,760px);position:relative;text-align:center}
+.band-bg{position:sticky;top:0;height:var(--band-h);z-index:0;overflow:hidden;background:#10141d}
+.band-bg img{width:100%;height:100%;max-width:none;object-fit:cover;object-position:center;display:block;filter:saturate(.88) contrast(1.06) brightness(.48)}
+.band-bg::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(90% 90% at 50% 50%,rgba(11,13,18,.32),rgba(11,13,18,.78))}
+.band-copy{position:relative;z-index:1;margin-top:calc(-1 * var(--band-h));min-height:calc(var(--band-h) + 42svh);display:grid;place-items:center;padding:clamp(48px,12vh,120px) 20px clamp(72px,16vh,140px)}
+.band h3{position:relative;z-index:2;font-weight:900;font-stretch:114%;text-transform:uppercase;font-size:clamp(38px,7vw,96px);line-height:.95;letter-spacing:-.01em;padding:0 20px;max-width:16ch}
 .band h3 b{color:var(--gold)}
+@media(prefers-reduced-motion:reduce){.band-copy{min-height:var(--band-h);padding:clamp(40px,8vh,80px) 20px}}
 
 /* ============ CONTACT ============ */
 .ct-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(30px,4vw,60px);align-items:start}
@@ -1089,7 +1093,7 @@ main,.nav-in,footer{transition:opacity .25s}
   <div class="sec">
     <div class="wrap">
       <span class="eyebrow rv" data-i18n="ab.s1">Unsere Geschichte — zum Selbstschreiben</span>
-      <p class="about-lead rv" style="--d:.08s;margin-top:24px" data-i18n="ab.lead">ZOB Döner steht für ehrliches Street Food, frische Zutaten und kräftigen Geschmack — mitten in Passau.</p>
+      <p class="about-lead" id="aboutLead" style="margin-top:24px" data-i18n="ab.lead">ZOB Döner steht für ehrliches Street Food, frische Zutaten und kräftigen Geschmack — mitten in Passau.</p>
       <div class="about-cols">
         <p class="lead rv" style="--d:.12s" data-i18n="ab.p1">Wir machen das, was wir selbst gern essen: Döner vom frisch belegten Spieß, knusprige Pizza, goldbraune Pide und Boxen, die satt machen. Kein Schnickschnack — dafür Handwerk, gute Zutaten und Rezepte, die einfach funktionieren.</p>
         <p class="lead mut rv" style="--d:.18s" data-i18n="ab.p2">Ob schneller Snack zwischendurch oder das große Essen für die ganze Runde: Bei uns bekommst du klassische Street-Food-Favoriten, frisch zubereitet und mit Herz gemacht.</p>
@@ -1097,8 +1101,12 @@ main,.nav-in,footer{transition:opacity .25s}
     </div>
   </div>
   <div class="band">
-    <img data-plx src="https://picsum.photos/seed/zob-band/1920/900.jpg" alt="Dönerspieß bei ZOB Döner Passau" loading="lazy">
-    <h3 class="rv" data-i18n-html="ab.band">Frisch. Heiß. <b>Echt ZOB.</b></h3>
+    <div class="band-bg" aria-hidden="true">
+      <img src="Images/hot%20taste%20bg.jpg" alt="" loading="lazy" decoding="async">
+    </div>
+    <div class="band-copy">
+      <h3 class="rv" data-i18n-html="ab.band">Frisch. Heiß. <b>Echt ZOB.</b></h3>
+    </div>
   </div>
   <div class="sec">
     <div class="wrap">
@@ -1747,6 +1755,55 @@ function refreshReviews(){
   }
 }
 
+/* ---------- ABOUT LEAD WORD REVEAL (same motion as reviews title) ---------- */
+let aboutWordsBound=false;
+function splitAboutLead(force){
+  const el=$('#aboutLead');if(!el)return;
+  const text=t('ab.lead');
+  el.setAttribute('aria-label',text);
+  if(reduceMotion){
+    el.textContent=text;
+    el.classList.remove('rev-words');
+    return;
+  }
+  const words=text.trim().split(/\s+/);
+  el.className='about-lead rev-words'+(el.classList.contains('go')&&!force?' go':'');
+  if(force)el.classList.remove('go');
+  el.innerHTML=words.map((w,i)=>`<span class="w"><i style="transition-delay:${(0.04+i*0.06).toFixed(2)}s">${w}</i></span>`).join('');
+}
+function playAboutWords(){
+  const el=$('#aboutLead');if(!el)return;
+  if(reduceMotion){el.textContent=t('ab.lead');return}
+  if(!el.classList.contains('rev-words'))splitAboutLead(true);
+  requestAnimationFrame(()=>el.classList.add('go'));
+}
+function bindAboutLead(){
+  if(aboutWordsBound)return;aboutWordsBound=true;
+  const el=$('#aboutLead');if(!el)return;
+  const ioAbout=new IntersectionObserver(es=>{
+    es.forEach(en=>{
+      if(en.isIntersecting){
+        playAboutWords();
+        ioAbout.unobserve(en.target);
+      }
+    });
+  },{threshold:.28});
+  ioAbout.observe(el);
+  requestAnimationFrame(()=>{
+    if(el.classList.contains('go')||!el.classList.contains('rev-words'))return;
+    const r=el.getBoundingClientRect();
+    if(r.top<innerHeight*.9&&r.bottom>40)playAboutWords();
+  });
+}
+function refreshAboutLead(){
+  splitAboutLead(true);
+  const el=$('#aboutLead');
+  if(el&&el.classList.contains('rev-words')){
+    const visible=el.getBoundingClientRect().top<innerHeight*.85&&el.getBoundingClientRect().bottom>0;
+    if(visible)playAboutWords();
+  }
+}
+
 /* ---------- CART UI ---------- */
 function renderCart(){
   const body=$('#drBody'),foot=$('#drFoot');
@@ -2030,6 +2087,14 @@ function swap(page){
     stopCar();stopRevAuto();
     $$('#galStack .gal-card').forEach(c=>{c.style.transform='';c.style.filter='';c.classList.remove('is-deep')});
   }
+  if(page==='about'){
+    requestAnimationFrame(()=>{
+      const el=$('#aboutLead');
+      if(!el||!el.classList.contains('rev-words')||el.classList.contains('go'))return;
+      const r=el.getBoundingClientRect();
+      if(r.top<innerHeight*.9&&r.bottom>40)playAboutWords();
+    });
+  }
 }
 function go(page,opts={},push=true){
   if(animating||page===CUR){if(opts.cat)setTimeout(()=>scrollCat(opts.cat),300);return}
@@ -2221,7 +2286,7 @@ function applyLang(){
   document.documentElement.lang=LANG;
   document.documentElement.dataset.lang=LANG;
   $$('[data-i18n]').forEach(el=>{
-    if(el.closest('#hero h1, .phero h1')||el.id==='revTitle')return;
+    if(el.closest('#hero h1, .phero h1')||el.id==='revTitle'||el.id==='aboutLead')return;
     el.textContent=t(el.dataset.i18n);
   });
   $$('[data-i18n-html]').forEach(el=>{el.innerHTML=t(el.dataset.i18nHtml)});
@@ -2232,6 +2297,7 @@ function applyLang(){
   typePageHeadline(CUR);
   syncCarAria();
   refreshReviews();
+  refreshAboutLead();
 }
 function setLang(l){
   if(l===LANG)return;
@@ -2281,6 +2347,8 @@ renderCatCarousel('doner');
 bindReviews();
 renderReview(0,false);
 splitRevTitle(true);
+splitAboutLead(true);
+bindAboutLead();
 observeReveals();
 onScroll();
 
