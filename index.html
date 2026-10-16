@@ -336,6 +336,12 @@ a{color:inherit;text-decoration:none}
 .gal-cap b{font-size:clamp(22px,3vw,34px);font-weight:900;font-stretch:112%;letter-spacing:.02em;text-transform:uppercase;line-height:1}
 .gal-cap span{font-size:12px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
 .gal-card.is-deep{border-color:rgba(242,181,58,.22)}
+/* Desktop framing — mobile crop already looks right */
+@media(min-width:701px){
+  .gal-card--1 img{object-position:center 58%}
+  .gal-card--2 img{object-position:center 12%}
+  .gal-card--5 img{object-fit:cover;object-position:center 48%}
+}
 @media(max-width:700px){
   .gal-card{--gal-top:calc(var(--nav-h) + 12px);height:min(62svh,520px);border-radius:22px}
   .gal-cap{padding:18px}
@@ -864,24 +870,24 @@ main,.nav-in,footer{transition:opacity .25s}
       </div>
     </div>
     <div class="wrap gal-stack" id="galStack" aria-label="ZOB Döner Galerie">
-      <figure class="gal-card" style="--z:1">
-        <img src="Images/gallery images/first.webp" alt="ZOB Döner Passau — Einblick 1" loading="lazy" decoding="async">
+      <figure class="gal-card gal-card--1" style="--z:1">
+        <img src="Images/gallery images/first.png" alt="ZOB Döner Passau — Einblick 1" loading="lazy" decoding="async">
         <figcaption class="gal-cap"><b class="num">01</b><span data-i18n="gal.t1">Einblicke</span></figcaption>
       </figure>
-      <figure class="gal-card" style="--z:2">
+      <figure class="gal-card gal-card--2" style="--z:2">
         <img src="Images/gallery images/second.webp" alt="ZOB Döner Passau — Einblick 2" loading="lazy" decoding="async">
         <figcaption class="gal-cap"><b class="num">02</b><span data-i18n="gal.t2">Die Theke</span></figcaption>
       </figure>
-      <figure class="gal-card" style="--z:3">
+      <figure class="gal-card gal-card--3" style="--z:3">
         <img src="Images/gallery images/third.jpg" alt="ZOB Döner Passau — Einblick 3" loading="lazy" decoding="async">
         <figcaption class="gal-cap"><b class="num">03</b><span data-i18n="gal.t3">Frisch zubereitet</span></figcaption>
       </figure>
-      <figure class="gal-card" style="--z:4">
+      <figure class="gal-card gal-card--4" style="--z:4">
         <img src="Images/gallery images/forth.jpg" alt="ZOB Döner Passau — Einblick 4" loading="lazy" decoding="async">
         <figcaption class="gal-cap"><b class="num">04</b><span data-i18n="gal.t4">Unsere Klassiker</span></figcaption>
       </figure>
-      <figure class="gal-card" style="--z:5">
-        <img src="Images/gallery images/fifth.webp" alt="ZOB Döner Passau — Einblick 5" loading="lazy" decoding="async">
+      <figure class="gal-card gal-card--5" style="--z:5">
+        <img src="Images/gallery images/fifth.webp?v=2" alt="ZOB Döner Passau — Pizza aus dem Ofen" loading="lazy" decoding="async">
         <figcaption class="gal-cap"><b class="num">05</b><span data-i18n="gal.t5">Mitten in Passau</span></figcaption>
       </figure>
     </div>
