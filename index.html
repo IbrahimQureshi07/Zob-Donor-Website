@@ -275,6 +275,48 @@ a{color:inherit;text-decoration:none}
 .strip button.active:hover .ic{transform:translateX(4px)}
 .strip-note{text-align:center;margin-top:22px;color:var(--mut);font-size:13.5px}
 
+/* ============ HOME CATEGORY CAROUSEL ============ */
+.cat-home .car-shell{position:relative;margin-top:clamp(36px,5vw,52px)}
+.car-viewport{overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;scroll-padding-inline:56px;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:12px 56px 22px;touch-action:pan-x}
+.car-viewport::-webkit-scrollbar{display:none}
+.car-track{display:flex;gap:16px;width:max-content;transition:opacity .35s var(--ease)}
+.car-card{flex:0 0 236px;scroll-snap-align:start;text-align:left;background:linear-gradient(180deg,var(--panel),rgba(20,24,35,.55));border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;color:inherit;transition:transform .45s var(--ease),border-color .45s,box-shadow .45s}
+.car-card:hover,.car-card:focus-visible{transform:translateY(-6px);border-color:rgba(242,181,58,.42);box-shadow:0 22px 44px rgba(0,0,0,.42)}
+.car-img{position:relative;aspect-ratio:5/4;display:block;overflow:hidden;background:#12151d}
+.car-img img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center;filter:saturate(.96) contrast(1.04) brightness(.94);transition:transform .8s var(--ease)}
+.car-card:hover .car-img img,.car-card:focus-visible .car-img img{transform:scale(1.07)}
+.car-img::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,transparent 40%,rgba(11,13,18,.72));pointer-events:none}
+.car-kicker{position:absolute;left:12px;bottom:12px;z-index:2;background:var(--gold);color:#181206;font-size:10px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;padding:5px 10px;border-radius:999px}
+.car-body{padding:15px 16px 16px;display:flex;flex-direction:column;gap:8px;flex:1;min-height:0}
+.car-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.car-name{font-size:15.5px;font-weight:800;letter-spacing:-.01em;line-height:1.25}
+.car-price{color:var(--gold);font-weight:900;font-size:14.5px;white-space:nowrap}
+.car-desc{font-size:12.5px;color:var(--mut);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.car-more{margin-top:auto;padding-top:6px;font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);opacity:.85}
+.car-btn{position:absolute;top:42%;z-index:3;width:46px;height:46px;border-radius:50%;border:1px solid var(--line2);background:rgba(14,17,25,.88);color:var(--ink);display:grid;place-items:center;backdrop-filter:blur(10px);transition:border-color .3s,color .3s,background .3s,transform .3s var(--ease)}
+.car-btn .ic{width:16px;height:16px}
+.car-btn.prev{left:4px}
+.car-btn.next{right:4px}
+.car-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(242,181,58,.1);transform:scale(1.06)}
+.car-shell.is-static .car-btn{opacity:0;pointer-events:none}
+.cat-cta{display:flex;justify-content:center;margin-top:clamp(28px,4vw,40px)}
+@media(max-width:900px){
+  .car-card{flex-basis:220px}
+  .car-btn{width:42px;height:42px}
+}
+@media(max-width:700px){
+  .car-viewport{padding:10px 4px 8px}
+  .car-card{flex:0 0 min(74vw,250px)}
+  .car-shell{padding-bottom:58px}
+  .car-btn{top:auto;bottom:0}
+  .car-btn.prev{left:calc(50% - 58px)}
+  .car-btn.next{right:calc(50% - 58px)}
+  .car-shell.is-static{padding-bottom:0}
+}
+@media(prefers-reduced-motion:reduce){
+  .car-viewport{scroll-behavior:auto}
+}
+
 /* ============ FRESH SPLIT ============ */
 .fresh{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,100px);align-items:center}
 .fresh-img{position:relative;border-radius:28px;overflow:clip;aspect-ratio:4/5;border:1px solid var(--line)}
@@ -574,6 +616,8 @@ main,.nav-in,footer{transition:opacity .25s}
     <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
     <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
     <symbol id="i-arr" viewBox="0 0 24 24"><path d="M4 12h15m0 0-6-6m6 6-6 6"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></symbol>
     <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
     <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2Z"/></symbol>
     <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
@@ -754,7 +798,7 @@ main,.nav-in,footer{transition:opacity .25s}
     </div>
   </div>
 
-  <div class="sec">
+  <div class="sec cat-home">
     <div class="wrap">
       <div class="sec-head" style="text-align:center">
         <span class="eyebrow rv" style="justify-content:center" data-i18n="cat.eyebrow">Kategorien</span>
@@ -763,12 +807,22 @@ main,.nav-in,footer{transition:opacity .25s}
       </div>
       <div class="strip rv" id="strip" style="--d:.2s">
         <span class="ind" aria-hidden="true"></span>
-        <button data-cat-go="doner" class="active"><i>01</i><span data-i18n="cat.doner">Döner</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></button>
-        <button data-cat-go="box"><i>02</i><span data-i18n="cat.box">Box</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></button>
-        <button data-cat-go="pizza"><i>03</i><span data-i18n="cat.pizza">Pizza</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></button>
-        <button data-cat-go="pide"><i>04</i><span data-i18n="cat.pide">Pide</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></button>
+        <button type="button" data-cat-pick="doner" class="active"><i>01</i><span data-i18n="cat.doner">Döner</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></button>
+        <button type="button" data-cat-pick="box"><i>02</i><span data-i18n="cat.box">Box</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></button>
+        <button type="button" data-cat-pick="pizza"><i>03</i><span data-i18n="cat.pizza">Pizza</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></button>
+        <button type="button" data-cat-pick="pide"><i>04</i><span data-i18n="cat.pide">Pide</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></button>
+      </div>
+      <div class="car-shell rv" id="carShell" style="--d:.22s">
+        <button type="button" class="car-btn prev" data-car="prev" aria-label="Vorheriges Gericht"><svg class="ic" aria-hidden="true"><use href="#i-left"/></svg></button>
+        <div class="car-viewport" id="catView" tabindex="0" aria-roledescription="carousel">
+          <div class="car-track" id="catTrack"></div>
+        </div>
+        <button type="button" class="car-btn next" data-car="next" aria-label="Nächstes Gericht"><svg class="ic" aria-hidden="true"><use href="#i-right"/></svg></button>
       </div>
       <p class="strip-note rv" style="--d:.26s" data-i18n="cat.note">Tipp: Alle Gerichte gibt es auch per WhatsApp zur Abholung.</p>
+      <div class="cat-cta rv" style="--d:.3s">
+        <button type="button" class="btn btn-solid" id="catFullBtn" data-cat-go="doner"><span data-i18n="cat.full">Ganze Speisekarte öffnen</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></button>
+      </div>
     </div>
   </div>
 
@@ -1180,7 +1234,7 @@ const I18N={
  'hero.eyebrow':'ZOB Döner · Passau','hero.t1':'Dein Döner.','hero.t2':'Dein Moment.','hero.sub':'Frisch. Herzhaft. Mitten in Passau — Döner, Box, Pizza & Pide, handgemacht und heiß auf den Teller.','hero.cta1':'Jetzt bestellen','hero.cta2':'Speisekarte ansehen','hero.scroll':'Scroll',
  'intro.eyebrow':'Willkommen bei ZOB','intro.h':'Mehr als nur Döner.','intro.p1':'ZOB Döner bringt frisches Street Food mitten in Passau auf den Teller: knuspriges Brot, frisch geschnittener Salat und Fleisch direkt vom Spieß — dazu Pizza, goldbraune Pide und Boxen, die richtig satt machen.','intro.p2':'Ob schneller Snack zwischen zwei Terminen oder das große Essen für alle zusammen — bei uns gibt es handgemachte Küche zu fairen Preisen. Ehrlich zubereitet, ohne Schnickschnack.','intro.c1':'Frisch zubereitet','intro.c2':'Kräftig im Geschmack','intro.c3':'Faire Preise',
  'fav.eyebrow':'Signaturen','fav.h':'Unsere Favoriten','fav.sub':'Die Klassiker, die immer wieder bestellt werden — direkt aus unserer Theke.','fav.all':'Zur ganzen Speisekarte','fav.tag':'Signatur','fav.add':'In den Warenkorb',
- 'cat.eyebrow':'Kategorien','cat.h':'Was darf\u2019s sein?','cat.sub':'Vier Kategorien, ein Versprechen: frisch, heiß und ehrlich.','cat.note':'Tipp: Alle Gerichte gibt es auch per WhatsApp zur Abholung.','cat.doner':'Döner','cat.box':'Box','cat.pizza':'Pizza','cat.pide':'Pide',
+ 'cat.eyebrow':'Kategorien','cat.h':'Was darf\u2019s sein?','cat.sub':'Vier Kategorien, ein Versprechen: frisch, heiß und ehrlich.','cat.note':'Tipp: Alle Gerichte gibt es auch per WhatsApp zur Abholung.','cat.doner':'Döner','cat.box':'Box','cat.pizza':'Pizza','cat.pide':'Pide','cat.full':'Ganze Speisekarte öffnen','cat.prev':'Vorheriges Gericht','cat.next':'Nächstes Gericht',
  'fresh.eyebrow':'Frische','fresh.h':'Frisch auf den Teller.','fresh.p':'Salat frisch geschnitten, Soßen selbst angemacht, Brot außen knusprig und innen fluffig. Jede Bestellung wird erst zubereitet, wenn sie bei uns eingeht — heiß, frisch und mit Liebe zum Detail.','fresh.cta':'Mehr über uns',
  'why.eyebrow':'Warum ZOB','why.h':'Warum ZOB Döner?','why.c1t':'Frisch zubereitet','why.c1d':'Frische Zutaten und jedes Gericht, das erst zubereitet wird, wenn du es bestellst.','why.c2t':'Voller Geschmack','why.c2d':'Kräftige Soßen, gegrillte Aromen und Portionen, die wirklich satt machen.','why.c3t':'Mitten in Passau','why.c3d':'Direkt am ZOB gelegen — praktisch, schnell erreichbar, mitten in der Stadt.','why.c4t':'Schnell & einfach','why.c4d':'Unkompliziert per WhatsApp bestellen und bequem bei uns abholen.',
  'loc.eyebrow':'Finde uns','loc.h':'Dein ZOB. Mitten in Passau.','loc.route':'Route planen','loc.call':'Jetzt anrufen','loc.open':'In Google Maps öffnen',
@@ -1199,7 +1253,7 @@ const I18N={
  'hero.eyebrow':'ZOB Döner · Passau','hero.t1':'Your döner.','hero.t2':'Your moment.','hero.sub':'Fresh. Hearty. Right in the heart of Passau — döner, boxes, pizza & pide, handmade and served hot.','hero.cta1':'Order now','hero.cta2':'View the menu','hero.scroll':'Scroll',
  'intro.eyebrow':'Welcome to ZOB','intro.h':'More than just döner.','intro.p1':'ZOB Döner brings fresh street food to the heart of Passau: crispy bread, freshly cut salad and meat straight from the spit — plus pizza, golden-brown pide and boxes that really fill you up.','intro.p2':'Whether it\u2019s a quick snack between appointments or a big meal to share — we serve handmade food at fair prices. Honestly prepared, no gimmicks.','intro.c1':'Freshly prepared','intro.c2':'Bursting with flavour','intro.c3':'Fair prices',
  'fav.eyebrow':'Signatures','fav.h':'Our favourites','fav.sub':'The classics our guests keep coming back for — straight from our counter.','fav.all':'View the full menu','fav.tag':'Signature','fav.add':'Add to cart',
- 'cat.eyebrow':'Categories','cat.h':'What will it be?','cat.sub':'Four categories, one promise: fresh, hot and honest.','cat.note':'Tip: every dish is also available via WhatsApp for pickup.','cat.doner':'Döner','cat.box':'Boxes','cat.pizza':'Pizza','cat.pide':'Pide',
+ 'cat.eyebrow':'Categories','cat.h':'What will it be?','cat.sub':'Four categories, one promise: fresh, hot and honest.','cat.note':'Tip: every dish is also available via WhatsApp for pickup.','cat.doner':'Döner','cat.box':'Boxes','cat.pizza':'Pizza','cat.pide':'Pide','cat.full':'Open full menu','cat.prev':'Previous dish','cat.next':'Next dish',
  'fresh.eyebrow':'Freshness','fresh.h':'Fresh on your plate.','fresh.p':'Salad freshly cut, sauces made in-house, bread crispy on the outside and fluffy inside. Every order is prepared the moment it comes in — hot, fresh and with care in every detail.','fresh.cta':'More about us',
  'why.eyebrow':'Why ZOB','why.h':'Why ZOB Döner?','why.c1t':'Freshly prepared','why.c1d':'Fresh ingredients and every dish prepared the moment you order it.','why.c2t':'Full of flavour','why.c2d':'Bold sauces, grilled flavours and portions that truly satisfy.','why.c3t':'Right in Passau','why.c3d':'Located right at the ZOB — convenient, easy to reach, in the middle of town.','why.c4t':'Fast & easy','why.c4d':'Order easily via WhatsApp and collect your food at your convenience.',
  'loc.eyebrow':'Find us','loc.h':'Your ZOB. Right in Passau.','loc.route':'Plan a route','loc.call':'Call now','loc.open':'Open in Google Maps',
@@ -1348,6 +1402,95 @@ function renderFavs(){
   $('#favGrid').innerHTML=FAVS.map((id,i)=>favCard(ALL[id]).replace('class="f-card rv"',`class="f-card rv" style="--d:${i*.07}s"`)).join('');
   observeReveals();
   bindAddButtons();
+}
+
+/* ---------- HOME CATEGORY CAROUSEL ---------- */
+const CAT_FALLBACK={doner:'Images/doner-kebab.jpg',box:'Images/Halloumi-Box.jpg',pizza:'Images/doner-pizza.jpg',pide:'Images/Sucuk-Pide.jpg'};
+const ITEM_FALLBACK={d3:'Images/Fleisch Kebab.jpg'};
+let carCat='doner',carTimer=null,carPaused=false,carBound=false;
+function carImg(it,catId){return it.img||ITEM_FALLBACK[it.id]||CAT_FALLBACK[catId]||imgSrc(it,640,520)}
+function carCard(it,catId){
+  const cat=CATS.find(c=>c.id===catId);
+  const label=cat?(LANG==='en'?cat.en:cat.de):'';
+  return `<button type="button" class="car-card" data-open="${it.id}" aria-label="${it.n} — ${t('menu.details')}">
+    <span class="car-img"><img loading="lazy" src="${carImg(it,catId)}" alt="${it.n} — ZOB Döner Passau"><span class="car-kicker">${label}</span></span>
+    <span class="car-body"><span class="car-top"><span class="car-name">${it.n}</span><span class="car-price num">${priceLabel(it)}</span></span><span class="car-desc">${desc(it.d)}</span><span class="car-more">${t('menu.details')}</span></span>
+  </button>`;
+}
+function syncCarAria(){
+  const p=$('[data-car="prev"]'),n=$('[data-car="next"]'),view=$('#catView');
+  if(p)p.setAttribute('aria-label',t('cat.prev'));
+  if(n)n.setAttribute('aria-label',t('cat.next'));
+  if(view)view.setAttribute('aria-label',t('cat.h'));
+}
+function carStep(){
+  const card=$('#catTrack .car-card');if(!card)return 252;
+  const gap=parseFloat(getComputedStyle($('#catTrack')).gap)||16;
+  return card.getBoundingClientRect().width+gap;
+}
+function updateCarBtns(){
+  const view=$('#catView'),shell=$('#carShell');if(!view||!shell)return;
+  shell.classList.toggle('is-static',view.scrollWidth<=view.clientWidth+8);
+}
+function carGo(dir){
+  const view=$('#catView');if(!view)return;
+  const step=carStep();
+  const max=Math.max(0,view.scrollWidth-view.clientWidth);
+  if(max<8)return;
+  let left=view.scrollLeft+dir*step;
+  if(dir>0&&view.scrollLeft>=max-12)left=0;
+  else if(dir<0&&view.scrollLeft<=12)left=max;
+  view.scrollTo({left,behavior:reduceMotion?'auto':'smooth'});
+}
+function stopCar(){if(carTimer){clearInterval(carTimer);carTimer=null}}
+function startCar(){
+  stopCar();
+  if(reduceMotion||CUR!=='home')return;
+  carTimer=setInterval(()=>{
+    if(carPaused||document.hidden)return;
+    if($('#pmodal')&&$('#pmodal').classList.contains('open'))return;
+    const view=$('#catView');if(!view)return;
+    const r=view.getBoundingClientRect();
+    if(r.bottom<80||r.top>innerHeight-80)return;
+    if(view.scrollWidth<=view.clientWidth+8)return;
+    carGo(1);
+  },3400);
+}
+function renderCatCarousel(catId){
+  const cat=CATS.find(c=>c.id===catId)||CATS[0];
+  carCat=cat.id;
+  const track=$('#catTrack'),view=$('#catView'),full=$('#catFullBtn');
+  if(!track)return;
+  track.style.opacity='0';
+  track.innerHTML=cat.items.map(it=>carCard(it,cat.id)).join('');
+  if(full)full.setAttribute('data-cat-go',cat.id);
+  if(view)view.scrollLeft=0;
+  syncCarAria();
+  requestAnimationFrame(()=>{
+    track.style.opacity='1';
+    updateCarBtns();
+  });
+  startCar();
+}
+function bindCatCarousel(){
+  if(carBound)return;carBound=true;
+  const shell=$('#carShell'),view=$('#catView');
+  if(!shell||!view)return;
+  const pause=()=>{carPaused=true};
+  const resume=()=>{carPaused=false};
+  shell.addEventListener('mouseenter',pause);
+  shell.addEventListener('mouseleave',resume);
+  shell.addEventListener('focusin',pause);
+  shell.addEventListener('focusout',e=>{if(!shell.contains(e.relatedTarget))resume()});
+  view.addEventListener('pointerdown',pause);
+  view.addEventListener('pointerup',resume);
+  view.addEventListener('pointercancel',resume);
+  view.addEventListener('scroll',updateCarBtns,{passive:true});
+  view.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'){e.preventDefault();carGo(1)}
+    else if(e.key==='ArrowLeft'){e.preventDefault();carGo(-1)}
+  });
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden&&CUR==='home')startCar()});
 }
 
 /* ---------- CART UI ---------- */
@@ -1562,6 +1705,7 @@ function openModal(id){
   }
   updatePm();
   $('#pmodal').classList.add('open');document.body.classList.add('lock');
+  carPaused=true;
   $('#pmMinus').focus();
 }
 function updatePm(){
@@ -1572,6 +1716,7 @@ function updatePm(){
 function closeModal(id){
   $$('.modal.open').forEach(m=>m.classList.remove('open'));
   document.body.classList.remove('lock');
+  carPaused=false;
 }
  $('#pmMinus').addEventListener('click',()=>{pm.q=Math.max(1,pm.q-1);updatePm()});
  $('#pmPlus').addEventListener('click',()=>{pm.q=Math.min(20,pm.q+1);updatePm()});
@@ -1591,12 +1736,14 @@ document.addEventListener('click',e=>{
 },true);
 document.addEventListener('click',e=>{
   if(e._zobCartHandled||closestFrom(e,'[data-add],[data-inc],[data-dec],[data-rm],[data-clear-cart]'))return;
+  const carNav=closestFrom(e,'[data-car]');
+  if(carNav){e.preventDefault();carGo(carNav.getAttribute('data-car')==='next'?1:-1);return}
   const open=closestFrom(e,'[data-open]');
   if(open){openModal(open.getAttribute('data-open'));return}
   const sz=closestFrom(e,'[data-size]');
   if(sz){pm.s=+sz.getAttribute('data-size');$$('#sizeRow button').forEach(b=>b.classList.toggle('sel',b===sz));updatePm();return}
   const catGo=closestFrom(e,'[data-cat-go]');
-  if(catGo){go('menu',{cat:catGo.getAttribute('data-cat-go')});return}
+  if(catGo){e.preventDefault();go('menu',{cat:catGo.getAttribute('data-cat-go')});return}
   const nav=closestFrom(e,'[data-nav]');
   if(nav){e.preventDefault();go(nav.getAttribute('data-nav'));closeMobileMenu();return}
   const soc=closestFrom(e,'[data-social]');
@@ -1622,6 +1769,7 @@ function swap(page){
   window.scrollTo(0,0);
   refreshInds();
   typePageHeadline(page);
+  if(page==='home')startCar();else stopCar();
 }
 function go(page,opts={},push=true){
   if(animating||page===CUR){if(opts.cat)setTimeout(()=>scrollCat(opts.cat),300);return}
@@ -1656,14 +1804,15 @@ function refreshInds(){
   setInd($('#catbar'),$('#catbar .cat-pill.active'));
   setInd($('#strip'),$('#strip button.active'));
 }
-window.addEventListener('resize',refreshInds);
+window.addEventListener('resize',()=>{refreshInds();updateCarBtns()});
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(refreshInds);
 
 /* home strip -> navigate */
  $('#strip').addEventListener('click',e=>{
-  const b=e.target.closest('button');if(!b)return;
+  const b=e.target.closest('button[data-cat-pick]');if(!b)return;
   $$('#strip button').forEach(x=>x.classList.toggle('active',x===b));
   setInd($('#strip'),b);
+  renderCatCarousel(b.getAttribute('data-cat-pick'));
 });
 
 /* sticky bar clicks are handled via delegation (data-scroll-cat) */
@@ -1803,6 +1952,7 @@ function applyLang(){
   $('#ordNote').placeholder=t('c.notePh');
   $('#cartBtn').setAttribute('aria-label',`${t('c.title')} (${cartCount()})`);
   typePageHeadline(CUR);
+  syncCarAria();
 }
 function setLang(l){
   if(l===LANG)return;
@@ -1811,7 +1961,7 @@ function setLang(l){
   document.documentElement.classList.add('i18n');
   setTimeout(()=>{
     applyLang();
-    renderFavs();renderMenuPage();watchCats();renderCart();
+    renderFavs();renderMenuPage();watchCats();renderCart();renderCatCarousel(carCat);
     document.title=TITLES[LANG][CUR];
     closeModal();closeLangs();closeMobileMenu();
     requestAnimationFrame(()=>document.documentElement.classList.remove('i18n'));
@@ -1847,6 +1997,8 @@ renderFavs();
 renderMenuPage();
 watchCats();
 renderCart();
+bindCatCarousel();
+renderCatCarousel('doner');
 observeReveals();
 onScroll();
 
@@ -1863,6 +2015,7 @@ window.addEventListener('load',()=>{
     revealHero();
     setTimeout(()=>$('#loader').remove(),1000);
     refreshInds();
+    updateCarBtns();
   },1450);
 });
 setTimeout(()=>{ // fallback if load already fired
