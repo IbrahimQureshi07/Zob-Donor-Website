@@ -502,7 +502,7 @@ a{color:inherit;text-decoration:none}
 @media(max-width:640px){.catbar-wrap{top:74px;padding:6px 0}.cat-sec{scroll-margin-top:130px}.m-item{gap:14px}.m-thumb{width:86px;height:86px}.m-name{min-width:0;overflow:hidden}}
 
 /* ============ CTA BANNER ============ */
-.cta-banner{position:relative;border:1px solid var(--line2);border-radius:30px;padding:clamp(44px,6vw,76px);text-align:center;overflow:clip;background:radial-gradient(120% 160% at 50% -20%,rgba(242,181,58,.14),transparent 55%),linear-gradient(180deg,var(--panel2),var(--panel))}
+.cta-banner{position:relative;border:1px solid var(--line2);border-radius:30px;padding:clamp(56px,8vw,96px) clamp(28px,5vw,56px);text-align:center;overflow:clip;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(120% 160% at 50% -20%,rgba(242,181,58,.14),transparent 55%),linear-gradient(180deg,var(--panel2),var(--panel))}
 .cta-banner .h2{margin-bottom:16px}
 .cta-banner p{max-width:480px;margin:0 auto 34px;color:var(--ink-dim)}
 .cta-banner .hero-cta{justify-content:center;margin-top:0}
@@ -526,6 +526,29 @@ a{color:inherit;text-decoration:none}
 .band h3{position:relative;z-index:2;font-weight:900;font-stretch:114%;text-transform:uppercase;font-size:clamp(38px,7vw,96px);line-height:.95;letter-spacing:-.01em;padding:0 20px;max-width:16ch}
 .band h3 b{color:var(--gold)}
 @media(max-width:900px){.band{background-attachment:scroll}}
+
+/* ============ ABOUT FAQ + FORM ============ */
+.faq-sec{position:relative;overflow:clip;isolation:isolate;border-block:1px solid var(--line);background:radial-gradient(90% 70% at 8% 0%,rgba(242,181,58,.1),transparent 55%),radial-gradient(70% 60% at 96% 100%,rgba(58,84,148,.08),transparent 52%),linear-gradient(180deg,rgba(243,238,226,.028),transparent 42%),var(--bg2)}
+.faq-sec::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.35;background-image:radial-gradient(rgba(243,238,226,.07) 1px,transparent 1px);background-size:22px 22px;mask-image:linear-gradient(180deg,transparent,black 18%,black 82%,transparent)}
+.faq-sec>.wrap{position:relative;z-index:1}
+.faq-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,5vw,64px);align-items:stretch}
+.faq-col{display:flex;flex-direction:column;min-height:0}
+.faq-col .sec-head{margin-bottom:clamp(22px,3vw,32px)}
+.faq-col .sec-head p{margin-inline:0;max-width:36ch}
+.faq-list{flex:1;display:flex;flex-direction:column;gap:12px;justify-content:space-between}
+.faq-item{border:1px solid var(--line);border-radius:18px;background:rgba(14,17,25,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);overflow:hidden;transition:border-color .35s var(--ease),box-shadow .35s}
+.faq-item.open{border-color:rgba(242,181,58,.38);box-shadow:0 16px 40px rgba(0,0,0,.28)}
+.faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 20px;text-align:left;font-weight:800;font-size:15.5px;letter-spacing:-.01em;color:var(--ink)}
+.faq-q .ic{width:16px;height:16px;flex:none;color:var(--gold);transition:transform .35s var(--ease)}
+.faq-item.open .faq-q .ic{transform:rotate(45deg)}
+.faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s var(--ease)}
+.faq-item.open .faq-a{grid-template-rows:1fr}
+.faq-a>div{overflow:hidden;min-height:0}
+.faq-a p{padding:0 20px 18px;color:var(--ink-dim);font-size:14.5px;line-height:1.65}
+.faq-form.ct-form{height:100%;display:flex;flex-direction:column}
+.faq-form.ct-form .fld textarea{min-height:100px}
+.faq-form.ct-form .f-note{margin-top:auto;padding-top:12px}
+@media(max-width:960px){.faq-grid{grid-template-columns:1fr}.faq-list{justify-content:flex-start}}
 
 /* ============ CONTACT ============ */
 .ct-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(30px,4vw,60px);align-items:start}
@@ -1117,7 +1140,62 @@ main,.nav-in,footer{transition:opacity .25s}
       </div>
     </div>
   </div>
-  <div class="sec" style="padding-top:0">
+  <div class="sec faq-sec" id="faqSec">
+    <div class="wrap">
+      <div class="faq-grid">
+        <div class="faq-col rv" style="--d:.08s">
+          <div class="sec-head">
+            <span class="eyebrow" data-i18n="faq.eyebrow">FAQ</span>
+            <h2 class="h2" data-i18n="faq.h">Häufige Fragen.</h2>
+            <p data-i18n="faq.sub">Schnelle Antworten rund um Bestellung, Abholung und mehr.</p>
+          </div>
+          <div class="faq-list" id="faqList">
+            <div class="faq-item open">
+              <button type="button" class="faq-q" aria-expanded="true"><span data-i18n="faq.q1">Wie kann ich bestellen?</span><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></button>
+              <div class="faq-a"><div><p data-i18n="faq.a1">Am einfachsten per WhatsApp oder direkt vor Ort. Stell deine Bestellung im Menü zusammen und schick sie uns — wir bereiten alles frisch zu.</p></div></div>
+            </div>
+            <div class="faq-item">
+              <button type="button" class="faq-q" aria-expanded="false"><span data-i18n="faq.q2">Gibt es Lieferung?</span><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></button>
+              <div class="faq-a"><div><p data-i18n="faq.a2">Aktuell holst du deine Bestellung bei uns am ZOB ab. So bleibt alles heiß und frisch.</p></div></div>
+            </div>
+            <div class="faq-item">
+              <button type="button" class="faq-q" aria-expanded="false"><span data-i18n="faq.q3">Wo findet ihr uns?</span><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></button>
+              <div class="faq-a"><div><p data-i18n="faq.a3">Direkt am ZOB in der Dr.-Hans-Kapfinger-Straße 10, 94032 Passau — mittendrin und leicht zu finden.</p></div></div>
+            </div>
+            <div class="faq-item">
+              <button type="button" class="faq-q" aria-expanded="false"><span data-i18n="faq.q4">Welche Zahlungsmittel akzeptiert ihr?</span><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></button>
+              <div class="faq-a"><div><p data-i18n="faq.a4">Bar und gängige Kartenzahlung vor Ort. Bei Fragen melde dich gern kurz bei uns.</p></div></div>
+            </div>
+            <div class="faq-item">
+              <button type="button" class="faq-q" aria-expanded="false"><span data-i18n="faq.q5">Habt ihr Allergie-Infos?</span><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></button>
+              <div class="faq-a"><div><p data-i18n="faq.a5">Ja — Allergene und Zusatzstoffe nennen wir dir gerne auf Anfrage. Frag einfach beim Bestellen nach.</p></div></div>
+            </div>
+          </div>
+        </div>
+        <form class="ct-form faq-form rv" id="abForm" style="--d:.14s" novalidate>
+          <h3 data-i18n="faq.formH">Noch Fragen?</h3>
+          <p data-i18n="faq.formP">Schreib uns — wir melden uns so schnell wie möglich.</p>
+          <div class="f-grid2">
+            <label class="fld"><span data-i18n="f.name">Name *</span><input type="text" id="afName" autocomplete="name"><em class="f-err" id="aeName"></em></label>
+            <label class="fld"><span data-i18n="f.email">E-Mail *</span><input type="email" id="afEmail" autocomplete="email"><em class="f-err" id="aeEmail"></em></label>
+          </div>
+          <label class="fld"><span data-i18n="f.phone">Telefon (optional)</span><input type="tel" id="afPhone" autocomplete="tel"></label>
+          <label class="fld"><span data-i18n="f.msg">Nachricht *</span><textarea id="afMsg"></textarea><em class="f-err" id="aeMsg"></em></label>
+          <button class="btn btn-solid btn-w100" type="submit"><span data-i18n="f.send">Nachricht senden</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></button>
+          <p class="f-note" data-i18n="f.note">Hinweis: Der Versand wird erst mit angebundenem E-Mail-Service aktiv. Bis dahin erreichst du uns am schnellsten per Telefon oder WhatsApp.</p>
+          <div class="f-ok" id="abFormOk">
+            <b id="abOkTitle">Danke!</b>
+            <p data-i18n="f.ok2">Deine Nachricht ist bereit — der E-Mail-Versand ist auf dieser Seite noch nicht angebunden. Ruf uns am besten kurz an oder schick uns deine Nachricht per WhatsApp.</p>
+            <div class="loc-btns">
+              <a class="btn btn-solid btn-sm" href="tel:+4915906361242"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg><span data-i18n="loc.call">Jetzt anrufen</span></a>
+              <button type="button" class="btn btn-ghost btn-sm" data-wa-generic><svg class="ic ic-f" aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="ct.waOpen">WhatsApp öffnen</span></button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="sec">
     <div class="wrap">
       <div class="cta-banner rv">
         <h2 class="h2" data-i18n="ab.ctaH">Hungry?</h2>
@@ -1395,6 +1473,7 @@ const I18N={
  'cta.h':'Appetit bekommen?','cta.p':'Stell deine Bestellung zusammen und schick sie uns direkt per WhatsApp — wir bereiten alles frisch für dich vor.','cta.menu':'Zur Speisekarte',
  'menu.eyebrow':'Speisekarte','menu.h':'Die Karte.','menu.sub':'Döner, Boxen, Pizza & Pide — alles frisch zubereitet. Bestell bequem per WhatsApp und hol dir dein Essen ab.','menu.note':'Alle Preise in Euro, inkl. MwSt. Allergene & Zusatzstoffe auf Anfrage.','menu.add':'Hinzufügen','menu.details':'Details ansehen','menu.from':'ab','menu.items':'Gerichte','menu.sizes':'Unsere Pizzen gibt es in drei Größen: Ø 27 cm · Ø 36 cm · Ø 40 cm.','menu.extrasT':'Extras — Pizza','menu.extras':'Pro Extra: 1,00 € / 1,50 € / 2,00 € — Tomatensoße, Käse, Paprika, Zwiebeln, Salami, Putenfleisch, Sucuk, Champignons, Thunfisch, Schinken. Extra Wunschsoße 1,00 € · Extra Käse 1,50 €.','menu.dextra':'Extra Käse + 1,50 €',
  'ab.eyebrow':'Über uns','ab.h':'Über ZOB Döner.','ab.sub':'Ehrliches Street Food aus Passau.','ab.s1':'Unsere Haltung','ab.lead':'ZOB Döner steht für ehrliches Street Food, frische Zutaten und kräftigen Geschmack — mitten in Passau.','ab.p1':'Wir machen das, was wir selbst gern essen: Döner vom frisch belegten Spieß, knusprige Pizza, goldbraune Pide und Boxen, die satt machen. Kein Schnickschnack — dafür Handwerk, gute Zutaten und Rezepte, die einfach funktionieren.','ab.p2':'Ob schneller Snack zwischendurch oder das große Essen für die ganze Runde: Bei uns bekommst du klassische Street-Food-Favoriten, frisch zubereitet und mit Herz gemacht.','ab.band':'Frisch. Heiß. <b>Echt ZOB.</b>','ab.s2':'Woran wir glauben','ab.vh':'Unsere Werte','ab.v1t':'Unsere Philosophie','ab.v1d':'Gutes Essen braucht keine Tricks. Wir halten uns an die Basics: frische Zutaten, saubere Zubereitung und Portionen, die stimmen.','ab.v2t':'Frische Zutaten','ab.v2d':'Salat, Gemüse und Soßen werden frisch vorbereitet — jeden Tag, aufs Neue.','ab.v3t':'Unsere Küche','ab.v3d':'Vom Döner bis zur Pizza: Alles wird zubereitet, wenn du bestellst. Nicht früher — und nicht später.','ab.v4t':'Mitten in Passau','ab.v4d':'Direkt am ZOB in der Dr.-Hans-Kapfinger-Straße — leicht zu erreichen, egal woher du kommst.','ab.ctaH':'Hungry?','ab.ctaP':'Schau dir die Karte an und bestell dir dein Lieblingsgericht.','ab.ctaContact':'Kontakt aufnehmen',
+ 'faq.eyebrow':'FAQ','faq.h':'Häufige Fragen.','faq.sub':'Schnelle Antworten rund um Bestellung, Abholung und mehr.','faq.q1':'Wie kann ich bestellen?','faq.a1':'Am einfachsten per WhatsApp oder direkt vor Ort. Stell deine Bestellung im Menü zusammen und schick sie uns — wir bereiten alles frisch zu.','faq.q2':'Gibt es Lieferung?','faq.a2':'Aktuell holst du deine Bestellung bei uns am ZOB ab. So bleibt alles heiß und frisch.','faq.q3':'Wo findet ihr uns?','faq.a3':'Direkt am ZOB in der Dr.-Hans-Kapfinger-Straße 10, 94032 Passau — mittendrin und leicht zu finden.','faq.q4':'Welche Zahlungsmittel akzeptiert ihr?','faq.a4':'Bar und gängige Kartenzahlung vor Ort. Bei Fragen melde dich gern kurz bei uns.','faq.q5':'Habt ihr Allergie-Infos?','faq.a5':'Ja — Allergene und Zusatzstoffe nennen wir dir gerne auf Anfrage. Frag einfach beim Bestellen nach.','faq.formH':'Noch Fragen?','faq.formP':'Schreib uns — wir melden uns so schnell wie möglich.',
  'ct.eyebrow':'Kontakt','ct.h':'Komm vorbei.','ct.sub':'Wir freuen uns auf dich — direkt am ZOB in Passau.','ct.addrT':'Adresse','ct.phoneT':'Telefon','ct.phoneD':'Bei Fragen oder Bestellungen — wir sind für dich da.','ct.waT':'WhatsApp','ct.waD':'Bestellung oder Frage? Schick uns direkt eine Nachricht.','ct.waOpen':'WhatsApp öffnen','ct.formH':'Schreib uns.','ct.formP':'Fragen, Feedback oder eine größere Bestellung? Hinterlass uns eine Nachricht.',
  'f.name':'Name *','f.email':'E-Mail *','f.phone':'Telefon (optional)','f.msg':'Nachricht *','f.send':'Nachricht senden','f.errName':'Bitte gib deinen Namen an.','f.errEmail':'Bitte gib eine gültige E-Mail-Adresse an.','f.errMsg':'Bitte schreib uns eine kurze Nachricht (min. 10 Zeichen).','f.note':'Hinweis: Der Versand wird erst mit angebundenem E-Mail-Service aktiv. Bis dahin erreichst du uns am schnellsten per Telefon oder WhatsApp.','f.ok1':'Danke, {name}!','f.ok2':'Deine Nachricht ist bereit — der E-Mail-Versand ist auf dieser Seite noch nicht angebunden. Ruf uns am besten kurz an oder schick uns deine Nachricht per WhatsApp.',
  'c.title':'Warenkorb','c.empty':'Dein Warenkorb ist leer.','c.emptyP':'Zeit für einen Döner — schau in die Karte.','c.go':'Speisekarte öffnen','c.sub':'Zwischensumme','c.total':'Gesamt','c.name':'Dein Name *','c.addr':'Adresse *','c.note':'Notiz (optional)','c.notePh':'z. B. ohne Zwiebeln, extra scharf …','c.wa':'Bestellung per WhatsApp senden','c.cont':'Weiter einkaufen','c.rm':'Artikel entfernen','c.clear':'Alles löschen',
@@ -1416,6 +1495,7 @@ const I18N={
  'cta.h':'Feeling hungry?','cta.p':'Put your order together and send it to us directly via WhatsApp — we\u2019ll prepare everything fresh for you.','cta.menu':'Go to the menu',
  'menu.eyebrow':'Menu','menu.h':'The menu.','menu.sub':'Döner, boxes, pizza & pide — all freshly prepared. Order easily via WhatsApp and pick up your food.','menu.note':'All prices in euros, incl. VAT. Allergen information available on request.','menu.add':'Add','menu.details':'View details','menu.from':'from','menu.items':'items','menu.sizes':'Our pizzas come in three sizes: Ø 27 cm · Ø 36 cm · Ø 40 cm.','menu.extrasT':'Extras — Pizza','menu.extras':'Per extra: €1.00 / €1.50 / €2.00 — tomato sauce, cheese, peppers, onions, salami, turkey, sucuk, mushrooms, tuna, ham. Extra sauce of choice €1.00 · Extra cheese €1.50.','menu.dextra':'Extra cheese + €1.50',
  'ab.eyebrow':'About us','ab.h':'About ZOB Döner.','ab.sub':'Honest street food from Passau.','ab.s1':'Where we stand','ab.lead':'ZOB Döner stands for honest street food, fresh ingredients and bold flavour — right in the heart of Passau.','ab.p1':'We make the food we love to eat ourselves: döner from a freshly stocked spit, crispy pizza, golden-brown pide and boxes that fill you up. No gimmicks — just craftsmanship, good ingredients and recipes that simply work.','ab.p2':'Whether it\u2019s a quick snack in between or a big meal for the whole group: with us you get classic street-food favourites, freshly prepared and made with heart.','ab.band':'Fresh. Hot. <b>100% ZOB.</b>','ab.s2':'What we believe in','ab.vh':'Our values','ab.v1t':'Our philosophy','ab.v1d':'Good food doesn\u2019t need tricks. We stick to the basics: fresh ingredients, clean preparation and portions that deliver.','ab.v2t':'Fresh ingredients','ab.v2d':'Salad, vegetables and sauces are prepared fresh — every single day.','ab.v3t':'Our food','ab.v3d':'From döner to pizza: everything is prepared when you order. Not before — and not after.','ab.v4t':'In the heart of Passau','ab.v4d':'Right at the ZOB on Dr.-Hans-Kapfinger-Straße — easy to reach, wherever you\u2019re coming from.','ab.ctaH':'Hungry?','ab.ctaP':'Take a look at the menu and order your favourite dish.','ab.ctaContact':'Get in touch',
+ 'faq.eyebrow':'FAQ','faq.h':'Frequently asked questions.','faq.sub':'Quick answers about ordering, pickup and more.','faq.q1':'How can I order?','faq.a1':'Easiest via WhatsApp or right here in store. Build your order in the menu and send it to us — we prepare everything fresh.','faq.q2':'Do you deliver?','faq.a2':'Right now you pick up your order at our ZOB counter. That way everything stays hot and fresh.','faq.q3':'Where can we find you?','faq.a3':'Right at the ZOB on Dr.-Hans-Kapfinger-Straße 10, 94032 Passau — central and easy to find.','faq.q4':'Which payment methods do you accept?','faq.a4':'Cash and common card payments in store. Just ask us if you have any questions.','faq.q5':'Do you have allergen info?','faq.a5':'Yes — we are happy to tell you about allergens and additives on request. Just ask when you order.','faq.formH':'Still have questions?','faq.formP':'Write to us — we will get back to you as soon as we can.',
  'ct.eyebrow':'Contact','ct.h':'Come on over.','ct.sub':'We look forward to seeing you — right at the ZOB in Passau.','ct.addrT':'Address','ct.phoneT':'Phone','ct.phoneD':'For questions or orders — we\u2019re here for you.','ct.waT':'WhatsApp','ct.waD':'Order or question? Send us a message directly.','ct.waOpen':'Open WhatsApp','ct.formH':'Write to us.','ct.formP':'Questions, feedback or a larger order? Leave us a message.',
  'f.name':'Name *','f.email':'Email *','f.phone':'Phone (optional)','f.msg':'Message *','f.send':'Send message','f.errName':'Please enter your name.','f.errEmail':'Please enter a valid email address.','f.errMsg':'Please write us a short message (min. 10 characters).','f.note':'Note: Sending will be activated once an email service is connected. Until then, the fastest way to reach us is by phone or WhatsApp.','f.ok1':'Thanks, {name}!','f.ok2':'Your message is ready — email sending isn\u2019t connected on this page yet. The quickest way is to call us or send your message via WhatsApp.',
  'c.title':'Cart','c.empty':'Your cart is empty.','c.emptyP':'Time for a döner — check out the menu.','c.go':'Open the menu','c.sub':'Subtotal','c.total':'Total','c.name':'Your name *','c.addr':'Address *','c.note':'Note (optional)','c.notePh':'e.g. no onions, extra spicy …','c.wa':'Send order on WhatsApp','c.cont':'Continue shopping','c.rm':'Remove item','c.clear':'Clear all',
@@ -2312,14 +2392,34 @@ function setLang(l){
   },190);
 }
 
+/* ---------- FAQ ACCORDION ---------- */
+function bindFaq(){
+  const root=$('#faqList');if(!root||root.dataset.bound)return;
+  root.dataset.bound='1';
+  root.addEventListener('click',e=>{
+    const btn=e.target.closest('.faq-q');if(!btn||!root.contains(btn))return;
+    const item=btn.closest('.faq-item');if(!item)return;
+    const willOpen=!item.classList.contains('open');
+    root.querySelectorAll('.faq-item.open').forEach(i=>{
+      i.classList.remove('open');
+      const b=i.querySelector('.faq-q');if(b)b.setAttribute('aria-expanded','false');
+    });
+    if(willOpen){
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded','true');
+    }
+  });
+}
+
 /* ---------- CONTACT FORM ---------- */
 function setErr(input,errEl,msg){
   const fld=input.closest('.fld');
   fld.classList.toggle('err',!!msg);
   if(msg)errEl.textContent=msg;
 }
-['fName','fEmail','fMsg'].forEach(id=>$('#'+id).addEventListener('input',e=>setErr(e.target,e.target.closest('.fld').querySelector('.f-err'),'')));
- $('#cform').addEventListener('submit',e=>{
+['fName','fEmail','fMsg'].forEach(id=>{const el=$('#'+id);if(el)el.addEventListener('input',e=>setErr(e.target,e.target.closest('.fld').querySelector('.f-err'),''))});
+const cform=$('#cform');
+if(cform)cform.addEventListener('submit',e=>{
   e.preventDefault();
   const name=$('#fName').value.trim(),email=$('#fEmail').value.trim(),msg=$('#fMsg').value.trim();
   let ok=true;
@@ -2330,6 +2430,21 @@ function setErr(input,errEl,msg){
   $('#okTitle').textContent=t('f.ok1').replace('{name}',name.split(' ')[0]);
   $('#formOk').classList.add('show');
   $$('#cform .fld, #cform .f-grid2, #cform > .btn, #cform > .f-note').forEach(el=>el.style.display='none');
+  toast(t('f.send')+' ✓');
+});
+['afName','afEmail','afMsg'].forEach(id=>{const el=$('#'+id);if(el)el.addEventListener('input',e=>setErr(e.target,e.target.closest('.fld').querySelector('.f-err'),''))});
+const abForm=$('#abForm');
+if(abForm)abForm.addEventListener('submit',e=>{
+  e.preventDefault();
+  const name=$('#afName').value.trim(),email=$('#afEmail').value.trim(),msg=$('#afMsg').value.trim();
+  let ok=true;
+  if(name.length<2){setErr($('#afName'),$('#aeName'),t('f.errName'));ok=false}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){setErr($('#afEmail'),$('#aeEmail'),t('f.errEmail'));ok=false}
+  if(msg.length<10){setErr($('#afMsg'),$('#aeMsg'),t('f.errMsg'));ok=false}
+  if(!ok)return;
+  $('#abOkTitle').textContent=t('f.ok1').replace('{name}',name.split(' ')[0]);
+  $('#abFormOk').classList.add('show');
+  $$('#abForm .fld, #abForm .f-grid2, #abForm > .btn, #abForm > .f-note').forEach(el=>el.style.display='none');
   toast(t('f.send')+' ✓');
 });
 
@@ -2347,6 +2462,7 @@ renderReview(0,false);
 splitRevTitle(true);
 splitAboutLead(true);
 bindAboutLead();
+bindFaq();
 observeReveals();
 onScroll();
 
