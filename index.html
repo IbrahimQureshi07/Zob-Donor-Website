@@ -713,8 +713,12 @@ footer{background:#080a0e;border-top:1px solid var(--line);padding-top:clamp(70p
 @media(max-width:560px){.ft-grid{grid-template-columns:1fr}}
 
 /* ============ LEGAL MODAL ============ */
-.legal-card{width:min(460px,100%)}
-.legal-card .pm-body p{font-size:14px}
+.legal-card{width:min(560px,100%)}
+.legal-body{display:flex;flex-direction:column;gap:12px;margin-top:10px;color:var(--ink-dim);font-size:14px;line-height:1.65}
+.legal-body h4{color:var(--ink);font-size:12.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin:6px 0 0}
+.legal-body a{color:var(--gold);font-weight:700}
+.legal-body ul{padding-left:1.15em;display:flex;flex-direction:column;gap:6px;margin:0}
+.legal-body li{padding-left:2px}
 
 /* ============ REVEAL / I18N FADE ============ */
 .rv{opacity:0;transform:translateY(30px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0s)}
@@ -1406,8 +1410,8 @@ main,.nav-in,footer{transition:opacity .25s}
   <div class="modal-card legal-card">
     <div class="pm-body">
       <h3 id="lTitle" style="padding-right:0"></h3>
-      <p class="pm-desc" data-i18n="l.ph">Platzhalter — Die rechtlichen Angaben des Betreibers werden an dieser Stelle ergänzt.</p>
-      <button class="btn btn-ghost btn-sm" data-close-modal style="margin-top:20px"><span data-i18n="m.close">Schließen</span></button>
+      <div class="legal-body" id="lBody"></div>
+      <button class="btn btn-ghost btn-sm" data-close-modal style="margin-top:22px"><span data-i18n="m.close">Schließen</span></button>
     </div>
   </div>
 </div>
@@ -1507,7 +1511,7 @@ const I18N={
  'm.size':'Größe','m.qty':'Menge','m.add':'In den Warenkorb','m.close':'Schließen',
  't.added':'Zum Warenkorb hinzugefügt','t.soon':'{n} folgt in Kürze.','t.errName':'Bitte gib deinen Namen an.','t.errAddr':'Bitte gib deine Adresse an.','t.cleared':'Warenkorb geleert',
  'wa.hello':'Hallo ZOB Döner,','wa.intro':'ich möchte gerne folgende Bestellung aufgeben:','wa.total':'Gesamt','wa.name':'Name','wa.addr':'Adresse','wa.note':'Notiz','wa.thanks':'Vielen Dank!','wa.generic':'Hallo ZOB Döner!',
- 'fo.tag':'Frischer Geschmack. Mitten in Passau.','fo.nav':'Navigation','fo.contact':'Kontakt','fo.hours':'Bestellung','fo.rights':'Alle Rechte vorbehalten.','l.imp':'Impressum','l.priv':'Datenschutz','l.ph':'Platzhalter — Die rechtlichen Angaben des Betreibers werden an dieser Stelle ergänzt.'},
+ 'fo.tag':'Frischer Geschmack. Mitten in Passau.','fo.nav':'Navigation','fo.contact':'Kontakt','fo.hours':'Bestellung','fo.rights':'Alle Rechte vorbehalten.','l.imp':'Impressum','l.priv':'Datenschutz'},
  en:{'a.skip':'Skip to content','l.sub':'Passau · Fresh Street Food','brand.sub':'Döner · Passau','nav.home':'Home','nav.menu':'Menu','nav.about':'About us','nav.contact':'Contact','nav.order':'Order now','m.lang':'Language',
  'hero.eyebrow':'ZOB Döner · Passau','hero.t1':'Your döner.','hero.t2':'Your moment.','hero.sub':'Fresh. Hearty. Right in the heart of Passau — döner, boxes, pizza & pide, handmade and served hot.','hero.cta1':'Order now','hero.cta2':'View the menu','hero.scroll':'Scroll',
  'intro.eyebrow':'Welcome to ZOB','intro.h':'More than just döner.','intro.p1':'ZOB Döner brings fresh street food to the heart of Passau: crispy bread, freshly cut salad and meat straight from the spit — plus pizza, golden-brown pide and boxes that really fill you up.','intro.p2':'Whether it\u2019s a quick snack between appointments or a big meal to share — we serve handmade food at fair prices. Honestly prepared, no gimmicks.','intro.c1':'Freshly prepared','intro.c2':'Bursting with flavour','intro.c3':'Fair prices',
@@ -1529,7 +1533,17 @@ const I18N={
  'm.size':'Size','m.qty':'Quantity','m.add':'Add to cart','m.close':'Close',
  't.added':'Added to your cart','t.soon':'{n} is coming soon.','t.errName':'Please enter your name.','t.errAddr':'Please enter your address.','t.cleared':'Cart cleared',
  'wa.hello':'Hello ZOB Döner,','wa.intro':'I would like to order from ZOB Döner:','wa.total':'Total','wa.name':'Name','wa.addr':'Address','wa.note':'Note','wa.thanks':'Thank you!','wa.generic':'Hello ZOB Döner!',
- 'fo.tag':'Fresh flavour. Right in Passau.','fo.nav':'Navigation','fo.contact':'Contact','fo.hours':'Ordering','fo.rights':'All rights reserved.','l.imp':'Imprint','l.priv':'Privacy','l.ph':'Placeholder — Legal information provided by the owner will be added here.'}
+ 'fo.tag':'Fresh flavour. Right in Passau.','fo.nav':'Navigation','fo.contact':'Contact','fo.hours':'Ordering','fo.rights':'All rights reserved.','l.imp':'Imprint','l.priv':'Privacy'}
+};
+const LEGAL={
+ de:{
+  imp:`<h4>Angaben zum Betrieb</h4><p><b>ZOB Döner</b><br>Im Zentralen Omnibusbahnhof (ZOB)<br>Dr.-Hans-Kapfinger-Straße 10<br>94032 Passau, Germany</p><h4>Kontakt</h4><p>Telefon: <a href="tel:+4915906361242">+49 1590 6361242</a><br>WhatsApp-Bestellungen und Anfragen über die auf der Website angegebenen Kontaktwege.</p><h4>Öffnungszeiten</h4><ul><li>Sonntag–Donnerstag: 11:00–23:00 Uhr</li><li>Freitag–Samstag: 11:00–05:00 Uhr</li><li>Feiertage: 11:00–22:00 Uhr</li></ul><h4>Hinweis</h4><p>Die hier genannten Angaben basieren auf öffentlich verfügbaren Informationen zum Standort ZOB Döner Passau. Weitergehende betreiberbezogene Angaben (z.&nbsp;B. vollständiger Name des Verantwortlichen oder USt-IdNr.) können auf Anfrage telefonisch ergänzt bzw. bestätigt werden.</p>`,
+  priv:`<h4>Verantwortliche Stelle</h4><p><b>ZOB Döner</b><br>Dr.-Hans-Kapfinger-Straße 10, 94032 Passau<br>Telefon: <a href="tel:+4915906361242">+49 1590 6361242</a></p><h4>Welche Daten wir verarbeiten</h4><ul><li><b>Kontaktformular:</b> Name, E-Mail, optional Telefon und Nachricht. Der E-Mail-Versand ist derzeit noch nicht angebunden; bis dahin erreichen Sie uns am schnellsten per Telefon oder WhatsApp.</li><li><b>WhatsApp:</b> Wenn Sie uns über WhatsApp kontaktieren, gelten zusätzlich die Datenschutzbestimmungen von WhatsApp/Meta.</li><li><b>Google Maps:</b> Auf der Website ist eine Karte eingebunden. Dabei kann Google Daten (z.&nbsp;B. IP-Adresse) verarbeiten. Details: Richtlinien von Google.</li><li><b>Lokale Speicherung:</b> Spracheinstellung und Warenkorb können im Browser (localStorage) gespeichert werden, damit die Seite für Sie komfortabler funktioniert.</li></ul><h4>Cookies &amp; Tracking</h4><p>Diese Website setzt keine eigenen Marketing- oder Analytics-Cookies ein. Externe Dienste (Google Maps, WhatsApp) können eigene Technologien nutzen.</p><h4>Ihre Rechte</h4><p>Sie können Auskunft, Berichtigung oder Löschung Sie betreffender Daten verlangen — melden Sie sich dazu bitte telefonisch unter <a href="tel:+4915906361242">+49 1590 6361242</a>.</p>`
+ },
+ en:{
+  imp:`<h4>Business details</h4><p><b>ZOB Döner</b><br>At the Central Bus Station (ZOB)<br>Dr.-Hans-Kapfinger-Straße 10<br>94032 Passau, Germany</p><h4>Contact</h4><p>Phone: <a href="tel:+4915906361242">+49 1590 6361242</a><br>WhatsApp orders and enquiries via the contact options shown on this website.</p><h4>Opening hours</h4><ul><li>Sunday–Thursday: 11:00 AM – 11:00 PM</li><li>Friday–Saturday: 11:00 AM – 5:00 AM</li><li>Public holidays: 11:00 AM – 10:00 PM</li></ul><h4>Note</h4><p>The details above are based on publicly available information for ZOB Döner in Passau. Further operator details (e.g. the full name of the responsible person or VAT ID) can be confirmed or added on request by phone.</p>`,
+  priv:`<h4>Controller</h4><p><b>ZOB Döner</b><br>Dr.-Hans-Kapfinger-Straße 10, 94032 Passau<br>Phone: <a href="tel:+4915906361242">+49 1590 6361242</a></p><h4>What data we process</h4><ul><li><b>Contact form:</b> name, email, optional phone and message. Email sending is not connected yet; until then the fastest way to reach us is by phone or WhatsApp.</li><li><b>WhatsApp:</b> if you contact us via WhatsApp, WhatsApp/Meta privacy terms also apply.</li><li><b>Google Maps:</b> a map is embedded on this site. Google may process data such as your IP address. See Google policies for details.</li><li><b>Local storage:</b> language preference and cart contents may be stored in your browser (localStorage) to make the site work more smoothly for you.</li></ul><h4>Cookies &amp; tracking</h4><p>This website does not use its own marketing or analytics cookies. External services (Google Maps, WhatsApp) may use their own technologies.</p><h4>Your rights</h4><p>You may request access to, correction of, or deletion of your personal data — please contact us by phone at <a href="tel:+4915906361242">+49 1590 6361242</a>.</p>`
+ }
 };
 const TITLES={de:{home:'ZOB Döner — Passau',menu:'Speisekarte · ZOB Döner',about:'Über uns · ZOB Döner',contact:'Kontakt · ZOB Döner'},en:{home:'ZOB Döner — Passau',menu:'Menu · ZOB Döner',about:'About us · ZOB Döner',contact:'Contact · ZOB Döner'}};
 
@@ -2129,10 +2143,30 @@ function updatePm(){
   $('#pmQty').textContent=pm.q;
   $('#pmTot').textContent=fmt(unit(it,pm.s)*pm.q);
 }
+let legalKind=null;
+function openLegal(kind){
+  legalKind=kind==='priv'?'priv':'imp';
+  const title=$('#lTitle'),body=$('#lBody'),modal=$('#legalModal');
+  const pack=LEGAL[LANG]||LEGAL.de;
+  if(title)title.textContent=t(legalKind==='imp'?'l.imp':'l.priv');
+  if(body)body.innerHTML=pack[legalKind]||'';
+  if(modal)modal.classList.add('open');
+  document.body.classList.add('lock');
+}
+function finishLoader(){
+  const loader=$('#loader');
+  if(!loader||loader.classList.contains('done')){document.body.classList.remove('lock');return}
+  loader.classList.add('done');
+  document.body.classList.remove('lock');
+  revealHero();
+  try{refreshInds();updateCarBtns()}catch(e){}
+  setTimeout(()=>{if(loader.parentNode)loader.remove()},1000);
+}
 function closeModal(id){
   $$('.modal.open').forEach(m=>m.classList.remove('open'));
   document.body.classList.remove('lock');
   carPaused=false;
+  legalKind=null;
 }
  $('#pmMinus').addEventListener('click',()=>{pm.q=Math.max(1,pm.q-1);updatePm()});
  $('#pmPlus').addEventListener('click',()=>{pm.q=Math.min(20,pm.q+1);updatePm()});
@@ -2167,7 +2201,7 @@ document.addEventListener('click',e=>{
   const soc=closestFrom(e,'[data-social]');
   if(soc){toast(t('t.soon').replace('{n}',soc.getAttribute('data-social')));return}
   const leg=closestFrom(e,'[data-legal]');
-  if(leg){$('#lTitle').textContent=t(leg.getAttribute('data-legal')==='imp'?'l.imp':'l.priv');$('#legalModal').classList.add('open');document.body.classList.add('lock');return}
+  if(leg){openLegal(leg.getAttribute('data-legal'));return}
   const cls=closestFrom(e,'[data-close-modal]');
   if(cls){closeModal();return}
   const sc=closestFrom(e,'[data-scroll-cat]');
@@ -2403,6 +2437,8 @@ function applyLang(){
   syncCarAria();
   refreshReviews();
   refreshAboutLead();
+  const lm=$('#legalModal');
+  if(legalKind&&lm&&lm.classList.contains('open'))openLegal(legalKind);
 }
 function setLang(l){
   if(l===LANG)return;
@@ -2476,42 +2512,34 @@ if(abForm)abForm.addEventListener('submit',e=>{
 });
 
 /* ---------- INIT ---------- */
-swap(parseHash());
-applyLang();
-renderFavs();
-renderMenuPage();
-watchCats();
-renderCart();
-bindCatCarousel();
-renderCatCarousel('doner');
-bindReviews();
-renderReview(0,false);
-splitRevTitle(true);
-splitAboutLead(true);
-bindAboutLead();
-bindFaq();
-observeReveals();
-onScroll();
-
 function revealHero(){
   const hero=$('#hero');
   if(!hero||hero.classList.contains('go'))return;
   hero.classList.add('go');
   typeHeroHeadline();
 }
-window.addEventListener('load',()=>{
-  setTimeout(()=>{
-    $('#loader').classList.add('done');
-    document.body.classList.remove('lock');
-    revealHero();
-    setTimeout(()=>$('#loader').remove(),1000);
-    refreshInds();
-    updateCarBtns();
-  },1450);
-});
-setTimeout(()=>{ // fallback if load already fired
-  if(document.body.contains($('#loader'))&&performance.now()>4000&&!$('#loader').classList.contains('done')){ $('#loader').classList.add('done');document.body.classList.remove('lock');revealHero();}
-},4200);
+try{
+  swap(parseHash());
+  applyLang();
+  renderFavs();
+  renderMenuPage();
+  watchCats();
+  renderCart();
+  bindCatCarousel();
+  renderCatCarousel('doner');
+  bindReviews();
+  renderReview(0,false);
+  splitRevTitle(true);
+  splitAboutLead(true);
+  bindAboutLead();
+  bindFaq();
+  observeReveals();
+  onScroll();
+}catch(err){
+  console.error('ZOB init error',err);
+}
+window.addEventListener('load',()=>{setTimeout(finishLoader,1450)});
+setTimeout(finishLoader,4200);
 </script>
 </body>
 </html>
