@@ -55,6 +55,59 @@ a{color:inherit;text-decoration:none}
 .glow.b{bottom:-30vw;right:-20vw;background:radial-gradient(closest-side,rgba(141,200,216,.04),transparent 70%);animation:drift 42s ease-in-out infinite alternate-reverse}
 @keyframes drift{to{transform:translate(6vw,4vw) scale(1.12)}}
 
+/* ============ ORNAMENTS (brand-fit, Najm-level polish) ============ */
+.orn-rails{position:fixed;inset:0;z-index:40;pointer-events:none;display:none}
+.orn-rail{
+  position:absolute;top:12vh;bottom:8vh;width:22px;opacity:.13;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='88' viewBox='0 0 22 88' fill='none'%3E%3Cpath d='M11 2c4 6 7 10 7 16s-3 10-7 16c-4-6-7-10-7-16S7 8 11 2Z' stroke='%23F0E0C5' stroke-width='1' opacity='.85'/%3E%3Ccircle cx='11' cy='44' r='2.2' fill='%238DC8D8' opacity='.9'/%3E%3Cpath d='M4 52c3 2 5 5 7 10 2-5 4-8 7-10' stroke='%23B77D50' stroke-width='1' opacity='.8'/%3E%3Cpath d='M11 64c3 4 5 7 5 11s-2 7-5 11c-3-4-5-7-5-11s2-7 5-11Z' stroke='%23F0E0C5' stroke-width='1' opacity='.7'/%3E%3C/svg%3E");
+  background-repeat:repeat-y;background-size:22px 88px;
+  -webkit-mask-image:linear-gradient(180deg,transparent,black 12%,black 88%,transparent);
+  mask-image:linear-gradient(180deg,transparent,black 12%,black 88%,transparent);
+}
+.orn-rail--l{left:max(10px,calc((100vw - 1320px)/2 - 8px))}
+.orn-rail--r{right:max(10px,calc((100vw - 1320px)/2 - 8px));transform:scaleX(-1)}
+@media(min-width:1180px){.orn-rails{display:block}}
+.orn-div{
+  display:flex;align-items:center;gap:12px;margin:14px 0 2px;max-width:220px;
+  color:var(--copper);opacity:.72;pointer-events:none;
+}
+.orn-div::before,.orn-div::after{
+  content:"";flex:1;height:1px;min-width:28px;
+  background:linear-gradient(90deg,transparent,currentColor);
+}
+.orn-div::after{background:linear-gradient(90deg,currentColor,transparent)}
+.orn-div i{
+  flex:none;width:7px;height:7px;border:1.5px solid currentColor;transform:rotate(45deg);
+  box-shadow:0 0 0 3px rgba(32,35,33,.92),0 0 0 4px rgba(183,125,80,.35);
+}
+.rev-sec .orn-div i{box-shadow:0 0 0 3px rgba(32,35,33,.5),0 0 0 4px rgba(183,125,80,.4)}
+.rev-sec .orn-div{opacity:.85}
+.sec-head[style*="text-align:center"] .orn-div,
+.sec-head.is-center .orn-div{margin-inline:auto}
+.amb-decor{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.sec.has-amb{position:relative;overflow:clip}
+.sec.has-amb>.wrap{position:relative;z-index:1}
+.amb-float{
+  position:absolute;opacity:.1;filter:invert(1) brightness(1.12);
+  user-select:none;will-change:transform;object-fit:contain;pointer-events:none;
+}
+.amb-float--a{top:28px;right:-8px;width:min(280px,34vw);animation:ambBob 6s ease-in-out infinite}
+.amb-float--b{bottom:20px;left:-6px;width:min(190px,28vw);animation:ambBob 7.2s ease-in-out infinite reverse}
+.amb-float--c{
+  top:40%;left:50%;width:min(160px,22vw);opacity:.06;
+  transform:translate(-50%,-50%);animation:ambDrift 18s ease-in-out infinite alternate;
+  filter:invert(1) brightness(1.05);
+}
+@keyframes ambBob{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-12px,0)}}
+@keyframes ambDrift{to{transform:translate(calc(-50% + 18px),calc(-50% - 10px))}}
+@media(max-width:900px){
+  .amb-float{opacity:.07}
+  .amb-float--a{width:min(180px,42vw);top:16px}
+  .amb-float--b{width:min(130px,36vw)}
+  .amb-float--c{display:none}
+}
+@media(max-width:700px){.orn-div{max-width:160px;margin-top:12px}}
+
 /* ============ TYPE SYSTEM ============ */
 .eyebrow{display:inline-flex;align-items:center;gap:12px;font-size:12px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
 .eyebrow::before{content:"";width:34px;height:1px;background:var(--gold)}
@@ -836,7 +889,7 @@ main,.nav-in,footer{transition:opacity .25s}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
   .rv,.hero .eyebrow,.hero .hero-sub,.hero .hero-cta,.hero .hero-meta,.phero p{opacity:1!important;transform:none!important}
-  .hero.go .hero-bg img,.fav-float{animation:none!important}
+  .hero.go .hero-bg img,.fav-float,.amb-float{animation:none!important}
   .rev-words .w>i{transform:none!important}
 }
 </style>
@@ -898,6 +951,10 @@ main,.nav-in,footer{transition:opacity .25s}
 <div class="veil" id="veil" aria-hidden="true"><img class="veil-logo" src="Images/logo without background.png" alt="" width="84" height="84" decoding="async"></div>
 <div class="grain" aria-hidden="true"></div>
 <div class="glow a" aria-hidden="true"></div><div class="glow b" aria-hidden="true"></div>
+<div class="orn-rails" aria-hidden="true">
+  <div class="orn-rail orn-rail--l"></div>
+  <div class="orn-rail orn-rail--r"></div>
+</div>
 
 <!-- NAV -->
 <header class="nav" id="nav">
@@ -999,13 +1056,18 @@ main,.nav-in,footer{transition:opacity .25s}
     </div>
   </div>
 
-  <div class="sec">
+  <div class="sec has-amb">
+    <div class="amb-decor" aria-hidden="true">
+      <img class="amb-float amb-float--a" src="Images/bg-2.png" alt="" loading="lazy" decoding="async">
+      <img class="amb-float amb-float--b" src="Images/bg-1.png" alt="" loading="lazy" decoding="async">
+    </div>
     <div class="wrap intro-grid">
       <div class="intro-media rv-img rv">
         <img src="Images/about.webp" alt="ZOB Döner Stand in Passau" loading="lazy" decoding="async">
       </div>
       <div class="intro-copy">
         <span class="eyebrow rv" data-i18n="intro.eyebrow">Willkommen bei ZOB</span>
+        <span class="orn-div" aria-hidden="true"><i></i></span>
         <h2 class="h2 rv" style="--d:.08s" data-i18n-html="intro.h">Mehr als nur Döner.</h2>
         <div class="rv" style="--d:.16s">
           <p class="lead" data-i18n="intro.p1">ZOB Döner bringt frisches Street Food mitten in Passau auf den Teller: knuspriges Brot, frisch geschnittener Salat und Fleisch direkt vom Spieß — dazu Pizza, goldbraune Pide und Boxen, die richtig satt machen.</p>
@@ -1029,6 +1091,7 @@ main,.nav-in,footer{transition:opacity .25s}
       <div class="sec-head row">
         <div>
           <span class="eyebrow rv" data-i18n="fav.eyebrow">Signaturen</span>
+          <span class="orn-div" aria-hidden="true"><i></i></span>
           <h2 class="h2 rv" style="--d:.08s" data-i18n="fav.h">Unsere Favoriten</h2>
           <p class="rv" style="--d:.14s" data-i18n="fav.sub">Die Klassiker, die immer wieder bestellt werden — direkt aus unserer Theke.</p>
         </div>
@@ -1038,10 +1101,15 @@ main,.nav-in,footer{transition:opacity .25s}
     </div>
   </div>
 
-  <div class="sec cat-home">
+  <div class="sec cat-home has-amb">
+    <div class="amb-decor" aria-hidden="true">
+      <img class="amb-float amb-float--b" src="Images/bg-1.png" alt="" loading="lazy" decoding="async">
+      <img class="amb-float amb-float--c" src="Images/bg-2.png" alt="" loading="lazy" decoding="async">
+    </div>
     <div class="wrap">
       <div class="sec-head" style="text-align:center">
         <span class="eyebrow rv" style="justify-content:center" data-i18n="cat.eyebrow">Kategorien</span>
+        <span class="orn-div" aria-hidden="true"><i></i></span>
         <h2 class="h2 rv" style="--d:.08s" data-i18n="cat.h">Was darf's sein?</h2>
         <p class="rv" style="--d:.14s;margin-inline:auto" data-i18n="cat.sub">Vier Kategorien, ein Versprechen: frisch, heiß und ehrlich.</p>
       </div>
@@ -1070,6 +1138,7 @@ main,.nav-in,footer{transition:opacity .25s}
     <div class="wrap">
       <div class="sec-head" style="text-align:center">
         <span class="eyebrow rv" style="justify-content:center" data-i18n="gal.eyebrow">Galerie</span>
+        <span class="orn-div" aria-hidden="true"><i></i></span>
         <h2 class="h2 rv" style="--d:.08s" data-i18n="gal.h">Einblicke.</h2>
         <p class="rv" style="--d:.14s;margin-inline:auto" data-i18n="gal.sub">Küche, Theke und unsere Klassiker — frisch eingefangen bei ZOB Döner in Passau.</p>
       </div>
@@ -1098,10 +1167,14 @@ main,.nav-in,footer{transition:opacity .25s}
     </div>
   </div>
 
-  <div class="sec alt">
+  <div class="sec alt has-amb">
+    <div class="amb-decor" aria-hidden="true">
+      <img class="amb-float amb-float--a" src="Images/bg-2.png" alt="" loading="lazy" decoding="async">
+    </div>
     <div class="wrap fresh fresh--flip">
       <div class="fresh-copy">
         <span class="eyebrow rv" data-i18n="fresh.eyebrow">Frische</span>
+        <span class="orn-div" aria-hidden="true"><i></i></span>
         <h2 class="h2 rv" style="--d:.08s" data-i18n="fresh.h">Frisch auf den Teller.</h2>
         <p class="lead mut rv" style="--d:.14s" data-i18n="fresh.p">Salat frisch geschnitten, Soßen selbst angemacht, Brot außen knusprig und innen fluffig. Jede Bestellung wird erst zubereitet, wenn sie bei uns eingeht — heiß, frisch und mit Liebe zum Detail.</p>
         <ul class="fresh-points rv" style="--d:.18s">
@@ -1122,6 +1195,7 @@ main,.nav-in,footer{transition:opacity .25s}
     <div class="wrap rev-grid">
       <div class="rev-copy">
         <span class="eyebrow" data-i18n="rev.eyebrow">Stimmen</span>
+        <span class="orn-div" aria-hidden="true"><i></i></span>
         <h2 class="h2" id="revTitle" data-i18n="rev.h">Was Gäste sagen.</h2>
         <p data-i18n="rev.p">Echte Google-Bewertungen unserer Gäste — über Geschmack, Frische und den Besuch am ZOB.</p>
         <div class="rev-rating" aria-label="4,4 von 5 Sternen aus 125 Google-Bewertungen">
@@ -1161,10 +1235,14 @@ main,.nav-in,footer{transition:opacity .25s}
     </div>
   </div>
 
-  <div class="sec alt loc-sec">
+  <div class="sec alt loc-sec has-amb">
+    <div class="amb-decor" aria-hidden="true">
+      <img class="amb-float amb-float--b" src="Images/bg-1.png" alt="" loading="lazy" decoding="async">
+    </div>
     <div class="wrap loc">
       <div>
         <span class="eyebrow rv" data-i18n="loc.eyebrow">Finde uns</span>
+        <span class="orn-div" aria-hidden="true"><i></i></span>
         <h2 class="h2 rv" style="--d:.08s" data-i18n="loc.h">Dein ZOB. Mitten in Passau.</h2>
         <div class="loc-info rv" style="--d:.14s">
           <span><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>Dr.-Hans-Kapfinger-Straße 10<br>94032 Passau, Germany</span>
