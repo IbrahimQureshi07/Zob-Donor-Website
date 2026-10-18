@@ -137,13 +137,33 @@ a{color:inherit;text-decoration:none}
 .burger.open i:first-child{transform:translateY(3.5px) rotate(45deg)}
 .burger.open i:last-child{transform:translateY(-3.5px) rotate(-45deg)}
 @media(max-width:1080px){.nav-links{display:none}.burger{display:grid}}
-@media(max-width:640px){.nav .order-cta{display:none}.lang-btn{height:40px;padding:0 12px}}
-@media(max-width:460px){
-  .nav-in{padding:0 14px;gap:10px}
-  .nav-right{gap:8px}
-  .lang-btn{height:38px;padding:0 10px;gap:5px;font-size:12px}
+@media(max-width:640px){
+  .nav .order-cta{display:none}
+  .nav-in{padding:0 16px;gap:12px}
+  .nav-right{gap:8px;flex:none;flex-shrink:0}
+  .brand{gap:9px;min-width:0}
+  .brand .badge{width:40px;height:40px}
+  .brand-word b{font-size:17px}
+  .brand-word span{font-size:8.5px;letter-spacing:.26em}
+  .lang-btn{height:38px;padding:0 11px;gap:5px;font-size:12px}
   .lang-btn .ic:last-of-type{display:none}
   .icon-btn{width:40px;height:40px}
+}
+@media(max-width:420px){
+  .nav-in{padding:0 12px;gap:8px}
+  .brand{gap:7px}
+  .brand .badge{width:34px;height:34px}
+  .brand-word b{font-size:14px}
+  .brand-word span{display:block;font-size:7.5px;letter-spacing:.14em}
+  .lang-btn{height:36px;min-width:36px;padding:0 8px;gap:4px}
+  .lang-btn .ic{width:14px}
+  .icon-btn{width:36px;height:36px}
+  .nav-right{gap:6px}
+}
+@media(max-width:340px){
+  .brand .badge{width:30px;height:30px}
+  .brand-word b{font-size:13px}
+  .brand-word span{font-size:7px;letter-spacing:.1em}
 }
 
 /* ============ MOBILE MENU ============ */
