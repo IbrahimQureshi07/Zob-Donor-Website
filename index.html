@@ -93,18 +93,25 @@ a{color:inherit;text-decoration:none}
 }
 .amb-float--a{top:28px;right:-8px;width:min(280px,34vw);animation:ambBob 6s ease-in-out infinite}
 .amb-float--b{bottom:20px;left:-6px;width:min(190px,28vw);animation:ambBob 7.2s ease-in-out infinite reverse}
-.amb-float--c{
-  top:40%;left:50%;width:min(160px,22vw);opacity:.06;
-  transform:translate(-50%,-50%);animation:ambDrift 18s ease-in-out infinite alternate;
-  filter:invert(1) brightness(1.05);
+.amb-float--lt{
+  top:12px;left:-40px;width:921px;height:1036px;max-width:none;
+  aspect-ratio:921/1036;object-fit:contain;animation:ambBob 6s ease-in-out infinite;
+}
+.amb-float--rb{
+  bottom:8px;right:-28px;width:641px;height:418px;max-width:none;
+  aspect-ratio:641/418;object-fit:contain;animation:ambBob 7.2s ease-in-out infinite reverse;
 }
 @keyframes ambBob{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(0,-12px,0)}}
-@keyframes ambDrift{to{transform:translate(calc(-50% + 18px),calc(-50% - 10px))}}
+@media(max-width:1200px){
+  .amb-float--lt{width:min(921px,72vw);height:auto}
+  .amb-float--rb{width:min(641px,58vw);height:auto}
+}
 @media(max-width:900px){
   .amb-float{opacity:.07}
   .amb-float--a{width:min(180px,42vw);top:16px}
   .amb-float--b{width:min(130px,36vw)}
-  .amb-float--c{display:none}
+  .amb-float--lt{width:min(420px,78vw);height:auto;left:-16px;top:8px}
+  .amb-float--rb{width:min(320px,68vw);height:auto;right:-12px;bottom:8px}
 }
 @media(max-width:700px){.orn-div{max-width:160px;margin-top:12px}}
 
@@ -1083,10 +1090,6 @@ main,.nav-in,footer{transition:opacity .25s}
   </div>
 
   <div class="sec alt fav-sec">
-    <div class="fav-decor" aria-hidden="true">
-      <img class="fav-float top" src="Images/bg-2.png" alt="" loading="lazy" decoding="async">
-      <img class="fav-float bot" src="Images/bg-1.png" alt="" loading="lazy" decoding="async">
-    </div>
     <div class="wrap">
       <div class="sec-head row">
         <div>
@@ -1103,8 +1106,8 @@ main,.nav-in,footer{transition:opacity .25s}
 
   <div class="sec cat-home has-amb">
     <div class="amb-decor" aria-hidden="true">
-      <img class="amb-float amb-float--b" src="Images/bg-1.png" alt="" loading="lazy" decoding="async">
-      <img class="amb-float amb-float--c" src="Images/bg-2.png" alt="" loading="lazy" decoding="async">
+      <img class="amb-float amb-float--lt" src="Images/bg-3.png" alt="" width="921" height="1036" loading="lazy" decoding="async">
+      <img class="amb-float amb-float--rb" src="Images/bg-5.png" alt="" width="641" height="418" loading="lazy" decoding="async">
     </div>
     <div class="wrap">
       <div class="sec-head" style="text-align:center">
