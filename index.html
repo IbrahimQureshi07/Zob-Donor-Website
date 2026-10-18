@@ -367,6 +367,9 @@ a{color:inherit;text-decoration:none}
 .rev-copy .eyebrow{margin-bottom:18px}
 .rev-copy .h2{margin-bottom:20px}
 .rev-copy>p{max-width:440px;color:var(--ink-dim);font-size:clamp(16px,1.4vw,18.5px);line-height:1.7}
+.rev-rating{display:flex;align-items:center;gap:10px;margin-top:22px;flex-wrap:wrap}
+.rev-rating b{font-size:28px;font-weight:900;color:var(--gold);letter-spacing:-.02em}
+.rev-rating span{color:var(--ink-dim);font-size:14px;font-weight:600}
 .rev-words{display:flex;flex-wrap:wrap;gap:.18em .28em}
 .rev-words .w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.06em;margin-bottom:-.06em}
 .rev-words .w>i{display:inline-block;font-style:normal;transform:translateY(110%);transition:transform .7s var(--ease)}
@@ -379,17 +382,32 @@ a{color:inherit;text-decoration:none}
 .rev-words .w:nth-child(6)>i{transition-delay:.44s}
 .rev-words .w:nth-child(7)>i{transition-delay:.52s}
 .rev-words .w:nth-child(8)>i{transition-delay:.6s}
-.rev-side{display:flex;flex-direction:column;gap:18px;align-items:stretch}
-.rev-card{position:relative;min-height:280px;padding:clamp(28px,3.5vw,40px);border-radius:26px;border:1px solid rgba(243,238,226,.16);background:rgba(14,17,25,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 28px 60px rgba(0,0,0,.4);display:flex;flex-direction:column;gap:18px;transition:opacity .35s var(--ease),transform .35s var(--ease)}
+.rev-side{display:flex;flex-direction:column;gap:14px;align-items:stretch}
+.rev-card{position:relative;height:420px;padding:clamp(22px,2.8vw,30px);border-radius:26px;border:1px solid rgba(243,238,226,.16);background:rgba(14,17,25,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 28px 60px rgba(0,0,0,.4);display:flex;flex-direction:column;gap:12px;transition:opacity .35s var(--ease),transform .35s var(--ease);overflow:hidden}
 .rev-card.is-swap{opacity:0;transform:translateY(12px)}
-.rev-quote{width:42px;height:42px;color:rgba(243,238,226,.28);margin-bottom:2px}
-.rev-quote .ic{width:42px;height:42px;fill:currentColor;stroke:none}
-.rev-body{font-size:clamp(16px,1.45vw,19px);line-height:1.65;color:var(--ink);flex:1}
-.rev-extra{font-size:14.5px;color:var(--ink-dim);line-height:1.55}
-.rev-meta{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:auto;padding-top:8px}
-.rev-stars{display:flex;gap:4px;color:var(--gold)}
-.rev-stars .ic{width:18px;height:18px;fill:currentColor;stroke:none}
-.rev-role{font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.rev-head{display:flex;align-items:center;gap:12px;flex:none}
+.rev-avatar{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:17px;color:#fff;flex:none;letter-spacing:.02em}
+.rev-who{min-width:0;flex:1;display:flex;flex-direction:column;gap:2px}
+.rev-who b{font-size:15px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rev-who small{font-size:12px;color:var(--mut);font-weight:600}
+.rev-g{width:22px;height:22px;flex:none;opacity:.9}
+.rev-stars{display:flex;gap:3px;color:var(--gold);flex:none}
+.rev-stars .ic{width:16px;height:16px;fill:currentColor;stroke:none}
+.rev-stars .ic.is-off{opacity:.22}
+.rev-clip{flex:1;min-height:0;display:flex;flex-direction:column;gap:8px}
+.rev-body{font-size:clamp(15px,1.35vw,17.5px);line-height:1.55;color:var(--ink);margin:0;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden}
+.rev-body.is-open{display:block;-webkit-line-clamp:unset;overflow:auto;max-height:100%}
+.rev-more{align-self:flex-start;font-size:13px;font-weight:800;letter-spacing:.04em;color:var(--gold);padding:0;background:none;border:0;cursor:pointer;transition:opacity .25s}
+.rev-more:hover{opacity:.75}
+.rev-more[hidden]{display:none!important}
+.rev-photo{flex:none;height:88px}
+.rev-photo[hidden]{display:none!important}
+.rev-photo img{width:88px;height:88px;object-fit:cover;border-radius:14px;border:1px solid rgba(243,238,226,.14)}
+.rev-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;flex:none;padding-top:4px;margin-top:auto;border-top:1px solid rgba(243,238,226,.1)}
+.rev-via{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.rev-google{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;font-size:13.5px;font-weight:800;color:var(--ink);border-bottom:1px solid rgba(242,181,58,.45);padding-bottom:2px;transition:color .3s,border-color .3s}
+.rev-google:hover{color:var(--gold);border-color:var(--gold)}
+.rev-google .ic{width:15px;height:15px}
 .rev-nav{display:flex;gap:12px;justify-content:flex-end}
 .rev-btn{width:48px;height:48px;border-radius:50%;border:1px solid rgba(243,238,226,.28);color:var(--ink);display:grid;place-items:center;background:rgba(14,17,25,.45);backdrop-filter:blur(8px);transition:border-color .3s,color .3s,background .3s,transform .3s var(--ease)}
 .rev-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(242,181,58,.1);transform:scale(1.05)}
@@ -397,6 +415,7 @@ a{color:inherit;text-decoration:none}
 @media(max-width:900px){
   .rev-grid{grid-template-columns:1fr;gap:34px}
   .rev-nav{justify-content:flex-start}
+  .rev-card{height:400px}
   .rev-veil{background:linear-gradient(180deg,rgba(8,10,14,.9) 0%,rgba(8,10,14,.78) 55%,rgba(8,10,14,.7) 100%)}
 }
 @media(prefers-reduced-motion:reduce){
@@ -1034,18 +1053,36 @@ main,.nav-in,footer{transition:opacity .25s}
       <div class="rev-copy">
         <span class="eyebrow" data-i18n="rev.eyebrow">Stimmen</span>
         <h2 class="h2" id="revTitle" data-i18n="rev.h">Was Gäste sagen.</h2>
-        <p data-i18n="rev.p">Echte Stimmen aus Passau — über Geschmack, Frische und den schnellen Besuch am ZOB.</p>
+        <p data-i18n="rev.p">Echte Google-Bewertungen unserer Gäste — über Geschmack, Frische und den Besuch am ZOB.</p>
+        <div class="rev-rating" aria-label="4,4 von 5 Sternen aus 125 Google-Bewertungen">
+          <b class="num">4,4</b>
+          <span data-i18n="rev.score">von 5 · 125 Google-Bewertungen</span>
+        </div>
       </div>
       <div class="rev-side">
         <article class="rev-card" id="revCard" aria-live="polite">
-          <div class="rev-quote" aria-hidden="true"><svg class="ic ic-f"><use href="#i-quote"/></svg></div>
-          <p class="rev-body" id="revBody"></p>
-          <p class="rev-extra" id="revExtra"></p>
+          <div class="rev-head">
+            <div class="rev-avatar" id="revAvatar" aria-hidden="true">Z</div>
+            <div class="rev-who">
+              <b id="revName"></b>
+              <small id="revWhen"></small>
+            </div>
+            <svg class="rev-g" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+          </div>
+          <div class="rev-stars" id="revStars" aria-hidden="true"></div>
+          <div class="rev-clip">
+            <p class="rev-body" id="revBody"></p>
+            <button type="button" class="rev-more" id="revMore" hidden></button>
+          </div>
+          <div class="rev-photo" id="revPhoto" hidden><img id="revImg" src="" alt="" loading="lazy" decoding="async"></div>
           <div class="rev-meta">
-            <div class="rev-stars" id="revStars" aria-hidden="true"></div>
-            <span class="rev-role" id="revRole"></span>
+            <span class="rev-via" data-i18n="rev.via">Google Review</span>
           </div>
         </article>
+        <a class="rev-google" id="revGoogle" href="https://www.google.com/maps/place/ZOB+D%C3%B6ner/@48.5745,13.4613,17z/data=!4m8!3m7!1s0x47745900332e8133:0x3529c13c4ec4fbd0!8m2!3d48.5745!4d13.4613!9m1!1b1" target="_blank" rel="noopener">
+          <span data-i18n="rev.google">Alle Bewertungen auf Google</span>
+          <svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg>
+        </a>
         <div class="rev-nav">
           <button type="button" class="rev-btn" data-rev="prev" aria-label="Vorherige Bewertung"><svg class="ic" aria-hidden="true"><use href="#i-left"/></svg></button>
           <button type="button" class="rev-btn" data-rev="next" aria-label="Nächste Bewertung"><svg class="ic" aria-hidden="true"><use href="#i-right"/></svg></button>
@@ -1511,7 +1548,7 @@ const I18N={
  'cat.eyebrow':'Kategorien','cat.h':'Was darf\u2019s sein?','cat.sub':'Vier Kategorien, ein Versprechen: frisch, heiß und ehrlich.','cat.note':'Tipp: Alle Gerichte gibt es auch per WhatsApp zur Abholung.','cat.doner':'Döner','cat.box':'Box','cat.pizza':'Pizza','cat.pide':'Pide','cat.full':'Ganze Speisekarte öffnen','cat.prev':'Vorheriges Gericht','cat.next':'Nächstes Gericht',
  'gal.eyebrow':'Galerie','gal.h':'Einblicke.','gal.sub':'Küche, Theke und unsere Klassiker — frisch eingefangen bei ZOB Döner in Passau.','gal.t1':'Einblicke','gal.t2':'Die Theke','gal.t3':'Frisch zubereitet','gal.t4':'Unsere Klassiker','gal.t5':'Mitten in Passau',
  'fresh.eyebrow':'Frische','fresh.h':'Frisch auf den Teller.','fresh.p':'Salat frisch geschnitten, Soßen selbst angemacht, Brot außen knusprig und innen fluffig. Jede Bestellung wird erst zubereitet, wenn sie bei uns eingeht — heiß, frisch und mit Liebe zum Detail.','fresh.cta':'Mehr über uns',
- 'rev.eyebrow':'Stimmen','rev.h':'Was Gäste sagen.','rev.p':'Echte Stimmen aus Passau — über Geschmack, Frische und den schnellen Besuch am ZOB.','rev.prev':'Vorherige Bewertung','rev.next':'Nächste Bewertung',
+ 'rev.eyebrow':'Stimmen','rev.h':'Was Gäste sagen.','rev.p':'Echte Google-Bewertungen unserer Gäste — über Geschmack, Frische und den Besuch am ZOB.','rev.score':'von 5 · 125 Google-Bewertungen','rev.via':'Google Review','rev.more':'Mehr lesen','rev.less':'Weniger','rev.google':'Alle Bewertungen auf Google','rev.prev':'Vorherige Bewertung','rev.next':'Nächste Bewertung',
  'why.eyebrow':'Warum ZOB','why.h':'Warum ZOB Döner?','why.c1t':'Frisch zubereitet','why.c1d':'Frische Zutaten und jedes Gericht, das erst zubereitet wird, wenn du es bestellst.','why.c2t':'Voller Geschmack','why.c2d':'Kräftige Soßen, gegrillte Aromen und Portionen, die wirklich satt machen.','why.c3t':'Mitten in Passau','why.c3d':'Direkt am ZOB gelegen — praktisch, schnell erreichbar, mitten in der Stadt.','why.c4t':'Schnell & einfach','why.c4d':'Unkompliziert per WhatsApp bestellen und bequem bei uns abholen.',
  'loc.eyebrow':'Finde uns','loc.h':'Dein ZOB. Mitten in Passau.','loc.route':'Route planen','loc.call':'Jetzt anrufen','loc.open':'In Google Maps öffnen',
  'soc.eyebrow':'Community','soc.h':'Folge uns.','soc.p':'Instagram, Facebook und TikTok sind bald für dich da — mit Einblicken aus der Küche, Neuigkeiten und Angeboten.','soc.soon':'folgt in Kürze',
@@ -1533,7 +1570,7 @@ const I18N={
  'cat.eyebrow':'Categories','cat.h':'What will it be?','cat.sub':'Four categories, one promise: fresh, hot and honest.','cat.note':'Tip: every dish is also available via WhatsApp for pickup.','cat.doner':'Döner','cat.box':'Boxes','cat.pizza':'Pizza','cat.pide':'Pide','cat.full':'Open full menu','cat.prev':'Previous dish','cat.next':'Next dish',
  'gal.eyebrow':'Gallery','gal.h':'Inside ZOB.','gal.sub':'Kitchen, counter and our classics — captured fresh at ZOB Döner in Passau.','gal.t1':'Inside','gal.t2':'The counter','gal.t3':'Freshly made','gal.t4':'Our classics','gal.t5':'Right in Passau',
  'fresh.eyebrow':'Freshness','fresh.h':'Fresh on your plate.','fresh.p':'Salad freshly cut, sauces made in-house, bread crispy on the outside and fluffy inside. Every order is prepared the moment it comes in — hot, fresh and with care in every detail.','fresh.cta':'More about us',
- 'rev.eyebrow':'Reviews','rev.h':'Hear what they say.','rev.p':'Real voices from Passau — about flavour, freshness and a quick stop at the ZOB.','rev.prev':'Previous review','rev.next':'Next review',
+ 'rev.eyebrow':'Reviews','rev.h':'Hear what they say.','rev.p':'Real Google reviews from our guests — about flavour, freshness and a stop at the ZOB.','rev.score':'out of 5 · 125 Google reviews','rev.via':'Google Review','rev.more':'Read more','rev.less':'Show less','rev.google':'See all reviews on Google','rev.prev':'Previous review','rev.next':'Next review',
  'why.eyebrow':'Why ZOB','why.h':'Why ZOB Döner?','why.c1t':'Freshly prepared','why.c1d':'Fresh ingredients and every dish prepared the moment you order it.','why.c2t':'Full of flavour','why.c2d':'Bold sauces, grilled flavours and portions that truly satisfy.','why.c3t':'Right in Passau','why.c3d':'Located right at the ZOB — convenient, easy to reach, in the middle of town.','why.c4t':'Fast & easy','why.c4d':'Order easily via WhatsApp and collect your food at your convenience.',
  'loc.eyebrow':'Find us','loc.h':'Your ZOB. Right in Passau.','loc.route':'Plan a route','loc.call':'Call now','loc.open':'Open in Google Maps',
  'soc.eyebrow':'Community','soc.h':'Follow us.','soc.p':'Instagram, Facebook and TikTok are coming soon — with kitchen insights, news and offers.','soc.soon':'coming soon',
@@ -1783,44 +1820,111 @@ function bindCatCarousel(){
   document.addEventListener('visibilitychange',()=>{if(!document.hidden&&CUR==='home')startCar()});
 }
 
-/* ---------- REVIEWS ---------- */
+/* ---------- REVIEWS (real Google reviews) ---------- */
+const GOOGLE_REVIEWS_URL='https://www.google.com/maps/place/ZOB+D%C3%B6ner/@48.5745,13.4613,17z/data=!4m8!3m7!1s0x47745900332e8133:0x3529c13c4ec4fbd0!8m2!3d48.5745!4d13.4613!9m1!1b1';
+const REV_AVATAR_COLORS=['#E67E22','#27AE60','#8E44AD','#1ABC9C','#C0392B','#2980B9'];
 const REVIEWS=[
-  {stars:5,role:{de:'Stammgast',en:'Regular'},
-   body:{de:'Der beste Döner am ZOB — Brot knusprig, Fleisch saftig und immer frisch. Genau so muss Street Food schmecken.',en:'The best döner at the ZOB — crispy bread, juicy meat and always fresh. This is how street food should taste.'},
-   extra:{de:'Schnell, freundlich und jeden Cent wert.',en:'Fast, friendly and worth every cent.'}},
-  {stars:5,role:{de:'Studentin',en:'Student'},
-   body:{de:'Zwischen Vorlesungen schnell vorbeischauen, bestellen und heiß abholen. Die Halloumi-Box ist mein Favorit.',en:'I stop by between lectures, order and pick it up hot. The Halloumi Box is my favourite.'},
-   extra:{de:'Portionen sind richtig sattmachend.',en:'The portions are properly filling.'}},
-  {stars:5,role:{de:'Familie',en:'Family'},
-   body:{de:'Pizza und Pide für die ganze Runde — alles frisch und heiß. Kinder und Erwachsene waren happy.',en:'Pizza and pide for the whole group — everything fresh and hot. Kids and adults were happy.'},
-   extra:{de:'Perfekt für den Abend am ZOB.',en:'Perfect for an evening stop at the ZOB.'}},
-  {stars:5,role:{de:'Pendler',en:'Commuter'},
-   body:{de:'Direkt am Bahnhof — ideal vor der Fahrt. WhatsApp-Bestellung klappt super unkompliziert.',en:'Right by the station — ideal before the trip. Ordering via WhatsApp is super easy.'},
-   extra:{de:'Frisch, heiß und pünktlich.',en:'Fresh, hot and on time.'}},
+  {name:'mudassir nedian',stars:5,when:{de:'vor 4 Monaten',en:'4 months ago'},
+   body:{de:'An meinem ersten Tag in Passau habe ich hier Döner probiert — und er war fantastisch. Wenn du Passau besuchst, musst du unbedingt ZOB Döner ausprobieren.',en:'The first day I came to Passau I tried doner from here and It was amazing. If you are visiting passau make sure to try zob doner'},
+   img:'Images/gallery images/third.jpg'},
+  {name:'edwin ismail',stars:4,when:{de:'vor 6 Monaten',en:'6 months ago'},
+   body:{de:'Immer wenn ich in Passau bin, esse ich garantiert bei ZOB Döner.',en:'Whenever I am in Passau, I am dinning in zob döner for sure'},
+   img:'Images/Fleisch-Box.jpg'},
+  {name:'Valentin “Bavarian Student”',stars:5,when:{de:'vor 7 Monaten',en:'7 months ago'},
+   body:{de:'Fantastischer Döner direkt am ZOB in Passau! Das Fleisch war unglaublich saftig und lecker, alles schmeckte so frisch. Das Beste: Das Fladenbrot wird nicht nur aufgewärmt — der Teig kommt erst nach der Bestellung in den Ofen. Jeder bekommt frisch gebackenes Brot, außen knusprig und innen weich. Das macht einen riesigen Unterschied.\n\nDas absolute Highlight war die Cocktailsoße — sie passt perfekt zum Döner. Insgesamt einfach ein fantastischer Döner: frisch, saftig und mit Liebe gemacht. Absolute Empfehlung, wenn du in Passau bist.',en:'Amazing doner kebab right by the central bus station in Passau! The meat was incredibly juicy and delicious, everything tasted so fresh. The best part: the flatbread isn\'t just reheated; the raw dough goes into the oven only after you order. This means every customer gets a freshly baked bread, beautifully crispy on the outside and soft on the inside. It makes a huge difference in taste.\n\nThe absolute highlight was the cocktail sauce; it goes perfectly with the doner and takes it to another level. Overall, simply a fantastic doner kebab: fresh, juicy, and made with love. Highly recommended if you\'re in Passau.'}},
+  {name:'Merde 02',stars:5,when:{de:'vor 11 Monaten',en:'11 months ago'},
+   body:{de:'ZOB Döner Passau – eine kulinarische Offenbarung im Fladenbrot! Wenn Engel Hunger hätten, würden sie hier anstehen. Der Döner von ZOB ist nicht nur Essen — er ist ein Erlebnis. Das Brot: fluffig wie eine Wolke. Das Fleisch: zart, saftig. Die Soße? Ein knoblauchiges Meisterwerk!\n\nKurz gesagt: Wer in Passau ist und noch nicht bei ZOB Döner war, hat das echte Leben nur gekostet — aber noch nicht richtig reinbebissen.',en:'ZOB Döner Passau – a culinary revelation in flatbread! If angels were hungry, they’d be queuing here! The döner from ZOB isn’t just food – it’s an experience. The bread: fluffy as a cloud. The meat: tender, juicy, and probably personally blessed by happy rotisseries. The sauce? A garlicky masterpiece!\n\nI’m sure ZOB Döner could resolve international peace negotiations – just hand everyone a dürüm, and everyone’s happy.\n\nIn short: If you’re in Passau and haven’t been to ZOB Döner, you’ve only tasted real life, but never taken a bite.'},
+   img:'Images/Döner Dürüm.jpg'},
+  {name:'Bettina Bajsz',stars:5,when:{de:'vor 2 Monaten',en:'2 months ago'},
+   body:{de:'Fantastischer Döner! Und der einzige Döner-Laden in Passau, wo man mit Karte zahlen kann — und ohne Mindestbestellung! TOP 👍👍',en:'Amazing döner! And the only döner shop in Passau where you can pay by card, and without a minimum order! TOP 👍👍'}},
+  {name:'Theresa Mittermüller',stars:5,when:{de:'vor 5 Monaten',en:'5 months ago'},
+   body:{de:'Husen hat uns den besten Döner gemacht. Er ist wirklich nett und unglaublich schnell. 😊',en:'Husen made us the best doner kebab. He\'s really nice and incredibly fast. 😊'}},
 ];
-let revIndex=0,revTimer=null,revBound=false,revWordsReady=false;
-function revText(item,key){return (item[key]&&(item[key][LANG]||item[key].de))||''}
+let revIndex=0,revTimer=null,revBound=false,revWordsReady=false,revOpen=false;
+function revText(item,key){return (item[key]&&(item[key][LANG]||item[key].de||item[key].en))||''}
+function revInitials(name){
+  const parts=String(name||'').replace(/[“”"]/g,'').trim().split(/\s+/).filter(Boolean);
+  if(!parts.length)return 'Z';
+  if(parts.length===1)return parts[0].slice(0,1).toUpperCase();
+  return (parts[0][0]+parts[parts.length-1][0]).toUpperCase();
+}
 function syncRevAria(){
   const p=$('[data-rev="prev"]'),n=$('[data-rev="next"]');
   if(p)p.setAttribute('aria-label',t('rev.prev'));
   if(n)n.setAttribute('aria-label',t('rev.next'));
 }
+function needsRevMore(el,text){
+  if(!el||!text)return false;
+  const probe=document.createElement('p');
+  probe.className='rev-body';
+  probe.style.cssText='position:absolute;visibility:hidden;pointer-events:none;width:'+el.clientWidth+'px';
+  probe.textContent=text;
+  document.body.appendChild(probe);
+  const full=probe.scrollHeight;
+  probe.style.display='-webkit-box';
+  probe.style.webkitBoxOrient='vertical';
+  probe.style.webkitLineClamp='4';
+  probe.style.overflow='hidden';
+  const clamped=probe.clientHeight;
+  probe.remove();
+  return full>clamped+2;
+}
+function paintReview(item){
+  const body=$('#revBody'),stars=$('#revStars'),name=$('#revName'),when=$('#revWhen');
+  const avatar=$('#revAvatar'),photo=$('#revPhoto'),img=$('#revImg'),more=$('#revMore');
+  revOpen=false;
+  if(name)name.textContent=item.name||'';
+  if(when)when.textContent=revText(item,'when');
+  if(avatar){
+    avatar.textContent=revInitials(item.name);
+    avatar.style.background=REV_AVATAR_COLORS[revIndex%REV_AVATAR_COLORS.length];
+  }
+  const text=revText(item,'body');
+  if(body){
+    body.textContent=text;
+    body.classList.remove('is-open');
+  }
+  if(stars){
+    const n=Math.max(1,Math.min(5,item.stars||5));
+    stars.innerHTML=Array.from({length:5},(_,i)=>`<svg class="ic${i<n?'':' is-off'}" aria-hidden="true"><use href="#i-star"></use></svg>`).join('');
+  }
+  if(photo&&img){
+    if(item.img){
+      img.src=item.img;
+      img.alt=(item.name||'')+' — Google Review';
+      photo.hidden=false;
+    }else{
+      img.removeAttribute('src');
+      photo.hidden=true;
+    }
+  }
+  if(more&&body){
+    requestAnimationFrame(()=>{
+      const show=needsRevMore(body,text);
+      more.hidden=!show;
+      more.textContent=t('rev.more');
+    });
+  }
+  syncRevAria();
+}
 function renderReview(i,animate){
   const item=REVIEWS[(i+REVIEWS.length)%REVIEWS.length];
   revIndex=(i+REVIEWS.length)%REVIEWS.length;
-  const card=$('#revCard'),body=$('#revBody'),extra=$('#revExtra'),role=$('#revRole'),stars=$('#revStars');
-  if(!card||!body)return;
-  const paint=()=>{
-    body.textContent=revText(item,'body');
-    if(extra)extra.textContent=revText(item,'extra');
-    if(role)role.textContent=revText(item,'role');
-    if(stars)stars.innerHTML=Array.from({length:item.stars||5},()=>'<svg class="ic" aria-hidden="true"><use href="#i-star"></use></svg>').join('');
-    syncRevAria();
-  };
+  const card=$('#revCard');
+  if(!card)return;
   if(animate&&!reduceMotion){
     card.classList.add('is-swap');
-    setTimeout(()=>{paint();card.classList.remove('is-swap')},180);
-  }else paint();
+    setTimeout(()=>{paintReview(item);card.classList.remove('is-swap')},180);
+  }else paintReview(item);
+}
+function toggleRevMore(){
+  const body=$('#revBody'),more=$('#revMore');
+  if(!body||!more||more.hidden)return;
+  revOpen=!revOpen;
+  body.classList.toggle('is-open',revOpen);
+  more.textContent=t(revOpen?'rev.less':'rev.more');
+  if(revOpen)stopRevAuto();
+  else if(CUR==='home')startRevAuto();
 }
 function revGo(dir){
   renderReview(revIndex+dir,true);
@@ -1829,14 +1933,14 @@ function revGo(dir){
 function stopRevAuto(){if(revTimer){clearInterval(revTimer);revTimer=null}}
 function startRevAuto(){
   stopRevAuto();
-  if(reduceMotion||CUR!=='home')return;
+  if(reduceMotion||CUR!=='home'||revOpen)return;
   revTimer=setInterval(()=>{
-    if(document.hidden)return;
+    if(document.hidden||revOpen)return;
     const sec=$('#revSec');if(!sec)return;
     const r=sec.getBoundingClientRect();
     if(r.bottom<80||r.top>innerHeight-80)return;
     renderReview(revIndex+1,true);
-  },5200);
+  },5600);
 }
 function splitRevTitle(force){
   const el=$('#revTitle');if(!el)return;
@@ -1863,6 +1967,10 @@ function playRevWords(){
 function bindReviews(){
   if(revBound)return;revBound=true;
   const sec=$('#revSec');if(!sec)return;
+  const more=$('#revMore');
+  if(more)more.addEventListener('click',e=>{e.preventDefault();toggleRevMore()});
+  const g=$('#revGoogle');
+  if(g)g.href=GOOGLE_REVIEWS_URL;
   const ioRev=new IntersectionObserver(es=>{
     es.forEach(en=>{
       if(en.isIntersecting){
@@ -1874,10 +1982,14 @@ function bindReviews(){
   },{threshold:.28});
   ioRev.observe(sec);
   sec.addEventListener('mouseenter',stopRevAuto);
-  sec.addEventListener('mouseleave',()=>{if(CUR==='home')startRevAuto()});
+  sec.addEventListener('mouseleave',()=>{if(CUR==='home'&&!revOpen)startRevAuto()});
 }
 function refreshReviews(){
   splitRevTitle(true);
+  const score=$('.rev-rating b');
+  if(score)score.textContent=LANG==='de'?'4,4':'4.4';
+  const scoreWrap=$('.rev-rating');
+  if(scoreWrap)scoreWrap.setAttribute('aria-label',LANG==='de'?'4,4 von 5 Sternen aus 125 Google-Bewertungen':'4.4 out of 5 stars from 125 Google reviews');
   renderReview(revIndex,false);
   syncRevAria();
   const title=$('#revTitle');
