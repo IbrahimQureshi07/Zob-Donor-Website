@@ -610,33 +610,46 @@ a{color:inherit;text-decoration:none}
   .rev-card{transition:none}
 }
 
-/* ============ FRESH SPLIT ============ */
-.fresh-sec{position:relative;overflow:clip}
-.fresh-mark{
-  position:absolute;left:50%;bottom:0;z-index:0;pointer-events:none;user-select:none;
-  transform:translate(-50%,10%);font-family:var(--font-display);font-weight:600;
-  font-size:clamp(88px,22vw,280px);letter-spacing:-.04em;line-height:.8;
-  color:rgba(32,35,33,.07);white-space:nowrap;
+/* ============ FRESH SPLIT (dark island) ============ */
+.fresh-sec{
+  padding:0;overflow:clip;background:var(--night);color:var(--cream);
+  --ink:var(--cream); --ink-dim:#d6c6ae; --mut:#aa9a84;
 }
-.fresh{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1.08fr;gap:clamp(36px,5.5vw,88px);align-items:center}
+.fresh{
+  position:relative;z-index:1;display:grid;grid-template-columns:1.18fr 1fr;
+  gap:0;align-items:stretch;max-width:none;margin:0;padding:0;width:100%;
+  min-height:min(640px,78vh);
+}
 .fresh-img{
-  position:relative;border-radius:26px;overflow:hidden;aspect-ratio:4/3;
-  border:1px solid var(--line);background:var(--bg2);align-self:center;
+  position:relative;overflow:hidden;min-height:100%;background:var(--night);align-self:stretch;
 }
-.fresh-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:46% 42%;filter:saturate(1.04) contrast(1.03) brightness(.98)}
-.fresh-copy{min-width:0}
-.fresh-copy .h2{margin:18px 0 20px}
-.fresh-copy p{max-width:480px}
-.fresh-copy .btn{margin-top:28px}
-.fresh-points{display:grid;grid-template-columns:1fr 1fr;gap:10px 14px;margin-top:26px;max-width:480px;padding:0}
-.fresh-points li{list-style:none;display:flex;gap:10px;align-items:center;font-size:13px;font-weight:700;color:var(--ink-dim);line-height:1.35;padding:10px 12px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
-.fresh-points .ic{width:16px;height:16px;color:var(--copper);flex:none}
+.fresh-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 58%;filter:saturate(.98) contrast(1.04) brightness(.96)}
+.fresh-copy{
+  position:relative;z-index:1;min-width:0;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(48px,6vw,88px) clamp(28px,5vw,72px) clamp(56px,7vw,96px);
+  background:var(--night);
+}
+.fresh-copy .h2{margin:18px 0 22px;color:var(--cream);max-width:14ch}
+.fresh-copy p{max-width:42ch;color:var(--ink-dim)}
+.fresh-copy .btn{margin-top:32px;align-self:flex-start}
+.fresh-copy .btn-ghost{border-color:rgba(243,230,207,.28);color:var(--cream);background:transparent}
+.fresh-copy .btn-ghost:hover{border-color:var(--cream);color:var(--cream);background:rgba(243,230,207,.08)}
+.fresh-copy .orn-div i{box-shadow:0 0 0 3px var(--night),0 0 0 4px rgba(183,125,80,.4)}
+.fresh-mark{
+  position:absolute;right:-4%;bottom:-6%;z-index:0;pointer-events:none;user-select:none;
+  font-family:var(--font-display);font-weight:600;
+  font-size:clamp(72px,12vw,180px);letter-spacing:-.04em;line-height:.8;
+  color:rgba(240,224,197,.07);white-space:nowrap;
+}
+.fresh-copy > *:not(.fresh-mark){position:relative;z-index:1}
 @media(max-width:900px){
-  .fresh{grid-template-columns:1fr;gap:24px}
-  .fresh-copy{order:1}
-  .fresh-img{order:2;aspect-ratio:4/3;max-width:100%}
+  .fresh{grid-template-columns:1fr;min-height:0}
+  .fresh-img{min-height:0;aspect-ratio:4/3}
+  .fresh-copy{padding:40px 22px 64px;justify-content:flex-start}
+  .fresh-copy .h2{max-width:none}
+  .fresh-mark{left:50%;right:auto;bottom:0;transform:translate(-50%,18%);font-size:clamp(72px,24vw,160px)}
 }
-@media(max-width:560px){.fresh-points{grid-template-columns:1fr 1fr;gap:8px 10px}}
 
 /* ============ WHY (unused on home; keep for safety) ============ */
 .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
@@ -1024,7 +1037,9 @@ main,.nav-in,footer{transition:opacity .25s}
   .scroll-ind{display:none}
   .mmenu{padding:96px 22px 28px}
   .mmenu nav a{font-family:var(--font-display);font-stretch:normal;text-transform:none;font-weight:560;font-size:clamp(28px,8vw,38px);letter-spacing:-.02em}
-  .fresh-mark{font-size:clamp(64px,22vw,140px);transform:translate(-50%,8%)}
+  .fresh-sec{padding:0}
+  .fresh-copy{padding:36px 20px 56px}
+  .fresh-mark{font-size:clamp(64px,22vw,140px);transform:translate(-50%,12%)}
   .intro-media{aspect-ratio:4/3}
   .gal-sec{padding-top:64px;padding-bottom:48px}
   .gal-sec .sec-head{margin-bottom:24px}
@@ -1040,7 +1055,7 @@ main,.nav-in,footer{transition:opacity .25s}
   .cat-sec{scroll-margin-top:calc(var(--nav-h) + 56px)}
   .menu-cta{margin-top:48px}
   .about-lead{font-size:clamp(22px,6.4vw,30px)}
-  .story-media,.fresh-img,.mapbox,.intro-media,.cta-banner{border-radius:18px}
+  .story-media,.mapbox,.intro-media,.cta-banner{border-radius:18px}
   .mapbox{height:240px}
   .loc-sec{padding-top:64px;padding-bottom:64px}
   .amb-float--lt,.amb-float--rb,.amb-float--a,.amb-float--b{display:none}
@@ -1319,22 +1334,16 @@ main,.nav-in,footer{transition:opacity .25s}
   </div>
 
   <div class="sec fresh-sec">
-    <div class="fresh-mark" aria-hidden="true">PASSAU</div>
-    <div class="wrap fresh">
+    <div class="fresh">
+      <div class="fresh-img rv-img rv"><img src="Images/about.webp" alt="ZOB Döner Stand in Passau" loading="lazy" decoding="async"></div>
       <div class="fresh-copy">
-        <span class="eyebrow rv" data-i18n="fresh.eyebrow">Frische</span>
+        <div class="fresh-mark" aria-hidden="true">PASSAU</div>
+        <span class="eyebrow rv" data-i18n="fresh.eyebrow">Das ZOB-Gefühl</span>
         <span class="orn-div" aria-hidden="true"><i></i></span>
-        <h2 class="h2 rv" style="--d:.08s" data-i18n="fresh.h">Frisch auf den Teller.</h2>
-        <p class="lead mut rv" style="--d:.14s" data-i18n="fresh.p">Salat frisch geschnitten, Soßen selbst angemacht, Brot außen knusprig und innen fluffig. Jede Bestellung wird erst zubereitet, wenn sie bei uns eingeht — heiß, frisch und mit Liebe zum Detail.</p>
-        <ul class="fresh-points rv" style="--d:.18s">
-          <li><svg class="ic" aria-hidden="true"><use href="#i-leaf"/></svg><span data-i18n="why.c1t">Frisch zubereitet</span></li>
-          <li><svg class="ic" aria-hidden="true"><use href="#i-flame"/></svg><span data-i18n="why.c2t">Voller Geschmack</span></li>
-          <li><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg><span data-i18n="why.c3t">Mitten in Passau</span></li>
-          <li><svg class="ic" aria-hidden="true"><use href="#i-bolt"/></svg><span data-i18n="why.c4t">Schnell &amp; einfach</span></li>
-        </ul>
-        <button class="btn btn-ghost rv" style="--d:.22s" data-nav="about"><span data-i18n="fresh.cta">Mehr über uns</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></button>
+        <h2 class="h2 rv" style="--d:.08s" data-i18n="fresh.h">Street Food, das nach Passau gehört.</h2>
+        <p class="lead mut rv" style="--d:.14s" data-i18n="fresh.p">Knuspriges Brot, frisch geschnittener Salat und Fleisch direkt vom Spieß — dazu Pizza, goldbraune Pide und Boxen, die satt machen. Ohne Schnickschnack, direkt am ZOB.</p>
+        <button class="btn btn-ghost rv" style="--d:.22s" data-nav="about"><span data-i18n="fresh.cta">Mehr über ZOB</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></button>
       </div>
-      <div class="fresh-img rv-img rv"><img src="Images/salad.webp" alt="Frisch zubereitet bei ZOB Döner" loading="lazy" decoding="async"></div>
     </div>
   </div>
 
@@ -1894,7 +1903,7 @@ const I18N={
  'fav.eyebrow':'Signaturen','fav.h':'Unsere Favoriten','fav.sub':'Die Klassiker, die immer wieder bestellt werden — direkt aus unserer Theke.','fav.all':'Zur ganzen Speisekarte','fav.tag':'Signatur','fav.add':'In den Warenkorb','fav.view':'Gericht ansehen',
  'cat.eyebrow':'Kategorien','cat.h':'Was darf\u2019s sein?','cat.sub':'Vier Kategorien, ein Versprechen: frisch, heiß und ehrlich.','cat.note':'Tipp: Alle Gerichte gibt es auch per WhatsApp zur Abholung.','cat.doner':'Döner','cat.box':'Box','cat.pizza':'Pizza','cat.pide':'Pide','cat.full':'Ganze Speisekarte öffnen','cat.prev':'Vorheriges Gericht','cat.next':'Nächstes Gericht',
  'gal.eyebrow':'Galerie','gal.h':'Einblicke.','gal.sub':'Küche, Theke und unsere Klassiker — frisch eingefangen bei ZOB Döner in Passau.','gal.t1':'Einblicke','gal.t2':'Die Theke','gal.t3':'Frisch zubereitet','gal.t4':'Unsere Klassiker','gal.t5':'Mitten in Passau',
- 'fresh.eyebrow':'Frische','fresh.h':'Frisch auf den Teller.','fresh.p':'Salat frisch geschnitten, Soßen selbst angemacht, Brot außen knusprig und innen fluffig. Jede Bestellung wird erst zubereitet, wenn sie bei uns eingeht — heiß, frisch und mit Liebe zum Detail.','fresh.cta':'Mehr über uns',
+ 'fresh.eyebrow':'Das ZOB-Gefühl','fresh.h':'Street Food, das nach Passau gehört.','fresh.p':'Knuspriges Brot, frisch geschnittener Salat und Fleisch direkt vom Spieß — dazu Pizza, goldbraune Pide und Boxen, die satt machen. Ohne Schnickschnack, direkt am ZOB.','fresh.cta':'Mehr über ZOB',
  'rev.eyebrow':'Stimmen','rev.h':'Was Gäste sagen.','rev.p':'Echte Google-Bewertungen unserer Gäste — über Geschmack, Frische und den Besuch am ZOB.','rev.score':'von 5 · 125 Google-Bewertungen','rev.via':'Google Review','rev.more':'Mehr lesen','rev.less':'Weniger','rev.google':'Alle Bewertungen auf Google','rev.prev':'Vorherige Bewertung','rev.next':'Nächste Bewertung',
  'why.eyebrow':'Warum ZOB','why.h':'Warum ZOB Döner?','why.c1t':'Frisch zubereitet','why.c1d':'Frische Zutaten und jedes Gericht, das erst zubereitet wird, wenn du es bestellst.','why.c2t':'Voller Geschmack','why.c2d':'Kräftige Soßen, gegrillte Aromen und Portionen, die wirklich satt machen.','why.c3t':'Mitten in Passau','why.c3d':'Direkt am ZOB gelegen — praktisch, schnell erreichbar, mitten in der Stadt.','why.c4t':'Schnell & einfach','why.c4d':'Unkompliziert per WhatsApp bestellen und bequem bei uns abholen.',
  'loc.eyebrow':'Finde uns','loc.h':'Dein ZOB. Mitten in Passau.','loc.route':'Route planen','loc.call':'Jetzt anrufen','loc.open':'In Google Maps öffnen',
@@ -1916,7 +1925,7 @@ const I18N={
  'fav.eyebrow':'Signatures','fav.h':'Our favourites','fav.sub':'The classics our guests keep coming back for — straight from our counter.','fav.all':'View the full menu','fav.tag':'Signature','fav.add':'Add to cart','fav.view':'View dish',
  'cat.eyebrow':'Categories','cat.h':'What will it be?','cat.sub':'Four categories, one promise: fresh, hot and honest.','cat.note':'Tip: every dish is also available via WhatsApp for pickup.','cat.doner':'Döner','cat.box':'Boxes','cat.pizza':'Pizza','cat.pide':'Pide','cat.full':'Open full menu','cat.prev':'Previous dish','cat.next':'Next dish',
  'gal.eyebrow':'Gallery','gal.h':'Inside ZOB.','gal.sub':'Kitchen, counter and our classics — captured fresh at ZOB Döner in Passau.','gal.t1':'Inside','gal.t2':'The counter','gal.t3':'Freshly made','gal.t4':'Our classics','gal.t5':'Right in Passau',
- 'fresh.eyebrow':'Freshness','fresh.h':'Fresh on your plate.','fresh.p':'Salad freshly cut, sauces made in-house, bread crispy on the outside and fluffy inside. Every order is prepared the moment it comes in — hot, fresh and with care in every detail.','fresh.cta':'More about us',
+ 'fresh.eyebrow':'The ZOB feeling','fresh.h':'Street food that belongs in Passau.','fresh.p':'Crispy bread, freshly cut salad and meat straight from the spit — plus pizza, golden pide and satisfying boxes. No fuss, right at the central bus station.','fresh.cta':'More about ZOB',
  'rev.eyebrow':'Reviews','rev.h':'Hear what they say.','rev.p':'Real Google reviews from our guests — about flavour, freshness and a stop at the ZOB.','rev.score':'out of 5 · 125 Google reviews','rev.via':'Google Review','rev.more':'Read more','rev.less':'Show less','rev.google':'See all reviews on Google','rev.prev':'Previous review','rev.next':'Next review',
  'why.eyebrow':'Why ZOB','why.h':'Why ZOB Döner?','why.c1t':'Freshly prepared','why.c1d':'Fresh ingredients and every dish prepared the moment you order it.','why.c2t':'Full of flavour','why.c2d':'Bold sauces, grilled flavours and portions that truly satisfy.','why.c3t':'Right in Passau','why.c3d':'Located right at the ZOB — convenient, easy to reach, in the middle of town.','why.c4t':'Fast & easy','why.c4d':'Order easily via WhatsApp and collect your food at your convenience.',
  'loc.eyebrow':'Find us','loc.h':'Your ZOB. Right in Passau.','loc.route':'Plan a route','loc.call':'Call now','loc.open':'Open in Google Maps',
