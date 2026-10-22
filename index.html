@@ -80,7 +80,7 @@ a{color:inherit;text-decoration:none}
 .orn-div::after{background:linear-gradient(90deg,currentColor,transparent)}
 .orn-div i{
   flex:none;width:7px;height:7px;border:1.5px solid currentColor;transform:rotate(45deg);
-  box-shadow:0 0 0 3px var(--bg),0 0 0 4px rgba(183,125,80),.35);
+  box-shadow:0 0 0 3px var(--bg),0 0 0 4px rgba(183,125,80,.35);
 }
 .rev-sec .orn-div i{box-shadow:0 0 0 3px rgba(32,35,33,.5),0 0 0 4px rgba(183,125,80,.4)}
 .rev-sec .orn-div{opacity:.85}
@@ -143,7 +143,7 @@ a{color:inherit;text-decoration:none}
 .btn-solid:hover .ic{transform:translateX(4px)}
 .btn-solid:active{transform:translateY(0) scale(.98)}
 .btn-ghost{border-color:var(--line2);color:var(--ink);background:transparent}
-.btn-ghost:hover{border-color:var(--copper);color:var(--copper);background:rgba(183,125,80),.07);transform:translateY(-2px)}
+.btn-ghost:hover{border-color:var(--copper);color:var(--copper);background:rgba(183,125,80,.07);transform:translateY(-2px)}
 .btn-ghost:hover .ic{transform:translateX(4px)}
 .btn-sm{padding:12px 20px;font-size:13.5px}
 .btn-w100{width:100%}
@@ -205,7 +205,7 @@ a{color:inherit;text-decoration:none}
 .lang-menu{position:absolute;top:calc(100% + 10px);right:0;min-width:150px;background:var(--panel2);border:1px solid var(--line2);border-radius:16px;padding:6px;box-shadow:var(--sh);opacity:0;visibility:hidden;transform:translateY(-8px) scale(.97);transform-origin:top right;transition:.3s var(--ease);z-index:5}
 .lang.open .lang-menu{opacity:1;visibility:visible;transform:none}
 .lang-menu button{display:flex;width:100%;align-items:center;justify-content:space-between;gap:10px;padding:11px 14px;border-radius:11px;font-weight:700;font-size:14px;color:var(--ink-dim);transition:.25s}
-.lang-menu button:hover{background:rgba(183,125,80),.12);color:var(--ink)}
+.lang-menu button:hover{background:rgba(183,125,80,.12);color:var(--ink)}
 .lang-menu button.sel{color:var(--blue)}
 .lang-menu button.sel::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--blue)}
 .burger{display:none}
@@ -316,25 +316,19 @@ a{color:inherit;text-decoration:none}
 
 /* ============ INTRO ============ */
 .intro-sec{position:relative;overflow:clip}
-.intro-mark{
-  position:absolute;left:50%;top:54%;z-index:0;pointer-events:none;user-select:none;
-  transform:translate(-50%,-50%);font-family:var(--font-display);font-weight:600;
-  font-size:clamp(88px,22vw,280px);letter-spacing:-.04em;line-height:.8;
-  color:rgba(32,35,33,.06);white-space:nowrap;
-}
-.intro-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(36px,5vw,80px);align-items:stretch}
-.intro-media{position:relative;border-radius:var(--r);overflow:clip;border:1px solid var(--line);align-self:stretch;min-height:280px;height:100%}
-.intro-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.96) contrast(1.03) brightness(.95)}
-.intro-media::after{content:"";position:absolute;inset:0;background:linear-gradient(200deg,transparent 50%,rgba(32,35,33,.35));pointer-events:none;z-index:1}
+.intro-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(32px,5vw,72px);align-items:center}
+.intro-media{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);aspect-ratio:4/3;width:100%;background:var(--bg2)}
+.intro-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 62%;filter:saturate(.98) contrast(1.02) brightness(1)}
 .intro-copy{display:flex;flex-direction:column;justify-content:center;min-width:0}
-.intro-copy .h2{margin:20px 0 26px}
-.intro-copy p+p{margin-top:18px}
-.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
-.chip{display:inline-flex;align-items:center;gap:9px;padding:10px 18px;border:1px solid var(--line2);border-radius:999px;font-size:13px;font-weight:700;color:var(--ink-dim)}
+.intro-copy .h2{margin:20px 0 22px}
+.intro-copy p{max-width:46ch}
+.intro-copy p+p{margin-top:16px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.chip{display:inline-flex;align-items:center;gap:9px;padding:10px 18px;border:1px solid var(--line2);border-radius:999px;font-size:13px;font-weight:700;color:var(--ink-dim);background:var(--panel)}
 .chip .ic{width:14px;color:var(--gold)}
 @media(max-width:900px){
-  .intro-grid{grid-template-columns:1fr;gap:28px}
-  .intro-media{min-height:0;aspect-ratio:16/11}
+  .intro-grid{grid-template-columns:1fr;gap:24px}
+  .intro-media{aspect-ratio:4/3}
   .intro-copy{justify-content:flex-start}
 }
 
@@ -477,7 +471,7 @@ a{color:inherit;text-decoration:none}
 .car-btn .ic{width:16px;height:16px}
 .car-btn.prev{left:4px}
 .car-btn.next{right:4px}
-.car-btn:hover{border-color:var(--copper);color:var(--cream);background:rgba(183,125,80),.9);transform:scale(1.06)}
+.car-btn:hover{border-color:var(--copper);color:var(--cream);background:rgba(183,125,80,.9);transform:scale(1.06)}
 .car-shell.is-static .car-btn{opacity:0;pointer-events:none}
 .cat-cta{display:flex;justify-content:center;margin-top:clamp(28px,4vw,40px)}
 @media(max-width:900px){
@@ -596,7 +590,7 @@ a{color:inherit;text-decoration:none}
 .rev-google .ic{width:15px;height:15px}
 .rev-nav{display:flex;gap:12px;justify-content:flex-end}
 .rev-btn{width:48px;height:48px;border-radius:50%;border:1px solid rgba(240,224,197,.24);color:var(--ink);display:grid;place-items:center;background:rgba(32,35,33,.55);backdrop-filter:blur(8px);transition:border-color .3s,color .3s,background .3s,transform .3s var(--ease)}
-.rev-btn:hover{border-color:var(--copper);color:var(--copper);background:rgba(183,125,80),.12);transform:scale(1.05)}
+.rev-btn:hover{border-color:var(--copper);color:var(--copper);background:rgba(183,125,80,.12);transform:scale(1.05)}
 .rev-btn .ic{width:16px;height:16px}
 @media(max-width:900px){
   .rev-sec{
@@ -617,15 +611,19 @@ a{color:inherit;text-decoration:none}
 }
 
 /* ============ FRESH SPLIT ============ */
-.fresh{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,100px);align-items:start}
-.fresh--flip .fresh-copy{order:1}
-.fresh--flip .fresh-img{order:2}
-.fresh-img{
-  position:sticky;top:calc(var(--nav-h) + 18px);z-index:1;
-  border-radius:26px;overflow:clip;aspect-ratio:4/5;border:1px solid var(--line);
-  box-shadow:0 24px 50px rgba(0,0,0,.28);align-self:start;
+.fresh-sec{position:relative;overflow:clip}
+.fresh-mark{
+  position:absolute;left:50%;bottom:0;z-index:0;pointer-events:none;user-select:none;
+  transform:translate(-50%,10%);font-family:var(--font-display);font-weight:600;
+  font-size:clamp(88px,22vw,280px);letter-spacing:-.04em;line-height:.8;
+  color:rgba(32,35,33,.07);white-space:nowrap;
 }
-.fresh-img img{width:100%;height:114%;object-fit:cover;object-position:75% 50%;will-change:transform;filter:saturate(1.04) contrast(1.03) brightness(.98)}
+.fresh{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1.08fr;gap:clamp(36px,5.5vw,88px);align-items:center}
+.fresh-img{
+  position:relative;border-radius:26px;overflow:hidden;aspect-ratio:4/3;
+  border:1px solid var(--line);background:var(--bg2);align-self:center;
+}
+.fresh-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:46% 42%;filter:saturate(1.04) contrast(1.03) brightness(.98)}
 .fresh-copy{min-width:0}
 .fresh-copy .h2{margin:18px 0 20px}
 .fresh-copy p{max-width:480px}
@@ -634,14 +632,11 @@ a{color:inherit;text-decoration:none}
 .fresh-points li{list-style:none;display:flex;gap:10px;align-items:center;font-size:13px;font-weight:700;color:var(--ink-dim);line-height:1.35;padding:10px 12px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
 .fresh-points .ic{width:16px;height:16px;color:var(--copper);flex:none}
 @media(max-width:900px){
-  .fresh{grid-template-columns:1fr;gap:28px}
-  .fresh--flip .fresh-copy,.fresh--flip .fresh-img{order:unset}
-  .fresh-img{position:relative;top:auto;aspect-ratio:16/11;max-width:100%}
+  .fresh{grid-template-columns:1fr;gap:24px}
+  .fresh-copy{order:1}
+  .fresh-img{order:2;aspect-ratio:4/3;max-width:100%}
 }
-@media(max-width:560px){.fresh-points{grid-template-columns:1fr}}
-@media(prefers-reduced-motion:reduce){
-  .fresh-img{position:relative;top:auto}
-}
+@media(max-width:560px){.fresh-points{grid-template-columns:1fr 1fr;gap:8px 10px}}
 
 /* ============ WHY (unused on home; keep for safety) ============ */
 .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
@@ -801,7 +796,7 @@ a{color:inherit;text-decoration:none}
 @media(max-width:900px){.band{background-attachment:scroll}}
 
 /* ============ ABOUT FAQ + FORM ============ */
-.faq-sec{position:relative;overflow:clip;isolation:isolate;border-block:1px solid var(--line);background:radial-gradient(90% 70% at 8% 0%,rgba(183,125,80),.08),transparent 55%),var(--bg2)}
+.faq-sec{position:relative;overflow:clip;isolation:isolate;border-block:1px solid var(--line);background:radial-gradient(90% 70% at 8% 0%,rgba(183,125,80,.08),transparent 55%),var(--bg2)}
 .faq-sec::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.35;background-image:radial-gradient(rgba(243,238,226,.07) 1px,transparent 1px);background-size:22px 22px;mask-image:linear-gradient(180deg,transparent,black 18%,black 82%,transparent)}
 .faq-sec>.wrap{position:relative;z-index:1}
 .faq-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,5vw,64px);align-items:stretch}
@@ -810,7 +805,7 @@ a{color:inherit;text-decoration:none}
 .faq-col .sec-head p{margin-inline:0;max-width:36ch}
 .faq-list{flex:1;display:flex;flex-direction:column;gap:12px;justify-content:space-between}
 .faq-item{border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden;transition:border-color .35s var(--ease),box-shadow .35s}
-.faq-item.open{border-color:rgba(183,125,80),.4);box-shadow:0 12px 28px rgba(32,28,20,.08)}
+.faq-item.open{border-color:rgba(183,125,80,.4);box-shadow:0 12px 28px rgba(32,28,20,.08)}
 .faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 20px;text-align:left;font-weight:800;font-size:15.5px;letter-spacing:-.01em;color:var(--ink)}
 .faq-q .ic{width:16px;height:16px;flex:none;color:var(--gold);transition:transform .35s var(--ease)}
 .faq-item.open .faq-q .ic{transform:rotate(45deg)}
@@ -1029,8 +1024,8 @@ main,.nav-in,footer{transition:opacity .25s}
   .scroll-ind{display:none}
   .mmenu{padding:96px 22px 28px}
   .mmenu nav a{font-family:var(--font-display);font-stretch:normal;text-transform:none;font-weight:560;font-size:clamp(28px,8vw,38px);letter-spacing:-.02em}
-  .intro-mark{font-size:clamp(72px,26vw,160px);top:48%}
-  .intro-media{aspect-ratio:5/4}
+  .fresh-mark{font-size:clamp(64px,22vw,140px);transform:translate(-50%,8%)}
+  .intro-media{aspect-ratio:4/3}
   .gal-sec{padding-top:64px;padding-bottom:48px}
   .gal-sec .sec-head{margin-bottom:24px}
   .gal-card{height:min(52svh,420px);border-radius:18px}
@@ -1220,7 +1215,6 @@ main,.nav-in,footer{transition:opacity .25s}
   </div>
 
   <div class="sec has-amb intro-sec">
-    <div class="intro-mark" aria-hidden="true">PASSAU</div>
     <div class="amb-decor" aria-hidden="true">
       <img class="amb-float amb-float--a" src="Images/bg-2.png" alt="" loading="lazy" decoding="async">
       <img class="amb-float amb-float--b" src="Images/bg-1.png" alt="" loading="lazy" decoding="async">
@@ -1324,6 +1318,26 @@ main,.nav-in,footer{transition:opacity .25s}
     </div>
   </div>
 
+  <div class="sec fresh-sec">
+    <div class="fresh-mark" aria-hidden="true">PASSAU</div>
+    <div class="wrap fresh">
+      <div class="fresh-copy">
+        <span class="eyebrow rv" data-i18n="fresh.eyebrow">Frische</span>
+        <span class="orn-div" aria-hidden="true"><i></i></span>
+        <h2 class="h2 rv" style="--d:.08s" data-i18n="fresh.h">Frisch auf den Teller.</h2>
+        <p class="lead mut rv" style="--d:.14s" data-i18n="fresh.p">Salat frisch geschnitten, Soßen selbst angemacht, Brot außen knusprig und innen fluffig. Jede Bestellung wird erst zubereitet, wenn sie bei uns eingeht — heiß, frisch und mit Liebe zum Detail.</p>
+        <ul class="fresh-points rv" style="--d:.18s">
+          <li><svg class="ic" aria-hidden="true"><use href="#i-leaf"/></svg><span data-i18n="why.c1t">Frisch zubereitet</span></li>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-flame"/></svg><span data-i18n="why.c2t">Voller Geschmack</span></li>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg><span data-i18n="why.c3t">Mitten in Passau</span></li>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-bolt"/></svg><span data-i18n="why.c4t">Schnell &amp; einfach</span></li>
+        </ul>
+        <button class="btn btn-ghost rv" style="--d:.22s" data-nav="about"><span data-i18n="fresh.cta">Mehr über uns</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></button>
+      </div>
+      <div class="fresh-img rv-img rv"><img src="Images/salad.webp" alt="Frisch zubereitet bei ZOB Döner" loading="lazy" decoding="async"></div>
+    </div>
+  </div>
+
   <div class="sec gal-sec">
     <div class="wrap">
       <div class="sec-head" style="text-align:center">
@@ -1354,25 +1368,6 @@ main,.nav-in,footer{transition:opacity .25s}
         <img src="Images/gallery images/fifth.webp?v=2" alt="ZOB Döner Passau — Pizza aus dem Ofen" loading="lazy" decoding="async">
         <figcaption class="gal-cap"><b class="num">05</b><span data-i18n="gal.t5">Mitten in Passau</span></figcaption>
       </figure>
-    </div>
-  </div>
-
-  <div class="sec alt">
-    <div class="wrap fresh fresh--flip">
-      <div class="fresh-copy">
-        <span class="eyebrow rv" data-i18n="fresh.eyebrow">Frische</span>
-        <span class="orn-div" aria-hidden="true"><i></i></span>
-        <h2 class="h2 rv" style="--d:.08s" data-i18n="fresh.h">Frisch auf den Teller.</h2>
-        <p class="lead mut rv" style="--d:.14s" data-i18n="fresh.p">Salat frisch geschnitten, Soßen selbst angemacht, Brot außen knusprig und innen fluffig. Jede Bestellung wird erst zubereitet, wenn sie bei uns eingeht — heiß, frisch und mit Liebe zum Detail.</p>
-        <ul class="fresh-points rv" style="--d:.18s">
-          <li><svg class="ic" aria-hidden="true"><use href="#i-leaf"/></svg><span data-i18n="why.c1t">Frisch zubereitet</span></li>
-          <li><svg class="ic" aria-hidden="true"><use href="#i-flame"/></svg><span data-i18n="why.c2t">Voller Geschmack</span></li>
-          <li><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg><span data-i18n="why.c3t">Mitten in Passau</span></li>
-          <li><svg class="ic" aria-hidden="true"><use href="#i-bolt"/></svg><span data-i18n="why.c4t">Schnell &amp; einfach</span></li>
-        </ul>
-        <button class="btn btn-ghost rv" style="--d:.22s" data-nav="about"><span data-i18n="fresh.cta">Mehr über uns</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></button>
-      </div>
-      <div class="fresh-img rv-img rv"><img data-plx src="Images/salad.webp" alt="Frische Zutaten bei ZOB Döner" loading="lazy" decoding="async"></div>
     </div>
   </div>
 
