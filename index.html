@@ -11,16 +11,18 @@
 <link rel="preload" as="image" href="Images/logo%20with%20background.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&display=swap" rel="stylesheet">
 <style>
 /* ============ TOKENS / RESET ============ */
 :root{
-  --cream:#F0E0C5; --blue:#8DC8D8; --copper:#B77D50;
-  --bg:#202321; --bg2:#262927; --panel:#2a2d2b; --panel2:#313533;
-  --ink:var(--cream); --ink-dim:#d4c4a8; --mut:#a89880;
+  --cream:#F3E6CF; --blue:#C8B89A; --copper:#B77D50;
+  --bg:#1c1e1c; --bg2:#242624; --panel:#2a2c2a; --panel2:#323432;
+  --ink:var(--cream); --ink-dim:#d6c6ae; --mut:#aa9a84;
   --gold:var(--copper); --gold2:#9a6843; --orange:#B77D50; --red:#e5484d;
-  --on-accent:#202321;
-  --line:rgba(240,224,197,.09); --line2:rgba(240,224,197,.18);
+  --on-accent:#1c1e1c;
+  --line:rgba(243,230,207,.1); --line2:rgba(243,230,207,.2);
+  --font-display:"Fraunces",Georgia,"Times New Roman",serif;
+  --font-body:"DM Sans",system-ui,sans-serif;
   --r:22px; --nav-h:86px;
   --ease:cubic-bezier(.22,.75,.25,1);
   --sh:0 24px 60px rgba(0,0,0,.45);
@@ -30,16 +32,16 @@ html{scroll-behavior:auto}
 html,body{overflow-x:clip}
 body{
   background:var(--bg); color:var(--ink);
-  font-family:"Archivo",sans-serif; font-size:16px; line-height:1.65; font-weight:450;
+  font-family:var(--font-body); font-size:16px; line-height:1.65; font-weight:450;
   -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
 }
 body.lock{overflow:hidden}
 img{display:block;max-width:100%}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 a{color:inherit;text-decoration:none}
-::selection{background:var(--blue);color:var(--on-accent)}
+::selection{background:var(--copper);color:var(--cream)}
 ::-webkit-scrollbar{width:10px}::-webkit-scrollbar-thumb{background:#3a3e3c;border-radius:8px}::-webkit-scrollbar-track{background:var(--bg)}
-:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px}
+:focus-visible{outline:2px solid var(--copper);outline-offset:3px;border-radius:4px}
 .skip{position:fixed;top:-60px;left:16px;z-index:400;background:var(--copper);color:var(--on-accent);padding:10px 18px;border-radius:999px;font-weight:700;transition:top .3s}
 .skip:focus{top:14px}
 .wrap{max-width:1260px;margin:0 auto;padding:0 28px}
@@ -52,7 +54,7 @@ a{color:inherit;text-decoration:none}
 @keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-40px,30px)}50%{transform:translate(30px,-45px)}75%{transform:translate(-25px,-20px)}100%{transform:translate(0,0)}}
 .glow{position:fixed;width:60vw;height:60vw;border-radius:50%;pointer-events:none;z-index:0;filter:blur(10px)}
 .glow.a{top:-25vw;left:-18vw;background:radial-gradient(closest-side,rgba(183,125,80,.03),transparent 70%);animation:drift 34s ease-in-out infinite alternate}
-.glow.b{bottom:-30vw;right:-20vw;background:radial-gradient(closest-side,rgba(141,200,216,.04),transparent 70%);animation:drift 42s ease-in-out infinite alternate-reverse}
+.glow.b{bottom:-30vw;right:-20vw;background:radial-gradient(closest-side,rgba(243,230,207,.04),transparent 70%);animation:drift 42s ease-in-out infinite alternate-reverse}
 @keyframes drift{to{transform:translate(6vw,4vw) scale(1.12)}}
 
 /* ============ ORNAMENTS (brand-fit, Najm-level polish) ============ */
@@ -118,8 +120,16 @@ a{color:inherit;text-decoration:none}
 /* ============ TYPE SYSTEM ============ */
 .eyebrow{display:inline-flex;align-items:center;gap:12px;font-size:12px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
 .eyebrow::before{content:"";width:34px;height:1px;background:var(--gold)}
-.h-display{font-weight:900;font-stretch:110%;text-transform:uppercase;letter-spacing:-.015em;line-height:.94;font-size:clamp(46px,7.4vw,106px);color:var(--cream)}
-.h2{font-weight:900;font-stretch:108%;text-transform:uppercase;letter-spacing:-.01em;line-height:.98;font-size:clamp(34px,4.6vw,64px);color:var(--cream)}
+.h-display{
+  font-family:var(--font-display); font-weight:560; font-stretch:normal;
+  text-transform:none; letter-spacing:-.03em; line-height:.96;
+  font-size:clamp(42px,7vw,96px); color:var(--cream);
+}
+.h2{
+  font-family:var(--font-display); font-weight:560; font-stretch:normal;
+  text-transform:none; letter-spacing:-.025em; line-height:1.05;
+  font-size:clamp(30px,4.4vw,58px); color:var(--cream);
+}
 .lead{font-size:clamp(17px,1.5vw,20px);color:var(--ink-dim);line-height:1.75;font-weight:450}
 .mut{color:var(--mut)}
 .num{font-variant-numeric:tabular-nums}
@@ -133,7 +143,7 @@ a{color:inherit;text-decoration:none}
 .btn-solid:hover .ic{transform:translateX(4px)}
 .btn-solid:active{transform:translateY(0) scale(.98)}
 .btn-ghost{border-color:rgba(240,224,197,.24);color:var(--ink);background:rgba(240,224,197,.02)}
-.btn-ghost:hover{border-color:var(--blue);color:var(--blue);background:rgba(141,200,216,.1);transform:translateY(-2px)}
+.btn-ghost:hover{border-color:var(--cream);color:var(--cream);background:rgba(243,230,207,.08);transform:translateY(-2px)}
 .btn-ghost:hover .ic{transform:translateX(4px)}
 .btn-sm{padding:12px 20px;font-size:13.5px}
 .btn-w100{width:100%}
@@ -293,7 +303,14 @@ a{color:inherit;text-decoration:none}
 @keyframes marq{to{transform:translateX(-50%)}}
 
 /* ============ INTRO ============ */
-.intro-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(36px,5vw,80px);align-items:stretch}
+.intro-sec{position:relative;overflow:clip}
+.intro-mark{
+  position:absolute;left:50%;top:54%;z-index:0;pointer-events:none;user-select:none;
+  transform:translate(-50%,-50%);font-family:var(--font-display);font-weight:600;
+  font-size:clamp(88px,22vw,280px);letter-spacing:-.04em;line-height:.8;
+  color:rgba(243,230,207,.045);white-space:nowrap;
+}
+.intro-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(36px,5vw,80px);align-items:stretch}
 .intro-media{position:relative;border-radius:var(--r);overflow:clip;border:1px solid var(--line);align-self:stretch;min-height:280px;height:100%}
 .intro-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.96) contrast(1.03) brightness(.95)}
 .intro-media::after{content:"";position:absolute;inset:0;background:linear-gradient(200deg,transparent 50%,rgba(32,35,33,.35));pointer-events:none;z-index:1}
@@ -352,8 +369,8 @@ a{color:inherit;text-decoration:none}
 .fav-info{min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding:8px 0}
 .fav-info .eyebrow{margin-bottom:2px}
 .fav-info h3{
-  font-weight:900;font-stretch:108%;text-transform:uppercase;letter-spacing:-.015em;line-height:1.05;
-  font-size:clamp(26px,3.4vw,44px);color:var(--cream);
+  font-family:var(--font-display);font-weight:560;font-stretch:normal;text-transform:none;
+  letter-spacing:-.03em;line-height:1.08;font-size:clamp(26px,3.4vw,44px);color:var(--cream);
 }
 .fav-info p{color:var(--ink-dim);font-size:clamp(15px,1.3vw,17.5px);line-height:1.65;max-width:34ch;margin:0}
 .fav-act{display:flex;align-items:center;flex-wrap:wrap;gap:16px 22px;margin-top:10px}
@@ -708,7 +725,7 @@ a{color:inherit;text-decoration:none}
 .cta-sec .wrap{width:100%}
 
 /* ============ ABOUT ============ */
-.about-lead{font-size:clamp(24px,3vw,38px);font-weight:800;font-stretch:108%;line-height:1.25;letter-spacing:-.01em;max-width:900px}
+.about-lead{font-family:var(--font-display);font-size:clamp(24px,3vw,38px);font-weight:560;font-stretch:normal;line-height:1.25;letter-spacing:-.02em;max-width:900px}
 .about-lead.rev-words{gap:.12em .26em}
 .about-cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,70px);margin-top:44px}
 .about-cols p{color:var(--ink-dim)}
@@ -724,8 +741,8 @@ a{color:inherit;text-decoration:none}
 .story-copy{min-width:0}
 .story-copy .eyebrow{margin-bottom:0}
 .story-copy h3,.story-copy .h3{
-  font-weight:900;font-stretch:108%;text-transform:uppercase;letter-spacing:-.01em;line-height:1.05;
-  font-size:clamp(26px,3.2vw,40px);color:var(--cream);margin:14px 0 16px;
+  font-family:var(--font-display);font-weight:560;font-stretch:normal;text-transform:none;
+  letter-spacing:-.025em;line-height:1.08;font-size:clamp(26px,3.2vw,40px);color:var(--cream);margin:14px 0 16px;
 }
 .story-copy p{color:var(--ink-dim);font-size:clamp(15.5px,1.35vw,18px);line-height:1.7;max-width:48ch}
 @media(max-width:900px){
@@ -1114,7 +1131,8 @@ main,.nav-in,footer{transition:opacity .25s}
     </div>
   </div>
 
-  <div class="sec has-amb">
+  <div class="sec has-amb intro-sec">
+    <div class="intro-mark" aria-hidden="true">PASSAU</div>
     <div class="amb-decor" aria-hidden="true">
       <img class="amb-float amb-float--a" src="Images/bg-2.png" alt="" loading="lazy" decoding="async">
       <img class="amb-float amb-float--b" src="Images/bg-1.png" alt="" loading="lazy" decoding="async">
