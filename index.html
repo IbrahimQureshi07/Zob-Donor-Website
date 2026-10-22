@@ -393,37 +393,54 @@ a{color:inherit;text-decoration:none}
   .fav-pin,.fav-more{display:none}
   .fav-mhead{display:block}
 }
-.f-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:stretch;width:100%;min-width:0}
+.f-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:stretch;width:100%;min-width:0}
 .f-card{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:20px;
-  overflow:hidden;
-  transition:transform .45s var(--ease),border-color .45s,box-shadow .45s;
-  display:flex;flex-direction:column;min-width:0;min-height:0;height:100%;
+  position:relative;background:var(--bg2);border:0;border-radius:14px;overflow:hidden;
+  transition:transform .45s var(--ease),box-shadow .45s;
+  min-width:0;min-height:0;height:100%;isolation:isolate;
 }
-.f-card:hover{transform:translateY(-5px);border-color:rgba(183,125,80),.4);box-shadow:0 16px 36px rgba(32,28,20,.12)}
-.f-img{position:relative;aspect-ratio:5/4;width:100%;overflow:hidden;flex:none;background:var(--bg2)}
-.f-img img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center;filter:saturate(1.04) contrast(1.04) brightness(.98);transition:transform .8s var(--ease)}
+.f-card:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(32,28,20,.16)}
+.f-img{position:relative;aspect-ratio:1/1;width:100%;overflow:hidden;background:var(--bg2)}
+.f-img img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center;filter:saturate(1.04) contrast(1.05) brightness(.96);transition:transform .8s var(--ease)}
 .f-card:hover .f-img img{transform:scale(1.05)}
-.f-img::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,transparent 50%,rgba(32,35,33,.4) 100%);pointer-events:none}
-.f-tag{position:absolute;top:14px;left:14px;z-index:2;background:var(--copper);color:var(--on-accent);font-size:10.5px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;padding:7px 13px;border-radius:999px}
-.f-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
-.f-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;min-width:0}
-.f-top h4{font-size:17px;font-weight:800;letter-spacing:-.01em;color:var(--ink);min-width:0;overflow-wrap:anywhere}
-.f-price{color:var(--copper);font-weight:900;font-size:15.5px;white-space:nowrap;flex:none}
-.f-body>p{font-size:13px;color:var(--mut);line-height:1.5;margin:0;flex:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.f-body .btn{align-self:flex-start;margin-top:auto;padding:10px 16px;font-size:12.5px}
-@media(max-width:1000px){.f-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}}
-@media(max-width:620px){
-  .f-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-  .f-card{border-radius:16px}
-  .f-body{padding:12px 12px 14px;gap:6px}
-  .f-top h4{font-size:14px}
-  .f-price{font-size:13px}
-  .f-body>p{display:none}
-  .f-body .btn{padding:8px 12px;font-size:11.5px;width:100%;justify-content:center}
-  .f-tag{top:10px;left:10px;font-size:9.5px;padding:5px 10px}
+.f-img::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,transparent 42%,rgba(32,35,33,.72) 100%);pointer-events:none}
+.f-tag{position:absolute;top:10px;left:10px;z-index:2;background:var(--copper);color:var(--on-accent);font-size:9.5px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;padding:5px 10px;border-radius:999px}
+.f-cap{
+  position:absolute;left:0;right:0;bottom:0;z-index:2;
+  display:flex;align-items:flex-end;justify-content:space-between;gap:8px;
+  padding:12px;pointer-events:none;
+}
+.f-cap h4{
+  margin:0;flex:1;min-width:0;
+  font-family:var(--font-display);font-weight:560;font-size:clamp(15px,3.8vw,20px);
+  letter-spacing:-.02em;line-height:1.15;color:var(--cream);
+  overflow-wrap:anywhere;text-shadow:0 1px 10px rgba(32,35,33,.35);
+}
+.f-plus{
+  pointer-events:auto;flex:none;
+  width:36px;height:36px;border-radius:50%;border:0;padding:0;
+  display:grid;place-items:center;
+  background:var(--copper);color:var(--on-accent);
+  box-shadow:0 6px 16px rgba(32,28,20,.28);
+  transition:transform .3s var(--ease),background .3s,color .3s;
+}
+.f-plus .ic{width:16px;height:16px;stroke-width:2.4}
+.f-plus:hover{transform:scale(1.08);background:var(--gold2)}
+.f-plus:active{transform:scale(.96)}
+.f-plus.ok{background:var(--night);color:var(--cream)}
+@media(min-width:621px){
+  .f-grid{gap:14px}
+  .f-card{border-radius:18px}
+  .f-cap{padding:14px 16px}
+  .f-cap h4{font-size:clamp(18px,2vw,22px)}
+  .f-plus{width:40px;height:40px}
+  .f-tag{top:12px;left:12px;font-size:10px;padding:6px 11px}
+}
+@media(max-width:380px){
+  .f-cap{padding:10px}
+  .f-cap h4{font-size:14px}
+  .f-plus{width:32px;height:32px}
+  .f-plus .ic{width:14px;height:14px}
 }
 
 /* ============ CATEGORY STRIP ============ */
@@ -1014,7 +1031,6 @@ main,.nav-in,footer{transition:opacity .25s}
   .mmenu nav a{font-family:var(--font-display);font-stretch:normal;text-transform:none;font-weight:560;font-size:clamp(28px,8vw,38px);letter-spacing:-.02em}
   .intro-mark{font-size:clamp(72px,26vw,160px);top:48%}
   .intro-media{aspect-ratio:5/4}
-  .f-img{aspect-ratio:16/11}
   .gal-sec{padding-top:64px;padding-bottom:48px}
   .gal-sec .sec-head{margin-bottom:24px}
   .gal-card{height:min(52svh,420px);border-radius:18px}
@@ -2017,12 +2033,15 @@ function priceLabel(it){return Array.isArray(it.p)?t('menu.from')+' '+fmt(it.p[0
 function imgSrc(it,w=900,h=700){return it.img||`https://picsum.photos/seed/${it.id}/`+w+`/`+h+`.jpg`}
 function favCard(it,opts={}){
   return `<article class="f-card rv"${opts.delay!=null?` style="--d:${opts.delay}s"`:''}>
-    <div class="f-img"><img loading="lazy" decoding="async" src="${imgSrc(it,900,700)}" alt="${it.n} — ZOB Döner Passau">${it.tag?`<span class="f-tag">${t('fav.tag')}</span>`:''}</div>
-    <div class="f-body">
-      <div class="f-top"><h4>${it.n}</h4><span class="f-price num">${priceLabel(it)}</span></div>
-      <p>${desc(it.d)}</p>
-      <button type="button" class="btn btn-solid btn-sm js-add" data-add="${it.id}" onclick="return window.zobAdd(this,event)"><svg class="ic" aria-hidden="true"><use href="#i-bag"/></svg><span>${t('fav.add')}</span></button>
-    </div></article>`;
+    <div class="f-img">
+      <img loading="lazy" decoding="async" src="${imgSrc(it,900,900)}" alt="${it.n} — ZOB Döner Passau">
+      ${it.tag?`<span class="f-tag">${t('fav.tag')}</span>`:''}
+      <div class="f-cap">
+        <h4>${it.n}</h4>
+        <button type="button" class="f-plus js-add" data-add="${it.id}" aria-label="${t('fav.add')}: ${it.n}" onclick="return window.zobAdd(this,event)"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></button>
+      </div>
+    </div>
+  </article>`;
 }
 function itemCard(it){
   const multi=Array.isArray(it.p);
@@ -2530,10 +2549,11 @@ function handleAddClick(e,el){
     const card=btn.closest?btn.closest('.m-item,.f-card'):null;
     const img=card?card.querySelector('img'):null;
     const ok=addToCart(id,null,1,img);
-    if(ok&&btn.classList.contains('add-btn')){
+    if(ok&&(btn.classList.contains('add-btn')||btn.classList.contains('f-plus'))){
       btn.classList.add('ok');
       const span=btn.querySelector('span');
       if(span){const old=span.textContent;span.textContent='✓';setTimeout(()=>{btn.classList.remove('ok');span.textContent=old},1400)}
+      else setTimeout(()=>btn.classList.remove('ok'),1400);
     }
     return false;
   }catch(err){return false}
