@@ -59,7 +59,7 @@ a{color:inherit;text-decoration:none}
 @keyframes drift{to{transform:translate(6vw,4vw) scale(1.12)}}
 
 /* ============ ORNAMENTS (brand-fit, Najm-level polish) ============ */
-.orn-rails{position:fixed;inset:0;z-index:40;pointer-events:none;display:none}
+.orn-rails{display:none!important}
 .orn-rail{
   position:absolute;top:12vh;bottom:8vh;width:22px;opacity:.13;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='88' viewBox='0 0 22 88' fill='none'%3E%3Cpath d='M11 2c4 6 7 10 7 16s-3 10-7 16c-4-6-7-10-7-16S7 8 11 2Z' stroke='%23EDE6D8' stroke-width='1' opacity='.85'/%3E%3Ccircle cx='11' cy='44' r='2.2' fill='%23E6B15F' opacity='.9'/%3E%3Cpath d='M4 52c3 2 5 5 7 10 2-5 4-8 7-10' stroke='%23E6B15F' stroke-width='1' opacity='.8'/%3E%3Cpath d='M11 64c3 4 5 7 5 11s-2 7-5 11c-3-4-5-7-5-11s2-7 5-11Z' stroke='%23EDE6D8' stroke-width='1' opacity='.7'/%3E%3C/svg%3E");
@@ -69,7 +69,6 @@ a{color:inherit;text-decoration:none}
 }
 .orn-rail--l{left:max(10px,calc((100vw - 1320px)/2 - 8px))}
 .orn-rail--r{right:max(10px,calc((100vw - 1320px)/2 - 8px));transform:scaleX(-1)}
-@media(min-width:1180px){.orn-rails{display:block}}
 .orn-div{
   display:flex;align-items:center;gap:12px;margin:14px 0 2px;max-width:220px;
   color:var(--copper);opacity:.72;pointer-events:none;
@@ -296,17 +295,28 @@ a{color:inherit;text-decoration:none}
 .scroll-ind i{width:1px;height:46px;background:var(--line2);position:relative;overflow:hidden;display:block}
 .scroll-ind i::after{content:"";position:absolute;left:0;top:-100%;width:100%;height:50%;background:var(--copper);animation:sline 1.9s var(--ease) infinite}
 @keyframes sline{60%{top:100%}100%{top:100%}}
-.stamp{position:absolute;right:clamp(16px,4vw,56px);bottom:clamp(22px,5vh,52px);z-index:6;width:168px;height:168px;border-radius:50%;background:var(--gold);border:0;display:grid;place-items:center;box-shadow:0 18px 40px rgba(0,0,0,.35)}
-.stamp .ring{position:absolute;inset:6px;animation:spin 18s linear infinite}
+.stamp{
+  position:absolute;right:clamp(16px,4vw,56px);bottom:clamp(22px,5vh,52px);z-index:6;
+  width:141px;height:141px;border-radius:50%;
+  background:#12110f;border:1px solid rgba(230,177,95,.9);
+  display:grid;place-items:center;box-shadow:0 18px 40px rgba(0,0,0,.4);
+}
+.stamp .ring{position:absolute;inset:3px;animation:spin 18s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.stamp .stamp-logo{width:54px;height:54px;object-fit:contain;position:relative;z-index:1;filter:brightness(0)}
-.stamp text{font-size:8.4px;font-weight:800;letter-spacing:2.2px;fill:var(--night);font-family:var(--font-body),sans-serif}
+.stamp text{font-size:7.1px;font-weight:800;letter-spacing:2.6px;fill:var(--cream);font-family:var(--font-body),sans-serif}
+.stamp-mid{
+  position:relative;z-index:1;width:56%;height:56%;border-radius:50%;overflow:hidden;
+  background:var(--gold);box-shadow:0 0 0 1px rgba(230,177,95,.35);
+}
+.stamp .stamp-logo{
+  width:118%;height:118%;max-width:none;object-fit:cover;object-position:center;
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:block;
+}
 @media(max-width:900px){
   .hero-bg img{object-position:center 40%}
   .hero-bg::after{background:linear-gradient(180deg,rgba(14,13,12,.55) 0%,rgba(14,13,12,.35) 35%,rgba(14,13,12,.82) 100%)}
   .hero-in{padding-bottom:clamp(100px,12vh,130px)}
   .stamp{width:128px;height:128px;bottom:18px;right:16px}
-  .stamp .stamp-logo{width:40px;height:40px}
 }
 
 /* ============ MARQUEE ============ */
@@ -322,25 +332,56 @@ a{color:inherit;text-decoration:none}
 /* ============ ARCH / SELECTIONS ============ */
 .arch-frame{
   position:relative;overflow:hidden;background:var(--bg2);
-  border-radius:180px 180px 18px 18px;
+  border-radius:500px 500px 0 0;
   box-shadow:0 0 0 1px rgba(230,177,95,.5);
   isolation:isolate;
 }
-.arch-frame img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.15s var(--ease)}
-.arch-frame:hover img{transform:scale(1.06)}
+.arch-frame img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  filter:saturate(1.04) contrast(1.05) brightness(.96);
+  transition:transform 1.05s var(--ease),filter .6s;
+}
+.arch-frame::before{
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(115deg,transparent 32%,rgba(247,245,240,.28) 50%,transparent 68%);
+  transform:translateX(-130%);transition:transform .95s var(--ease);
+}
+.arch-frame::after{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,transparent 42%,rgba(14,13,12,.72) 100%);
+  transition:background .5s var(--ease);
+}
 .sel-sec{padding-top:clamp(72px,9vw,120px);padding-bottom:clamp(40px,5vw,64px)}
-.sel-sec .sec-head{text-align:center}
+.sel-sec .sec-head{text-align:center;display:flex;flex-direction:column;align-items:center}
 .sel-sec .sec-head .h2{margin-inline:auto}
+.sel-sec .orn-div{margin-inline:auto}
+.title-badge{
+  display:block;width:min(168px,42vw);height:auto;margin:0 auto 10px;
+  filter:drop-shadow(0 8px 18px rgba(0,0,0,.28));
+}
 .arch-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.4vw,28px);align-items:end}
-.arch-card{display:block;min-width:0;background:none;border:0;color:inherit;padding:0;cursor:pointer;text-align:left;width:100%;font:inherit}
+.arch-card{
+  display:block;min-width:0;background:none;border:0;color:inherit;padding:0;cursor:pointer;text-align:left;width:100%;font:inherit;
+  transition:transform .45s var(--ease);
+}
 .arch-card .arch-frame{aspect-ratio:4/5}
+.arch-card:hover{transform:translateY(-8px)}
 .arch-card:nth-child(2){transform:translateY(28px)}
-.arch-cap{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-top:14px;padding:0 6px}
+.arch-card:nth-child(2):hover{transform:translateY(20px)}
+.arch-card:hover .arch-frame img{transform:scale(1.1);filter:saturate(1.08) contrast(1.06) brightness(1)}
+.arch-card:hover .arch-frame::before{transform:translateX(130%)}
+.arch-card:hover .arch-frame::after{background:linear-gradient(180deg,rgba(14,13,12,.08) 0%,rgba(14,13,12,.28) 42%,rgba(14,13,12,.78) 100%)}
+.arch-cap{
+  display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-top:14px;padding:0 6px;
+  transition:transform .5s var(--ease);
+}
+.arch-card:hover .arch-cap{transform:translateY(-4px)}
 .arch-cap b{font-family:var(--font-display);font-weight:560;font-size:clamp(16px,1.6vw,20px)}
 .arch-cap span{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
 @media(max-width:900px){
   .arch-row{grid-template-columns:1fr 1fr}
   .arch-card:nth-child(2){transform:none}
+  .arch-card:hover,.arch-card:nth-child(2):hover{transform:translateY(-8px)}
   .arch-card:nth-child(3){grid-column:1/-1;max-width:70%;margin-inline:auto}
 }
 @media(max-width:560px){
@@ -351,7 +392,7 @@ a{color:inherit;text-decoration:none}
 /* ============ INTRO ============ */
 .intro-sec{position:relative;overflow:clip}
 .intro-grid{position:relative;z-index:1;display:grid;grid-template-columns:.92fr 1.08fr;gap:clamp(32px,5vw,72px);align-items:center}
-.intro-media{position:relative;overflow:hidden;aspect-ratio:4/5;width:100%;background:var(--bg2);border-radius:200px 200px 22px 22px;box-shadow:0 0 0 1px rgba(230,177,95,.5)}
+.intro-media{position:relative;overflow:hidden;aspect-ratio:4/5;width:100%;background:var(--bg2);border-radius:500px 500px 0 0;box-shadow:0 0 0 1px rgba(230,177,95,.5)}
 .intro-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 62%;filter:saturate(.98) contrast(1.02) brightness(1);transition:transform 1.2s var(--ease)}
 .intro-media:hover img{transform:scale(1.05)}
 .intro-copy{display:flex;flex-direction:column;justify-content:center;min-width:0;order:-1}
@@ -432,7 +473,7 @@ a{color:inherit;text-decoration:none}
   min-width:0;min-height:0;height:100%;isolation:isolate;
 }
 .f-card:hover{transform:translateY(-8px)}
-.f-img{position:relative;aspect-ratio:3/4;width:100%;overflow:hidden;background:var(--bg2);border-radius:170px 170px 16px 16px;box-shadow:0 0 0 1px rgba(230,177,95,.5)}
+.f-img{position:relative;aspect-ratio:3/4;width:100%;overflow:hidden;background:var(--bg2);border-radius:500px 500px 0 0;box-shadow:0 0 0 1px rgba(230,177,95,.5)}
 .f-img img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center;filter:saturate(1.04) contrast(1.05) brightness(.96);transition:transform 1.05s var(--ease),filter .6s}
 .f-card:hover .f-img img{transform:scale(1.1);filter:saturate(1.08) contrast(1.06) brightness(1)}
 .f-img::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(115deg,transparent 32%,rgba(247,245,240,.28) 50%,transparent 68%);transform:translateX(-130%);transition:transform .95s var(--ease)}
@@ -1137,7 +1178,7 @@ main,.nav-in,footer{transition:opacity .25s}
   .fresh-sec{padding:0}
   .fresh-copy{padding:36px 20px 56px}
   .fresh-mark{font-size:clamp(64px,22vw,140px);transform:translate(-50%,12%)}
-  .intro-media{aspect-ratio:4/5;border-radius:140px 140px 16px 16px}
+  .intro-media{aspect-ratio:4/5;border-radius:500px 500px 0 0}
   .gal-sec{padding-top:64px;padding-bottom:48px}
   .gal-sec .sec-head{margin-bottom:24px}
   .gal-stack{grid-template-columns:1fr;gap:12px}
@@ -1310,10 +1351,10 @@ main,.nav-in,footer{transition:opacity .25s}
     <div class="scroll-ind" id="scrollInd"><span data-i18n="hero.scroll">Scroll</span><i></i></div>
     <div class="stamp" aria-hidden="true">
       <svg class="ring" viewBox="0 0 100 100">
-        <defs><path id="circ" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></defs>
+        <defs><path id="circ" d="M50,50 m-39,0 a39,39 0 1,1 78,0 a39,39 0 1,1 -78,0"/></defs>
         <text><textPath href="#circ">ZOB DÖNER · PASSAU · ZOB DÖNER · PASSAU ·</textPath></text>
       </svg>
-      <img class="stamp-logo" src="Images/logo%20without%20background.png" alt="">
+      <span class="stamp-mid"><img class="stamp-logo" src="Images/book-icon-1.png" alt="" decoding="async"></span>
     </div>
   </div>
 
@@ -1330,7 +1371,8 @@ main,.nav-in,footer{transition:opacity .25s}
 
   <div class="sec sel-sec">
     <div class="wrap">
-      <div class="sec-head">
+      <div class="sec-head is-center">
+        <img class="title-badge rv" src="Images/menu-title-badge.svg" alt="" width="215" height="99" decoding="async">
         <span class="eyebrow rv" style="justify-content:center" data-i18n="sel.eyebrow">Auswahl</span>
         <span class="orn-div" aria-hidden="true"><i></i></span>
         <h2 class="h2 rv" style="--d:.08s" data-i18n="sel.h">Unsere Klassiker.</h2>
