@@ -429,16 +429,22 @@ a{color:inherit;text-decoration:none}
   display:flex;flex-direction:column;align-items:center;text-align:center;
   margin-bottom:clamp(36px,5vw,64px);max-width:920px;margin-inline:auto;
 }
-.intro-star{width:clamp(28px,3.2vw,40px);height:auto;display:block;margin-bottom:18px}
+.intro-label-row{
+  display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  margin-bottom:16px;
+}
+.intro-star{
+  width:14px;height:14px;flex:none;display:block;object-fit:contain;
+}
 .intro-label{
   font-size:12px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;
-  color:var(--gold);margin-bottom:16px;
+  color:var(--gold);line-height:1;
 }
-.intro-head .story-h{margin:0;max-width:18ch;font-size:clamp(30px,4.2vw,54px);line-height:1.16}
+.intro-head .story-h{margin:0;max-width:36ch;font-size:clamp(34px,4.6vw,58px);line-height:1.18;letter-spacing:-.015em}
 .story-h .gold{color:var(--gold);font-style:normal}
-.intro-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,72px);align-items:center}
+.intro-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,72px);align-items:stretch}
 .intro-media{
-  position:relative;overflow:hidden;aspect-ratio:4/5;width:100%;
+  position:relative;overflow:hidden;aspect-ratio:4/5;width:100%;height:100%;
   background:var(--bg2);border-radius:500px 500px 0 0;isolation:isolate;
 }
 .intro-media img{
@@ -458,7 +464,7 @@ a{color:inherit;text-decoration:none}
   content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
   background:linear-gradient(180deg,transparent 48%,rgba(14,13,12,.55) 100%);
 }
-.intro-copy{display:flex;flex-direction:column;justify-content:center;min-width:0}
+.intro-copy{display:flex;flex-direction:column;justify-content:center;min-width:0;height:100%}
 .story-h{font-size:clamp(28px,3.6vw,48px);line-height:1.18}
 .story-h .story-pic{
   display:inline-block;width:3.1em;height:.72em;border-radius:999px;overflow:hidden;
@@ -494,18 +500,34 @@ a{color:inherit;text-decoration:none}
   color:var(--gold);margin-bottom:6px;
 }
 .intro-feat p{margin:0;font-size:14px;line-height:1.55;color:var(--ink-dim)}
+.intro-cta{
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;
+  gap:16px 22px;margin-top:clamp(28px,3.8vw,44px);
+  padding-top:clamp(22px,3vw,32px);border-top:1px solid var(--line2);
+}
+.intro-cta-label{
+  display:block;font-size:12px;font-weight:800;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:8px;line-height:1;
+}
+.intro-cta-num{
+  font-family:var(--font-display);font-size:clamp(22px,2.5vw,30px);
+  font-weight:560;letter-spacing:-.02em;color:var(--ink);line-height:1.1;
+  transition:color .3s;
+}
+.intro-cta-num:hover,.intro-cta-num:focus-visible{color:var(--gold)}
 @media(max-width:900px){
   .intro-head{margin-bottom:28px}
   .intro-head .story-h{max-width:none}
   .intro-grid{grid-template-columns:1fr;gap:24px}
-  .intro-media{aspect-ratio:4/3;order:-1}
-  .intro-copy{justify-content:flex-start}
+  .intro-media{display:none}
+  .intro-copy{justify-content:flex-start;height:auto}
   .intro-feats{grid-template-columns:1fr;gap:18px}
 }
 @media(max-width:560px){
   .intro-feat{gap:12px}
   .feat-ico{width:50px;height:50px}
   .feat-ico img{width:30px;height:30px}
+  .intro-cta{flex-direction:column;align-items:flex-start}
 }
 
 /* ============ SECTION HEAD ============ */
@@ -1518,9 +1540,12 @@ main,.nav-in,footer{transition:opacity .25s}
     </div>
     <div class="wrap">
       <div class="intro-head">
-        <img class="intro-star rv" src="Images/star-element.svg" alt="" width="40" height="40" decoding="async">
-        <span class="intro-label rv" data-i18n="intro.label">Unsere Geschichte</span>
-        <h2 class="h2 story-h rv" style="--d:.08s" data-i18n-html="intro.story">Frisch vom <i class="story-pic"><img src="Images/zob-doner.jpg" alt=""></i> <span class="gold">Spieß</span>, <i class="story-pic"><img src="Images/doner-pizza.jpg" alt=""></i> <span class="gold">Pizza</span> &amp; <i class="story-pic"><img src="Images/Sucuk-Pide.jpg" alt=""></i> <span class="gold">Pide</span>.</h2>
+        <div class="intro-label-row rv">
+          <img class="intro-star" src="Images/star-element.svg" alt="" width="14" height="14" decoding="async">
+          <span class="intro-label" data-i18n="intro.label">Unsere Geschichte</span>
+          <img class="intro-star" src="Images/star-element.svg" alt="" width="14" height="14" decoding="async">
+        </div>
+        <h2 class="h2 story-h rv" style="--d:.08s" data-i18n-html="intro.story">Frisch vom <i class="story-pic"><img src="Images/zob-doner.jpg" alt=""></i> <span class="gold">Spieß</span>, <i class="story-pic"><img src="Images/doner-pizza.jpg" alt=""></i> <span class="gold">Pizza</span>, <i class="story-pic"><img src="Images/Sucuk-Pide.jpg" alt=""></i> <span class="gold">Pide</span>, <i class="story-pic"><img src="Images/Fleisch-Box.jpg" alt=""></i> <span class="gold">Box</span> &amp; <i class="story-pic"><img src="Images/Döner Dürüm.jpg" alt=""></i> <span class="gold">Dürüm</span>.</h2>
       </div>
       <div class="intro-grid">
         <div class="intro-copy rv" style="--d:.14s">
@@ -1541,6 +1566,13 @@ main,.nav-in,footer{transition:opacity .25s}
                 <p data-i18n="intro.f2d">Direkt am ZOB — schnell, herzlich und mit dem Gefühl von zu Hause.</p>
               </div>
             </article>
+          </div>
+          <div class="intro-cta">
+            <div>
+              <span class="intro-cta-label" data-i18n="intro.cta">Jetzt kontaktieren</span>
+              <a class="intro-cta-num" href="tel:+4915906361242">+49 1590 6361242</a>
+            </div>
+            <a class="btn btn-solid" href="#/about" data-nav="about"><span data-i18n="nav.about">Über uns</span><svg class="ic" aria-hidden="true"><use href="#i-arr"/></svg></a>
           </div>
         </div>
         <div class="intro-media rv-img rv" style="--d:.18s">
@@ -2230,7 +2262,7 @@ function trEn(s){let o=s;ENMAP.forEach(([de,en])=>{o=o.replace(new RegExp(de.rep
 const I18N={
  de:{'a.skip':'Zum Inhalt springen','l.sub':'Passau · Frisches Street Food','brand.sub':'Döner · Passau','nav.home':'Home','nav.menu':'Menü','nav.about':'Über uns','nav.contact':'Kontakt','nav.order':'Jetzt bestellen','m.lang':'Sprache',
  'hero.eyebrow':'ZOB Döner · Passau','hero.t1':'Dein Döner.','hero.t2':'Dein Moment.','hero.sub':'Frisch. Herzhaft. Mitten in Passau — Döner, Box, Pizza & Pide, handgemacht und heiß auf den Teller.','hero.cta1':'Jetzt bestellen','hero.cta2':'Speisekarte ansehen','hero.scroll':'Scroll',
- 'intro.eyebrow':'Willkommen bei ZOB','intro.label':'Unsere Geschichte','intro.h':'Mehr als nur Döner.','intro.story':'Frisch vom <i class="story-pic"><img src="Images/zob-doner.jpg" alt=""></i> <span class="gold">Spieß</span>, <i class="story-pic"><img src="Images/doner-pizza.jpg" alt=""></i> <span class="gold">Pizza</span> &amp; <i class="story-pic"><img src="Images/Sucuk-Pide.jpg" alt=""></i> <span class="gold">Pide</span>.','intro.p1':'Unsere Geschichte beginnt direkt am ZOB in Passau: frisches Street Food ohne Umwege — Döner vom Spieß, knusprige Pizza, goldbraune Pide und Boxen, die satt machen.','intro.p2':'Wir kochen, was wir selbst gern essen. Saubere Basics, ehrliche Zubereitung und faire Preise — für den schnellen Happen zwischendurch oder das große Essen mit Freunden.','intro.c1':'Frisch zubereitet','intro.c2':'Kräftig im Geschmack','intro.c3':'Faire Preise','intro.f1t':'Hygienisches Essen','intro.f1d':'Saubere Theke, frische Zutaten und ehrliche Zubereitung — jeden Tag.','intro.f2t':'Gutes Ambiente','intro.f2d':'Direkt am ZOB — schnell, herzlich und mit dem Gefühl von zu Hause.',
+ 'intro.eyebrow':'Willkommen bei ZOB','intro.label':'Unsere Geschichte','intro.h':'Mehr als nur Döner.','intro.story':'Frisch vom <i class="story-pic"><img src="Images/zob-doner.jpg" alt=""></i> <span class="gold">Spieß</span>, <i class="story-pic"><img src="Images/doner-pizza.jpg" alt=""></i> <span class="gold">Pizza</span>, <i class="story-pic"><img src="Images/Sucuk-Pide.jpg" alt=""></i> <span class="gold">Pide</span>, <i class="story-pic"><img src="Images/Fleisch-Box.jpg" alt=""></i> <span class="gold">Box</span> &amp; <i class="story-pic"><img src="Images/Döner Dürüm.jpg" alt=""></i> <span class="gold">Dürüm</span>.','intro.p1':'Unsere Geschichte beginnt direkt am ZOB in Passau: frisches Street Food ohne Umwege — Döner vom Spieß, knusprige Pizza, goldbraune Pide und Boxen, die satt machen.','intro.p2':'Wir kochen, was wir selbst gern essen. Saubere Basics, ehrliche Zubereitung und faire Preise — für den schnellen Happen zwischendurch oder das große Essen mit Freunden.','intro.c1':'Frisch zubereitet','intro.c2':'Kräftig im Geschmack','intro.c3':'Faire Preise','intro.f1t':'Hygienisches Essen','intro.f1d':'Saubere Theke, frische Zutaten und ehrliche Zubereitung — jeden Tag.','intro.f2t':'Gutes Ambiente','intro.f2d':'Direkt am ZOB — schnell, herzlich und mit dem Gefühl von zu Hause.','intro.cta':'Jetzt kontaktieren',
  'fav.eyebrow':'Signaturen','fav.h':'Unsere Favoriten','fav.sub':'Die Klassiker, die immer wieder bestellt werden — direkt aus unserer Theke.','fav.all':'Zur ganzen Speisekarte','fav.tag':'Signatur','fav.add':'In den Warenkorb','fav.view':'Gericht ansehen',
  'sel.eyebrow':'Auswahl','sel.h':'Unsere Klassiker.','sel.view':'Menü ansehen','sel.d1':'Unser Klassiker — frisch vom Spieß, mit Salat und Hirtenkäse.','sel.d2':'Knuspriger Boden mit Dönerfleisch, Paprika und Zwiebeln.','sel.d3':'Goldbraune Pide mit Sucuk, Käse und Röstpaprika.',
  'cat.eyebrow':'Kategorien','cat.h':'Was darf\u2019s sein?','cat.sub':'Vier Kategorien, ein Versprechen: frisch, heiß und ehrlich.','cat.note':'Tipp: Alle Gerichte gibt es auch per WhatsApp zur Abholung.','cat.doner':'Döner','cat.box':'Box','cat.pizza':'Pizza','cat.pide':'Pide','cat.full':'Ganze Speisekarte öffnen','cat.prev':'Vorheriges Gericht','cat.next':'Nächstes Gericht',
@@ -2253,7 +2285,7 @@ const I18N={
  'fo.tag':'Frischer Geschmack. Mitten in Passau.','fo.nav':'Navigation','fo.contact':'Kontakt','fo.hours':'Bestellung','fo.rights':'Alle Rechte vorbehalten.','l.imp':'Impressum','l.priv':'Datenschutz'},
  en:{'a.skip':'Skip to content','l.sub':'Passau · Fresh Street Food','brand.sub':'Döner · Passau','nav.home':'Home','nav.menu':'Menu','nav.about':'About us','nav.contact':'Contact','nav.order':'Order now','m.lang':'Language',
  'hero.eyebrow':'ZOB Döner · Passau','hero.t1':'Your döner.','hero.t2':'Your moment.','hero.sub':'Fresh. Hearty. Right in the heart of Passau — döner, boxes, pizza & pide, handmade and served hot.','hero.cta1':'Order now','hero.cta2':'View the menu','hero.scroll':'Scroll',
- 'intro.eyebrow':'Welcome to ZOB','intro.label':'Our Story','intro.h':'More than just döner.','intro.story':'Fresh from the <i class="story-pic"><img src="Images/zob-doner.jpg" alt=""></i> <span class="gold">spit</span>, <i class="story-pic"><img src="Images/doner-pizza.jpg" alt=""></i> <span class="gold">pizza</span> &amp; <i class="story-pic"><img src="Images/Sucuk-Pide.jpg" alt=""></i> <span class="gold">pide</span>.','intro.p1':'Our story starts right at the ZOB in Passau: fresh street food with no fuss — döner from the spit, crispy pizza, golden-brown pide and boxes that fill you up.','intro.p2':'We cook what we love to eat ourselves. Clean basics, honest prep and fair prices — for a quick bite between stops or a big meal with friends.','intro.c1':'Freshly prepared','intro.c2':'Bursting with flavour','intro.c3':'Fair prices','intro.f1t':'Hygienic food','intro.f1d':'A clean counter, fresh ingredients and honest prep — every day.','intro.f2t':'Fresh ambience','intro.f2d':'Right at the ZOB — quick, warm and with a feel-good vibe.',
+ 'intro.eyebrow':'Welcome to ZOB','intro.label':'Our Story','intro.h':'More than just döner.','intro.story':'Fresh from the <i class="story-pic"><img src="Images/zob-doner.jpg" alt=""></i> <span class="gold">spit</span>, <i class="story-pic"><img src="Images/doner-pizza.jpg" alt=""></i> <span class="gold">pizza</span>, <i class="story-pic"><img src="Images/Sucuk-Pide.jpg" alt=""></i> <span class="gold">pide</span>, <i class="story-pic"><img src="Images/Fleisch-Box.jpg" alt=""></i> <span class="gold">box</span> &amp; <i class="story-pic"><img src="Images/Döner Dürüm.jpg" alt=""></i> <span class="gold">dürüm</span>.','intro.p1':'Our story starts right at the ZOB in Passau: fresh street food with no fuss — döner from the spit, crispy pizza, golden-brown pide and boxes that fill you up.','intro.p2':'We cook what we love to eat ourselves. Clean basics, honest prep and fair prices — for a quick bite between stops or a big meal with friends.','intro.c1':'Freshly prepared','intro.c2':'Bursting with flavour','intro.c3':'Fair prices','intro.f1t':'Hygienic food','intro.f1d':'A clean counter, fresh ingredients and honest prep — every day.','intro.f2t':'Fresh ambience','intro.f2d':'Right at the ZOB — quick, warm and with a feel-good vibe.','intro.cta':'Contact Now',
  'fav.eyebrow':'Signatures','fav.h':'Our favourites','fav.sub':'The classics our guests keep coming back for — straight from our counter.','fav.all':'View the full menu','fav.tag':'Signature','fav.add':'Add to cart','fav.view':'View dish',
  'sel.eyebrow':'Selections','sel.h':'Signature plates.','sel.view':'View menu','sel.d1':'Our classic — fresh from the spit, with salad and feta.','sel.d2':'Crispy base with döner meat, peppers and onions.','sel.d3':'Golden-brown pide with sucuk, cheese and roasted peppers.',
  'cat.eyebrow':'Categories','cat.h':'What will it be?','cat.sub':'Four categories, one promise: fresh, hot and honest.','cat.note':'Tip: every dish is also available via WhatsApp for pickup.','cat.doner':'Döner','cat.box':'Boxes','cat.pizza':'Pizza','cat.pide':'Pide','cat.full':'Open full menu','cat.prev':'Previous dish','cat.next':'Next dish',
