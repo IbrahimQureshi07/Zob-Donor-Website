@@ -135,16 +135,19 @@ a{color:inherit;text-decoration:none}
 .num{font-variant-numeric:tabular-nums}
 
 /* ============ BUTTONS ============ */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:16px 30px;border-radius:999px;font-weight:800;font-size:15px;letter-spacing:.02em;border:1px solid transparent;transition:transform .35s var(--ease),background .35s,border-color .35s,color .35s,box-shadow .35s;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:16px 30px;border-radius:999px;font-weight:800;font-size:15px;letter-spacing:.02em;border:1px solid transparent;overflow:hidden;vertical-align:middle;transition:background .35s,border-color .35s,color .35s,box-shadow .35s,transform .25s var(--ease);white-space:nowrap}
 .btn svg,.btn .ic,.btn span,.add-btn svg,.add-btn .ic,.add-btn span,.icon-btn svg,.qty button svg,.c-rm svg{pointer-events:none}
-.btn .ic{transition:transform .35s var(--ease)}
+.btn-wrap{display:grid;justify-items:center;align-items:center;max-width:100%;overflow:hidden}
+.btn-w100 .btn-wrap,.btn-w100 .btn-line{width:100%}
+.btn-line{grid-area:1/1;display:inline-flex;align-items:center;justify-content:center;gap:10px;transition:transform .55s var(--ease)}
+.btn-line.is-dup{transform:translateY(100%)}
+.btn:hover .btn-line:not(.is-dup),.btn:focus-visible .btn-line:not(.is-dup){transform:translateY(-100%)}
+.btn:hover .btn-line.is-dup,.btn:focus-visible .btn-line.is-dup{transform:translateY(0)}
 .btn-solid{background:var(--copper);color:var(--on-accent)}
-.btn-solid:hover{background:#c89263;transform:translateY(-2px);box-shadow:0 14px 34px rgba(183,125,80,.28)}
-.btn-solid:hover .ic{transform:translateX(4px)}
-.btn-solid:active{transform:translateY(0) scale(.98)}
+.btn-solid:hover,.btn-solid:focus-visible{background:#c89263;box-shadow:0 14px 34px rgba(183,125,80,.28)}
+.btn-solid:active{transform:scale(.98)}
 .btn-ghost{border-color:var(--line2);color:var(--ink);background:transparent}
-.btn-ghost:hover{border-color:var(--copper);color:var(--copper);background:rgba(183,125,80,.07);transform:translateY(-2px)}
-.btn-ghost:hover .ic{transform:translateX(4px)}
+.btn-ghost:hover,.btn-ghost:focus-visible{border-color:var(--copper);color:var(--copper);background:rgba(183,125,80,.07)}
 .btn-sm{padding:12px 20px;font-size:13.5px}
 .btn-w100{width:100%}
 
@@ -279,7 +282,7 @@ a{color:inherit;text-decoration:none}
 .hero h1 [data-i18n]{display:inline;white-space:pre-wrap}
 .hero{--ink:var(--cream);--ink-dim:#d6c6ae;--mut:#aa9a84}
 .hero .btn-ghost{border-color:rgba(243,230,207,.28);color:var(--cream);background:transparent}
-.hero .btn-ghost:hover{border-color:var(--cream);color:var(--cream);background:rgba(243,230,207,.08)}
+.hero .btn-ghost:hover,.hero .btn-ghost:focus-visible{border-color:var(--cream);color:var(--cream);background:rgba(243,230,207,.08)}
 .hero-sub{max-width:480px;color:var(--ink-dim);font-size:clamp(16px,1.55vw,18.5px);line-height:1.65}
 .hero.typed .hero-sub{opacity:1;transform:none;transition-delay:.06s}
 .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
@@ -651,7 +654,7 @@ a{color:inherit;text-decoration:none}
 .fresh-copy p{max-width:42ch;color:var(--ink-dim)}
 .fresh-copy .btn{margin-top:32px;align-self:flex-start}
 .fresh-copy .btn-ghost{border-color:rgba(243,230,207,.28);color:var(--cream);background:transparent}
-.fresh-copy .btn-ghost:hover{border-color:var(--cream);color:var(--cream);background:rgba(243,230,207,.08)}
+.fresh-copy .btn-ghost:hover,.fresh-copy .btn-ghost:focus-visible{border-color:var(--cream);color:var(--cream);background:rgba(243,230,207,.08)}
 .fresh-copy .orn-div i{box-shadow:0 0 0 3px var(--night),0 0 0 4px rgba(183,125,80,.4)}
 .fresh-mark{
   position:absolute;right:-4%;bottom:-6%;z-index:0;pointer-events:none;user-select:none;
@@ -782,13 +785,14 @@ a{color:inherit;text-decoration:none}
 }
 
 /* ============ CTA BANNER ============ */
-.cta-banner{position:relative;border:1px solid var(--line2);border-radius:30px;padding:clamp(56px,8vw,96px) clamp(28px,5vw,56px);text-align:center;overflow:clip;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(120% 160% at 50% -20%,rgba(183,125,80,.14),transparent 55%),linear-gradient(180deg,var(--panel2),var(--panel))}
+.cta-banner{display:none!important;position:relative;border:1px solid var(--line2);border-radius:30px;padding:clamp(56px,8vw,96px) clamp(28px,5vw,56px);text-align:center;overflow:clip;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(120% 160% at 50% -20%,rgba(183,125,80,.14),transparent 55%),linear-gradient(180deg,var(--panel2),var(--panel))}
 .cta-banner .h2{margin-bottom:16px}
 .cta-banner p{max-width:480px;margin:0 auto 34px;color:var(--ink-dim)}
 .cta-banner .hero-cta{justify-content:center;margin-top:0}
 .cat-home{padding-top:clamp(72px,9vw,120px)}
-.cta-sec{display:flex;align-items:center;min-height:calc(100svh - 96px);padding:clamp(60px,8vw,120px) 0}
+.cta-sec{display:none!important;align-items:center;min-height:calc(100svh - 96px);padding:clamp(60px,8vw,120px) 0}
 .cta-sec .wrap{width:100%}
+.sec:has(.cta-banner){display:none!important}
 
 /* ============ ABOUT ============ */
 .about-lead{font-family:var(--font-display);font-size:clamp(24px,3vw,38px);font-weight:560;font-stretch:normal;line-height:1.25;letter-spacing:-.02em;max-width:900px}
@@ -1035,6 +1039,8 @@ main,.nav-in,footer{transition:opacity .25s}
   .rv,.hero .eyebrow,.hero .hero-sub,.hero .hero-cta,.hero .hero-meta,.phero p{opacity:1!important;transform:none!important}
   .hero.go .hero-bg img,.fav-float,.amb-float{animation:none!important}
   .rev-words .w>i{transform:none!important}
+  .btn-line,.btn:hover .btn-line,.btn:focus-visible .btn-line{transform:none!important}
+  .btn-line.is-dup{display:none}
 }
 
 /* ============ MOBILE RHYTHM (phones) — last so it wins ============ */
@@ -1854,6 +1860,31 @@ main,.nav-in,footer{transition:opacity .25s}
    ZOB DÖNER — single-file app
    ============================================================ */
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+function enhanceBtns(scope){
+  const root=scope&&scope.querySelectorAll?scope:document;
+  root.querySelectorAll('.btn').forEach(btn=>{
+    const first=btn.firstElementChild;
+    if(first&&first.classList.contains('btn-wrap'))return;
+    const wrap=document.createElement('span');
+    wrap.className='btn-wrap';
+    const line=document.createElement('span');
+    line.className='btn-line';
+    while(btn.firstChild) line.appendChild(btn.firstChild);
+    const dup=line.cloneNode(true);
+    dup.classList.add('is-dup');
+    dup.setAttribute('aria-hidden','true');
+    dup.querySelectorAll('[id]').forEach(el=>el.removeAttribute('id'));
+    wrap.append(line,dup);
+    btn.appendChild(wrap);
+  });
+}
+function syncBtnDup(btn){
+  const line=btn&&btn.querySelector('.btn-line:not(.is-dup)');
+  const dup=btn&&btn.querySelector('.btn-line.is-dup');
+  if(!line||!dup)return;
+  dup.innerHTML=line.innerHTML;
+  dup.querySelectorAll('[id]').forEach(el=>el.removeAttribute('id'));
+}
 const WA_NUM='4915906361242', TEL='+4915906361242';
 const SIZES=['27 cm','36 cm','40 cm'];
 const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -2507,6 +2538,7 @@ function renderCart(){
         <svg class="bus-big ic" aria-hidden="true"><use href="#i-bus"/></svg>
         <b>${t('c.empty')}</b><p>${t('c.emptyP')}</p>
         <button class="btn btn-solid btn-sm" data-nav="menu"><span>${t('c.go')}</span></button></div>`;
+      enhanceBtns(body);
     }
   }else{
     if(foot)foot.style.display='flex';
@@ -2715,6 +2747,7 @@ function updatePm(){
   const it=ALL[pm.id];if(!it)return;
   $('#pmQty').textContent=pm.q;
   $('#pmTot').textContent=fmt(unit(it,pm.s)*pm.q);
+  syncBtnDup($('#pmAdd'));
 }
 let legalKind=null;
 function openLegal(kind){
@@ -3014,6 +3047,7 @@ function applyLang(){
   refreshAboutLead();
   const lm=$('#legalModal');
   if(legalKind&&lm&&lm.classList.contains('open'))openLegal(legalKind);
+  enhanceBtns();
 }
 function setLang(l){
   if(l===LANG)return;
