@@ -333,13 +333,17 @@ a{color:inherit;text-decoration:none}
 .arch-frame{
   position:relative;overflow:hidden;background:var(--bg2);
   border-radius:500px 500px 0 0;
-  box-shadow:0 0 0 1px rgba(230,177,95,.5);
   isolation:isolate;
 }
 .arch-frame img{
   width:100%;height:100%;object-fit:cover;display:block;
   filter:saturate(1.04) contrast(1.05) brightness(.96);
   transition:transform 1.05s var(--ease),filter .6s;
+}
+.arch-inset{
+  position:absolute;inset:clamp(10px,2.2vw,14px);z-index:3;pointer-events:none;
+  border:1px solid rgba(230,177,95,.72);
+  border-radius:500px 500px 0 0;
 }
 .arch-frame::before{
   content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
@@ -351,7 +355,16 @@ a{color:inherit;text-decoration:none}
   background:linear-gradient(180deg,transparent 42%,rgba(14,13,12,.72) 100%);
   transition:background .5s var(--ease);
 }
-.sel-sec{padding-top:clamp(72px,9vw,120px);padding-bottom:clamp(40px,5vw,64px)}
+.sel-sec{position:relative;overflow:clip;padding-top:clamp(72px,9vw,120px);padding-bottom:clamp(40px,5vw,64px)}
+.sel-sec>.wrap{position:relative;z-index:1}
+.sel-mark{
+  position:absolute;left:50%;top:auto;bottom:4%;z-index:0;pointer-events:none;user-select:none;
+  transform:translate(-50%,0) rotate(-10deg);
+  font-family:var(--font-display);font-style:italic;font-weight:500;
+  font-size:clamp(56px,14vw,180px);line-height:.9;letter-spacing:-.02em;
+  white-space:nowrap;color:transparent;-webkit-text-stroke:1px rgba(230,177,95,.18);
+  text-transform:lowercase;
+}
 .sel-sec .sec-head{text-align:center;display:flex;flex-direction:column;align-items:center}
 .sel-sec .sec-head .h2{margin-inline:auto}
 .sel-sec .orn-div{margin-inline:auto}
@@ -372,21 +385,51 @@ a{color:inherit;text-decoration:none}
 .arch-card:hover .arch-frame::before{transform:translateX(130%)}
 .arch-card:hover .arch-frame::after{background:linear-gradient(180deg,rgba(14,13,12,.08) 0%,rgba(14,13,12,.28) 42%,rgba(14,13,12,.78) 100%)}
 .arch-cap{
-  display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-top:14px;padding:0 6px;
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  gap:10px;margin-top:clamp(18px,2.4vw,26px);padding:0 10px;
   transition:transform .5s var(--ease);
 }
 .arch-card:hover .arch-cap{transform:translateY(-4px)}
-.arch-cap b{font-family:var(--font-display);font-weight:560;font-size:clamp(16px,1.6vw,20px)}
-.arch-cap span{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.arch-cap b{
+  font-family:var(--font-display);font-weight:560;letter-spacing:-.02em;
+  font-size:clamp(22px,2.2vw,30px);line-height:1.15;color:var(--cream);
+}
+.arch-desc{
+  margin:0;max-width:30ch;color:var(--ink-dim);
+  font-size:clamp(13.5px,1.2vw,15px);line-height:1.55;font-weight:500;
+}
+.arch-view{
+  display:inline-block;margin-top:4px;padding-bottom:5px;
+  font-size:11.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+  color:#e6b15f;border-bottom:1px solid #e6b15f;
+  transition:color .3s,border-color .3s;
+}
+.arch-card:hover .arch-view{color:#fff;border-bottom-color:#fff}
 @media(max-width:900px){
-  .arch-row{grid-template-columns:1fr 1fr}
+  .sel-sec{padding-top:clamp(56px,10vw,88px);padding-bottom:clamp(36px,7vw,56px)}
+  .sel-mark{bottom:2%;font-size:clamp(48px,18vw,120px);-webkit-text-stroke:1px rgba(230,177,95,.14)}
+  .title-badge{width:min(140px,38vw);margin-bottom:6px}
+  .arch-row{grid-template-columns:1fr 1fr;gap:clamp(22px,4vw,32px) 14px;align-items:start}
   .arch-card:nth-child(2){transform:none}
-  .arch-card:hover,.arch-card:nth-child(2):hover{transform:translateY(-8px)}
-  .arch-card:nth-child(3){grid-column:1/-1;max-width:70%;margin-inline:auto}
+  .arch-card:hover,.arch-card:nth-child(2):hover{transform:translateY(-6px)}
+  .arch-card:nth-child(3){grid-column:1/-1;max-width:78%;margin-inline:auto}
+  .arch-inset{inset:clamp(8px,2vw,12px)}
+  .arch-cap{padding:0 2px;gap:8px;margin-top:16px}
+  .arch-cap b{font-size:clamp(18px,4.6vw,24px)}
+  .arch-desc{max-width:28ch;font-size:13px;line-height:1.5}
+  .arch-view{font-size:11px;letter-spacing:.16em;padding-bottom:4px}
 }
 @media(max-width:560px){
-  .arch-row{grid-template-columns:1fr;gap:22px}
-  .arch-card:nth-child(3){max-width:none}
+  .sel-sec{padding-top:52px;padding-bottom:48px}
+  .sel-mark{bottom:6%;font-size:clamp(42px,20vw,88px);opacity:.9}
+  .title-badge{width:min(120px,46vw)}
+  .arch-row{grid-template-columns:1fr;gap:34px}
+  .arch-card:nth-child(3){max-width:100%;width:100%}
+  .arch-card .arch-frame{aspect-ratio:3/4;max-width:320px;margin-inline:auto}
+  .arch-cap{margin-top:16px;padding:0 8px;gap:9px}
+  .arch-cap b{font-size:clamp(22px,6.5vw,26px)}
+  .arch-desc{max-width:34ch;font-size:14px}
+  .arch-view{margin-top:2px}
 }
 
 /* ============ INTRO ============ */
@@ -1199,6 +1242,8 @@ main,.nav-in,footer{transition:opacity .25s}
   .mapbox{height:240px}
   .loc-sec{padding-top:64px;padding-bottom:64px}
   .amb-float--lt,.amb-float--rb,.amb-float--a,.amb-float--b{display:none}
+  .sel-sec{padding-top:56px;padding-bottom:52px}
+  .sel-sec .sec-head{margin-bottom:28px}
   .fav-mhead .sec-head{margin-bottom:22px}
   .btn{white-space:normal}
   .ft-mark{font-size:clamp(52px,16vw,88px)}
@@ -1370,6 +1415,7 @@ main,.nav-in,footer{transition:opacity .25s}
   </div>
 
   <div class="sec sel-sec">
+    <div class="sel-mark" aria-hidden="true">zob doner</div>
     <div class="wrap">
       <div class="sec-head is-center">
         <img class="title-badge rv" src="Images/menu-title-badge.svg" alt="" width="215" height="99" decoding="async">
@@ -1379,16 +1425,37 @@ main,.nav-in,footer{transition:opacity .25s}
       </div>
       <div class="arch-row">
         <button type="button" class="arch-card rv" data-open="d2">
-          <div class="arch-frame"><img src="Images/zob-doner.jpg" alt="ZOB Döner" loading="lazy" decoding="async"></div>
-          <div class="arch-cap"><b>ZOB Döner</b><span data-i18n="cat.doner">Döner</span></div>
+          <div class="arch-frame">
+            <img src="Images/zob-doner.jpg" alt="ZOB Döner" loading="lazy" decoding="async">
+            <span class="arch-inset" aria-hidden="true"></span>
+          </div>
+          <div class="arch-cap">
+            <b>ZOB Döner</b>
+            <p class="arch-desc" data-i18n="sel.d1">Unser Klassiker — frisch vom Spieß, mit Salat und Hirtenkäse.</p>
+            <span class="arch-view" data-i18n="sel.view">Menü ansehen</span>
+          </div>
         </button>
         <button type="button" class="arch-card rv" style="--d:.08s" data-open="p27">
-          <div class="arch-frame"><img src="Images/doner-pizza.jpg" alt="Döner Pizza" loading="lazy" decoding="async"></div>
-          <div class="arch-cap"><b>Döner Pizza</b><span data-i18n="cat.pizza">Pizza</span></div>
+          <div class="arch-frame">
+            <img src="Images/doner-pizza.jpg" alt="Döner Pizza" loading="lazy" decoding="async">
+            <span class="arch-inset" aria-hidden="true"></span>
+          </div>
+          <div class="arch-cap">
+            <b>Döner Pizza</b>
+            <p class="arch-desc" data-i18n="sel.d2">Knuspriger Boden mit Dönerfleisch, Paprika und Zwiebeln.</p>
+            <span class="arch-view" data-i18n="sel.view">Menü ansehen</span>
+          </div>
         </button>
         <button type="button" class="arch-card rv" style="--d:.16s" data-open="pi37">
-          <div class="arch-frame"><img src="Images/Sucuk-Pide.jpg" alt="Sucuk Pide" loading="lazy" decoding="async"></div>
-          <div class="arch-cap"><b>Sucuk Pide</b><span data-i18n="cat.pide">Pide</span></div>
+          <div class="arch-frame">
+            <img src="Images/Sucuk-Pide.jpg" alt="Sucuk Pide" loading="lazy" decoding="async">
+            <span class="arch-inset" aria-hidden="true"></span>
+          </div>
+          <div class="arch-cap">
+            <b>Sucuk Pide</b>
+            <p class="arch-desc" data-i18n="sel.d3">Goldbraune Pide mit Sucuk, Käse und Röstpaprika.</p>
+            <span class="arch-view" data-i18n="sel.view">Menü ansehen</span>
+          </div>
         </button>
       </div>
     </div>
@@ -1486,7 +1553,7 @@ main,.nav-in,footer{transition:opacity .25s}
       </div>
       <div class="menu-prev rv" id="menuPrevWrap" style="--d:.22s">
         <div class="mp-list" id="menuPrev"></div>
-        <div class="mp-arch"><div class="arch-frame"><img id="menuPrevImg" src="Images/zob-doner.jpg" alt="ZOB Döner"></div></div>
+        <div class="mp-arch"><div class="arch-frame"><img id="menuPrevImg" src="Images/zob-doner.jpg" alt="ZOB Döner"><span class="arch-inset" aria-hidden="true"></span></div></div>
       </div>
       <div class="car-shell rv" id="carShell" style="--d:.22s">
         <button type="button" class="car-btn prev" data-car="prev" aria-label="Vorheriges Gericht"><svg class="ic" aria-hidden="true"><use href="#i-left"/></svg></button>
@@ -2100,7 +2167,7 @@ const I18N={
  'hero.eyebrow':'ZOB Döner · Passau','hero.t1':'Dein Döner.','hero.t2':'Dein Moment.','hero.sub':'Frisch. Herzhaft. Mitten in Passau — Döner, Box, Pizza & Pide, handgemacht und heiß auf den Teller.','hero.cta1':'Jetzt bestellen','hero.cta2':'Speisekarte ansehen','hero.scroll':'Scroll',
  'intro.eyebrow':'Willkommen bei ZOB','intro.h':'Mehr als nur Döner.','intro.story':'Frisch vom <i class="story-pic"><img src="Images/zob-doner.jpg" alt=""></i> Spieß, <i class="story-pic"><img src="Images/doner-pizza.jpg" alt=""></i> Pizza &amp; <i class="story-pic"><img src="Images/Sucuk-Pide.jpg" alt=""></i> Pide.','intro.p1':'ZOB Döner bringt frisches Street Food mitten in Passau auf den Teller: knuspriges Brot, frisch geschnittener Salat und Fleisch direkt vom Spieß — dazu Pizza, goldbraune Pide und Boxen, die richtig satt machen.','intro.p2':'Ob schneller Snack zwischen zwei Terminen oder das große Essen für alle zusammen — bei uns gibt es handgemachte Küche zu fairen Preisen. Ehrlich zubereitet, ohne Schnickschnack.','intro.c1':'Frisch zubereitet','intro.c2':'Kräftig im Geschmack','intro.c3':'Faire Preise',
  'fav.eyebrow':'Signaturen','fav.h':'Unsere Favoriten','fav.sub':'Die Klassiker, die immer wieder bestellt werden — direkt aus unserer Theke.','fav.all':'Zur ganzen Speisekarte','fav.tag':'Signatur','fav.add':'In den Warenkorb','fav.view':'Gericht ansehen',
- 'sel.eyebrow':'Auswahl','sel.h':'Unsere Klassiker.',
+ 'sel.eyebrow':'Auswahl','sel.h':'Unsere Klassiker.','sel.view':'Menü ansehen','sel.d1':'Unser Klassiker — frisch vom Spieß, mit Salat und Hirtenkäse.','sel.d2':'Knuspriger Boden mit Dönerfleisch, Paprika und Zwiebeln.','sel.d3':'Goldbraune Pide mit Sucuk, Käse und Röstpaprika.',
  'cat.eyebrow':'Kategorien','cat.h':'Was darf\u2019s sein?','cat.sub':'Vier Kategorien, ein Versprechen: frisch, heiß und ehrlich.','cat.note':'Tipp: Alle Gerichte gibt es auch per WhatsApp zur Abholung.','cat.doner':'Döner','cat.box':'Box','cat.pizza':'Pizza','cat.pide':'Pide','cat.full':'Ganze Speisekarte öffnen','cat.prev':'Vorheriges Gericht','cat.next':'Nächstes Gericht',
  'gal.eyebrow':'Galerie','gal.h':'Einblicke.','gal.sub':'Küche, Theke und unsere Klassiker — frisch eingefangen bei ZOB Döner in Passau.','gal.t1':'Einblicke','gal.t2':'Die Theke','gal.t3':'Frisch zubereitet','gal.t4':'Unsere Klassiker','gal.t5':'Mitten in Passau',
  'fresh.eyebrow':'Das ZOB-Gefühl','fresh.h':'Street Food, das nach Passau gehört.','fresh.p':'Knuspriges Brot, frisch geschnittener Salat und Fleisch direkt vom Spieß — dazu Pizza, goldbraune Pide und Boxen, die satt machen. Ohne Schnickschnack, direkt am ZOB.','fresh.cta':'Mehr über ZOB',
@@ -2123,7 +2190,7 @@ const I18N={
  'hero.eyebrow':'ZOB Döner · Passau','hero.t1':'Your döner.','hero.t2':'Your moment.','hero.sub':'Fresh. Hearty. Right in the heart of Passau — döner, boxes, pizza & pide, handmade and served hot.','hero.cta1':'Order now','hero.cta2':'View the menu','hero.scroll':'Scroll',
  'intro.eyebrow':'Welcome to ZOB','intro.h':'More than just döner.','intro.story':'Fresh from the <i class="story-pic"><img src="Images/zob-doner.jpg" alt=""></i> spit, <i class="story-pic"><img src="Images/doner-pizza.jpg" alt=""></i> pizza &amp; <i class="story-pic"><img src="Images/Sucuk-Pide.jpg" alt=""></i> pide.','intro.p1':'ZOB Döner brings fresh street food to the heart of Passau: crispy bread, freshly cut salad and meat straight from the spit — plus pizza, golden-brown pide and boxes that really fill you up.','intro.p2':'Whether it\u2019s a quick snack between appointments or a big meal to share — we serve handmade food at fair prices. Honestly prepared, no gimmicks.','intro.c1':'Freshly prepared','intro.c2':'Bursting with flavour','intro.c3':'Fair prices',
  'fav.eyebrow':'Signatures','fav.h':'Our favourites','fav.sub':'The classics our guests keep coming back for — straight from our counter.','fav.all':'View the full menu','fav.tag':'Signature','fav.add':'Add to cart','fav.view':'View dish',
- 'sel.eyebrow':'Selections','sel.h':'Signature plates.',
+ 'sel.eyebrow':'Selections','sel.h':'Signature plates.','sel.view':'View menu','sel.d1':'Our classic — fresh from the spit, with salad and feta.','sel.d2':'Crispy base with döner meat, peppers and onions.','sel.d3':'Golden-brown pide with sucuk, cheese and roasted peppers.',
  'cat.eyebrow':'Categories','cat.h':'What will it be?','cat.sub':'Four categories, one promise: fresh, hot and honest.','cat.note':'Tip: every dish is also available via WhatsApp for pickup.','cat.doner':'Döner','cat.box':'Boxes','cat.pizza':'Pizza','cat.pide':'Pide','cat.full':'Open full menu','cat.prev':'Previous dish','cat.next':'Next dish',
  'gal.eyebrow':'Gallery','gal.h':'Inside ZOB.','gal.sub':'Kitchen, counter and our classics — captured fresh at ZOB Döner in Passau.','gal.t1':'Inside','gal.t2':'The counter','gal.t3':'Freshly made','gal.t4':'Our classics','gal.t5':'Right in Passau',
  'fresh.eyebrow':'The ZOB feeling','fresh.h':'Street food that belongs in Passau.','fresh.p':'Crispy bread, freshly cut salad and meat straight from the spit — plus pizza, golden pide and satisfying boxes. No fuss, right at the central bus station.','fresh.cta':'More about ZOB',
