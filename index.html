@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de" data-lang="de">
 <head>
 <meta charset="UTF-8">
@@ -356,15 +356,6 @@ a{color:inherit;text-decoration:none}
   transition:background .5s var(--ease);
 }
 .sel-sec{position:relative;overflow:clip;padding-top:clamp(72px,9vw,120px);padding-bottom:clamp(40px,5vw,64px)}
-.sel-sec>.wrap{position:relative;z-index:1}
-.sel-mark{
-  position:absolute;left:50%;top:auto;bottom:4%;z-index:0;pointer-events:none;user-select:none;
-  transform:translate(-50%,0) rotate(-10deg);
-  font-family:var(--font-display);font-style:italic;font-weight:500;
-  font-size:clamp(56px,14vw,180px);line-height:.9;letter-spacing:-.02em;
-  white-space:nowrap;color:transparent;-webkit-text-stroke:1px rgba(230,177,95,.18);
-  text-transform:lowercase;
-}
 .sel-sec .sec-head{text-align:center;display:flex;flex-direction:column;align-items:center}
 .sel-sec .sec-head .h2{margin-inline:auto}
 .sel-sec .orn-div{margin-inline:auto}
@@ -407,7 +398,6 @@ a{color:inherit;text-decoration:none}
 .arch-card:hover .arch-view{color:#fff;border-bottom-color:#fff}
 @media(max-width:900px){
   .sel-sec{padding-top:clamp(56px,10vw,88px);padding-bottom:clamp(36px,7vw,56px)}
-  .sel-mark{bottom:2%;font-size:clamp(48px,18vw,120px);-webkit-text-stroke:1px rgba(230,177,95,.14)}
   .title-badge{width:min(140px,38vw);margin-bottom:6px}
   .arch-row{grid-template-columns:1fr 1fr;gap:clamp(22px,4vw,32px) 14px;align-items:start}
   .arch-card:nth-child(2){transform:none}
@@ -421,7 +411,6 @@ a{color:inherit;text-decoration:none}
 }
 @media(max-width:560px){
   .sel-sec{padding-top:52px;padding-bottom:48px}
-  .sel-mark{bottom:6%;font-size:clamp(42px,20vw,88px);opacity:.9}
   .title-badge{width:min(120px,46vw)}
   .arch-row{grid-template-columns:1fr;gap:34px}
   .arch-card:nth-child(3){max-width:100%;width:100%}
@@ -1415,7 +1404,6 @@ main,.nav-in,footer{transition:opacity .25s}
   </div>
 
   <div class="sec sel-sec">
-    <div class="sel-mark" aria-hidden="true">zob doner</div>
     <div class="wrap">
       <div class="sec-head is-center">
         <img class="title-badge rv" src="Images/menu-title-badge.svg" alt="" width="215" height="99" decoding="async">
