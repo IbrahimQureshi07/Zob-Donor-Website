@@ -867,26 +867,41 @@ a{color:inherit;text-decoration:none}
 .rev-sec{
   position:relative;overflow:clip;padding:clamp(96px,12vw,160px) 0;isolation:isolate;
   --ink:var(--cream); --ink-dim:#c4bbae; --mut:#8f877c; --line:rgba(237,230,216,.12); --line2:rgba(237,230,216,.2);
-  background-color:var(--night);
-  background-image:url("Images/review%20bg.png");
-  background-position:center center;
-  background-size:100% auto; /* full width — no side crop (cover was clipping) */
-  background-repeat:no-repeat;
-  background-attachment:fixed;
+  background:var(--night);
 }
-.rev-bg{display:none}
-.rev-veil{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(105deg,rgba(14,13,12,.96) 0%,rgba(14,13,12,.88) 45%,rgba(14,13,12,.72) 100%),radial-gradient(80% 80% at 80% 20%,rgba(230,177,95,.08),transparent 55%)}
-.rev-sec .wrap{position:relative;z-index:2}
+.rev-bg,.rev-veil{display:none}
+.rev-sec .wrap{
+  position:relative;z-index:1;
+  max-width:min(1520px,100%);
+  padding-left:clamp(16px,2.2vw,28px);
+  padding-right:clamp(16px,2.2vw,28px);
+}
 .rev-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch;
-  border:1px solid var(--gold);border-radius:32px 160px 32px 32px;overflow:hidden;
-  background:rgba(14,13,12,.55);
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0;align-items:stretch;
+  background:transparent;overflow:visible;
 }
-.rev-left{padding:clamp(28px,4vw,52px);display:flex;flex-direction:column;min-width:0}
-.rev-visual{min-height:100%;position:relative;overflow:hidden;background:var(--bg2)}
-.rev-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.rev-copy .eyebrow{margin-bottom:18px}
-.rev-copy .h2{margin-bottom:20px}
+.rev-left{
+  position:relative;z-index:2;
+  padding:clamp(28px,4vw,52px);
+  display:flex;flex-direction:column;min-width:0;gap:clamp(22px,3vw,32px);
+  border:1px solid var(--gold);
+  border-radius:0 clamp(80px,12vw,160px) 0 0;
+  background:rgba(14,13,12,.94);
+}
+.rev-visual{
+  position:relative;z-index:1;
+  margin-left:clamp(-90px,-7vw,-56px);
+  border-radius:clamp(80px,12vw,160px) 0 0 0;
+  overflow:hidden;background:var(--bg2);
+  box-shadow:0 28px 56px rgba(0,0,0,.32);
+}
+.rev-visual img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center 40%;display:block;
+  filter:saturate(1.04) contrast(1.04) brightness(1.02);
+}
+.rev-copy .fav-label-row{margin-bottom:16px}
+.rev-copy .h2{margin:0 0 18px}
 .rev-copy>p{max-width:440px;color:var(--ink-dim);font-size:clamp(16px,1.4vw,18.5px);line-height:1.7}
 .rev-rating{display:flex;align-items:center;gap:10px;margin-top:22px;flex-wrap:wrap}
 .rev-rating b{font-size:28px;font-weight:900;color:var(--copper);letter-spacing:-.02em}
@@ -934,21 +949,24 @@ a{color:inherit;text-decoration:none}
 .rev-btn:hover{border-color:var(--copper);color:var(--copper);background:rgba(230,177,95,.12);transform:scale(1.05)}
 .rev-btn .ic{width:16px;height:16px}
 @media(max-width:900px){
-  .rev-sec{
-    background-attachment:scroll;
-    background-size:cover; /* section-sized fill on mobile */
-    background-position:center center;
+  .rev-sec .wrap{max-width:1260px;padding-left:18px;padding-right:18px}
+  .rev-grid{grid-template-columns:1fr}
+  .rev-visual{display:none;min-height:0;margin:0}
+  .rev-left{
+    padding:28px 20px 24px;
+    border-radius:0 clamp(56px,20vw,110px) 0 0;
+    text-align:center;align-items:center;
   }
-  .rev-grid{grid-template-columns:1fr;border-radius:28px}
-  .rev-visual{min-height:240px}
-  .rev-left{padding:24px 20px}
-  .rev-nav{justify-content:flex-start}
-  .rev-card{height:auto;min-height:340px;max-height:none}
+  .rev-copy{display:flex;flex-direction:column;align-items:center;width:100%}
+  .rev-copy>p{max-width:36ch;margin-inline:auto}
+  .rev-rating{justify-content:center}
+  .rev-side{width:100%;align-items:center}
+  .rev-google{align-self:center}
+  .rev-nav{justify-content:center}
+  .rev-card{height:auto;min-height:340px;max-height:none;text-align:left;width:100%}
   .rev-clip{min-height:120px}
-  .rev-veil{background:linear-gradient(180deg,rgba(14,13,12,.96) 0%,rgba(14,13,12,.9) 55%,rgba(14,13,12,.86) 100%)}
 }
 @media(prefers-reduced-motion:reduce){
-  .rev-sec{background-attachment:scroll}
   .rev-words .w>i{transform:none!important;transition:none!important}
   .rev-card{transition:none}
 }
@@ -1844,14 +1862,15 @@ main,.nav-in,footer{transition:opacity .25s}
   </div>
 
   <div class="sec rev-sec" id="revSec">
-    <div class="rev-bg" aria-hidden="true"><img src="Images/review bg.png" alt="" loading="lazy" decoding="async"></div>
-    <div class="rev-veil" aria-hidden="true"></div>
     <div class="wrap rev-grid">
       <div class="rev-left">
       <div class="rev-copy">
-        <span class="eyebrow" data-i18n="rev.eyebrow">Stimmen</span>
-        <span class="orn-div" aria-hidden="true"><i></i></span>
-        <h2 class="h2" id="revTitle" data-i18n="rev.h">Was Gäste sagen.</h2>
+        <div class="fav-label-row">
+          <img class="fav-star" src="Images/star-element.svg" alt="" width="12" height="12" decoding="async">
+          <span class="fav-label" data-i18n="rev.eyebrow">Reviews</span>
+          <img class="fav-star" src="Images/star-element.svg" alt="" width="12" height="12" decoding="async">
+        </div>
+        <h2 class="h2" id="revTitle" data-i18n="rev.h">Happy Testimonials</h2>
         <p data-i18n="rev.p">Echte Google-Bewertungen unserer Gäste — über Geschmack, Frische und den Besuch am ZOB.</p>
         <div class="rev-rating" aria-label="4,4 von 5 Sternen aus 125 Google-Bewertungen">
           <b class="num">4,4</b>
@@ -1889,7 +1908,7 @@ main,.nav-in,footer{transition:opacity .25s}
       </div>
       </div>
       <div class="rev-visual" aria-hidden="true">
-        <img src="Images/gallery%20images/second.webp" alt="" loading="lazy" decoding="async">
+        <img src="Images/testimonial-bg1.jpg" alt="" loading="lazy" decoding="async">
       </div>
     </div>
   </div>
@@ -2399,7 +2418,7 @@ const I18N={
  'cat.eyebrow':'Kategorien','cat.h':'Was darf\u2019s sein?','cat.sub':'Vier Kategorien, ein Versprechen: frisch, heiß und ehrlich.','cat.note':'Tipp: Alle Gerichte gibt es auch per WhatsApp zur Abholung.','cat.doner':'Döner','cat.box':'Box','cat.pizza':'Pizza','cat.pide':'Pide','cat.full':'Ganze Speisekarte öffnen','cat.prev':'Vorheriges Gericht','cat.next':'Nächstes Gericht',
  'gal.eyebrow':'Galerie','gal.h':'Zob Gallery','gal.sub':'Küche, Theke und unsere Klassiker — frisch eingefangen bei ZOB Döner in Passau.','gal.t1':'Einblicke','gal.t2':'Die Theke','gal.t3':'Frisch zubereitet','gal.t4':'Unsere Klassiker','gal.t5':'Mitten in Passau',
  'fresh.eyebrow':'Das ZOB-Gefühl','fresh.h':'Street Food, das nach Passau gehört.','fresh.p':'Knuspriges Brot, frisch geschnittener Salat und Fleisch direkt vom Spieß — dazu Pizza, goldbraune Pide und Boxen, die satt machen. Ohne Schnickschnack, direkt am ZOB.','fresh.cta':'Mehr über ZOB',
- 'rev.eyebrow':'Stimmen','rev.h':'Was Gäste sagen.','rev.p':'Echte Google-Bewertungen unserer Gäste — über Geschmack, Frische und den Besuch am ZOB.','rev.score':'von 5 · 125 Google-Bewertungen','rev.via':'Google Review','rev.more':'Mehr lesen','rev.less':'Weniger','rev.google':'Alle Bewertungen auf Google','rev.prev':'Vorherige Bewertung','rev.next':'Nächste Bewertung',
+ 'rev.eyebrow':'Reviews','rev.h':'Happy Testimonials','rev.p':'Echte Google-Bewertungen unserer Gäste — über Geschmack, Frische und den Besuch am ZOB.','rev.score':'von 5 · 125 Google-Bewertungen','rev.via':'Google Review','rev.more':'Mehr lesen','rev.less':'Weniger','rev.google':'Alle Bewertungen auf Google','rev.prev':'Vorherige Bewertung','rev.next':'Nächste Bewertung',
  'why.eyebrow':'Warum ZOB','why.h':'Warum ZOB Döner?','why.c1t':'Frisch zubereitet','why.c1d':'Frische Zutaten und jedes Gericht, das erst zubereitet wird, wenn du es bestellst.','why.c2t':'Voller Geschmack','why.c2d':'Kräftige Soßen, gegrillte Aromen und Portionen, die wirklich satt machen.','why.c3t':'Mitten in Passau','why.c3d':'Direkt am ZOB gelegen — praktisch, schnell erreichbar, mitten in der Stadt.','why.c4t':'Schnell & einfach','why.c4d':'Unkompliziert per WhatsApp bestellen und bequem bei uns abholen.',
  'loc.eyebrow':'Finde uns','loc.h':'Dein ZOB. Mitten in Passau.','loc.route':'Route planen','loc.call':'Jetzt anrufen','loc.open':'In Google Maps öffnen',
  'soc.eyebrow':'Community','soc.h':'Folge uns.','soc.p':'Instagram, Facebook und TikTok sind bald für dich da — mit Einblicken aus der Küche, Neuigkeiten und Angeboten.','soc.soon':'folgt in Kürze',
@@ -2422,7 +2441,7 @@ const I18N={
  'cat.eyebrow':'Categories','cat.h':'What will it be?','cat.sub':'Four categories, one promise: fresh, hot and honest.','cat.note':'Tip: every dish is also available via WhatsApp for pickup.','cat.doner':'Döner','cat.box':'Boxes','cat.pizza':'Pizza','cat.pide':'Pide','cat.full':'Open full menu','cat.prev':'Previous dish','cat.next':'Next dish',
  'gal.eyebrow':'Gallery','gal.h':'Zob Gallery','gal.sub':'Kitchen, counter and our classics — captured fresh at ZOB Döner in Passau.','gal.t1':'Inside','gal.t2':'The counter','gal.t3':'Freshly made','gal.t4':'Our classics','gal.t5':'Right in Passau',
  'fresh.eyebrow':'The ZOB feeling','fresh.h':'Street food that belongs in Passau.','fresh.p':'Crispy bread, freshly cut salad and meat straight from the spit — plus pizza, golden pide and satisfying boxes. No fuss, right at the central bus station.','fresh.cta':'More about ZOB',
- 'rev.eyebrow':'Reviews','rev.h':'Hear what they say.','rev.p':'Real Google reviews from our guests — about flavour, freshness and a stop at the ZOB.','rev.score':'out of 5 · 125 Google reviews','rev.via':'Google Review','rev.more':'Read more','rev.less':'Show less','rev.google':'See all reviews on Google','rev.prev':'Previous review','rev.next':'Next review',
+ 'rev.eyebrow':'Reviews','rev.h':'Happy Testimonials','rev.p':'Real Google reviews from our guests — about flavour, freshness and a stop at the ZOB.','rev.score':'out of 5 · 125 Google reviews','rev.via':'Google Review','rev.more':'Read more','rev.less':'Show less','rev.google':'See all reviews on Google','rev.prev':'Previous review','rev.next':'Next review',
  'why.eyebrow':'Why ZOB','why.h':'Why ZOB Döner?','why.c1t':'Freshly prepared','why.c1d':'Fresh ingredients and every dish prepared the moment you order it.','why.c2t':'Full of flavour','why.c2d':'Bold sauces, grilled flavours and portions that truly satisfy.','why.c3t':'Right in Passau','why.c3d':'Located right at the ZOB — convenient, easy to reach, in the middle of town.','why.c4t':'Fast & easy','why.c4d':'Order easily via WhatsApp and collect your food at your convenience.',
  'loc.eyebrow':'Find us','loc.h':'Your ZOB. Right in Passau.','loc.route':'Plan a route','loc.call':'Call now','loc.open':'Open in Google Maps',
  'soc.eyebrow':'Community','soc.h':'Follow us.','soc.p':'Instagram, Facebook and TikTok are coming soon — with kitchen insights, news and offers.','soc.soon':'coming soon',
