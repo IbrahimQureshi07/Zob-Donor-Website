@@ -1075,14 +1075,12 @@ a{color:inherit;text-decoration:none}
 .phero.typed p{opacity:1;transform:none;transition-delay:.06s}
 
 /* ============ MENU PAGE ============ */
-.catbar-wrap{position:sticky;top:86px;z-index:60;padding:6px 0;margin:-10px 0 8px}
-.catbar{position:relative;display:flex;gap:6px;padding:9px;background:var(--panel);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--line2);border-radius:999px;width:max-content;max-width:100%;margin:0 auto;overflow-x:auto;scrollbar-width:none;box-shadow:var(--sh)}
-.catbar::-webkit-scrollbar{display:none}
-.catbar .ind{position:absolute;top:9px;bottom:9px;left:9px;border-radius:999px;background:var(--blue);transition:left .45s var(--ease),width .45s var(--ease)}
-.cat-pill{position:relative;z-index:1;padding:11px 24px;border-radius:999px;font-weight:800;font-size:14px;letter-spacing:.03em;color:var(--ink-dim);white-space:nowrap;transition:color .3s}
-.cat-pill:hover{color:var(--ink)}
-.cat-pill.active{color:var(--night)}
-.menu-note{margin:34px 0 10px;color:var(--mut);font-size:13px;text-align:center}
+.catbar-wrap{
+  position:sticky;top:86px;z-index:60;
+  padding:16px 0 12px;margin:0 0 4px;
+  background:linear-gradient(180deg,var(--bg2) 72%,rgba(23,24,25,0));
+}
+.menu-note{margin:28px 0 10px;color:var(--mut);font-size:13px;text-align:center}
 .cat-sec{padding-top:clamp(48px,6vw,80px);scroll-margin-top:150px}
 .cat-head{display:flex;align-items:baseline;gap:18px;margin-bottom:30px;flex-wrap:wrap}
 .cat-num{font-weight:900;font-size:14px;color:var(--gold);letter-spacing:.2em}
@@ -1979,14 +1977,18 @@ main,.nav-in,footer{transition:opacity .25s}
   <div class="phero">
     <div class="phero-bg"><img data-plx src="Images/menu.png" alt="Döner und Spezialitäten bei ZOB Döner Passau" loading="lazy" decoding="async"></div>
     <div class="wrap phero-in">
-      <span class="eyebrow" data-i18n="menu.eyebrow">Speisekarte</span>
+      <div class="fav-label-row">
+        <img class="fav-star" src="Images/star-element.svg" alt="" width="12" height="12" decoding="async">
+        <span class="fav-label" data-i18n="menu.eyebrow">Speisekarte</span>
+        <img class="fav-star" src="Images/star-element.svg" alt="" width="12" height="12" decoding="async">
+      </div>
       <h1 class="h-display" id="menuTitle"><span class="line"><span data-i18n="menu.h"></span></span></h1>
       <p data-i18n="menu.sub">Döner, Boxen, Pizza &amp; Pide — alles frisch zubereitet. Bestell bequem per WhatsApp und hol dir dein Essen ab.</p>
     </div>
   </div>
   <div class="sec alt menu-body">
     <div class="wrap" style="padding-top:0">
-    <div class="catbar-wrap"><div class="catbar" id="catbar"><span class="ind" aria-hidden="true"></span></div></div>
+    <div class="catbar-wrap"><div class="strip" id="catbar" role="navigation" aria-label="Menu categories"></div></div>
     <p class="menu-note" data-i18n="menu.note">Alle Preise in Euro, inkl. MwSt. Allergene &amp; Zusatzstoffe auf Anfrage.</p>
     <div id="menuRoot"></div>
     <div class="cta-banner menu-cta rv">
@@ -2593,16 +2595,27 @@ function renderMenuPage(){
       <div class="m-grid">${c.items.map(itemCard).join('')}</div>
     </div>`;
   }).join('');
-  // sticky pills
+  // sticky strip (Home style)
   const bar=$('#catbar');
-  bar.querySelectorAll('.cat-pill').forEach(b=>b.remove());
+  bar.innerHTML='';
   CATS.forEach((c,i)=>{
+    if(i>0){
+      const star=document.createElement('img');
+      star.className='strip-star';
+      star.src='Images/star-element.svg';
+      star.alt='';
+      star.width=10;star.height=10;
+      star.setAttribute('decoding','async');
+      star.setAttribute('aria-hidden','true');
+      bar.appendChild(star);
+    }
     const b=document.createElement('button');
-    b.className='cat-pill'+(i===0?' active':'');
-    b.dataset.scrollCat=c.id;b.textContent=LANG==='en'?c.en:c.de;
+    b.type='button';
+    if(i===0)b.className='active';
+    b.dataset.scrollCat=c.id;
+    b.textContent=LANG==='en'?c.en:c.de;
     bar.appendChild(b);
   });
-  refreshInds();
   bindAddButtons();
 }
 let favIndex=0;
@@ -3418,19 +3431,18 @@ window.addEventListener('popstate',()=>{const p=parseHash();if(p!==CUR&&!animati
 function scrollCat(id){
   const el=document.getElementById('cat-'+id);if(!el)return;
   el.scrollIntoView({behavior:reduceMotion?'auto':'smooth',block:'start'});
-  $$('#catbar .cat-pill').forEach(b=>b.classList.toggle('active',b.dataset.scrollCat===id));
-  setInd($('#catbar'),$('#catbar .cat-pill.active'));
+  $$('#catbar button[data-scroll-cat]').forEach(b=>b.classList.toggle('active',b.dataset.scrollCat===id));
 }
 
-/* ---------- SLIDING INDICATORS ---------- */
+/* ---------- SLIDING INDICATORS (home strip unused; keep no-op safe) ---------- */
 function setInd(box,btn){
+  if(!box)return;
   const ind=box.querySelector('.ind');if(!ind)return;
   if(!btn||!btn.offsetWidth)return;
   ind.style.left=btn.offsetLeft+'px';
   ind.style.width=btn.offsetWidth+'px';
 }
 function refreshInds(){
-  setInd($('#catbar'),$('#catbar .cat-pill.active'));
   setInd($('#strip'),$('#strip button.active'));
 }
 window.addEventListener('resize',()=>{refreshInds();updateCarBtns();bindCarSpin()});
@@ -3444,11 +3456,10 @@ if(document.fonts&&document.fonts.ready)document.fonts.ready.then(refreshInds);
   renderCatCarousel(b.getAttribute('data-cat-pick'));
 });
 
-/* sticky bar clicks are handled via delegation (data-scroll-cat) */
+/* sticky menu strip (data-scroll-cat) */
  $('#catbar').addEventListener('click',e=>{
-  const b=e.target.closest('.cat-pill');if(!b)return;
-  $$('#catbar .cat-pill').forEach(x=>x.classList.toggle('active',x===b));
-  setInd($('#catbar'),b);
+  const b=e.target.closest('button[data-scroll-cat]');if(!b)return;
+  $$('#catbar button[data-scroll-cat]').forEach(x=>x.classList.toggle('active',x===b));
   scrollCat(b.dataset.scrollCat);
 });
 
@@ -3457,8 +3468,7 @@ const spy=new IntersectionObserver(es=>{
   es.forEach(en=>{
     if(en.isIntersecting){
       const id=en.target.id.replace('cat-','');
-      $$('#catbar .cat-pill').forEach(b=>b.classList.toggle('active',b.dataset.scrollCat===id));
-      setInd($('#catbar'),$('#catbar .cat-pill.active'));
+      $$('#catbar button[data-scroll-cat]').forEach(b=>b.classList.toggle('active',b.dataset.scrollCat===id));
     }
   });
 },{rootMargin:'-40% 0px -55% 0px'});
