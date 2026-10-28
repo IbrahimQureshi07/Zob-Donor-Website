@@ -1019,16 +1019,64 @@ a{color:inherit;text-decoration:none}
   .fresh-mark{left:50%;right:auto;bottom:0;transform:translate(-50%,18%);font-size:clamp(72px,24vw,160px)}
 }
 
-/* ============ WHY (unused on home; keep for safety) ============ */
-.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.why-card{padding:30px 26px;border:1px solid var(--line);border-radius:var(--r);background:var(--panel);transition:transform .45s var(--ease),border-color .45s}
-.why-card:hover{transform:translateY(-6px);border-color:rgba(230,177,95,.35)}
-.why-ico{width:52px;height:52px;border-radius:16px;border:1px solid rgba(230,177,95,.35);display:grid;place-items:center;color:var(--copper);margin-bottom:20px}
-.why-ico .ic{width:22px;height:22px}
-.why-card h4{font-weight:900;font-stretch:110%;text-transform:uppercase;font-size:16.5px;letter-spacing:.02em;margin-bottom:10px}
-.why-card p{font-size:13.5px;color:var(--mut);line-height:1.6}
-@media(max-width:1020px){.why-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:560px){.why-grid{grid-template-columns:1fr}}
+/* ============ WHY CHOOSE (about) ============ */
+.why-choose{padding-top:clamp(72px,9vw,120px);padding-bottom:clamp(64px,8vw,110px)}
+.why-choose .sec-head{margin-bottom:clamp(40px,5vw,64px)}
+.why-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,2.2vw,28px);align-items:end}
+.why-item{min-width:0}
+.why-arch{
+  position:relative;overflow:hidden;aspect-ratio:4/5;width:100%;
+  border-radius:500px 500px 0 0;background:var(--bg2);isolation:isolate;
+}
+.why-arch img{
+  width:100%;height:100%;object-fit:cover;object-position:center;
+  display:block;filter:saturate(1.02) contrast(1.04) brightness(.96);
+  transition:transform 1.05s var(--ease),filter .6s;
+}
+.why-arch::before{
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(115deg,transparent 32%,rgba(247,245,240,.26) 50%,transparent 68%);
+  transform:translateX(-130%);transition:transform .95s var(--ease);
+}
+.why-arch::after{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,transparent 48%,rgba(14,13,12,.72) 100%);
+  transition:background .5s var(--ease);
+}
+.why-item:hover .why-arch img{transform:scale(1.1);filter:saturate(1.08) contrast(1.05) brightness(1)}
+.why-item:hover .why-arch::before{transform:translateX(130%)}
+.why-item:hover .why-arch::after{background:linear-gradient(180deg,rgba(14,13,12,.08) 0%,rgba(14,13,12,.28) 42%,rgba(14,13,12,.78) 100%)}
+.why-cap{
+  position:absolute;left:0;right:0;bottom:18px;z-index:3;pointer-events:none;
+  text-align:center;font-size:12px;font-weight:800;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--cream);
+}
+@media(prefers-reduced-motion:reduce){
+  .why-item:hover .why-arch img{transform:scale(1.04)}
+  .why-item:hover .why-arch::before{transform:none}
+}
+.why-stats{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:clamp(28px,4vw,48px);margin-top:clamp(56px,7vw,88px);
+}
+.why-stat{min-width:0}
+.why-num{
+  display:block;font-family:var(--font-display);font-weight:560;
+  font-size:clamp(44px,5.4vw,72px);letter-spacing:-.03em;line-height:.95;
+  color:var(--ink);
+}
+.why-num i{font-style:normal}
+.why-stat-lab{
+  display:block;margin:10px 0 12px;font-size:12px;font-weight:800;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
+}
+.why-stat p{margin:0;max-width:28ch;font-size:14.5px;line-height:1.6;color:var(--mut)}
+@media(max-width:900px){
+  .why-row{grid-template-columns:1fr;justify-items:center;gap:28px}
+  .why-item{width:min(320px,86vw)}
+  .why-stats{grid-template-columns:1fr;text-align:center;gap:36px;margin-top:48px}
+  .why-stat p{margin-inline:auto}
+}
 
 /* ============ LOCATION / MAP ============ */
 .loc-sec{
@@ -2112,6 +2160,66 @@ main,.nav-in,footer{transition:opacity .25s}
       </div>
     </div>
   </div>
+  <div class="sec why-choose">
+    <div class="wrap">
+      <div class="sec-head is-center">
+        <div class="fav-label-row rv">
+          <img class="fav-star" src="Images/star-element.svg" alt="" width="12" height="12" decoding="async">
+          <span class="fav-label" data-i18n="ab.whyE">Warum ZOB</span>
+          <img class="fav-star" src="Images/star-element.svg" alt="" width="12" height="12" decoding="async">
+        </div>
+        <h2 class="h2 rv" style="--d:.08s" data-i18n="ab.whyH">Warum bei uns essen?</h2>
+      </div>
+      <div class="why-row">
+        <article class="why-item rv">
+          <div class="why-arch">
+            <img src="Images/why1.jpg" alt="Erfahrener Koch bei ZOB Döner" loading="lazy" decoding="async">
+            <span class="why-cap" data-i18n="ab.why1">Erfahrener Koch</span>
+          </div>
+        </article>
+        <article class="why-item rv" style="--d:.08s">
+          <div class="why-arch">
+            <img src="Images/why2.jpg" alt="Hygienisches Essen bei ZOB Döner" loading="lazy" decoding="async">
+            <span class="why-cap" data-i18n="ab.why2">Hygienisches Essen</span>
+          </div>
+        </article>
+        <article class="why-item rv" style="--d:.12s">
+          <div class="why-arch">
+            <img src="Images/why3.jpg" alt="Ambiente bei ZOB Döner" loading="lazy" decoding="async">
+            <span class="why-cap" data-i18n="ab.why3">Gutes Ambiente</span>
+          </div>
+        </article>
+        <article class="why-item rv" style="--d:.16s">
+          <div class="why-arch">
+            <img src="Images/why4.jpg" alt="Rezepte bei ZOB Döner" loading="lazy" decoding="async">
+            <span class="why-cap" data-i18n="ab.why4">Geheimrezept</span>
+          </div>
+        </article>
+      </div>
+      <div class="why-stats" id="whyStats">
+        <article class="why-stat rv" style="--d:.04s">
+          <b class="why-num"><span data-count="4">0</span><i>+</i></b>
+          <span class="why-stat-lab" data-i18n="ab.st1l">Kategorien</span>
+          <p data-i18n="ab.st1p">Döner, Box, Pizza und Pide — vier klare Wege zum Sattwerden.</p>
+        </article>
+        <article class="why-stat rv" style="--d:.08s">
+          <b class="why-num"><span data-count="125">0</span><i>+</i></b>
+          <span class="why-stat-lab" data-i18n="ab.st2l">Google-Bewertungen</span>
+          <p data-i18n="ab.st2p">Echte Stimmen unserer Gäste auf Google — über Geschmack und den Besuch am ZOB.</p>
+        </article>
+        <article class="why-stat rv" style="--d:.12s">
+          <b class="why-num"><span data-count="39">0</span><i>+</i></b>
+          <span class="why-stat-lab" data-i18n="ab.st3l">Gerichte</span>
+          <p data-i18n="ab.st3p">Von Döner bis Pide: eine Karte, die wirklich Hunger stillt.</p>
+        </article>
+        <article class="why-stat rv" style="--d:.16s">
+          <b class="why-num"><span data-count="7">0</span></b>
+          <span class="why-stat-lab" data-i18n="ab.st4l">Tage die Woche</span>
+          <p data-i18n="ab.st4p">Sonntag bis Samstag am ZOB — unter der Woche bis 23 Uhr, am Wochenende noch länger.</p>
+        </article>
+      </div>
+    </div>
+  </div>
   <div class="band">
     <h3 class="rv" data-i18n-html="ab.band">Frisch. Heiß. <b>Echt ZOB.</b></h3>
   </div>
@@ -2531,7 +2639,7 @@ const I18N={
  'soc.eyebrow':'Community','soc.h':'Folge uns.','soc.p':'Instagram, Facebook und TikTok sind bald für dich da — mit Einblicken aus der Küche, Neuigkeiten und Angeboten.','soc.soon':'folgt in Kürze',
  'cta.h':'Appetit bekommen?','cta.p':'Stell deine Bestellung zusammen und schick sie uns direkt per WhatsApp — wir bereiten alles frisch für dich vor.','cta.menu':'Zur Speisekarte',
  'menu.eyebrow':'Speisekarte','menu.h':'Die Karte.','menu.sub':'Döner, Boxen, Pizza & Pide — alles frisch zubereitet. Bestell bequem per WhatsApp und hol dir dein Essen ab.','menu.note':'Alle Preise in Euro, inkl. MwSt. Allergene & Zusatzstoffe auf Anfrage.','menu.add':'Hinzufügen','menu.details':'Details ansehen','menu.from':'ab','menu.items':'Gerichte','menu.sizes':'Unsere Pizzen gibt es in drei Größen: Ø 27 cm · Ø 36 cm · Ø 40 cm.','menu.extrasT':'Extras — Pizza','menu.extras':'Pro Extra: 1,00 € / 1,50 € / 2,00 € — Tomatensoße, Käse, Paprika, Zwiebeln, Salami, Putenfleisch, Sucuk, Champignons, Thunfisch, Schinken. Extra Wunschsoße 1,00 € · Extra Käse 1,50 €.','menu.dextra':'Extra Käse + 1,50 €',
- 'ab.eyebrow':'Über uns','ab.h':'Über ZOB Döner.','ab.sub':'Ehrliches Street Food aus Passau.','ab.s1':'Unsere Haltung','ab.story':'Wo <span class="gold">ehrlicher Geschmack</span> auf <span class="gold">frisches Street Food</span> trifft — für ein unvergessliches <span class="gold">ZOB-Erlebnis</span> in Passau!','ab.lead':'ZOB Döner steht für ehrliches Street Food, frische Zutaten und kräftigen Geschmack — mitten in Passau.','ab.p1':'Wir machen das, was wir selbst gern essen: Döner vom frisch belegten Spieß, knusprige Pizza, goldbraune Pide und Boxen, die satt machen. Kein Schnickschnack — dafür Handwerk, gute Zutaten und Rezepte, die einfach funktionieren.','ab.p2':'Ob schneller Snack zwischendurch oder das große Essen für die ganze Runde: Bei uns bekommst du klassische Street-Food-Favoriten, frisch zubereitet und mit Herz gemacht.','ab.band':'Frisch. Heiß. <b>Echt ZOB.</b>','ab.s2':'Einblicke','ab.vh':'Unser Laden.','ab.vs':'Vier Momente aus dem Alltag bei ZOB Döner in Passau — vom Schild über der Tür bis zum heißen Teller.','ab.v1k':'01','ab.v1t':'Unser Laden','ab.v1d':'Das Schild über der Tür sagt, wer wir sind: ZOB Döner in Passau. Direkt am ZOB holst du dir einen schnellen Snack oder das große Essen für die ganze Runde — ehrlich zubereitet, heiß ausgegeben und ohne Umwege. Komm vorbei, bestell und nimm mit, was gerade frisch vom Spieß kommt.','ab.v2k':'02','ab.v2t':'Frisch an der Theke','ab.v2d':'An der Theke siehst du, was auf deinen Döner kommt: Salat, Kraut, Zwiebeln und Gemüse — jeden Tag frisch vorbereitet, nicht aus der Tüte. Wir halten die Basics sauber und knackig, damit jeder Happen bunt und ehrlich schmeckt. Frag gern nach, was gerade besonders gut passt.','ab.v3k':'03','ab.v3t':'Auf den Teller','ab.v3d':'Fleisch vom Spieß, frischer Belag, Soßen nach Wunsch — so landet dein Gericht heiß und sattmachend vor dir. Ob Teller, Box oder im Brot: Wir machen Street Food, das nach Handwerk schmeckt und richtig Hunger stillt. Portionen, die stimmen — ohne Schnickschnack.','ab.v4k':'04','ab.v4t':'Mehr als Döner','ab.v4d':'Neben dem Klassiker gibt’s knusprige Pizza frisch aus dem Ofen, goldbraune Pide und Boxen für zwischendurch. Die Favoriten, die in Passau immer wieder bestellt werden — heiß, herzhaft und für jeden Hunger das Richtige. Schau auf die Karte und nimm mit, wonach dir ist.','ab.ctaH':'Hungry?','ab.ctaP':'Schau dir die Karte an und bestell dir dein Lieblingsgericht.','ab.ctaContact':'Kontakt aufnehmen',
+ 'ab.eyebrow':'Über uns','ab.h':'Über ZOB Döner.','ab.sub':'Ehrliches Street Food aus Passau.','ab.s1':'Unsere Haltung','ab.story':'Wo <span class="gold">ehrlicher Geschmack</span> auf <span class="gold">frisches Street Food</span> trifft — für ein unvergessliches <span class="gold">ZOB-Erlebnis</span> in Passau!','ab.lead':'ZOB Döner steht für ehrliches Street Food, frische Zutaten und kräftigen Geschmack — mitten in Passau.','ab.p1':'Wir machen das, was wir selbst gern essen: Döner vom frisch belegten Spieß, knusprige Pizza, goldbraune Pide und Boxen, die satt machen. Kein Schnickschnack — dafür Handwerk, gute Zutaten und Rezepte, die einfach funktionieren.','ab.p2':'Ob schneller Snack zwischendurch oder das große Essen für die ganze Runde: Bei uns bekommst du klassische Street-Food-Favoriten, frisch zubereitet und mit Herz gemacht.','ab.whyE':'Warum ZOB','ab.whyH':'Warum bei uns essen?','ab.why1':'Erfahrener Koch','ab.why2':'Hygienisches Essen','ab.why3':'Gutes Ambiente','ab.why4':'Geheimrezept','ab.st1l':'Kategorien','ab.st1p':'Döner, Box, Pizza und Pide — vier klare Wege zum Sattwerden.','ab.st2l':'Google-Bewertungen','ab.st2p':'Echte Stimmen unserer Gäste auf Google — über Geschmack und den Besuch am ZOB.','ab.st3l':'Gerichte','ab.st3p':'Von Döner bis Pide: eine Karte, die wirklich Hunger stillt.','ab.st4l':'Tage die Woche','ab.st4p':'Sonntag bis Samstag am ZOB — unter der Woche bis 23 Uhr, am Wochenende noch länger.','ab.band':'Frisch. Heiß. <b>Echt ZOB.</b>','ab.s2':'Einblicke','ab.vh':'Unser Laden.','ab.vs':'Vier Momente aus dem Alltag bei ZOB Döner in Passau — vom Schild über der Tür bis zum heißen Teller.','ab.v1k':'01','ab.v1t':'Unser Laden','ab.v1d':'Das Schild über der Tür sagt, wer wir sind: ZOB Döner in Passau. Direkt am ZOB holst du dir einen schnellen Snack oder das große Essen für die ganze Runde — ehrlich zubereitet, heiß ausgegeben und ohne Umwege. Komm vorbei, bestell und nimm mit, was gerade frisch vom Spieß kommt.','ab.v2k':'02','ab.v2t':'Frisch an der Theke','ab.v2d':'An der Theke siehst du, was auf deinen Döner kommt: Salat, Kraut, Zwiebeln und Gemüse — jeden Tag frisch vorbereitet, nicht aus der Tüte. Wir halten die Basics sauber und knackig, damit jeder Happen bunt und ehrlich schmeckt. Frag gern nach, was gerade besonders gut passt.','ab.v3k':'03','ab.v3t':'Auf den Teller','ab.v3d':'Fleisch vom Spieß, frischer Belag, Soßen nach Wunsch — so landet dein Gericht heiß und sattmachend vor dir. Ob Teller, Box oder im Brot: Wir machen Street Food, das nach Handwerk schmeckt und richtig Hunger stillt. Portionen, die stimmen — ohne Schnickschnack.','ab.v4k':'04','ab.v4t':'Mehr als Döner','ab.v4d':'Neben dem Klassiker gibt’s knusprige Pizza frisch aus dem Ofen, goldbraune Pide und Boxen für zwischendurch. Die Favoriten, die in Passau immer wieder bestellt werden — heiß, herzhaft und für jeden Hunger das Richtige. Schau auf die Karte und nimm mit, wonach dir ist.','ab.ctaH':'Hungry?','ab.ctaP':'Schau dir die Karte an und bestell dir dein Lieblingsgericht.','ab.ctaContact':'Kontakt aufnehmen',
  'faq.eyebrow':'FAQ','faq.h':'Häufige Fragen.','faq.sub':'Schnelle Antworten rund um Bestellung, Abholung und mehr.','faq.q1':'Wie kann ich bestellen?','faq.a1':'Am einfachsten per WhatsApp oder direkt vor Ort. Stell deine Bestellung im Menü zusammen und schick sie uns — wir bereiten alles frisch zu.','faq.q2':'Gibt es Lieferung?','faq.a2':'Aktuell holst du deine Bestellung bei uns am ZOB ab. So bleibt alles heiß und frisch.','faq.q3':'Wo findet ihr uns?','faq.a3':'Direkt am ZOB in der Dr.-Hans-Kapfinger-Straße 10, 94032 Passau — mittendrin und leicht zu finden.','faq.q4':'Welche Zahlungsmittel akzeptiert ihr?','faq.a4':'Bar und gängige Kartenzahlung vor Ort. Bei Fragen melde dich gern kurz bei uns.','faq.q5':'Habt ihr Allergie-Infos?','faq.a5':'Ja — Allergene und Zusatzstoffe nennen wir dir gerne auf Anfrage. Frag einfach beim Bestellen nach.','faq.formH':'Noch Fragen?','faq.formP':'Schreib uns — wir melden uns so schnell wie möglich.',
  'ct.eyebrow':'Kontakt','ct.h':'Komm vorbei.','ct.sub':'Wir freuen uns auf dich — direkt am ZOB in Passau.','ct.addrT':'Adresse','ct.addrD':'Direkt am ZOB — zentral, gut erreichbar, mit Präsenz vor Ort.','ct.phoneT':'Telefon','ct.phoneD':'Bei Fragen oder Bestellungen — wir sind für dich da.','ct.waT':'WhatsApp','ct.waD':'Bestellung oder Frage? Schick uns direkt eine Nachricht — schnell, unkompliziert und ohne Wartezeit.','ct.waOpen':'WhatsApp öffnen','ct.visit':'Besuch uns','ct.h1':'So – Do','ct.h2':'Fr – Sa','ct.write':'Schreib uns','ct.formH':'Nachricht schreiben','ct.formP':'Schreib uns — wir antworten in der Regel innerhalb von 24 Stunden und helfen gern weiter!',
  'f.name':'Dein Name *','f.email':'Deine E-Mail *','f.phone':'Telefonnummer','f.msg':'Nachricht *','f.req':'Sonderwunsch','f.send':'Nachricht senden','f.errName':'Bitte gib deinen Namen an.','f.errEmail':'Bitte gib eine gültige E-Mail-Adresse an.','f.errMsg':'Bitte schreib uns eine kurze Nachricht (min. 10 Zeichen).','f.note':'Hinweis: Der Versand wird erst mit angebundenem E-Mail-Service aktiv. Bis dahin erreichst du uns am schnellsten per Telefon oder WhatsApp.','f.ok1':'Danke, {name}!','f.ok2':'Deine Nachricht ist bereit — der E-Mail-Versand ist auf dieser Seite noch nicht angebunden. Ruf uns am besten kurz an oder schick uns deine Nachricht per WhatsApp.',
@@ -2554,7 +2662,7 @@ const I18N={
  'soc.eyebrow':'Community','soc.h':'Follow us.','soc.p':'Instagram, Facebook and TikTok are coming soon — with kitchen insights, news and offers.','soc.soon':'coming soon',
  'cta.h':'Feeling hungry?','cta.p':'Put your order together and send it to us directly via WhatsApp — we\u2019ll prepare everything fresh for you.','cta.menu':'Go to the menu',
  'menu.eyebrow':'Menu','menu.h':'The menu.','menu.sub':'Döner, boxes, pizza & pide — all freshly prepared. Order easily via WhatsApp and pick up your food.','menu.note':'All prices in euros, incl. VAT. Allergen information available on request.','menu.add':'Add','menu.details':'View details','menu.from':'from','menu.items':'items','menu.sizes':'Our pizzas come in three sizes: Ø 27 cm · Ø 36 cm · Ø 40 cm.','menu.extrasT':'Extras — Pizza','menu.extras':'Per extra: €1.00 / €1.50 / €2.00 — tomato sauce, cheese, peppers, onions, salami, turkey, sucuk, mushrooms, tuna, ham. Extra sauce of choice €1.00 · Extra cheese €1.50.','menu.dextra':'Extra cheese + €1.50',
- 'ab.eyebrow':'About us','ab.h':'About ZOB Döner.','ab.sub':'Honest street food from Passau.','ab.s1':'Where we stand','ab.story':'Where <span class="gold">honest flavour</span> meets <span class="gold">fresh street food</span> — for an unforgettable <span class="gold">ZOB experience</span> in Passau!','ab.lead':'ZOB Döner stands for honest street food, fresh ingredients and bold flavour — right in the heart of Passau.','ab.p1':'We make the food we love to eat ourselves: döner from a freshly stocked spit, crispy pizza, golden-brown pide and boxes that fill you up. No gimmicks — just craftsmanship, good ingredients and recipes that simply work.','ab.p2':'Whether it\u2019s a quick snack in between or a big meal for the whole group: with us you get classic street-food favourites, freshly prepared and made with heart.','ab.band':'Fresh. Hot. <b>100% ZOB.</b>','ab.s2':'Inside','ab.vh':'Our shop.','ab.vs':'Four moments from everyday life at ZOB Döner in Passau — from the sign above the door to the hot plate.','ab.v1k':'01','ab.v1t':'Our shop','ab.v1d':'The sign above the door says who we are: ZOB Döner in Passau. Right at the ZOB you can grab a quick snack or a proper meal for the whole group — prepared honestly, served hot and with no fuss. Drop by, order, and take what\u2019s fresh from the spit.','ab.v2k':'02','ab.v2t':'Fresh at the counter','ab.v2d':'At the counter you see what goes on your döner: salad, cabbage, onions and vegetables — prepared fresh every day, not from a bag. We keep the basics clean and crisp so every bite tastes colourful and honest. Ask us what pairs best today.','ab.v3k':'03','ab.v3t':'On your plate','ab.v3d':'Meat from the spit, fresh toppings, sauces your way — that\u2019s how your meal lands in front of you, hot and filling. Whether on a plate, in a box or in bread: street food that tastes handmade and actually fills you up. Portions that deliver — no gimmicks.','ab.v4k':'04','ab.v4t':'More than döner','ab.v4d':'Alongside the classic you\u2019ll find crispy pizza straight from the oven, golden-brown pide and boxes for in between. The favourites Passau keeps ordering — hot, hearty and the right pick for every appetite. Check the menu and take what you\u2019re craving.','ab.ctaH':'Hungry?','ab.ctaP':'Take a look at the menu and order your favourite dish.','ab.ctaContact':'Get in touch',
+ 'ab.eyebrow':'About us','ab.h':'About ZOB Döner.','ab.sub':'Honest street food from Passau.','ab.s1':'Where we stand','ab.story':'Where <span class="gold">honest flavour</span> meets <span class="gold">fresh street food</span> — for an unforgettable <span class="gold">ZOB experience</span> in Passau!','ab.lead':'ZOB Döner stands for honest street food, fresh ingredients and bold flavour — right in the heart of Passau.','ab.p1':'We make the food we love to eat ourselves: döner from a freshly stocked spit, crispy pizza, golden-brown pide and boxes that fill you up. No gimmicks — just craftsmanship, good ingredients and recipes that simply work.','ab.p2':'Whether it\u2019s a quick snack in between or a big meal for the whole group: with us you get classic street-food favourites, freshly prepared and made with heart.','ab.whyE':'Why Choose Us','ab.whyH':'Why Dine With Us','ab.why1':'Skilled Chef','ab.why2':'Hygienic Food','ab.why3':'Fresh Ambience','ab.why4':'Secret Recipe','ab.st1l':'Categories','ab.st1p':'Döner, boxes, pizza and pide — four clear ways to fill up.','ab.st2l':'Google reviews','ab.st2p':'Real voices from our guests on Google — about flavour and a stop at the ZOB.','ab.st3l':'Dishes','ab.st3p':'From döner to pide: a menu that actually fills you up.','ab.st4l':'Days a week','ab.st4p':'Sunday to Saturday at the ZOB — until 11 pm on weekdays, even later at the weekend.','ab.band':'Fresh. Hot. <b>100% ZOB.</b>','ab.s2':'Inside','ab.vh':'Our shop.','ab.vs':'Four moments from everyday life at ZOB Döner in Passau — from the sign above the door to the hot plate.','ab.v1k':'01','ab.v1t':'Our shop','ab.v1d':'The sign above the door says who we are: ZOB Döner in Passau. Right at the ZOB you can grab a quick snack or a proper meal for the whole group — prepared honestly, served hot and with no fuss. Drop by, order, and take what\u2019s fresh from the spit.','ab.v2k':'02','ab.v2t':'Fresh at the counter','ab.v2d':'At the counter you see what goes on your döner: salad, cabbage, onions and vegetables — prepared fresh every day, not from a bag. We keep the basics clean and crisp so every bite tastes colourful and honest. Ask us what pairs best today.','ab.v3k':'03','ab.v3t':'On your plate','ab.v3d':'Meat from the spit, fresh toppings, sauces your way — that\u2019s how your meal lands in front of you, hot and filling. Whether on a plate, in a box or in bread: street food that tastes handmade and actually fills you up. Portions that deliver — no gimmicks.','ab.v4k':'04','ab.v4t':'More than döner','ab.v4d':'Alongside the classic you\u2019ll find crispy pizza straight from the oven, golden-brown pide and boxes for in between. The favourites Passau keeps ordering — hot, hearty and the right pick for every appetite. Check the menu and take what you\u2019re craving.','ab.ctaH':'Hungry?','ab.ctaP':'Take a look at the menu and order your favourite dish.','ab.ctaContact':'Get in touch',
  'faq.eyebrow':'FAQ','faq.h':'Frequently asked questions.','faq.sub':'Quick answers about ordering, pickup and more.','faq.q1':'How can I order?','faq.a1':'Easiest via WhatsApp or right here in store. Build your order in the menu and send it to us — we prepare everything fresh.','faq.q2':'Do you deliver?','faq.a2':'Right now you pick up your order at our ZOB counter. That way everything stays hot and fresh.','faq.q3':'Where can we find you?','faq.a3':'Right at the ZOB on Dr.-Hans-Kapfinger-Straße 10, 94032 Passau — central and easy to find.','faq.q4':'Which payment methods do you accept?','faq.a4':'Cash and common card payments in store. Just ask us if you have any questions.','faq.q5':'Do you have allergen info?','faq.a5':'Yes — we are happy to tell you about allergens and additives on request. Just ask when you order.','faq.formH':'Still have questions?','faq.formP':'Write to us — we will get back to you as soon as we can.',
  'ct.eyebrow':'Contact','ct.h':'Come on over.','ct.sub':'We look forward to seeing you — right at the ZOB in Passau.','ct.addrT':'Address','ct.addrD':'Right at the ZOB — central, easy to reach, with us on site.','ct.phoneT':'Phone','ct.phoneD':'For questions or orders — we\u2019re here for you.','ct.waT':'WhatsApp','ct.waD':'Order or question? Send us a message directly — fast, simple and with no waiting around.','ct.waOpen':'Open WhatsApp','ct.visit':'Visit us','ct.h1':'Sun – Thu','ct.h2':'Fri – Sat','ct.write':'Write to us','ct.formH':'Message us','ct.formP':'Contact us — we aim to reply within 24 hours and are happy to help!',
  'f.name':'Your Name *','f.email':'Your Email *','f.phone':'Phone Number','f.msg':'Message *','f.req':'Special Request','f.send':'Send your message','f.errName':'Please enter your name.','f.errEmail':'Please enter a valid email address.','f.errMsg':'Please write us a short message (min. 10 characters).','f.note':'Note: Sending will be activated once an email service is connected. Until then, the fastest way to reach us is by phone or WhatsApp.','f.ok1':'Thanks, {name}!','f.ok2':'Your message is ready — email sending isn\u2019t connected on this page yet. The quickest way is to call us or send your message via WhatsApp.',
@@ -3506,9 +3614,11 @@ function swap(page){
   if(page==='about'){
     requestAnimationFrame(()=>{
       const el=$('#aboutLead');
-      if(!el||!el.classList.contains('rev-words')||el.classList.contains('go'))return;
-      const r=el.getBoundingClientRect();
-      if(r.top<innerHeight*.9&&r.bottom>40)playAboutWords();
+      if(el&&el.classList.contains('rev-words')&&!el.classList.contains('go')){
+        const r=el.getBoundingClientRect();
+        if(r.top<innerHeight*.9&&r.bottom>40)playAboutWords();
+      }
+      playWhyStats();
     });
   }
 }
@@ -3578,6 +3688,35 @@ const io=new IntersectionObserver(es=>{
   es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}});
 },{threshold:.12,rootMargin:'0px 0px -6% 0px'});
 function observeReveals(){$$('.rv:not(.in),.rv-img:not(.in)').forEach(el=>io.observe(el))}
+
+/* ---------- ABOUT STATS COUNT-UP ---------- */
+let whyStatsIO;
+function playWhyStats(){
+  const root=$('#whyStats');if(!root)return;
+  const nums=$$('#whyStats [data-count]');
+  nums.forEach(el=>el.textContent='0');
+  if(whyStatsIO){whyStatsIO.disconnect();whyStatsIO=null}
+  const run=()=>{
+    nums.forEach(el=>{
+      const target=+el.dataset.count||0;
+      if(reduceMotion){el.textContent=String(target);return}
+      const start=performance.now(),dur=1500;
+      const tick=now=>{
+        const p=Math.min(1,(now-start)/dur);
+        const eased=1-Math.pow(1-p,3);
+        el.textContent=String(Math.round(target*eased));
+        if(p<1)requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
+  };
+  whyStatsIO=new IntersectionObserver(es=>{
+    es.forEach(en=>{
+      if(en.isIntersecting){run();whyStatsIO.disconnect();whyStatsIO=null}
+    });
+  },{threshold:.35});
+  whyStatsIO.observe(root);
+}
 
 /* ---------- PARALLAX ---------- */
 const plxEls=()=>$$('[data-plx]');
